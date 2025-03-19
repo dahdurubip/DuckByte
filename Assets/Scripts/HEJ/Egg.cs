@@ -58,7 +58,8 @@ public class Egg : MonoBehaviour
         effect.SetActive(true);
         yield return new WaitForSeconds(1f);
         gameObject.SetActive(false);
-        Instantiate(cpSpider);
+        //Instantiate(cpSpider);
+        cpSpider.SetActive(true);
         Debug.Log("153");
     }
 
