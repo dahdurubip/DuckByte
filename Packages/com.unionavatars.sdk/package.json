@@ -1,0 +1,54 @@
+{
+  "name": "com.unionavatars.sdk",
+  "version": "2.2.3",
+  "displayName": "Union Avatars SDK",
+  "description": "Integration of Union Avatars into Unity with UI support.\n\nTo fully understand how to work with the package, we recommend that you install the Essential Samples below and check them along with the documentation.",
+  "unity": "2020.3",
+  "documentationUrl": "https://docs.unionavatars.com/docs/Integration/Unity_SDK/get_started/",
+  "changelogUrl": "https://docs.unionavatars.com/docs/Integration/Unity_SDK/changelog",
+  "license": "https://union-web-asset.s3.eu-central-1.amazonaws.com/sdk/unionavatars_unitysdk_license.pdf",
+  "dependencies": {
+    "com.unity.nuget.newtonsoft-json": "2.0.2",
+    "com.unity.meshopt.decompress": "0.1.0-preview.5",
+    "com.unity.cloud.gltfast": "6.2.0",
+    "com.unity.cloud.draco": "5.1.8"
+  },
+  "keywords": [
+    "metaverse",
+    "avatar",
+    "character",
+    "identity"
+  ],
+  "author": {
+    "name": "Union Avatars",
+    "email": "techsupport@unionavatars.com",
+    "url": "https://unionavatars.com/"
+  },
+  "samples": [
+    {
+      "displayName": "Essential Samples",
+      "description": "Contains sample scripts, scenes and resources to fully understand how to use the package",
+      "path": "Samples~/Essentials"
+    },
+    {
+      "displayName": "User Interface",
+      "description": "Contains a fully featured UI to create and use avatars at runtime",
+      "path": "Samples~/UserInterface"
+    },
+    {
+      "displayName": "VR w/ User Interface",
+      "description": "Contains a sample to use Union Avatars in your VR application as well as a user interface. It requires OpenXR plugin",
+      "path": "Samples~/VRUserInterface"
+    },
+    {
+      "displayName": "NPC Avatars",
+      "description": "Contains a sample scene and scripts to load avatars as NPCs",
+      "path": "Samples~/NPC"
+    },
+    {
+      "displayName": "OVR Lip Sync Sample",
+      "description": "Contains sample scripts and scenes to integrate Union Avatars with oculus lip sync. This sample requires the official Oculus Lip Sync package",
+      "path": "Samples~/LipSync"
+    }
+  ]
+}

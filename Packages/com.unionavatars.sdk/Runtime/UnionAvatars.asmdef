@@ -1,0 +1,38 @@
+{
+    "name": "UnionAvatars",
+    "rootNamespace": "",
+    "references": [
+        "Oculus.LipSync",
+        "Unity.TextMeshPro",
+        "StandaloneFileBrowser",
+        "NativeFilePicker.Runtime",
+        "glTFast",
+        "QRCoder",
+        "WalletConnectUnity"
+    ],
+    "includePlatforms": [],
+    "excludePlatforms": [],
+    "allowUnsafeCode": false,
+    "overrideReferences": false,
+    "precompiledReferences": [],
+    "autoReferenced": true,
+    "defineConstraints": [],
+    "versionDefines": [
+        {
+            "name": "com.unity.render-pipelines.universal",
+            "expression": "",
+            "define": "USING_URP"
+        },
+        {
+            "name": "com.unity.render-pipelines.high-definition",
+            "expression": "",
+            "define": "USING_HDRP"
+        },
+        {
+            "name": "com.unity.cloud.gltfast",
+            "expression": "",
+            "define": "USING_GLTFAST"
+        }
+    ],
+    "noEngineReferences": false
+}

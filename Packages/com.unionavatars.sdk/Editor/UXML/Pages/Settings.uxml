@@ -1,0 +1,14 @@
+<ui:UXML xmlns:ui="UnityEngine.UIElements" xmlns:uie="UnityEditor.UIElements" xsi="http://www.w3.org/2001/XMLSchema-instance" engine="UnityEngine.UIElements" editor="UnityEditor.UIElements" noNamespaceSchemaLocation="../../../../UIElementsSchema/UIElements.xsd" editor-extension-mode="False">
+    <Style src="project://database/Packages/com.unionavatars.sdk/Editor/UXML/UnionAvatars_Editor.uss?fileID=7433441132597879392&amp;guid=82fa1b865a2135442a5cfdee6a5a5bc8&amp;type=3#UnionAvatars_Editor" />
+    <ui:VisualElement name="SettingsPanel" style="flex-grow: 1; align-items: center; padding-top: 25px; -unity-text-align: upper-left; padding-right: 0; display: flex;">
+        <ui:Toggle label="Asset Cache" name="setting-cache" tooltip="Enables caches for avatars, bodies and thumbnails, making loading speed increase" class="setting-toggle option-container" style="justify-content: space-around; align-items: center; flex-direction: row; width: auto; padding-right: 10px; padding-left: 10px;" />
+        <ui:Toggle label="Mesh Optimization" name="setting-optimization" tooltip="Enables file optimization when creating an avatar, which reduces its size" class="setting-toggle option-container" style="width: auto; padding-left: 10px; padding-right: 10px;" />
+        <ui:Toggle label="Avatar LOD" name="setting-lod" tooltip="WARNING! Avatars using LOD cannot be edited. Enables level of detail for newly created avatars" class="setting-toggle option-container" style="width: auto; padding-left: 10px; padding-right: 10px;" />
+        <ui:SliderInt picking-mode="Ignore" label="Max LOD" value="3" high-value="0" show-input-field="true" low-value="3" direction="Horizontal" name="setting-maxlod" class="setting-toggle option-container" style="width: auto; -unity-text-align: upper-center; flex-direction: column; flex-wrap: nowrap; height: 56px; max-width: 223px;" />
+        <ui:VisualElement class="option-container" style="flex-direction: column; height: auto; width: auto;">
+            <ui:Label text="Avatar Styles" display-tooltip-when-elided="true" style="font-size: 15px; -unity-font-style: bold; margin-bottom: 8px;" />
+            <ui:Toggle label="Realistic" name="style-realistic" tooltip="Enables caches for avatars, bodies and thumbnails, making loading speed increase" class="setting-toggle" style="justify-content: space-around; align-items: center; flex-direction: row; width: auto; padding-right: 30px; padding-left: 25px; margin-bottom: 1px; margin-right: 0; padding-bottom: 8px;" />
+            <ui:Toggle label="Cartoon" name="style-cartoon" tooltip="Enables caches for avatars, bodies and thumbnails, making loading speed increase" class="setting-toggle" style="justify-content: space-around; align-items: center; flex-direction: row; width: auto; padding-right: 30px; padding-left: 25px; margin-bottom: 1px; margin-right: 0;" />
+        </ui:VisualElement>
+    </ui:VisualElement>
+</ui:UXML>
