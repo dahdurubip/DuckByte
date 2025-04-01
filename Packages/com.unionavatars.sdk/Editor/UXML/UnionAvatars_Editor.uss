@@ -1,0 +1,103 @@
+.nav-button {
+    opacity: 1;
+    display: flex;
+    justify-content: flex-start;
+    -unity-text-align: middle-center;
+    flex-grow: 1;
+    margin-top: 4px;
+    margin-bottom: 4px;
+    border-top-left-radius: 9px;
+    border-bottom-left-radius: 9px;
+    border-top-right-radius: 9px;
+    border-bottom-right-radius: 9px;
+    border-left-width: 0;
+    border-right-width: 0;
+    border-top-width: 0;
+    border-bottom-width: 0;
+    background-color: rgb(228, 228, 228);
+    margin-left: 2px;
+    margin-right: 2px;
+    color: rgb(9, 9, 9);
+    font-size: 16px;
+    -unity-font-style: bold;
+}
+
+.nav-button:hover {
+    background-color: rgb(183, 183, 183);
+    color: rgb(0, 0, 0);
+}
+
+.nav-button-selected {
+    color: rgb(255, 255, 255);
+    background-color: rgb(12, 12, 12);
+}
+
+.setting-toggle {
+    font-size: 15px;
+    scale: 1 1;
+    -unity-text-align: upper-left;
+    margin-left: 0;
+    width: auto;
+    margin-bottom: 21px;
+    white-space: normal;
+    -unity-font-style: normal;
+}
+
+.social-media {
+    background-image: url('project://database/Packages/com.unionavatars.sdk/Editor/Images/discord-icon.png?fileID=2800000&guid=bad595752da186c4b9e84e4079962dc9&type=3#discord-icon');
+    background-color: rgba(0, 0, 0, 0);
+    -unity-background-image-tint-color: rgb(255, 255, 255);
+    border-top-left-radius: 0;
+    border-bottom-left-radius: 0;
+    border-top-right-radius: 0;
+    border-bottom-right-radius: 0;
+    border-left-width: 0;
+    border-right-width: 0;
+    border-top-width: 0;
+    border-bottom-width: 0;
+    -unity-background-scale-mode: scale-to-fit;
+    width: 35px;
+    padding-left: 0;
+    padding-right: 0;
+    padding-top: 0;
+    padding-bottom: 0;
+    margin-top: 0;
+    margin-bottom: 0;
+    height: 23px;
+    margin-left: 5px;
+}
+
+#twitter:hover {
+    -unity-background-image-tint-color: rgb(0, 0, 0);
+}
+
+#discord:hover {
+    -unity-background-image-tint-color: rgb(114, 137, 218);
+}
+
+#website:hover {
+    -unity-background-image-tint-color: rgb(0, 200, 240);
+}
+
+.option-container {
+    height: 38px;
+    width: 90%;
+    justify-content: space-between;
+    background-color: rgb(77, 77, 77);
+    padding-top: 10px;
+    padding-right: 10px;
+    padding-bottom: 10px;
+    padding-left: 10px;
+    border-top-left-radius: 6px;
+    border-top-right-radius: 6px;
+    border-bottom-right-radius: 6px;
+    border-bottom-left-radius: 6px;
+    flex-direction: row;
+    align-items: center;
+    margin-bottom: 6px;
+}
+
+#GetCredentials:hover {
+    color: rgba(185, 185, 185, 255);
+    scale: 1.05 1.05;
+}
