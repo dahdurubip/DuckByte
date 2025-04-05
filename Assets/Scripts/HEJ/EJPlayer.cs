@@ -8,6 +8,7 @@ public class EJPlayer : MonoBehaviour
 
     private int xPressCount = 0;
     private Action escapeCallback;
+    private Action eggOneCallback;
     private bool hasEscaped = false;
 
     void Start()
@@ -19,7 +20,7 @@ public class EJPlayer : MonoBehaviour
     {
         MovePlayer();
 
-        if (Input.GetKeyDown(KeyCode.X) && !hasEscaped && escapeCallback != null)
+        if (Input.GetKeyDown(KeyCode.X) && !hasEscaped)
         {
             xPressCount++;
             HandleXPress(xPressCount);
@@ -44,7 +45,12 @@ public class EJPlayer : MonoBehaviour
 
     void OnFirstXPress()
     {
-        Debug.Log("X 버튼을 처음 눌렀습니다! 아직 2번 더 눌러야 합니다.");
+        if (eggOneCallback != null)
+        {
+            Debug.Log("EggOne() 호출!");
+            eggOneCallback.Invoke();
+            eggOneCallback = null; // 한 번만 실행되도록 초기화
+        }
     }
 
     void OnSecondXPress()
@@ -72,6 +78,11 @@ public class EJPlayer : MonoBehaviour
     public void SetEscapeCallback(Action callback)
     {
         escapeCallback = callback;
+    }
+
+    public void SetEggOneCallback(Action callback)
+    {
+        eggOneCallback = callback;
     }
 
     public void ResetXPressCount()
