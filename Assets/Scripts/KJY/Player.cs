@@ -2,6 +2,27 @@
 
 public class Player : MonoBehaviour
 {
+   
+    [SerializeField] private float maxHp = 100f;
+    private float currentHp;
+
+    [SerializeField] private HpBar hpBar;
+
+    public float CurrentHp
+    {
+        get => currentHp;
+        set
+        {
+            currentHp = Mathf.Clamp(value, 0f, maxHp);
+            hpBar.UpdateHpBar(maxHp, currentHp);
+
+            if (currentHp <= 0f)
+            {
+                Die();
+            }
+        }
+    }
+
     public static Player instance;
 
     [SerializeField] private float moveSpeed = 3f;
@@ -26,6 +47,8 @@ public class Player : MonoBehaviour
     {
         animator = GetComponent<Animator>();
         controller = GetComponent<CharacterController>();
+
+        CurrentHp = maxHp;  // 체력 초기화 및 HP 바 초기화
     }
 
     private void FixedUpdate()
@@ -126,5 +149,21 @@ public class Player : MonoBehaviour
         {
             finalSpeed = isCrouching ? crouchSpeed : moveSpeed;
         }
+    }
+
+    public void TakeDamage(float damage)
+    {
+        CurrentHp -= damage;
+    }
+
+    private void Die()
+    {
+        Debug.Log("플레이어 사망!");
+        // 여기서 사망 애니메이션, 게임 오버 처리 등 넣기
+    }
+
+    public void Heal(float amount)
+    {
+        CurrentHp += amount;
     }
 }

@@ -12,8 +12,7 @@ public class Torch : MonoBehaviour
     //이동속도
     [SerializeField] private float moveSpeed = 3f;      
 
-    private Vector3 firstWallStartPos;
-    private Vector3 secondWallStartPos;
+
     private Vector3 firstWallTargetPos;
     private Vector3 secondWallTargetPos;
 
@@ -22,9 +21,7 @@ public class Torch : MonoBehaviour
     //이동 상태 체크
     private bool isMoving = false; 
 
-    private void Start()
-    {
-    }
+
 
     private void OnMouseDown()
     {
