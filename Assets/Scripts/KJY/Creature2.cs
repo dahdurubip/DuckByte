@@ -1,6 +1,7 @@
 using UnityEngine;
 using UnityEngine.AI;
 using System.Collections;
+using Unity.Services.Analytics;
 
 public class Creature2 : MonoBehaviour
 {
@@ -36,6 +37,23 @@ public class Creature2 : MonoBehaviour
         isAttacking = false;
         currentState = creatureState.Patrol;
         Creature2Patrol();
+
+
+
+        //navMeshAgent.Warp(new Vector3(5, 0, 5)); // 원하는 위치로 순간이동
+        //navMeshAgent = GetComponent<NavMeshAgent>();
+
+        NavMeshHit hit;
+        if (NavMesh.SamplePosition(transform.position, out hit, 1.0f, NavMesh.AllAreas))
+        {
+            Debug.Log("NavMesh 위에 있음!");
+        }
+        else
+        {
+            Debug.LogError("NavMesh 위에 없음! NavMesh를 확인하세요!");
+        }
+
+
     }
 
     private void Update()
@@ -105,7 +123,7 @@ public class Creature2 : MonoBehaviour
 
     private void Creature2Teleportation()
     {
-        navMeshAgent.isStopped = true;
+       // navMeshAgent.isStopped = true;
         Debug.Log("순간이동함");
     }
 
@@ -212,6 +230,11 @@ public class Creature2 : MonoBehaviour
         navMeshAgent.destination = player.transform.position;
         animator.SetBool("isRun", true);
         animator.SetBool("isIdle", false);
+
+        Debug.Log("추적 모드! 플레이어 위치: " + player.transform.position);
+        Debug.Log("목적지 설정됨: " + navMeshAgent.destination);
+        Debug.Log("Agent 속도: " + navMeshAgent.velocity);
+        Debug.Log("남은 거리: " + navMeshAgent.remainingDistance);
     }
 
     private void Creature2Idle()
