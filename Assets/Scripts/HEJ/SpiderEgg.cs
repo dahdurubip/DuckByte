@@ -1,6 +1,5 @@
-using UnityEngine;
-using System;
 using System.Collections;
+using UnityEngine;
 
 public class SpiderEgg : MonoBehaviour
 {
@@ -8,6 +7,12 @@ public class SpiderEgg : MonoBehaviour
     private bool isPlayerInRange = false;
     private Coroutine countdownCoroutine;
     private EJPlayer currentPlayer;
+    private Rigidbody rb;
+
+    private void Awake()
+    {
+        rb = GetComponent<Rigidbody>();
+    }
 
     void OnTriggerEnter(Collider other)
     {
@@ -19,12 +24,12 @@ public class SpiderEgg : MonoBehaviour
             if (currentPlayer != null)
             {
                 currentPlayer.SetEscapeCallback(OnPlayerEscape); // X 버튼 탈출 기능 활성화
+                currentPlayer.SetEggOneCallback(EggOne); // 첫 번째 X 입력 시 EggOne() 호출
                 currentPlayer.ResetXPressCount(); // X 입력 횟수 초기화
             }
 
             isPlayerInRange = true;
 
-            // 카운트다운이 시작되지 않았다면 시작
             if (!isCounting)
             {
                 isCounting = true;
@@ -38,7 +43,8 @@ public class SpiderEgg : MonoBehaviour
         if (other.CompareTag("Player") && currentPlayer != null)
         {
             Debug.Log($"{gameObject.name} 플레이어가 범위를 벗어남! X 버튼이 비활성화됩니다.");
-            currentPlayer.SetEscapeCallback(null); // X 버튼 기능 비활성화
+            currentPlayer.SetEscapeCallback(null);
+            currentPlayer.SetEggOneCallback(null); // 첫 번째 X 입력 기능도 비활성화
             currentPlayer = null;
             isPlayerInRange = false;
         }
@@ -69,5 +75,34 @@ public class SpiderEgg : MonoBehaviour
         }
 
         Destroy(gameObject);
+    }
+
+    private void EggOne()
+    {
+        Debug.Log("EggOne() 실행됨!");
+
+        Transform meeple = this.gameObject.transform.GetChild(1);
+
+        foreach (Transform grandChild in meeple)
+        {
+            GameObject grandChildObject = grandChild.gameObject;
+            Debug.Log("손자 오브젝트: " + grandChildObject.name);
+
+            // Rigidbody 가져오기
+            Rigidbody rb = grandChildObject.GetComponent<Rigidbody>();
+            if (rb != null)
+            {
+                // 현재 isKinematic 값 출력
+                Debug.Log($"{grandChildObject.name}의 isKinematic 상태: {rb.isKinematic}");
+
+                // isKinematic 값 변경 (예: false로 설정하여 물리 적용)
+                rb.isKinematic = false;
+                Debug.Log($"{grandChildObject.name}의 isKinematic을 false로 설정!");
+            }
+            else
+            {
+                Debug.Log($"{grandChildObject.name}에는 Rigidbody가 없음!");
+            }
+        }
     }
 }
