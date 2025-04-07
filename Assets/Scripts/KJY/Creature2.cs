@@ -1,7 +1,6 @@
 using UnityEngine;
 using UnityEngine.AI;
 using System.Collections;
-using Unity.Services.Analytics;
 
 public class Creature2 : MonoBehaviour
 {
@@ -16,16 +15,20 @@ public class Creature2 : MonoBehaviour
     //AI 이동경로
     [SerializeField] private Transform[] wayPoint;
     [SerializeField] private NavMeshAgent navMeshAgent;
+
     //크리처 상태
     private enum creatureState {Patrol, Pursuit, Attack, Idle};
     private creatureState currentState;
     private bool isAttacking;
-    private int currentPatrolIndex = 1;
+    private int currentPatrolIndex = 0;
     private bool patrolling = true;
     private float idleTime = 1f;
     private float Timer = 0f;
     private float attackRange = 2f;
     private float detectionRange = 10f;
+    private float damage = 10f;
+
+
     //크리처 액션
     private Animator animator;
 
@@ -33,35 +36,14 @@ public class Creature2 : MonoBehaviour
     {
         navMeshAgent = GetComponent<NavMeshAgent>();
         animator = GetComponent<Animator>();
-        animator.applyRootMotion = false;
         isAttacking = false;
         currentState = creatureState.Patrol;
         Creature2Patrol();
-
-
-
-        //navMeshAgent.Warp(new Vector3(5, 0, 5)); // 원하는 위치로 순간이동
-        //navMeshAgent = GetComponent<NavMeshAgent>();
-
-        NavMeshHit hit;
-        if (NavMesh.SamplePosition(transform.position, out hit, 1.0f, NavMesh.AllAreas))
-        {
-            Debug.Log("NavMesh 위에 있음!");
-        }
-        else
-        {
-            Debug.LogError("NavMesh 위에 없음! NavMesh를 확인하세요!");
-        }
-
-
     }
 
     private void Update()
     {
-        //Debug.Log("NavMeshAgent Velocity: " + navMeshAgent.velocity);
 
-
-        //navMeshAgent.isStopped = false;
 
         float distanceToPlayer = Vector3.Distance(player.transform.position, transform.position);
 
@@ -87,7 +69,7 @@ public class Creature2 : MonoBehaviour
 
         if (creature2Manager.CanGrow)
         {
-            GrowCreature();
+            GrowCreature(creature2Manager.detectionCount);
             creature2Manager.CanGrow = false;
         }
 
@@ -123,14 +105,57 @@ public class Creature2 : MonoBehaviour
 
     private void Creature2Teleportation()
     {
-       // navMeshAgent.isStopped = true;
+        navMeshAgent.isStopped = true;
+        animator.SetBool("isIdle", false);
+        animator.SetBool("isWalking", false);
+        animator.SetBool("isRun", false);
+
+        Vector3 teleportOffset = new Vector3(Random.Range(-2f, 2f), 0, Random.Range(-2f, 2f));
+        transform.position = player.transform.position + teleportOffset;
+
+        // 즉시 플레이어 방향으로 회전
+        transform.LookAt(new Vector3(player.transform.position.x, transform.position.y, player.transform.position.z));
+
+
+        currentState = creatureState.Attack;
         Debug.Log("순간이동함");
     }
 
-    private void GrowCreature()
+    private void GrowCreature(int _Cnt)
     {
         //transform.localScale *= growScaleAmount;
         Debug.Log("크리처가 성장했습니다!");
+
+        if (_Cnt == 3)
+        {
+            //attack함수에 있는 데미지의 수치 바꾼다.
+            damage = 30f;
+            //길에 있는 벽이 3개 완전히 올라간다.
+            creature2Manager.wallmove = true;
+        }
+        else if (_Cnt == 6)
+        {
+            //attack함수에 있는 데미지의 수치 바꾼다.
+            damage = 60f;
+            //몸에 빨간 빛이 생긴다.
+            //이동가능한 벽들이 완전히 올라간다.   벽의 위치를 13으로 고정
+            creature2Manager.wallmove = true;
+
+            //플레이어의 위치로 이동한다.
+            currentState = creatureState.Pursuit;
+        }
+        else if (_Cnt >= 9)
+        {
+            //attack함수에 있는 데미지의 수치 바꾼다.
+            damage = 90f;
+            //몸에 보라 빛이 생긴다.
+            //바로 순간이동 한다.
+            Creature2Teleportation();
+            creature2Manager.CanTeleportation = false;
+            //이동 불가능한 벽 포함 완전히 올라간다.
+            creature2Manager.wallmove = true;
+        }
+        
     }
 
     private void Creature2Patrol()
@@ -183,12 +208,14 @@ public class Creature2 : MonoBehaviour
         isAttacking = true;
         navMeshAgent.isStopped = true;
         animator.SetBool("isWalking", false);
+        animator.SetBool("isRun", false);
         animator.SetTrigger("Attack");
 
         Vector3 dir = (player.transform.position - transform.position).normalized;
         Quaternion lookRotation = Quaternion.LookRotation(new Vector3(dir.x, 0, dir.z));
         transform.rotation = Quaternion.Slerp(transform.rotation, lookRotation, Time.deltaTime * 5f);
 
+        //데미지크드 추가해야 함
 
         StartCoroutine(AttackCooldown());
     }
@@ -208,6 +235,7 @@ public class Creature2 : MonoBehaviour
 
         if(distanceToPlayer <= attackRange)
         {
+            player.TakeDamage(damage);
             Creature2Attack();
         }
         else
@@ -228,13 +256,10 @@ public class Creature2 : MonoBehaviour
     {
         navMeshAgent.isStopped = false;
         navMeshAgent.destination = player.transform.position;
+        navMeshAgent.speed = 5.0f;
         animator.SetBool("isRun", true);
         animator.SetBool("isIdle", false);
-
-        Debug.Log("추적 모드! 플레이어 위치: " + player.transform.position);
-        Debug.Log("목적지 설정됨: " + navMeshAgent.destination);
-        Debug.Log("Agent 속도: " + navMeshAgent.velocity);
-        Debug.Log("남은 거리: " + navMeshAgent.remainingDistance);
+        animator.SetBool("isWalking", false);
     }
 
     private void Creature2Idle()
