@@ -8,6 +8,7 @@ public class SpiderEgg : MonoBehaviour
     private Coroutine countdownCoroutine;
     private EJPlayer currentPlayer;
     private Rigidbody rb;
+    [SerializeField] GameObject fireSpider;
 
     private void Awake()
     {
@@ -52,7 +53,7 @@ public class SpiderEgg : MonoBehaviour
 
     IEnumerator Countdown()
     {
-        float timer = 10f;
+        float timer = 2f;
         while (timer > 0)
         {
             Debug.Log($"{gameObject.name} 남은 시간: {timer:F1}초");
@@ -61,6 +62,7 @@ public class SpiderEgg : MonoBehaviour
         }
 
         Debug.Log($"{gameObject.name} 시간 초과! 플레이어가 실패했습니다.");
+        fireSpider.SetActive(true);
         isCounting = false;
     }
 
