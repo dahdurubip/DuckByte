@@ -32,7 +32,7 @@ public class Creature2Eyes : MonoBehaviour
 
     void Start()
     {
-        Debug.Log("현재 설정된 playerLayer 값: " + playerLayer.value.ToString());
+        //Debug.Log("현재 설정된 playerLayer 값: " + playerLayer.value.ToString());
         lineList = new List<CastInfo>();
         StartCheckingTarget();
         StartDrawingRayLines();
@@ -81,7 +81,8 @@ public class Creature2Eyes : MonoBehaviour
                 if (hit.collider.CompareTag("Player"))
                 {
                     Debug.Log("플레이어 감지됨!");
-                    creature2Manager.OnPlayerDetected();
+                    //creature2Manager.CommandTeleport();
+                    creature2Manager.OnEyeDetected(transform.position);
                     break; // 1회 감지만 하고 빠짐
                 }
             }

@@ -1,87 +1,106 @@
-﻿using UnityEngine;
+﻿using System.Collections;
+using UnityEngine;
 
 public class Creature2Manager : MonoBehaviour
-
 {
-
     [SerializeField] private WallPosController wallpos;
     public bool wallmove = false;
 
-    [Header("크리처 관련 설정")]
-    [SerializeField] private GameObject creature2;
-    [SerializeField] private int growThreshold = 3; // 몇 번 감지되면 성장하는지
+    [Header("Creature2 Settings")]
+    [SerializeField] private Creature2 creature2;
+    [SerializeField] private int growThreshold = 3;
+    [SerializeField] private Transform player;
 
+    [Header("Clone Settings")]
+    [SerializeField] private GameObject creature2Clone;
+    [SerializeField] private Transform playerTransform;
+    [SerializeField] private float activeDuration = 3f;
+    [SerializeField] private Creature2Clone creature2Script;
+    private Vector3 lastEyePos;
+    private Vector3 lastEyeForward;
 
-    private float TheTime = 0;
+    // 타이머를 클래스 멤버로 선언
+    private float lightTimer = 0f;
+
+    // 재호출 방지 플래그
+    private bool isTeleporting = false;
+
     public int detectionCount = 0;
-
-    public bool CanTeleportation = false;
     public bool CanGrow = false;
-
     public bool TheLight = false;
 
+    //순간이동할 때 다른 크리처를 활성화해서 순간이동을 시킨다.
+
+
+    private void Awake()
+    {
+        creature2Clone.SetActive(false);
+    }
+
+
+
+    // Update에서는 wallmove 관련만 처리 (그 외 타이밍은 OnPlayerDetected나 WhenTheLightOn에서 별도로 처리)
     private void Update()
     {
-        if(wallmove)
+        if (wallmove)
         {
             wallpos.MoveThewall(detectionCount);
             wallmove = false;
         }
-    }
-
-    public void OnPlayerDetected()
-    {
-        //크리처를 감지된 3초후에 크리처 순간이동
-        //크리처가 순간이동하고 나서 횟수 증가
-        //만약에 회수 5번 이상이면 크리처 성장한다.
-        TheTime += Time.deltaTime;
-        Debug.Log($"시간 : {TheTime}");
-        Debug.Log($"플레이어 감지됨! 현재 감지 횟수: {detectionCount}");
-
-        //2초되면 횟수 증가하고 
-        if(TheTime >= 0.3f)
-        {
-            //크리처 순간이동한다.
-            //횟수 추가한다.
-            detectionCount++;
-            MoveAndGrow();
-            TheTime = 0;
-        }
 
     }
 
-    private void MoveAndGrow()
+    public void OnEyeDetected(Vector3 eyePos)
     {
-        float Timer = 0;
-        if(detectionCount == 1)
-        {
-            Timer += Time.deltaTime;
-            if(Timer >= 2f)
-            {
-                CanTeleportation = true;
-            }
-        }
-        if (detectionCount % growThreshold == 0)
+        if (isTeleporting) return;    // 이미 순간이동 중이면 무시
+
+        lastEyePos = eyePos;
+        ActivateClone();
+    }
+
+    private void ActivateClone()
+    {
+        isTeleporting = true;         // 순간이동 시작
+        creature2Clone.SetActive(true);
+        // 눈알 위치/방향과 플레이어 전달
+        creature2Script.Initialize(lastEyePos, playerTransform);
+        StartCoroutine(DeactivateAfterDelay());
+    }
+
+    private IEnumerator DeactivateAfterDelay()
+    {
+        yield return new WaitForSeconds(activeDuration);
+        creature2Clone.SetActive(false);
+        isTeleporting = false;        // 순간이동 종료 → 재호출 허용
+    }
+
+    private void GrowWithCreature2()
+    {
+        // growThreshold 이상일 때마다 성장
+        if (detectionCount > 0 && detectionCount % growThreshold == 0)
         {
             CanGrow = true;
         }
-
     }
 
-    //플레이어스크립트에서 호출해야 함
+    //지금은 없음
+    //외부 이벤트에서 호출: 손전등이 켜진 상태를 지속할 때
     public void WhenTheLightOn()
     {
-        float TheTimer = 0f;
-        if(TheLight)
+        if (TheLight)
         {
-            TheTimer += Time.deltaTime;
-            if(TheTimer >= 3f)
+            lightTimer += Time.deltaTime;
+            if (lightTimer >= 3f)
             {
-                //손전등 3초 이상 켰다. 크리처 순간이동 해야 함.
-                CanTeleportation = true;
+                //CommandTeleport();
             }
+        }
+        else
+        {
+            lightTimer = 0f;
         }
     }
 
 
 }
+
