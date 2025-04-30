@@ -14,7 +14,7 @@ public class Creature2Manager : MonoBehaviour
     [Header("Clone Settings")]
     [SerializeField] private GameObject creature2Clone;
     [SerializeField] private Transform playerTransform;
-    [SerializeField] private float activeDuration = 3f;
+    [SerializeField] private float activeDuration = 2f;
     [SerializeField] private Creature2Clone creature2Script;
     private Vector3 lastEyePos;
     private Vector3 lastEyeForward;
@@ -53,7 +53,11 @@ public class Creature2Manager : MonoBehaviour
     public void OnEyeDetected(Vector3 eyePos)
     {
         if (isTeleporting) return;    // 이미 순간이동 중이면 무시
-
+        ++detectionCount;
+        if(detectionCount >= 9)
+        {
+            detectionCount = 9;
+        }
         lastEyePos = eyePos;
         ActivateClone();
     }
@@ -74,14 +78,14 @@ public class Creature2Manager : MonoBehaviour
         isTeleporting = false;        // 순간이동 종료 → 재호출 허용
     }
 
-    private void GrowWithCreature2()
-    {
-        // growThreshold 이상일 때마다 성장
-        if (detectionCount > 0 && detectionCount % growThreshold == 0)
-        {
-            CanGrow = true;
-        }
-    }
+    //private void GrowWithCreature2()
+    //{
+    //    // growThreshold 이상일 때마다 성장
+    //    if (detectionCount > 0 && detectionCount % growThreshold == 0)
+    //    {
+    //        CanGrow = true;
+    //    }
+    //}
 
     //지금은 없음
     //외부 이벤트에서 호출: 손전등이 켜진 상태를 지속할 때

@@ -5,6 +5,7 @@ public class PlayerMovement : MonoBehaviour
     private Animator animator;
     private Camera cam;
     private CharacterController characterController;
+    private CapsuleCollider capsuleCollider;
 
     public float speed = 5f;
     public float runSpeed = 10f;
@@ -19,6 +20,8 @@ public class PlayerMovement : MonoBehaviour
     // crouch 상태 시 조정되는 캐릭터 콜라이더 값들
     public float crouchHeight = 1f;     // crouch 상태일 때의 height
     public float crouchCenterY = 0.7f;    // crouch 상태일 때의 center Y값
+    public float crouchCapHeight = 1f;
+    public float crouchCapCenterY = 0.5f;
 
     //중력
     public float gravity = -9.81f;
@@ -26,14 +29,19 @@ public class PlayerMovement : MonoBehaviour
 
     private float originalHeight;       // 원래 height 저장
     private Vector3 originalCenter;     // 원래 center 저장
+    private float originalCapHeight;       // 원래 height 저장
+    private Vector3 originalCapCenter;     // 원래 center 저장
 
     private void Start()
     {
         animator = GetComponent<Animator>();
         cam = Camera.main;
         characterController = GetComponent<CharacterController>();
+        capsuleCollider = GetComponent<CapsuleCollider>();
         originalHeight = characterController.height;   // 원래 height 저장
         originalCenter = characterController.center;     // 원래 center 저장
+        originalCapHeight = capsuleCollider.height;
+        originalCapCenter = capsuleCollider.center;
     }
 
     private void Update()
@@ -87,14 +95,18 @@ public class PlayerMovement : MonoBehaviour
         {
             finalSpeed = crouchSpeed;
             characterController.height = crouchHeight;
+            capsuleCollider.height = crouchCapHeight;
             // crouch 상태일 때 center의 Y값을 crouchCenterY로 설정
             characterController.center = new Vector3(originalCenter.x, crouchCenterY, originalCenter.z);
+            capsuleCollider.center = new Vector3(originalCapCenter.x, crouchCapCenterY, originalCapCenter.z);
         }
         else
         {
             finalSpeed = (run) ? runSpeed : speed;
             characterController.height = originalHeight;
+            capsuleCollider.height = originalCapHeight;
             characterController.center = originalCenter;
+            capsuleCollider.center = originalCapCenter;
         }
 
         Vector3 forward = transform.TransformDirection(Vector3.forward);
