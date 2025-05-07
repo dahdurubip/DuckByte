@@ -93,7 +93,7 @@ public class ItemManager : MonoBehaviour
                 fKeyPromptUI.SetActive(true);
 
             // 아이템 머리 위에 프롬프트 위치
-            Vector3 worldPos = nearbyItem.transform.position + Vector3.up * 1.5f;
+            Vector3 worldPos = nearbyItem.transform.position + Vector3.up * 0.5f;
             Vector3 screenPos = mainCamera.WorldToScreenPoint(worldPos);
             fKeyPromptUI.transform.position = screenPos;
         }

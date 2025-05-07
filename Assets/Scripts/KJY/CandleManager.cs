@@ -1,20 +1,30 @@
 using UnityEngine;
 using System.Collections.Generic;
+using System.Linq;
 
 public class CandleManager : MonoBehaviour
 {
     [Header("모든 Candle을 순서대로 할당하세요 (Hierarchy 순서대로)")]
     public List<Candle> candles = new List<Candle>();
 
-    [Header("정답으로 켜야 할 인덱스 (0부터 시작)")]
-    public List<int> correctIndices = new List<int> { 0, 2, 4, 5, 8 };
+    [Header("정답으로 켜야 할 인덱스 (0부터 시작, 순서 중요)")]
+    public List<int> correctIndices = new List<int> { 0, 1, 2, 3, 4, 5, 6, 7};
 
-    // 현재까지 켜진 촛불 인덱스
-    private HashSet<int> litIndices = new HashSet<int>();
+    // 현재까지 켜진 촛불 인덱스를 순서대로 기록
+    private List<int> litIndices = new List<int>();
+
+    public ParticleSystem particle;
+
+
+    private void Awake()
+    {
+        //particle = GetComponent<ParticleSystem>();
+    }
+
 
     void Start()
     {
-        // 각 Candle에 이 매니저를 등록
+        particle.Stop();
         for (int i = 0; i < candles.Count; i++)
         {
             candles[i].Initialize(this, i);
@@ -26,42 +36,38 @@ public class CandleManager : MonoBehaviour
     /// </summary>
     public void OnCandleLit(int index)
     {
-        // 이미 판정이 끝난 촛불은 무시
+        // 중복 방지: 이미 기록된 인덱스는 무시
         if (litIndices.Contains(index)) return;
 
-        // 올바른 인덱스면 추가, 아니면 바로 오답 처리
-        if (correctIndices.Contains(index))
-        {
-            litIndices.Add(index);
-            CheckComplete();
-        }
-        else
-        {
-            Wrong();
-        }
-    }
+        // 새로 켜진 촛불 인덱스 추가
+        litIndices.Add(index);
 
-    private void CheckComplete()
-    {
-        // 모두 켜졌다면 성공
+        // 정답 개수와 일치할 때만 판정
         if (litIndices.Count == correctIndices.Count)
-            Correct();
+        {
+            // 순서와 값이 모두 일치하면 성공, 아니면 오답
+            if (litIndices.SequenceEqual(correctIndices))
+                Correct();
+            else
+                Wrong();
+        }
     }
 
     private void Correct()
     {
         Debug.Log("정답! 퍼즐이 풀렸습니다.");
         // TODO: 성공 이펙트, 다음 단계로 이동 등
+        particle.Play();
     }
 
     private void Wrong()
     {
         Debug.Log("오답! 모든 촛불을 끄고 다시 시도하세요.");
-        // 모든 촛불 끄기
+        // 모든 촛불 초기화
         foreach (var c in candles)
             c.ResetCandle();
 
-        // 판정 초기화
+        // 입력 기록 초기화
         litIndices.Clear();
     }
 }

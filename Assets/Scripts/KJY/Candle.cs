@@ -17,10 +17,8 @@ public class Candle : MonoBehaviour, IInteractable
         myIndex = index;
     }
 
-
     private void Awake()
     {
-        //if (animator == null) animator = GetComponent<Animator>();
         particle = GetComponentInChildren<ParticleSystem>();
     }
 
@@ -28,12 +26,14 @@ public class Candle : MonoBehaviour, IInteractable
     {
         particle.Stop();
     }
+
     public void OnInteract(GameObject heldItem)
     {
-        // 1) 아이템이 널(null)이면 무시
+        // 이미 켜진 촛불은 무시
+        if (isLit) return;
+
         if (heldItem == null) return;
 
-        // 2) 태그가 맞는 열쇠인지 확인
         if (heldItem.CompareTag(requiredKeyTag))
         {
             OpenChest();
@@ -48,18 +48,15 @@ public class Candle : MonoBehaviour, IInteractable
     {
         Debug.Log("켜졌습니다!");
         particle.Play();
-        //if (animator != null)
-        //animator.SetTrigger("Open");
-        // TODO: 아이템 스폰, 소리 재생 등 추가
+        isLit = true;  // 촛불 상태를 켜진 상태로 설정
+
+        // 매니저에게 이 촛불이 켜졌음을 알림
+        manager.OnCandleLit(myIndex);
     }
 
-    /// <summary>
-    /// 매니저의 오답 처리 시 호출되어 촛불을 초기 상태로 되돌립니다.
-    /// </summary>
     public void ResetCandle()
     {
         particle.Stop();
         isLit = false;
     }
-
 }
