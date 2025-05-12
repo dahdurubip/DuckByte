@@ -109,6 +109,7 @@ public class PlayerMovement : MonoBehaviour
             capsuleCollider.center = originalCapCenter;
         }
 
+        // 이때 조작 반전 if문 넣어보기
         Vector3 forward = transform.TransformDirection(Vector3.forward);
         Vector3 right = transform.TransformDirection(Vector3.right);
 

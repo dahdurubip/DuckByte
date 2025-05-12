@@ -1,0 +1,36 @@
+using UnityEngine;
+
+public class AltarManager : MonoBehaviour, IInteractable
+{
+    [Header("제단 상호작용 아이템")]
+    public string requiredItemTag = "Piece";
+    public BossPhaseManager bossPhaseManager;
+
+    public void OnInteract(GameObject heldItem)
+    {
+        // 1) 아이템이 널(null)이면 무시
+        if (heldItem == null) return;
+
+        // 2) 태그가 맞는 열쇠인지 확인
+        if (heldItem.CompareTag(requiredItemTag))
+        {
+            sd();
+        }
+        else
+        {
+            Debug.Log("이건 열쇠가 아닙니다.");
+        }
+    }
+
+    void sd()
+    {
+        //Debug.Log("상자가 열립니다!");
+        //if (animator != null)
+        //animator.SetTrigger("Open");
+        // TODO: 아이템 스폰, 소리 재생 등 추가
+
+        int nextPhase = bossPhaseManager.currentPhase + 1;
+        bossPhaseManager.SetPhase(nextPhase);
+    }
+
+}

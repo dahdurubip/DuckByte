@@ -19,11 +19,11 @@ public class CDHPlayer : MonoBehaviour
 
         controller.Move(input * speed * Time.deltaTime);
 
-        if (Input.GetKeyDown(KeyCode.R))
+        if (Input.GetKeyDown(KeyCode.N))
         {
             Jump();
         }
-        if (Input.GetKeyDown(KeyCode.E))
+        if (Input.GetKeyDown(KeyCode.M))
         {
             InteractWithItem();
         }
