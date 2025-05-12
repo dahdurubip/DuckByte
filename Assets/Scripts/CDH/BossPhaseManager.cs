@@ -5,6 +5,7 @@ using System.Collections.Generic;
 public class BossPhaseManager : MonoBehaviour
 {
     public GameObject rockPrefab;
+    public GameObject bossObject;
     public GameObject warningCirclePrefab;
     public GameObject shockwaveEffectPrefab;
 
@@ -19,7 +20,8 @@ public class BossPhaseManager : MonoBehaviour
     //public int spawnCount = 4; 
     private float timer;
 
-
+    public Transform altar;              // 제단 위치
+    public float altarSafeRadius = 3f;   // 제단 보호 범위
 
     public Transform player;          // 따라다닐 플레이어
 
@@ -36,7 +38,7 @@ public class BossPhaseManager : MonoBehaviour
     void Update()
     {
         timer += Time.deltaTime;
-        Debug.Log("Timer: " + timer);
+        //Debug.Log("Timer: " + timer);
 
         if (timer >= phaseInterval)
         {
@@ -96,6 +98,7 @@ public class BossPhaseManager : MonoBehaviour
         // 3. 경고 제거
         Destroy(warning);
 
+        yield return new WaitForSeconds(0.3f);
         // 4. 돌을 마지막 위치 위로부터 생성
         Instantiate(rockPrefab, dropPosition + Vector3.up * 0.5f, Quaternion.identity);
 
@@ -126,7 +129,10 @@ public class BossPhaseManager : MonoBehaviour
         // 랜덤으로 선택된 지점에 워닝 생성
         for (int i = 0; i < spawnCount && i < randomPoints.Count; i++)
         {
-            warnings.Add(Instantiate(warningCirclePrefab, randomPoints[i].position, Quaternion.identity));
+            //warnings.Add(Instantiate(warningCirclePrefab, randomPoints[i].position, Quaternion.identity));
+
+            Vector3 warningPosition = randomPoints[i].position + Vector3.down * 4f;
+            warnings.Add(Instantiate(warningCirclePrefab, warningPosition, Quaternion.identity));
         }
 
         yield return new WaitForSeconds(1f);
@@ -145,39 +151,94 @@ public class BossPhaseManager : MonoBehaviour
 
     IEnumerator Phase3Attack()
     {
-        // 보스(해당 스크립트가 붙은 오브젝트)의 현재 위치를 저장
-        Vector3 center = transform.position;
-        // 저장한 곳에 경고 프리팹을 생성
-        GameObject warning = Instantiate(warningCirclePrefab, center, Quaternion.identity);
-        // 경고 프리팹의 크기를 충격파 범위에 맞게 키움
-        // shockwaveRadius * 2 : 충격파의 지 름에 해당하는 크기로 설정
-        warning.transform.localScale = Vector3.one * shockwaveRadius * 2f;
-        // 1초간 대기, 경고 시간이자 플레이어의 회피 유도 타이밍
+        //// 보스(해당 스크립트가 붙은 오브젝트)의 현재 위치를 저장
+        //Vector3 center = transform.position;
+        //// 저장한 곳에 경고 프리팹을 생성
+        //GameObject warning = Instantiate(warningCirclePrefab, center, Quaternion.identity);
+        //// 경고 프리팹의 크기를 충격파 범위에 맞게 키움
+        //// shockwaveRadius * 2 : 충격파의 지 름에 해당하는 크기로 설정
+        //warning.transform.localScale = Vector3.one * shockwaveRadius * 2f;
+        //// 1초간 대기, 경고 시간이자 플레이어의 회피 유도 타이밍
+        //yield return new WaitForSeconds(1f);
+        //// 경고 프리팹 제거
+        //Destroy(warning);
+
+        //// 충격파 시각 이펙트(프리팹) 실행
+        //Instantiate(shockwaveEffectPrefab, center, Quaternion.identity);
+
+        //// 반지름(shockwaveRadius)만큼의 구를 만들어 범위 안의 오브젝트들 감지
+        //// 보스를 중심으로 피격 판정 범위 설정
+        //Collider[] hits = Physics.OverlapSphere(center, shockwaveRadius);
+
+        //// 감지된 오브젝트들 각각에 대해 반복검사
+        //foreach (var hit in hits)
+        //{
+        //    // 감지된 오브젝트의 Tag가 플레이어인지 확인
+        //    if (hit.CompareTag("Player"))
+        //    {
+        //        //// 플레이어가 PlayerMental스크립트를 가지고 있다면 저장
+        //        var mental = hit.GetComponent<PlayerMental>();
+        //        // 스크립트를 가지고 있는 경우 TakeMentalDamage함수를 통해 정신력 데미지를 부여
+        //        if (mental != null)
+        //        {
+        //            mental.TakeMentalDamage(shockwaveMentalDamage);
+        //        }
+        //    }
+        //}
+
+
+        //Instantiate(warningCirclePrefab, bossObject.transform.position, Quaternion.identity);
+        //yield return new WaitForSeconds(1f);
+
+        //// 충격파 발동
+        //Instantiate(shockwaveEffectPrefab, bossObject.transform.position, Quaternion.identity);
+
+        //Collider[] targets = Physics.OverlapSphere(bossObject.transform.position, shockwaveRadius);
+        //foreach (var target in targets)
+        //{
+        //    if (target.CompareTag("Player"))
+        //    {
+        //        target.GetComponent<PlayerMental>()?.TakeMentalDamage(shockwaveMentalDamage);
+        //    }
+        //}
+
+        //// 보스 사라짐
+        //bossObject.SetActive(false);
+        //yield return new WaitForSeconds(1f);
+
+        //// 보스 이동
+        //int randomIndex = Random.Range(0, rockSpawnPoints.Length);
+        //bossObject.transform.position = rockSpawnPoints[randomIndex].position;
+
+        //// 보스 다시 등장
+        //bossObject.SetActive(true);
+        //yield return new WaitForSeconds(1f);
+
+
+        //1.경고음 재생
+        //2.카메라 흔들림
+
         yield return new WaitForSeconds(1f);
-        // 경고 프리팹 제거
-        Destroy(warning);
 
-        // 충격파 시각 이펙트(프리팹) 실행
-        Instantiate(shockwaveEffectPrefab, center, Quaternion.identity);
 
-        // 반지름(shockwaveRadius)만큼의 구를 만들어 범위 안의 오브젝트들 감지
-        // 보스를 중심으로 피격 판정 범위 설정
-        Collider[] hits = Physics.OverlapSphere(center, shockwaveRadius);
+        //3.충격파 이펙트 발생
+        Instantiate(shockwaveEffectPrefab, bossObject.transform.position, Quaternion.identity);
 
-        // 감지된 오브젝트들 각각에 대해 반복검사
-        foreach (var hit in hits)
+        // 플레이어가 제단 반경 안에 있는지 확인
+        float distanceToAltar = Vector3.Distance(player.position, altar.position);
+
+        // 안전 반경 밖이면 정신력 데미지
+        if (distanceToAltar > altarSafeRadius)
         {
-            // 감지된 오브젝트의 Tag가 플레이어인지 확인
-            if (hit.CompareTag("Player"))
+            PlayerMental mental = player.GetComponent<PlayerMental>();
+            if (mental != null)
             {
-                //// 플레이어가 PlayerMental스크립트를 가지고 있다면 저장
-                //var mental = hit.GetComponent<PlayerMental>();
-                //// 스크립트를 가지고 있는 경우 TakeMentalDamage함수를 통해 정신력 데미지를 부여
-                //if (mental != null)
-                //{
-                //    mental.TakeMentalDamage(shockwaveMentalDamage);
-                //}
+                //4.정신력 데미지
+                mental.TakeMentalDamage(shockwaveMentalDamage);
+                //5.카메라 색상 왜곡 효과(포스트 프로세싱)
             }
         }
     }
+
+
 }

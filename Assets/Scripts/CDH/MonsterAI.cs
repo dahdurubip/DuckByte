@@ -291,6 +291,8 @@ public class MonsterAI : MonoBehaviour
         }
     }
 
+
+    // 플레이어 의심
     private IEnumerator HandleSuspicion()
     {
         //Debug.Log("플레이어 의심 중...");
