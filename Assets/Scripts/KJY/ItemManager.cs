@@ -3,77 +3,93 @@ using UnityEngine;
 public class ItemManager : MonoBehaviour
 {
     [Header("Hand & Pickup")]
-    public Transform handTransform;      // 손 위치 포인트
-    public LayerMask itemLayer;         // Item 레이어만 검출
-    public float detectRange = 2f;      // 집을 수 있는 최대 거리
+    //손 위치 포인트
+    public Transform handTransform;
+    //필요하는 레이어만 검출
+    public LayerMask pickUpLayer;
+    //집을 수 있는 최대 거리
+    public float detectRange = 2f;      
 
     [Header("UI")]
-    public GameObject fKeyPromptUI;     // "Press F" UI
-    public GameObject pressEIconUI;
+    public GameObject FKey;    
+    public GameObject EKey;
 
     private Camera mainCamera;
-    private GameObject currentItem;       // 손에 든 아이템
-    private GameObject nearbyItem;        // 근처에 있는 가장 가까운 아이템
-
-    //[Header("Interaction Settings")]
-    //public float interactRange = 15f;             // 상호작용 사거리
-    //public LayerMask interactableLayer;          // 상호작용 레이어 (Item 레이어와 구분)
+    //손에 든 아이템
+    public GameObject currentItem;
+    //근처에 있는 가장 가까운 아이템
+    private GameObject nearbyItem;        
 
     [Header("Interaction Settings")]
-    public KeyCode interactKey = KeyCode.E;      // 상호작용 키
-    public float interactRange = 15f;          // 최대 거리
-    public float panAngle = 30f;               // 팬(원뿔) 각도 절반
-    public LayerMask interactableLayer;        // 상호작용 레이어
+    //상호작용 키
+    private KeyCode interactKey = KeyCode.E;
+    //최대 거리
+    public float interactRange = 15f;
+    //팬(원뿔) 각도 절반
+    public float panAngle = 30f;
+    //상호작용 레이어
+    public LayerMask interactableLayer;
+
+    [SerializeField] private Door door;
 
     private void Start()
     {
         mainCamera = Camera.main;
-        if (fKeyPromptUI != null) fKeyPromptUI.SetActive(false);
-        if (pressEIconUI != null) pressEIconUI.SetActive(false);
+        if (FKey != null) FKey.SetActive(false);
+        if (EKey != null) EKey.SetActive(false);
     }
 
     private void Update()
     {
         DetectNearbyItem();
-        UpdateInteractUI();   // ← 매 프레임마다 인터랙트 가능 여부 체크
+        UpdateInteractUI();   //인터랙트 가능 여부 체크
 
-        // F 키 입력 시, 근처 아이템이 있으면 픽업 또는 교체
+        //F 키 입력 시, 근처 아이템이 있으면 픽업 또는 교체
         if (Input.GetKeyDown(KeyCode.F) && nearbyItem != null)
         {
-            PickupItem(nearbyItem);
-            // 픽업 후엔 다시 근처 아이템을 검사
-            DetectNearbyItem();
+            if (nearbyItem.tag == "LeftDoor")
+            {
+                //좌측문 열기 함수 추가
+                door.OpenTheLeftDoor();
+            }
+            else
+            {
+                PickupItem(nearbyItem);
+
+                //픽업 후엔 다시 근처 아이템을 검사
+                DetectNearbyItem();
+            }
         }
 
-        // 손에 든 아이템이 있을 때만 상호작용 시도
+        //손에 든 아이템이 있을 때만 상호작용 시도
         if (currentItem != null && Input.GetKeyDown(interactKey))
         {
             TryInteractWithTarget();
         }
     }
 
-    // 반경 내 아이템 검출
+    //반경 내 아이템 검출
     private void DetectNearbyItem()
     {
-        Collider[] hits = Physics.OverlapSphere(transform.position, detectRange, itemLayer);
+        Collider[] hits = Physics.OverlapSphere(transform.position, detectRange, pickUpLayer);
         GameObject nearest = null;
         float minDist = Mathf.Infinity;
 
         foreach (var col in hits)
         {
-            GameObject go = col.gameObject;
+            GameObject item = col.gameObject;
 
-            // ↓ 손에 든 아이템 또는 손 위치의 자식이면 검사 제외
-            if (currentItem != null && go == currentItem)
+            //손에 든 아이템 또는 손 위치의 자식이면 검사 제외
+            if (currentItem != null && item == currentItem)
                 continue;
-            if (handTransform != null && go.transform.IsChildOf(handTransform))
+            if (handTransform != null && item.transform.IsChildOf(handTransform))
                 continue;
 
-            float dist = Vector3.Distance(transform.position, go.transform.position);
+            float dist = Vector3.Distance(transform.position, item.transform.position);
             if (dist < minDist)
             {
                 minDist = dist;
-                nearest = go;
+                nearest = item;
             }
         }
 
@@ -82,29 +98,29 @@ public class ItemManager : MonoBehaviour
     }
 
 
-    // UI 아이콘 활성/비활성 및 위치 갱신
+    //UI 아이콘 활성/비활성 및 위치 갱신
     private void UpdatePromptUI()
     {
-        if (fKeyPromptUI == null) return;
+        if (FKey == null) return;
 
         if (nearbyItem != null)
         {
-            if (!fKeyPromptUI.activeSelf)
-                fKeyPromptUI.SetActive(true);
+            if (!FKey.activeSelf)
+                FKey.SetActive(true);
 
-            // 아이템 머리 위에 프롬프트 위치
+            //아이템 위에 프롬프트 위치
             Vector3 worldPos = nearbyItem.transform.position + Vector3.up * 0.5f;
             Vector3 screenPos = mainCamera.WorldToScreenPoint(worldPos);
-            fKeyPromptUI.transform.position = screenPos;
+            FKey.transform.position = screenPos;
         }
         else
         {
-            if (fKeyPromptUI.activeSelf)
-                fKeyPromptUI.SetActive(false);
+            if (FKey.activeSelf)
+                FKey.SetActive(false);
         }
     }
 
-    // 실제 집기/교체 로직
+    //실제 집기/교체 로직
     private void PickupItem(GameObject item)
     {
         // 손에 든 게 있으면 내려놓기
@@ -121,8 +137,9 @@ public class ItemManager : MonoBehaviour
         currentItem.transform.localRotation = Quaternion.identity;
     }
 
-    // 손에 든 아이템 내려놓기
-    private void DropCurrentItem()
+    //손에 든 아이템 내려놓기
+    //충돌시 이 함수를 호출
+    public void DropCurrentItem()
     {
         currentItem.transform.SetParent(null);
         var rb = currentItem.GetComponent<Rigidbody>();
@@ -195,7 +212,7 @@ public class ItemManager : MonoBehaviour
 
     private void UpdateInteractUI()
     {
-        if (pressEIconUI == null)
+        if (EKey == null)
             return;
 
         bool canInteract = false;
@@ -226,7 +243,7 @@ public class ItemManager : MonoBehaviour
             }
         }
 
-        pressEIconUI.SetActive(canInteract);
+        EKey.SetActive(canInteract);
     }
 
     private void TryInteractWithTarget()
@@ -296,6 +313,8 @@ public class ItemManager : MonoBehaviour
             prevPoint = nextPoint;
         }
     }
+
+
 }
 
 

@@ -5,11 +5,11 @@ using System.Collections;
 public class Creature2 : MonoBehaviour
 {
     [Header("Defalut Setting")]
-    [SerializeField] private Creature2Manager creature2Manager;
+    [SerializeField] private ItemManager itemmanager;
     [SerializeField] private Player player;
     [SerializeField] private CameraMovement camShake;
 
-    // AI 이동경로
+    [Header("AI Settings")]
     [SerializeField] private Transform[] wayPoint;
     [SerializeField] private NavMeshAgent navMeshAgent;
 
@@ -25,8 +25,9 @@ public class Creature2 : MonoBehaviour
     private float detectionRange = 10f;
     private float damage = 10f;
 
-    //크리처 액션
+    //크리처 애니메이션
     private Animator animator;
+
 
     private void Start()
     {
@@ -130,6 +131,7 @@ public class Creature2 : MonoBehaviour
         animator.SetBool("isRun", false);
         animator.SetTrigger("Attack");
         player.StartCoroutine(player.PlayerHitEffect());
+        itemmanager.DropCurrentItem();
         //player.PlayerHitEffect();
         //Invoke("player.PlayerHitEffectEnd", 0.5f);
         camShake.StartCoroutine(camShake.Shake(0.2f, 0.3f));
@@ -137,8 +139,6 @@ public class Creature2 : MonoBehaviour
         Vector3 dir = (player.transform.position - transform.position).normalized;
         Quaternion lookRotation = Quaternion.LookRotation(new Vector3(dir.x, 0, dir.z));
         transform.rotation = Quaternion.Slerp(transform.rotation, lookRotation, Time.deltaTime * 5f);
-
-        //데미지크드 추가해야 함
 
         StartCoroutine(AttackCooldown());
     }

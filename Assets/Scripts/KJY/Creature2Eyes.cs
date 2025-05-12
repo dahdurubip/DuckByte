@@ -13,22 +13,21 @@ public struct CastInfo
 
 public class Creature2Eyes : MonoBehaviour
 {
-    [Header("기본 설정")]
+    [Header("Scripts")]
     [SerializeField] private Creature2Manager creature2Manager;
 
-    [Header("타겟 레이어 설정")]
+    [Header("Settings")]
     [SerializeField] private LayerMask playerLayer;
-
-    [Header("시야 설정")]
     [SerializeField, Range(0f, 30f)] private float viewRange = 3f;
     [SerializeField, Range(0f, 360f)] private float viewAngle = 80f;
 
-    [Header("디버그용")]
+    [Header("DebugSettings")]
     [SerializeField] private List<CastInfo> lineList;
 
     private WaitForSeconds checkDelay = new WaitForSeconds(0.1f);
     private Coroutine checkTargetCoroutine;
     private Coroutine drawRayLineCoroutine;
+
 
     void Start()
     {
@@ -83,7 +82,7 @@ public class Creature2Eyes : MonoBehaviour
                     Debug.Log("플레이어 감지됨!");
                     //creature2Manager.CommandTeleport();
                     creature2Manager.OnEyeDetected(transform.position);
-                    break; // 1회 감지만 하고 빠짐
+                    break; // 회 감지만 하고 빠짐
                 }
             }
         }

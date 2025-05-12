@@ -5,12 +5,6 @@ using UnityEditor.Rendering.LookDev;
 
 public class Player : MonoBehaviour
 {
-   
-    [SerializeField] private float maxHp = 100f;
-    private float currentHp;
-
-    //[SerializeField] private HpBar hpBar;
-
     public float CurrentHp
     {
         get => currentHp;
@@ -40,24 +34,23 @@ public class Player : MonoBehaviour
     //private CharacterController controller;
     //private Vector3 moveDirection;
 
+    [Header("Hp Settings")]
+    [SerializeField] private float maxHp = 100f;
 
-    private Animator animator;
-    
+    [Header("Shake Settings")]
     [SerializeField] private GameObject hitEffect1;
     [SerializeField] private GameObject hitEffect2;
     [SerializeField] private CameraMovement cam;
 
-    //private void Awake()
-    //{
-    //    instance = this;
-    //}
+    private float currentHp;
+    private Animator animator;
+
 
     private void Start()
     {
         animator = GetComponent<Animator>();
-        //controller = GetComponent<CharacterController>();
-
-        CurrentHp = maxHp;  // 체력 초기화 및 HP 바 초기화
+        //체력 초기화 및 HP 바 초기화
+        CurrentHp = maxHp;  
     }
 
     //private void FixedUpdate()
@@ -201,7 +194,7 @@ public class Player : MonoBehaviour
     {
         Debug.Log("플레이어 사망!");
         StopAllCoroutines();
-        // 여기서 사망 애니메이션, 게임 오버 처리 등 넣기
+        //여기서 사망 애니메이션, 게임 오버 처리 등 넣기
         animator.SetBool("die", true);
         //게임오버 화면 전환
     }

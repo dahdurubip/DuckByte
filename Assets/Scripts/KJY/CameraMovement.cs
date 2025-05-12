@@ -21,7 +21,7 @@ public class CameraMovement : MonoBehaviour
     public float finalDistance;
     public float smoothness = 10f;
 
-    // 시야 고정 토글
+    //시야 고정 토글
     private bool isViewLocked = false;
 
 
@@ -39,13 +39,13 @@ public class CameraMovement : MonoBehaviour
     private void Update()
     {
 
-        // Q 키를 눌렀을 때 토글: 한 번 누르면 잠금, 다시 누르면 해제
+        //Q키를 눌렀을 때 토글: 한 번 누르면 잠금, 다시 누르면 해제
         if (Input.GetKeyDown(KeyCode.Q))
         {
             isViewLocked = !isViewLocked;
         }
 
-        // 시야가 잠겨 있지 않을 때만 마우스 입력으로 회전값 업데이트
+        //시야가 잠겨 있지 않을 때만 마우스 입력으로 회전값 업데이트
         if (!isViewLocked)
         {
             rotX += -Input.GetAxis("Mouse Y") * sensitivity * Time.deltaTime;
@@ -53,7 +53,7 @@ public class CameraMovement : MonoBehaviour
             rotX = Mathf.Clamp(rotX, -clampAngle, clampAngle);
         }
 
-        // 회전 적용 (잠긴 상태여도 마지막 rotX/rotY가 유지됨)
+        //회전 적용 (잠긴 상태여도 마지막 rotX/rotY가 유지됨)
         Quaternion rot = Quaternion.Euler(rotX, rotY, 0);
         transform.rotation = rot;
 
@@ -77,7 +77,7 @@ public class CameraMovement : MonoBehaviour
         realCamera.localPosition = Vector3.Lerp(realCamera.localPosition, dirNormalized * finalDistance, Time.deltaTime * smoothness);
     }
 
-    // 흔들릴 시간, 세기
+    //흔들릴 시간, 세기
     public IEnumerator Shake(float duration, float magnitude)
     {
         Vector3 originalPos = realCam.transform.localPosition;
@@ -85,11 +85,11 @@ public class CameraMovement : MonoBehaviour
 
         while (elapsed < duration)
         {
-            // 랜덤 오프셋 계산
+            //랜덤 오프셋 계산
             float offsetX = Random.Range(-1f, 1f) * magnitude;
             float offsetY = Random.Range(-1f, 1f) * magnitude;
 
-            // 카메라 위치 갱신
+            //카메라 위치 갱신
             realCam.transform.localPosition = new Vector3(originalPos.x + offsetX,
                                                   originalPos.y + offsetY,
                                                   originalPos.z);

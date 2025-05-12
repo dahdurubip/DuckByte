@@ -3,13 +3,16 @@ using UnityEngine;
 public class Candle : MonoBehaviour, IInteractable
 {
     [Header("Key Settings")]
-    public string requiredKeyTag = "Fire";    // 필요 열쇠 태그
-    public ParticleSystem particle;
-    //public Animator animator;                // 열리는 애니메이터
+    //열쇠 태그
+    [SerializeField] private string KeyTag = "Fire";   
+    [SerializeField] private ParticleSystem particle;
+    //열리는 애니메이터
+    //[SerializeField] private Animator animator; 
 
     private CandleManager manager;
     private int myIndex;
     private bool isLit = false;
+
 
     public void Initialize(CandleManager mgr, int index)
     {
@@ -29,14 +32,14 @@ public class Candle : MonoBehaviour, IInteractable
 
     public void OnInteract(GameObject heldItem)
     {
-        // 이미 켜진 촛불은 무시
+        //이미 켜진 촛불은 무시
         if (isLit) return;
 
         if (heldItem == null) return;
 
-        if (heldItem.CompareTag(requiredKeyTag))
+        if (heldItem.CompareTag(KeyTag))
         {
-            OpenChest();
+            OpenCandle();
         }
         else
         {
@@ -44,13 +47,14 @@ public class Candle : MonoBehaviour, IInteractable
         }
     }
 
-    private void OpenChest()
+    private void OpenCandle()
     {
         Debug.Log("켜졌습니다!");
         particle.Play();
-        isLit = true;  // 촛불 상태를 켜진 상태로 설정
+        //촛불 상태를 켜진 상태로 설정
+        isLit = true;  
 
-        // 매니저에게 이 촛불이 켜졌음을 알림
+        //매니저에게 이 촛불이 켜졌음을 알림
         manager.OnCandleLit(myIndex);
     }
 

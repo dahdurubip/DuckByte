@@ -4,21 +4,21 @@ using System.Collections;
 public class Creature2Clone : MonoBehaviour
 {
 
-    private Transform playerTransform;
+    [Header("Scripts Settings")]
+    [SerializeField] private ItemManager itemmanager;
     [SerializeField] private Player player;
     [SerializeField] private CameraMovement camShake;
 
-    [Header("Movement")]
+    [Header("Default Settings")]
     [SerializeField] private float moveSpeed = 3.5f;
-
-    [Header("Combat")]
     [SerializeField] private float attackRange = 5f;
+    [SerializeField] private float rotationSpeed = 720f;
 
+    private Transform playerTransform;
     private Vector3 targetPosition;
-
     private Animator animator;
     private bool isAttacking = false;
-    public float rotationSpeed = 720f;
+
 
     private void Start()
     {
@@ -28,7 +28,10 @@ public class Creature2Clone : MonoBehaviour
     public void Initialize(Vector3 eyePos, Transform player)
     {
         playerTransform = player;
+
+        float targetPosY = playerTransform.position.y;
         targetPosition = eyePos;
+        targetPosition.y = targetPosY;
         transform.position = targetPosition;
     }
 
@@ -43,7 +46,7 @@ public class Creature2Clone : MonoBehaviour
         }
         else
         {
-            // 공격
+            //공격
             if (!isAttacking)
             {
                 Attack();
@@ -51,21 +54,22 @@ public class Creature2Clone : MonoBehaviour
 
         }
     }
+
     private void Chase()
     {
-        // 추적
+        //추적
         Vector3 dir = (playerTransform.position - transform.position);
         dir.y = 0;
         dir.Normalize();
 
-        // 회전
+        //회전
         Quaternion lookRot = Quaternion.LookRotation(dir);
         transform.rotation = Quaternion.RotateTowards(transform.rotation, lookRot, rotationSpeed * Time.deltaTime);
 
-        // 이동
+        //이동
         transform.position += dir * moveSpeed * Time.deltaTime;
 
-        // 애니메이션
+        //애니메이션
         animator.SetBool("run", true);
         animator.ResetTrigger("attack");
         isAttacking = false;
@@ -78,8 +82,12 @@ public class Creature2Clone : MonoBehaviour
         animator.SetTrigger("attack");
         player.TakeDamage(15);
         player.StartCoroutine(player.PlayerHitEffect());
-        //player.PlayerHitEffect();
-        //Invoke("player.PlayerHitEffectEnd", 0.5f);
+
+        //손에 아이템 있으면 호출
+        if(itemmanager.currentItem != null)
+        {
+            itemmanager.DropCurrentItem();
+        }
         camShake.StartCoroutine(camShake.Shake(0.2f, 0.3f));
     }
 
