@@ -5,6 +5,7 @@ public class Chest : MonoBehaviour, IInteractable
     [Header("requiredKeyTag Settings")]
     //필요 열쇠 태그
     public string requiredKeyTag = "Key";
+    [SerializeField] private ItemManager itemmanager;
 
     //열리는 애니메이터
     //public Animator animator;                
@@ -35,6 +36,7 @@ public class Chest : MonoBehaviour, IInteractable
     private void OpenChest()
     {
         Debug.Log("상자가 열립니다!");
+        Destroy(itemmanager.currentItem);
         //if (animator != null)
             //animator.SetTrigger("Open");
         //아이템 스폰, 소리 재생 등 추가
