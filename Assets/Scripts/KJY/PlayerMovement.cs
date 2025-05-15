@@ -32,6 +32,8 @@ public class PlayerMovement : MonoBehaviour
     private float originalCapHeight;       // 원래 height 저장
     private Vector3 originalCapCenter;     // 원래 center 저장
 
+    public bool IsMoving { get; private set; }
+
     private void Start()
     {
         animator = GetComponent<Animator>();
@@ -114,6 +116,9 @@ public class PlayerMovement : MonoBehaviour
         Vector3 right = transform.TransformDirection(Vector3.right);
 
         Vector3 moveDirection = forward * Input.GetAxisRaw("Vertical") + right * Input.GetAxisRaw("Horizontal");
+
+        IsMoving = moveDirection.magnitude > 0.1f;
+
         characterController.Move(moveDirection.normalized * (finalSpeed * Time.deltaTime));
 
         float percent = ((run) ? 1f : 0.5f) * moveDirection.magnitude;
