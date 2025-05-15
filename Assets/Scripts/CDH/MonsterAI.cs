@@ -7,7 +7,7 @@ public class MonsterAI : MonoBehaviour
     public GameManager GM;
     public NavMeshAgent NMA;
     public Transform player;
-    public CDHPlayer playerMovement;
+    public PlayerMovement pM;
 
     public float chaseSpeed = 3.0f;                 // 추적 속도
     public float patrolSpeed = 2.0f;                // 배회 속도
@@ -21,6 +21,8 @@ public class MonsterAI : MonoBehaviour
     private bool isSuspicious = false;              // 몬스터의 의심 상태
     private Coroutine suspicionCoroutine;           // 의심 코루틴
     private Coroutine panicCoroutine;               // 배회 코루틴
+
+    public Animator anim;
 
 
     // 몬스터의 추적 모드
@@ -52,6 +54,8 @@ public class MonsterAI : MonoBehaviour
         isChasing = true;
         NMA.isStopped = false;
 
+        setRun();
+
         StopAllCoroutines();
         StartCoroutine(ChaseSound());
     }
@@ -64,6 +68,9 @@ public class MonsterAI : MonoBehaviour
         currentChaseMode = ChaseMode.FollowPlayer;
         isChasing = true;
         NMA.isStopped = false;
+
+        // 추적하는 애니메이션 넣기 - Run 애니메이션
+        setRun();
 
         StopAllCoroutines();
         StartCoroutine(ChaseSound());
@@ -157,7 +164,7 @@ public class MonsterAI : MonoBehaviour
             float distanceToPlayer = Vector3.Distance(transform.position, player.position);
 
             // 패닉 조건 체크
-            if (distanceToPlayer <= panicRange && !playerMovement.IsMoving && panicCoroutine == null)
+            if (distanceToPlayer <= panicRange && !pM.IsMoving && panicCoroutine == null)
             {
                 panicCoroutine = StartCoroutine(TriggerPanic());
             }
@@ -167,7 +174,8 @@ public class MonsterAI : MonoBehaviour
             {
                 Debug.Log("플레이어가 멀어짐, 추적 종료");
                 isChasing = false;
-                Patrol();
+                StartCoroutine(LookAroundCoroutine());
+                //Patrol();
                 yield break;
             }
 
@@ -175,7 +183,8 @@ public class MonsterAI : MonoBehaviour
             {
                 Debug.Log("도착 완료, 배회 재시작");
                 isChasing = false;
-                Patrol();
+                StartCoroutine(LookAroundCoroutine());
+                //Patrol();
                 yield break;
             }
 
@@ -184,13 +193,36 @@ public class MonsterAI : MonoBehaviour
         }
     }
 
+    private IEnumerator LookAroundCoroutine()
+    {
+        NMA.isStopped = true;
+
+        //float timer = 0f;
+        //float duration = 2f;
+
+        setLook();
+        //while (timer < duration)
+        //{
+        //    //// 랜덤하게 고개를 좌우로 돌리는 연출
+        //    //float angle = Mathf.Sin(Time.time * 2f) * 30f;
+        //    //transform.rotation = Quaternion.Euler(0f, transform.eulerAngles.y + angle * Time.deltaTime, 0f);
+
+
+        //    timer += Time.deltaTime;
+        //    yield return null;
+        //}
+        yield return new WaitForSeconds(2f);
+        NMA.isStopped = false;
+        Patrol(); // 또는 StartCoroutine(PatrolCoroutine());
+    }
+
     private IEnumerator TriggerPanic()
     {
         float elapsed = 0f;
         Debug.Log("패닉 카운트다운 시작");
         while (elapsed < panicTime)
         {
-            if (playerMovement.IsMoving || Vector3.Distance(transform.position, player.position) > panicRange)
+            if (pM.IsMoving || Vector3.Distance(transform.position, player.position) > panicRange)
             {
                 Debug.Log("패닉 조건 해제");
                 panicCoroutine = null;
@@ -218,6 +250,10 @@ public class MonsterAI : MonoBehaviour
             Debug.Log("배회 시작!");
             isPatrolling = true;
             NMA.speed = patrolSpeed;
+
+            // 배회 애니메이션 넣기 - walk 모션
+            setWalk();
+
             StartCoroutine(PatrolCoroutine());
         }
     }
@@ -246,17 +282,19 @@ public class MonsterAI : MonoBehaviour
                 }
 
                 float distanceToPlayer = Vector3.Distance(transform.position, player.position);
-                    
+
 
                 // 패닉
-                if (distanceToPlayer <= panicRange && !playerMovement.IsMoving && panicCoroutine == null)
+                if (distanceToPlayer <= panicRange && !pM.IsMoving && panicCoroutine == null)
                 {
                     panicCoroutine = StartCoroutine(TriggerPanic());
                 }
 
+
                 // 의심
-                if (distanceToPlayer <= suspicionRange && playerMovement.IsMoving)
+                if (distanceToPlayer <= suspicionRange && pM.IsMoving)
                 {
+                    Debug.Log("의심 거리 들어왔음");
                     if (!isSuspicious) // (!isSuspicious && suspicionCoroutine == null) 수정할지 고민
                     {
                         NMA.isStopped = true;
@@ -264,19 +302,19 @@ public class MonsterAI : MonoBehaviour
                         suspicionCoroutine = StartCoroutine(HandleSuspicion());
                     }
                 }
-                else
-                {
-                    if (isSuspicious)
-                    {
-                        isSuspicious = false;
-                        NMA.isStopped = false;
-                        if (suspicionCoroutine != null)
-                        {
-                            StopCoroutine(suspicionCoroutine);
-                            suspicionCoroutine = null;
-                        }
-                    }
-                }
+                //else
+                //{
+                //    if (isSuspicious)
+                //    {
+                //        isSuspicious = false;
+                //        NMA.isStopped = false;
+                //        if (suspicionCoroutine != null)
+                //        {
+                //            StopCoroutine(suspicionCoroutine);
+                //            suspicionCoroutine = null;
+                //        }
+                //    }
+                //}
 
                 if (NMA.remainingDistance < 0.5f && NMA.velocity.magnitude < 0.1f)
                 {
@@ -291,8 +329,6 @@ public class MonsterAI : MonoBehaviour
         }
     }
 
-
-    // 플레이어 의심
     private IEnumerator HandleSuspicion()
     {
         //Debug.Log("플레이어 의심 중...");
@@ -318,7 +354,15 @@ public class MonsterAI : MonoBehaviour
 
         Debug.Log("플레이어 의심 중...");
 
+        setLook();
+
+        // 플레이어가 움직이는 시간을 계산 할 변수
         float timer = 0f;
+        // 플레이어가 멈춰도 유예시간을 줄 변수
+        float lookIngTimer = 0f;
+        float lookIngDuration = 1f;
+        // 플레이어가 멀어지면 의심 해제 될 거리
+        float maxDistance = suspicionRange * 2f;
 
         while (timer < 2f)
         {
@@ -326,16 +370,30 @@ public class MonsterAI : MonoBehaviour
             transform.LookAt(new Vector3(player.position.x, transform.position.y, player.position.z));
 
             // 조건 유지 중이면 타이머 증가
-            if (Vector3.Distance(transform.position, player.position) <= suspicionRange && playerMovement.IsMoving)
+            if (Vector3.Distance(transform.position, player.position) <= suspicionRange && pM.IsMoving)
             {
                 timer += Time.deltaTime;
+                lookIngTimer = 0f;
+            }
+            else if (Vector3.Distance(transform.position, player.position) > maxDistance)
+            {
+                Debug.Log("플레이어가 너무 멀어져서 의심 해제");
+                isSuspicious = false;
+                NMA.isStopped = false;
+                setWalk();
+                yield break;
             }
             else
             {
-                Debug.Log("의심 조건 해제됨");
-                isSuspicious = false;
-                NMA.isStopped = false;
-                yield break;
+                lookIngTimer += Time.deltaTime;
+                if (lookIngTimer >= lookIngDuration)
+                {
+                    Debug.Log("의심 조건 해제됨");
+                    isSuspicious = false;
+                    NMA.isStopped = false;
+                    setWalk();
+                    yield break;
+                }
             }
 
             yield return null;
@@ -351,15 +409,15 @@ public class MonsterAI : MonoBehaviour
     {
         //for (int i = 0; i < 10; i++) // 최대 10번 시도 // 해당 부분은 장애물이 많은 곳에서 적절한 위치를 못 뽐을 시를 방지하기 위해 사용하는 것이 적절 하지만 속도가 조금 느림
         //{
-            Vector3 randomDirection = Random.insideUnitSphere * range;
-            randomDirection += center;
+        Vector3 randomDirection = Random.insideUnitSphere * range;
+        randomDirection += center;
 
 
-            NavMeshHit hit;
-            if (NavMesh.SamplePosition(randomDirection, out hit, range, NavMesh.AllAreas))
-            {
-                return hit.position;
-            }
+        NavMeshHit hit;
+        if (NavMesh.SamplePosition(randomDirection, out hit, range, NavMesh.AllAreas))
+        {
+            return hit.position;
+        }
         //}
 
         // 실패 시 현재 위치 반환
@@ -371,7 +429,39 @@ public class MonsterAI : MonoBehaviour
         if (other.CompareTag("Player"))
         {
             Debug.Log("몬스터와 충돌! 플레이어 즉사");
+
+            // 공격 애니메이션 넣기 - attack 트리거
+            anim.SetTrigger("attackTrigger");
+
             GM.KillPlayer();
         }
+    }
+
+    void setBool()
+    {
+        anim.SetBool("isWalk", false);
+        anim.SetBool("isRun", false);
+        anim.SetBool("isLook", false);
+    }
+
+    void setRun()
+    {
+        setBool();
+        anim.SetBool("isRun", true);
+        Debug.Log("달리기시작했음");
+
+    }
+
+    void setWalk()
+    {
+        setBool();
+        anim.SetBool("isWalk", true);
+        Debug.Log("걷기시작했닭");
+    }
+
+    void setLook()
+    {
+        setBool();
+        anim.SetBool("isLook", true);
     }
 }
