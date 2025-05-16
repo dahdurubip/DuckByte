@@ -30,7 +30,8 @@ public class AltarManager : MonoBehaviour, IInteractable
         // TODO: 아이템 스폰, 소리 재생 등 추가
 
         int nextPhase = bossPhaseManager.currentPhase + 1;
-        bossPhaseManager.SetPhase(nextPhase);
+        //bossPhaseManager.SetPhase(nextPhase);
+        bossPhaseManager.triggerPhaseTransition(nextPhase);
     }
 
 }
