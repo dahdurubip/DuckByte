@@ -3,49 +3,59 @@ using System.Collections;
 
 public class CameraMovement : MonoBehaviour
 {
+    [Header("Gimmick Manager")]
+    [SerializeField] private PlayerMovement playerMovement;
 
+    [Header("Follow Settings")]
     public Transform objectTofollow;
     public float followSpeed = 10f;
+
+    [Header("Mouse Look Settings")]
     public float sensitivity = 100f;
     public float clampAngle = 70f;
 
     private float rotX;
     private float rotY;
 
-    [SerializeField] private GameObject realCam;
-    public Transform realCamera;
-    public Vector3 dirNormalized;
-    public Vector3 finalDir;
-    public float minDistance;
-    public float maxDistance;
-    public float finalDistance;
-    public float smoothness = 10f;
+    [Header("Camera Collision & Zoom")]
+    [SerializeField] private GameObject realCam;    // 실제 카메라 GameObject
+    public Transform realCamera;                    // 카메라 Transform
+    public Vector3 dirNormalized;                   // 카메라 로컬 방향
+    public Vector3 finalDir;                        // 월드 공간 목표지점
+    public float minDistance;                       // 최소 거리
+    public float maxDistance;                       // 최대 거리
+    public float finalDistance;                     // 충돌 보정 거리
+    public float smoothness = 10f;                  // 보간 속도
 
-    //시야 고정 토글
+    // 시야 고정 토글
     private bool isViewLocked = false;
 
+    // 원래 카메라 로컬 Y 위치 저장용
+    private float originalCamLocalY;
 
     private void Start()
     {
+        // 마우스 회전 초기값 세팅
         rotX = transform.localRotation.eulerAngles.x;
         rotY = transform.localRotation.eulerAngles.y;
 
+        // 카메라 로컬 방향 & 거리 초기화
         dirNormalized = realCamera.localPosition.normalized;
         finalDistance = realCamera.localPosition.magnitude;
 
-       
+        // 원래 카메라 Y 위치 저장
+        originalCamLocalY = realCamera.localPosition.y;
     }
 
     private void Update()
     {
-
-        //Q키를 눌렀을 때 토글: 한 번 누르면 잠금, 다시 누르면 해제
+        // Q키로 시야 고정/해제 토글
         if (Input.GetKeyDown(KeyCode.Q))
         {
             isViewLocked = !isViewLocked;
         }
 
-        //시야가 잠겨 있지 않을 때만 마우스 입력으로 회전값 업데이트
+        // 시야가 잠기지 않았을 때만 마우스로 회전
         if (!isViewLocked)
         {
             rotX += -Input.GetAxis("Mouse Y") * sensitivity * Time.deltaTime;
@@ -53,20 +63,23 @@ public class CameraMovement : MonoBehaviour
             rotX = Mathf.Clamp(rotX, -clampAngle, clampAngle);
         }
 
-        //회전 적용 (잠긴 상태여도 마지막 rotX/rotY가 유지됨)
+        // 회전 적용 (고정 상태여도 마지막 rotX/rotY 유지)
         Quaternion rot = Quaternion.Euler(rotX, rotY, 0);
         transform.rotation = rot;
-
     }
 
     private void LateUpdate()
     {
-        transform.position = Vector3.MoveTowards(transform.position, objectTofollow.position, followSpeed * Time.deltaTime);
-        
-        finalDir = transform.TransformPoint(dirNormalized * maxDistance);
+        // 1) 대상 따라가기
+        transform.position = Vector3.MoveTowards(
+            transform.position,
+            objectTofollow.position,
+            followSpeed * Time.deltaTime
+        );
 
-        RaycastHit hit;
-        if(Physics.Linecast(transform.position, finalDir, out hit))
+        // 2) 카메라 충돌 거리 계산
+        finalDir = transform.TransformPoint(dirNormalized * maxDistance);
+        if (Physics.Linecast(transform.position, finalDir, out RaycastHit hit))
         {
             finalDistance = Mathf.Clamp(hit.distance, minDistance, maxDistance);
         }
@@ -74,10 +87,29 @@ public class CameraMovement : MonoBehaviour
         {
             finalDistance = maxDistance;
         }
-        realCamera.localPosition = Vector3.Lerp(realCamera.localPosition, dirNormalized * finalDistance, Time.deltaTime * smoothness);
+
+        // 3) 목표 로컬 포지션 계산
+        Vector3 targetLocalPos = dirNormalized * finalDistance;
+
+        // 4) 크라우치 상태에 따른 Y축 보정
+        if (playerMovement.playerCrouch)
+        {
+            targetLocalPos.y = originalCamLocalY * 0.3f;
+        }
+        else
+        {
+            targetLocalPos.y = originalCamLocalY;
+        }
+
+        // 5) 부드럽게 보간 적용
+        realCamera.localPosition = Vector3.Lerp(
+            realCamera.localPosition,
+            targetLocalPos,
+            Time.deltaTime * smoothness
+        );
     }
 
-    //흔들릴 시간, 세기
+    // 카메라 흔들기 코루틴
     public IEnumerator Shake(float duration, float magnitude)
     {
         Vector3 originalPos = realCam.transform.localPosition;
@@ -85,21 +117,20 @@ public class CameraMovement : MonoBehaviour
 
         while (elapsed < duration)
         {
-            //랜덤 오프셋 계산
             float offsetX = Random.Range(-1f, 1f) * magnitude;
             float offsetY = Random.Range(-1f, 1f) * magnitude;
 
-            //카메라 위치 갱신
-            realCam.transform.localPosition = new Vector3(originalPos.x + offsetX,
-                                                  originalPos.y + offsetY,
-                                                  originalPos.z);
+            realCam.transform.localPosition = new Vector3(
+                originalPos.x + offsetX,
+                originalPos.y + offsetY,
+                originalPos.z
+            );
 
             elapsed += Time.deltaTime;
             yield return null;
         }
 
-        // 원래 위치로 복구
+        // 원래 위치 복구
         realCam.transform.localPosition = originalPos;
     }
-
 }

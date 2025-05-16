@@ -131,7 +131,10 @@ public class Creature2 : MonoBehaviour
         animator.SetBool("isRun", false);
         animator.SetTrigger("Attack");
         player.StartCoroutine(player.PlayerHitEffect());
-        itemmanager.DropCurrentItem();
+        if(itemmanager.currentItem != null)
+        {
+            itemmanager.DropCurrentItem();
+        }
         //player.PlayerHitEffect();
         //Invoke("player.PlayerHitEffectEnd", 0.5f);
         camShake.StartCoroutine(camShake.Shake(0.2f, 0.3f));

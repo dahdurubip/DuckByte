@@ -22,6 +22,7 @@ public class PlayerMovement : MonoBehaviour
     public float crouchCenterY = 0.7f;    // crouch 상태일 때의 center Y값
     public float crouchCapHeight = 1f;
     public float crouchCapCenterY = 0.5f;
+    public bool playerCrouch;
 
     //중력
     public float gravity = -9.81f;
@@ -31,7 +32,6 @@ public class PlayerMovement : MonoBehaviour
     private Vector3 originalCenter;     // 원래 center 저장
     private float originalCapHeight;       // 원래 height 저장
     private Vector3 originalCapCenter;     // 원래 center 저장
-
     private void Start()
     {
         animator = GetComponent<Animator>();
@@ -42,6 +42,8 @@ public class PlayerMovement : MonoBehaviour
         originalCenter = characterController.center;     // 원래 center 저장
         originalCapHeight = capsuleCollider.height;
         originalCapCenter = capsuleCollider.center;
+
+
     }
 
     private void Update()
@@ -66,6 +68,7 @@ public class PlayerMovement : MonoBehaviour
         if (Input.GetKeyDown(KeyCode.C))
         {
             isCrouching = !isCrouching;
+            playerCrouch = !playerCrouch;
         }
         // ===== crouch 토글 추가 부분 끝 =====
 
@@ -96,7 +99,8 @@ public class PlayerMovement : MonoBehaviour
             finalSpeed = crouchSpeed;
             characterController.height = crouchHeight;
             capsuleCollider.height = crouchCapHeight;
-            // crouch 상태일 때 center의 Y값을 crouchCenterY로 설정
+
+            //crouch 상태일 때 center의 Y값을 crouchCenterY로 설정
             characterController.center = new Vector3(originalCenter.x, crouchCenterY, originalCenter.z);
             capsuleCollider.center = new Vector3(originalCapCenter.x, crouchCapCenterY, originalCapCenter.z);
         }
