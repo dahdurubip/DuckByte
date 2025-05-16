@@ -9,30 +9,41 @@ public class PlayerMovement : MonoBehaviour
 
     public float speed = 5f;
     public float runSpeed = 10f;
-    public float crouchSpeed = 2.5f;      // crouch 상태의 이동 속도
+    //crouch 상태의 이동 속도
+    public float crouchSpeed = 2.5f;      
     public float finalSpeed;
     public bool run;
     public bool toggleCameraRotation;
-    public bool isCrouching;            // crouch 상태 여부
+    //crouch 상태 여부
+    public bool isCrouching;            
 
     public float smoothness = 10f;
 
-    // crouch 상태 시 조정되는 캐릭터 콜라이더 값들
-    public float crouchHeight = 1f;     // crouch 상태일 때의 height
-    public float crouchCenterY = 0.7f;    // crouch 상태일 때의 center Y값
+    //crouch 상태 시 조정되는 캐릭터 콜라이더 값들
+    //crouch 상태일 때의 height
+    public float crouchHeight = 1f;
+    //crouch 상태일 때의 center Y값
+    public float crouchCenterY = 0.7f;    
     public float crouchCapHeight = 1f;
     public float crouchCapCenterY = 0.5f;
+    public bool playerCrouch;
+    private float Timer = 0f;
 
-    //중력
-    public float gravity = -9.81f;
+    //중력 -9.81f
+    public float gravity = -10f;
     private float verticalVelocity = 0f;
 
-    private float originalHeight;       // 원래 height 저장
-    private Vector3 originalCenter;     // 원래 center 저장
-    private float originalCapHeight;       // 원래 height 저장
-    private Vector3 originalCapCenter;     // 원래 center 저장
+    //원래 height 저장
+    private float originalHeight;
+    //원래 center 저장
+    private Vector3 originalCenter;
+    //원래 height 저장
+    private float originalCapHeight;
+    //원래 center 저장
+    private Vector3 originalCapCenter;
 
     public bool IsMoving { get; private set; }
+
 
     private void Start()
     {
@@ -40,10 +51,14 @@ public class PlayerMovement : MonoBehaviour
         cam = Camera.main;
         characterController = GetComponent<CharacterController>();
         capsuleCollider = GetComponent<CapsuleCollider>();
-        originalHeight = characterController.height;   // 원래 height 저장
-        originalCenter = characterController.center;     // 원래 center 저장
+        //원래 height 저장
+        originalHeight = characterController.height;
+        //원래 center 저장
+        originalCenter = characterController.center;     
         originalCapHeight = capsuleCollider.height;
         originalCapCenter = capsuleCollider.center;
+
+
     }
 
     private void Update()
@@ -57,27 +72,30 @@ public class PlayerMovement : MonoBehaviour
         }
         verticalVelocity += gravity * Time.deltaTime;
 
-        // 카메라 회전 토글 (LeftAlt)
+        //카메라 회전 토글 (LeftAlt)
         toggleCameraRotation = Input.GetKey(KeyCode.LeftAlt);
 
-        // 달리기 입력 (LeftShift)
+        //달리기 입력 (LeftShift)
         run = Input.GetKey(KeyCode.LeftShift);
 
-        // ===== crouch 토글 추가 부분 시작 =====
-        // C키를 한 번 누르면 crouch 상태 토글 (한 번 누르면 true, 다시 누르면 false)
+ 
+        //C키를 한 번 누르면 crouch 상태 토글 (한 번 누르면 true, 다시 누르면 false)
         if (Input.GetKeyDown(KeyCode.C))
         {
             isCrouching = !isCrouching;
+            playerCrouch = !playerCrouch;
         }
-        // ===== crouch 토글 추가 부분 끝 =====
 
-        // ===== 공격 추가 부분 시작 =====
-        // F키를 누르면 attack 애니메이션(이름은 "attack") 실행
+
+
+
+
+        //스페이스키 공격
         if (Input.GetKeyDown(KeyCode.Space))
         {
             animator.SetTrigger("attack");
         }
-        // ===== 공격 추가 부분 끝 =====
+ 
 
         InputMovement();
     }
@@ -98,9 +116,19 @@ public class PlayerMovement : MonoBehaviour
             finalSpeed = crouchSpeed;
             characterController.height = crouchHeight;
             capsuleCollider.height = crouchCapHeight;
-            // crouch 상태일 때 center의 Y값을 crouchCenterY로 설정
+
+            //crouch 상태일 때 center의 Y값을 crouchCenterY로 설정
             characterController.center = new Vector3(originalCenter.x, crouchCenterY, originalCenter.z);
             capsuleCollider.center = new Vector3(originalCapCenter.x, crouchCapCenterY, originalCapCenter.z);
+
+            Timer += Time.deltaTime;
+            //Debug.Log("Timer : " + Timer);
+            if (Timer >= 7f)
+            {
+                isCrouching = false;
+                playerCrouch = false;
+                Timer = 0f;
+            }
         }
         else
         {
@@ -111,7 +139,7 @@ public class PlayerMovement : MonoBehaviour
             capsuleCollider.center = originalCapCenter;
         }
 
-        // 이때 조작 반전 if문 넣어보기
+        //이때 조작 반전 if문 넣어보기
         Vector3 forward = transform.TransformDirection(Vector3.forward);
         Vector3 right = transform.TransformDirection(Vector3.right);
 

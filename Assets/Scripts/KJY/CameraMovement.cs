@@ -31,7 +31,7 @@ public class CameraMovement : MonoBehaviour
     private bool isViewLocked = false;
 
     // 원래 카메라 로컬 Y 위치 저장용
-    private float originalCamLocalY;
+    public float originalCamLocalY;
 
     private void Start()
     {
@@ -44,7 +44,7 @@ public class CameraMovement : MonoBehaviour
         finalDistance = realCamera.localPosition.magnitude;
 
         // 원래 카메라 Y 위치 저장
-        originalCamLocalY = realCamera.localPosition.y;
+        //originalCamLocalY = realCamera.localPosition.y;
     }
 
     private void Update()

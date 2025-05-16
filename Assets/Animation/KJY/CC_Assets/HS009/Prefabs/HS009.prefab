@@ -2464,6 +2464,7 @@ GameObject:
   - component: {fileID: 3850340034015714051}
   - component: {fileID: 6551614942396899850}
   - component: {fileID: 7170638558045817283}
+  - component: {fileID: 5267542716667308999}
   m_Layer: 6
   m_Name: HS009
   m_TagString: Player
@@ -2587,7 +2588,7 @@ MonoBehaviour:
   crouchCapHeight: 1
   crouchCapCenterY: 0.5
   playerCrouch: 0
-  gravity: -9.81
+  gravity: -10
 --- !u!136 &6551614942396899850
 CapsuleCollider:
   m_ObjectHideFlags: 0
@@ -2624,19 +2625,51 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   handTransform: {fileID: 8530807550448601165}
-  pickUpLayer:
-    serializedVersion: 2
-    m_Bits: 128
-  detectRange: 2
-  FKeyUI: {fileID: 0}
-  EKeyUI: {fileID: 0}
-  currentItem: {fileID: 0}
-  interactRange: 8
-  panAngle: 8
-  interactableLayer:
+  interacterLayer:
     serializedVersion: 2
     m_Bits: 256
-  door: {fileID: 0}
+  pickableLayer:
+    serializedVersion: 2
+    m_Bits: 128
+  detectRange: 10
+  panAngle: 15
+  EKeyUI: {fileID: 0}
+  paperUI: {fileID: 0}
+  bookUI: {fileID: 0}
+  skelUI: {fileID: 0}
+  ItemSkel1: {fileID: 0}
+  ItemSkel2: {fileID: 0}
+  paperParticle: {fileID: 0}
+  bookParticle: {fileID: 0}
+  skelParticle: {fileID: 0}
+  currentItem: {fileID: 0}
+--- !u!54 &5267542716667308999
+Rigidbody:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4988899844810396821}
+  serializedVersion: 4
+  m_Mass: 1
+  m_Drag: 0
+  m_AngularDrag: 0.05
+  m_CenterOfMass: {x: 0, y: 0, z: 0}
+  m_InertiaTensor: {x: 1, y: 1, z: 1}
+  m_InertiaRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ImplicitCom: 1
+  m_ImplicitTensor: 1
+  m_UseGravity: 1
+  m_IsKinematic: 1
+  m_Interpolate: 0
+  m_Constraints: 0
+  m_CollisionDetection: 0
 --- !u!1 &5027803776207049007
 GameObject:
   m_ObjectHideFlags: 0

@@ -98,6 +98,7 @@ public class ItemManager : MonoBehaviour
                 //Door ¿­±â/´Ý±â
                 if (nearbyInteractable.TryGetComponent<Door>(out var door))
                 {
+                    Debug.Log("Door");
                     door.Toggle();
                     return;
                 }
