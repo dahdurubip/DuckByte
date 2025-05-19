@@ -1,3 +1,4 @@
+using TMPro;
 using UnityEngine;
 
 public class ItemManager : MonoBehaviour
@@ -21,6 +22,9 @@ public class ItemManager : MonoBehaviour
     public GameObject paperUI;
     public GameObject bookUI;
     public GameObject skelUI;
+    public GameObject noteUI;
+
+    public TextMeshProUGUI noteUIText;
 
     //object
     [Header("SKel Settings")]
@@ -95,6 +99,50 @@ public class ItemManager : MonoBehaviour
                     ItemSkel2.SetActive(true);
                     return;
                 }
+                //쪽지들은 전부 note태그
+                //각 쪽지마다 noteText스크립트 달고 해당하는 내용은 각각 수정
+                //상호작용 된 쪽지의 컴포넌트 속 Text를 가져와서 글자를 띄움
+                if (nearbyInteractable.CompareTag("Note"))
+                {
+                    NoteText content = nearbyInteractable.GetComponent<NoteText>();
+                    if (content != null)
+                    {
+                        noteUIText.text = content.noteText;
+                    }
+
+                    noteUI.SetActive(!noteUI.activeSelf);
+                    return;
+                }
+                // 크리처2맵에서 석상 불켜기 할 때 필요한 태그
+                if (nearbyInteractable.CompareTag("Statue"))
+                {
+                    Statue statue = nearbyInteractable.GetComponent<Statue>();
+                    if (statue != null)
+                    {
+                        statue.LightFire();
+                    }
+                    return;
+                }
+                // 장독대
+                {
+                    if (nearbyInteractable.CompareTag("Jar"))
+                    {
+                        Jar breaker = nearbyInteractable.GetComponent<Jar>();
+                        if (breaker != null)
+                        {
+                            breaker.BreakJar();
+                        }
+                    }
+                    return;
+                }
+                //if (nearbyInteractable.CompareTag("Note"))
+                //{
+
+                //    noteUI.SetActive(!noteUI.activeSelf);
+                //    return;
+                //}
+
+
                 //Door 열기/닫기
                 if (nearbyInteractable.TryGetComponent<Door>(out var door))
                 {

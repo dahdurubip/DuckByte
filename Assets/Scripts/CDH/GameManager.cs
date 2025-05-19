@@ -6,7 +6,7 @@ public class GameManager : MonoBehaviour
 
     // 델리게이트 이벤트 (플레이어가 소리를 발생시킬 때 위치를 전달)
     public event Action<Vector3> OnSoundEmitted;
-    // C# 기본 제공 델리게이트 함수
+    // C# 기본 제공 델리게이트 함수 - Action<T>
 
     // public delegate void SoundEvent(Vector3 position);
     // public event SoundEvent OnSoundEmitted;
