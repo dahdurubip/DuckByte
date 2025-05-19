@@ -1,0 +1,38 @@
+using UnityEngine;
+
+public class Jiockdo : MonoBehaviour, IInteractable
+{
+    [Header("requiredKeyTag Settings")]
+    //필요 열쇠 태그
+    public string requiredKeyTag = "Bulsang";
+    [SerializeField] private ItemManager itemmanager;
+
+    //[SerializeField] private GameObject SCDoorLock;
+
+    //IInteractable 구현
+    public void OnInteract(GameObject heldItem)
+    {
+        //1) 아이템이 널(null)이면 무시
+        if (heldItem == null) return;
+
+        //2) 태그가 맞는 열쇠인지 확인
+        if (heldItem.CompareTag(requiredKeyTag))
+        {
+            ClearJiockdo();
+        }
+        else
+        {
+            Debug.Log("이건 불상이 아닙니다.");
+        }
+    }
+
+    private void ClearJiockdo()
+    {
+        Debug.Log("불상을 바쳤습니다");
+        Destroy(itemmanager.currentItem);
+        // 풀린 자물쇠가 사라짐
+        //SCDoorLock.SetActive(false);
+        // 숨겨진 문과 상호작용 할 수 있게됨
+
+    }
+}
