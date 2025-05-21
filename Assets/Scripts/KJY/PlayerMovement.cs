@@ -143,6 +143,21 @@ public class PlayerMovement : MonoBehaviour
         Vector3 forward = transform.TransformDirection(Vector3.forward);
         Vector3 right = transform.TransformDirection(Vector3.right);
 
+
+        // 내일 이거 해보깅~!
+        //PlayerMental mental = GetComponent<PlayerMental>();
+        //float vertical = Input.GetAxisRaw("Vertical");
+        //float horizontal = Input.GetAxisRaw("Horizontal");
+
+        //if (mental != null && mental.IsReversingControl)
+        //{
+        //    vertical = -vertical;
+        //    horizontal = -horizontal;
+        //}
+
+        //Vector3 moveDirection = forward * vertical + right * horizontal;
+
+
         Vector3 moveDirection = forward * Input.GetAxisRaw("Vertical") + right * Input.GetAxisRaw("Horizontal");
 
         IsMoving = moveDirection.magnitude > 0.1f;

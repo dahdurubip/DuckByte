@@ -14,7 +14,7 @@ public class AltarManager : MonoBehaviour, IInteractable
         // 2) 태그가 맞는 열쇠인지 확인
         if (heldItem.CompareTag(requiredItemTag))
         {
-            sd();
+            PhaseClear();
         }
         else
         {
@@ -22,7 +22,7 @@ public class AltarManager : MonoBehaviour, IInteractable
         }
     }
 
-    void sd()
+    void PhaseClear()
     {
         //Debug.Log("상자가 열립니다!");
         //if (animator != null)

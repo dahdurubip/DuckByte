@@ -32,6 +32,11 @@ public class BossPhaseManager : MonoBehaviour
 
     private bool isPaused = false;
 
+    //// 보스 2페이즈
+    //[SerializeField] GameObject burningGroundPrefab; // 불타는 바닥 프리팹
+    //[SerializeField] float groundRadius = 2f;        // 데미지 범위 반지름
+    //[SerializeField] float burnDuration = 3f;        // 몇 초 동안 유지할지
+
 
     void Start()
     {
@@ -113,7 +118,7 @@ public class BossPhaseManager : MonoBehaviour
 
             //Debug.Log("Phase1Attack 반복 시작");
             // 1. 경고 프리팹 생성 (시작할 때 플레이어 위치)
-            GameObject warning = Instantiate(warningCirclePrefab, player.position, Quaternion.identity);
+            GameObject warning = Instantiate(warningCirclePrefab, player.position, Quaternion.Euler(90, 0, 0));
 
             float timer = 0f;
 
@@ -132,9 +137,14 @@ public class BossPhaseManager : MonoBehaviour
             // 3. 경고 제거
             Destroy(warning);
 
-            yield return new WaitForSeconds(0.3f);
             // 4. 돌을 마지막 위치 위로부터 생성
-            Instantiate(rockPrefab, dropPosition + Vector3.up * 0.5f, Quaternion.identity);
+            Instantiate(rockPrefab, dropPosition + Vector3.up * 5f, Quaternion.identity);
+            yield return new WaitForSeconds(2f);
+            Instantiate(rockPrefab, dropPosition + Vector3.up * 5f, Quaternion.identity);
+
+            //예측 드롭
+            //Vector3 secondDrop = dropPosition + (player.forward * 2f);
+            //Instantiate(rockPrefab, secondDrop + Vector3.up * 0.5f, Quaternion.identity);
 
             yield return new WaitForSeconds(1.5f); // 다음 행동까지 약간 기다림
         }
@@ -152,7 +162,7 @@ public class BossPhaseManager : MonoBehaviour
 
             //  랜덤으로 몇 개 생성할지 정하기
             //int spawnCount = 4; // 원하는 수치로 조정
-            int spawnCount = Random.Range(2, 4); // 3~5개 사이 랜덤
+            int spawnCount = Random.Range(5, 7); // 3~5개 사이 랜덤
 
 
             List<Transform> randomPoints = new List<Transform>(rockSpawnPoints);
@@ -191,6 +201,29 @@ public class BossPhaseManager : MonoBehaviour
             yield return new WaitForSeconds(2f);
         }
     }
+
+    //void SpawnBurningGround(Vector3 position)
+    //{
+    //    GameObject fire = Instantiate(burningGroundPrefab, position, Quaternion.identity);
+
+    //    // 1. 트랜스폼 스케일 조정 (시각적으로 반지름과 일치하도록)
+    //    float diameter = groundRadius * 2f;
+    //    fire.transform.localScale = new Vector3(diameter, 1f, diameter); // Y는 높이
+
+    //    // 2. Capsule Collider 세팅
+    //    CapsuleCollider col = fire.GetComponent<CapsuleCollider>();
+    //    if (col != null)
+    //    {
+    //        col.radius = groundRadius;
+    //        col.height = 0.1f;              // 매우 얇게 (지면용)
+    //        col.center = Vector3.zero;      // 중앙 기준
+    //        col.direction = 1;              // Y축 방향
+    //        col.isTrigger = true;
+    //    }
+
+    //    // 3. 일정 시간 후 제거
+    //    Destroy(fire, burnDuration);
+    //}
 
     IEnumerator Phase3Attack()
     {
@@ -272,20 +305,20 @@ public class BossPhaseManager : MonoBehaviour
             Instantiate(shockwaveEffectPrefab, altar.transform.position, Quaternion.identity);
 
             // 플레이어가 제단 반경 안에 있는지 확인
-            float distanceToAltar = Vector3.Distance(player.position, altar.position);
+            //float distanceToAltar = Vector3.Distance(player.position, altar.position);
 
             // 안전 반경 밖이면 정신력 데미지
-            if (distanceToAltar > altarSafeRadius)
-            {
-                Debug.Log("안전 반경 밖임");
+            //if (distanceToAltar > altarSafeRadius)
+            //{
                 PlayerMental mental = player.GetComponent<PlayerMental>();
-                if (mental != null)
+                if (mental != null && !mental.isHealing)
                 {
+                    Debug.Log("안전 반경 밖임");
                     //4.정신력 데미지
                     mental.TakeMentalDamage(shockwaveMentalDamage);
                     //5.카메라 색상 왜곡 효과(포스트 프로세싱)
                 }
-            }
+           // }
             yield return new WaitForSeconds(2f);
         }
     }
