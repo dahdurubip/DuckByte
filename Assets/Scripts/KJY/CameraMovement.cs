@@ -33,6 +33,12 @@ public class CameraMovement : MonoBehaviour
     // 원래 카메라 로컬 Y 위치 저장용
     public float originalCamLocalY;
 
+
+    private void Awake()
+    {
+        transform.localPosition = objectTofollow.transform.position;
+    }
+
     private void Start()
     {
         // 마우스 회전 초기값 세팅

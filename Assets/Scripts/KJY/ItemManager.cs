@@ -123,6 +123,20 @@ public class ItemManager : MonoBehaviour
                     }
                     return;
                 }
+                //Door 열기/닫기
+                if (nearbyInteractable.TryGetComponent<Door>(out var door))
+                {
+                    Debug.Log("Door");
+                    door.Toggle();
+                    return;
+                }
+
+                //IInteractable
+                if (nearbyInteractable.TryGetComponent<IInteractable>(out var inter))
+                {
+                    inter.OnInteract(currentItem);
+                    return;
+                }
                 // 장독대
                 {
                     if (nearbyInteractable.CompareTag("Jar"))
@@ -143,19 +157,6 @@ public class ItemManager : MonoBehaviour
                 //}
 
 
-                //Door 열기/닫기
-                if (nearbyInteractable.TryGetComponent<Door>(out var door))
-                {
-                    Debug.Log("Door");
-                    door.Toggle();
-                    return;
-                }
-                //IInteractable
-                if (nearbyInteractable.TryGetComponent<IInteractable>(out var inter))
-                {
-                    inter.OnInteract(currentItem);
-                    return;
-                }
             }
 
             //픽업
