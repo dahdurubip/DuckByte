@@ -1,5 +1,6 @@
 using UnityEngine;
 using UnityEngine.SceneManagement; // 죽었을 때 씬 리로드용
+using System.Collections;
 
 public class PlayerMental : MonoBehaviour
 {
@@ -19,6 +20,11 @@ public class PlayerMental : MonoBehaviour
     public Transform altar;
     //private PlayerMovement playerMovement; // 조작 반전 적용용
 
+    private Coroutine recoverCoroutine;
+    public bool isHealing { get; private set; }
+    public bool isInSlowZone { get; private set; }
+    public bool IsReversingControl { get; private set; }
+
     void Start()
     {
         currentMental = maxMental;
@@ -31,18 +37,72 @@ public class PlayerMental : MonoBehaviour
         //}
     }
 
+
+    private void OnTriggerEnter(Collider other)
+    {
+        if (other.CompareTag("SlowZone"))
+        {
+            isInSlowZone = true;
+            // 이동 속도 줄이는 코드넣기
+        }
+
+        if (other.CompareTag("HealZone"))
+        {
+            if (recoverCoroutine == null)
+            {
+                isHealing = true;
+                recoverCoroutine = StartCoroutine(RecoverMental());
+            }
+        }
+    }
+
+    private void OnTriggerExit(Collider other)
+    {
+        if (other.CompareTag("SlowZone"))
+        {
+            isInSlowZone = false;
+            // 이동 속도 원상복구하는 코드넣기
+        }
+
+        if (other.CompareTag("HealZone") && recoverCoroutine != null)
+        {
+            isHealing = false;
+            StopCoroutine(recoverCoroutine);
+            recoverCoroutine = null;
+        }
+    }
+
+    IEnumerator RecoverMental()
+    {
+        Debug.Log("회복 시작");
+        while (true)
+        {
+            currentMental += recoveryRate * Time.deltaTime;
+            currentMental = Mathf.Clamp(currentMental, 0f, maxMental);
+
+            if (currentMental > 30 && isReversingControl)
+            {
+                isReversingControl = false;
+                Debug.Log("정신력 회복 → 조작 정상화");
+            }
+
+            yield return null; // 다음 프레임까지 대기
+        }
+    }
+
+
     void Update()
     {
         // 정신력 회복 조건
-        if (altar != null)
-        {
-            // 플레이어의 위치와 제단의 위치사이의 거리를 구해 회복 구역 이내라면 회복함수를 호출
-            float distanceToAltar = Vector3.Distance(transform.position, altar.position);
-            if (distanceToAltar <= recoveryRange)
-            {
-                RecoverMental();
-            }
-        }
+        //if (altar != null)
+        //{
+        //    // 플레이어의 위치와 제단의 위치사이의 거리를 구해 회복 구역 이내라면 회복함수를 호출
+        //    float distanceToAltar = Vector3.Distance(transform.position, altar.position);
+        //    if (distanceToAltar <= recoveryRange)
+        //    {
+        //        RecoverMental();
+        //    }
+        //}
 
         // 정신력 상태에 따른 효과
         // 현재 정신력이 30이하이면서 조작반전이 되지않았다면 효과함수 호출
@@ -68,24 +128,24 @@ public class PlayerMental : MonoBehaviour
     }
 
     // 회복 함수
-    void RecoverMental()
-    {
-        Debug.Log("회복중");
-        // 정신력을 초당 회복
-        currentMental += recoveryRate * Time.deltaTime;
-        currentMental = Mathf.Clamp(currentMental, 0f, maxMental);
+    //void RecoverMental()
+    //{
+    //    Debug.Log("회복중");
+    //    // 정신력을 초당 회복
+    //    currentMental += recoveryRate * Time.deltaTime;
+    //    currentMental = Mathf.Clamp(currentMental, 0f, maxMental);
 
-        // 조작 반전 복구
-        // 정신력이 30이상이면서 조작반전상태일시에는 조작반전 상태를 해제
-        if (currentMental > 30 && isReversingControl)
-        {
-            isReversingControl = false;
-            //if (playerMovement != null)
-            //    playerMovement.SetReverseControl(false);
+    //    // 조작 반전 복구
+    //    // 정신력이 30이상이면서 조작반전상태일시에는 조작반전 상태를 해제
+    //    if (currentMental > 30 && isReversingControl)
+    //    {
+    //        isReversingControl = false;
+    //        //if (playerMovement != null)
+    //        //    playerMovement.SetReverseControl(false);
 
-            Debug.Log("정신력 회복 → 조작 정상화");
-        }
-    }
+    //        Debug.Log("정신력 회복 → 조작 정상화");
+    //    }
+    //}
 
     // 낮은 정신력 효과
     void TriggerLowMentalEffects()
