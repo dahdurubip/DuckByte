@@ -12,6 +12,8 @@ public class FirePuzzleManager : MonoBehaviour
     private Coroutine timerCoroutine;         // 타이머 코루틴 추적 변수
     public float timeLimit = 30f;            // 제한 시간
 
+    public GameObject bossDoor;
+
     private void Start()
     {
         foreach (var statue in statues)       // 각 석상에 이벤트 등록
@@ -61,6 +63,7 @@ public class FirePuzzleManager : MonoBehaviour
         Debug.Log("퍼즐 완료!");
         // 문이 열리는 소리가 들린다 텍스트 띄우기
         // 문이랑 상호작용 가능해지는 기능 추가
+        bossDoor.layer = LayerMask.NameToLayer("Interactable");
     }
 
     private void ResetPuzzle()

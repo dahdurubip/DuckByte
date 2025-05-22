@@ -32,6 +32,9 @@ public class BossPhaseManager : MonoBehaviour
 
     private bool isPaused = false;
 
+    public GameObject burningGroundPrefab; // 불바닥 프리팹
+    public float burnDuration = 3f;        // 불바닥 제거 시간
+
     //// 보스 2페이즈
     //[SerializeField] GameObject burningGroundPrefab; // 불타는 바닥 프리팹
     //[SerializeField] float groundRadius = 2f;        // 데미지 범위 반지름
@@ -75,11 +78,14 @@ public class BossPhaseManager : MonoBehaviour
     //    timer = 0;
     //}
 
+   
+
     public void SetPhase(int phase)
     {
         //if (phase <= currentPhase) return; // 이미 진행한 단계면 무시
 
         currentPhase = phase;
+        Debug.Log(currentPhase);
         //timer = 0;
 
         switch (currentPhase)
@@ -158,6 +164,9 @@ public class BossPhaseManager : MonoBehaviour
         {
             if (isPaused) { yield return null; continue; }
 
+            RockOff rockScript = rockPrefab.GetComponent<RockOff>();
+            rockScript.bossPhaseManager = this; // 혹은 this.bossPhaseManager;
+
             List<GameObject> warnings = new List<GameObject>();
 
             //  랜덤으로 몇 개 생성할지 정하기
@@ -181,8 +190,9 @@ public class BossPhaseManager : MonoBehaviour
             {
                 //warnings.Add(Instantiate(warningCirclePrefab, randomPoints[i].position, Quaternion.identity));
 
+                //Vector3 warningPosition = randomPoints[i].position + Vector3.down * 4f;
                 Vector3 warningPosition = randomPoints[i].position + Vector3.down * 4f;
-                warnings.Add(Instantiate(warningCirclePrefab, warningPosition, Quaternion.identity));
+                warnings.Add(Instantiate(warningCirclePrefab, warningPosition, Quaternion.Euler(90, 0, 0)));
             }
 
             yield return new WaitForSeconds(1f);
@@ -197,33 +207,10 @@ public class BossPhaseManager : MonoBehaviour
             {
                 Instantiate(rockPrefab, randomPoints[i].position, Quaternion.identity);
             }
-
+            //GameObject rock = Instantiate(rockPrefab, randomPoints[i].position, Quaternion.identity);
             yield return new WaitForSeconds(2f);
         }
     }
-
-    //void SpawnBurningGround(Vector3 position)
-    //{
-    //    GameObject fire = Instantiate(burningGroundPrefab, position, Quaternion.identity);
-
-    //    // 1. 트랜스폼 스케일 조정 (시각적으로 반지름과 일치하도록)
-    //    float diameter = groundRadius * 2f;
-    //    fire.transform.localScale = new Vector3(diameter, 1f, diameter); // Y는 높이
-
-    //    // 2. Capsule Collider 세팅
-    //    CapsuleCollider col = fire.GetComponent<CapsuleCollider>();
-    //    if (col != null)
-    //    {
-    //        col.radius = groundRadius;
-    //        col.height = 0.1f;              // 매우 얇게 (지면용)
-    //        col.center = Vector3.zero;      // 중앙 기준
-    //        col.direction = 1;              // Y축 방향
-    //        col.isTrigger = true;
-    //    }
-
-    //    // 3. 일정 시간 후 제거
-    //    Destroy(fire, burnDuration);
-    //}
 
     IEnumerator Phase3Attack()
     {
@@ -292,6 +279,8 @@ public class BossPhaseManager : MonoBehaviour
         while (currentPhase == 3)
         {
             if (isPaused) { yield return null; continue; }
+
+
 
             //1.경고음 재생
             Debug.Log("충격파 등장 위이잉");
