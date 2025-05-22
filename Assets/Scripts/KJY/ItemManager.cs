@@ -12,7 +12,9 @@ public class ItemManager : MonoBehaviour
     //전방 원뿔 반경
     public float detectRange = 5f;
     //전방 원뿔 절반 각도
-    public float panAngle = 30f;                    
+    public float panAngle = 30f;
+    //flash
+    [SerializeField] private FlashManager flashManager;
 
 
     [Header("Key UI Settings")]
@@ -46,8 +48,12 @@ public class ItemManager : MonoBehaviour
     private GameObject nearbyInteractable;
     //픽업 대상
     private GameObject pickableTarget;
+    //애니메이션
+    private Animator animator;
+    
     private void Start()
     {
+        animator = GetComponent<Animator>();
         mainCamera = Camera.main;
         if (EKeyUI) EKeyUI.SetActive(false);
         if (paperUI) paperUI.SetActive(false);
@@ -79,6 +85,9 @@ public class ItemManager : MonoBehaviour
             //읽기 기믹 (Paper/Book/Skel)
             if (nearbyInteractable != null)
             {
+                //Debug.Log("Pick");
+                animator.SetTrigger("pickStand");
+
                 if (nearbyInteractable.CompareTag("Paper"))
                 {
                     paperParticle?.Stop(true, ParticleSystemStopBehavior.StopEmittingAndClear);
@@ -162,11 +171,41 @@ public class ItemManager : MonoBehaviour
             //픽업
             if (pickableTarget != null)
             {
-                PickupItem(pickableTarget);
+                //animator.SetTrigger("pickSit");
+                //PickupItem(pickableTarget);
+                //return;
+
+
+                Vector3 directionToTarget = pickableTarget.transform.position - transform.position;
+                float verticalOffset = directionToTarget.y;
+
+                if (verticalOffset < 0.5f) // 예: 바닥에 있을 경우
+                {
+                    animator.SetTrigger("pickSit");
+                }
+                else // 예: 앞에 있을 경우
+                {
+                    animator.SetTrigger("pickStand");
+                }
+
                 return;
+
+            }
+            // 3. 그 외 상황 - 후레쉬 On/Off 전용 처리
+            if (currentItem != null && currentItem.CompareTag("Flashlight"))
+            {
+                flashManager?.Toggle();
             }
         }
 
+    }
+
+    public void OnPickupAnimationEnd()
+    {
+        if (pickableTarget != null)
+        {
+            PickupItem(pickableTarget);
+        }
     }
 
     private void DetectNearbyInteractable()
@@ -230,6 +269,13 @@ public class ItemManager : MonoBehaviour
         if (item.TryGetComponent<Rigidbody>(out var rb))
             rb.isKinematic = true;
 
+        if (item.CompareTag("Flashlight"))
+        {
+            flashManager = item.GetComponent<FlashManager>();
+            flashManager.TurnOn();
+            flashManager.SetHeld(true);
+        }
+
         item.transform.SetParent(handTransform);
         item.transform.localPosition = Vector3.zero;
         item.transform.localRotation = Quaternion.identity;
@@ -238,6 +284,12 @@ public class ItemManager : MonoBehaviour
     public void DropCurrentItem()
     {
         if (currentItem == null) return;
+
+
+        if (currentItem.CompareTag("Flashlight"))
+        {
+            flashManager?.SetHeld(false); 
+        }
 
         var item = currentItem;
         item.transform.SetParent(null);

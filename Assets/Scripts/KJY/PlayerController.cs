@@ -22,8 +22,8 @@ public class PlayerController : MonoBehaviour
     private Animator animator;
 
     // 상태 플래그들
-    private bool isWalking = false;
-    private bool isTurning = false;
+    //private bool isWalking = false;
+    //private bool isTurning = false;
 
     private void Start()
     {
@@ -85,7 +85,7 @@ public class PlayerController : MonoBehaviour
             if (hasVerticalInput || hasHorizontalInput)
             {
                 // crouch 상태에서 이동 입력이 있을 때
-                isWalking = true;
+                //isWalking = true;
                 animator.SetBool("isWalking", true);  // 걷기 애니메이션 활성화
                 animator.SetBool("isTurning", false);   // 회전은 비활성화
                 animator.SetFloat("turn", 0f);          // 회전 파라미터 초기화
@@ -116,7 +116,7 @@ public class PlayerController : MonoBehaviour
             if (hasVerticalInput)
             {
                 // 전/후진 입력이 있을 때 (걷기 또는 달리기)
-                isWalking = true;
+                //isWalking = true;
                 animator.SetBool("isWalking", true);  // 걷기 애니메이션 활성화
                 animator.SetBool("isTurning", false);   // 회전 애니메이션 비활성화
                 animator.SetFloat("turn", 0f);          // 회전 파라미터 초기화
@@ -136,7 +136,7 @@ public class PlayerController : MonoBehaviour
             // 전진 입력 없이 좌우 입력만 있을 때 → 제자리 회전 처리
             else if (!hasVerticalInput && hasHorizontalInput)
             {
-                isTurning = true;
+                //isTurning = true;
                 animator.SetBool("isTurning", true);  // 회전 애니메이션 활성화
                 animator.SetFloat("turn", inputHorizontal); // 회전 정도 전달
 

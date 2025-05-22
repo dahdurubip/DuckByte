@@ -104,14 +104,14 @@ public class PlayerMovement : MonoBehaviour
         InputMovement();
     }
 
-    private void LateUpdate()
-    {
+    //private void LateUpdate()
+    //{
         //if (!toggleCameraRotation)
         //{
         //    Vector3 playerRotate = Vector3.Scale(cam.transform.forward, new Vector3(1f, 0f, 1f));
         //    transform.rotation = Quaternion.Slerp(transform.rotation, Quaternion.LookRotation(playerRotate), Time.deltaTime * smoothness);
         //}
-    }
+    //}
 
     //    private void InputMovement()
     //    {
@@ -192,6 +192,7 @@ public class PlayerMovement : MonoBehaviour
             characterController.height = crouchHeight;
             capsuleCollider.height = crouchCapHeight;
 
+            //crouch 상태일 때 center의 Y값을 crouchCenterY로 설정
             characterController.center = new Vector3(originalCenter.x, crouchCenterY, originalCenter.z);
             capsuleCollider.center = new Vector3(originalCapCenter.x, crouchCapCenterY, originalCapCenter.z);
 
