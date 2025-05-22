@@ -9,6 +9,9 @@ public class SCDoor : MonoBehaviour, IInteractable
 
     [SerializeField] private GameObject SCDoorLock;
 
+    public GameObject door1;
+    public GameObject door2;
+
     //IInteractable 구현
     public void OnInteract(GameObject heldItem)
     {
@@ -33,6 +36,7 @@ public class SCDoor : MonoBehaviour, IInteractable
         // 풀린 자물쇠가 사라짐
         SCDoorLock.SetActive(false);
         // 문과 상호작용 할 수 있게됨
-        
+        door1.layer = LayerMask.NameToLayer("Interactable");
+        door2.layer = LayerMask.NameToLayer("Interactable");
     }
 }

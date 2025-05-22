@@ -104,14 +104,14 @@ public class PlayerMovement : MonoBehaviour
         InputMovement();
     }
 
-    private void LateUpdate()
-    {
-        //if (!toggleCameraRotation)
-        //{
-        //    Vector3 playerRotate = Vector3.Scale(cam.transform.forward, new Vector3(1f, 0f, 1f));
-        //    transform.rotation = Quaternion.Slerp(transform.rotation, Quaternion.LookRotation(playerRotate), Time.deltaTime * smoothness);
-        //}
-    }
+    //private void LateUpdate()
+    //{
+    //    //if (!toggleCameraRotation)
+    //    //{
+    //    //    Vector3 playerRotate = Vector3.Scale(cam.transform.forward, new Vector3(1f, 0f, 1f));
+    //    //    transform.rotation = Quaternion.Slerp(transform.rotation, Quaternion.LookRotation(playerRotate), Time.deltaTime * smoothness);
+    //    //}
+    //}
 
     //    private void InputMovement()
     //    {
@@ -215,6 +215,16 @@ public class PlayerMovement : MonoBehaviour
         float horizontal = Input.GetAxisRaw("Horizontal");
         float vertical = Input.GetAxisRaw("Vertical");
 
+        // 내일 이거 해보깅~!
+        PlayerMental mental = GetComponent<PlayerMental>();
+        //float vertical = Input.GetAxisRaw("Vertical");
+        //float horizontal = Input.GetAxisRaw("Horizontal");
+
+        if (mental != null && mental.IsReversingControl)
+        {
+            vertical = -vertical;
+            horizontal = -horizontal;
+        }
         Vector3 inputDirection = new Vector3(horizontal, 0f, vertical).normalized;
 
         Vector3 camForward = Vector3.Scale(cam.transform.forward, new Vector3(1, 0, 1)).normalized;
@@ -224,6 +234,9 @@ public class PlayerMovement : MonoBehaviour
 
         IsMoving = moveDirection.magnitude > 0.1f;
 
+
+
+        // 좌우 돌때 회전 자연스럽게 하는거
         if (IsMoving && !toggleCameraRotation)
         {
             float targetRotation = Mathf.Atan2(inputDirection.x, inputDirection.z) * Mathf.Rad2Deg + cam.transform.eulerAngles.y;
