@@ -37,6 +37,9 @@ public class BossPhaseManager : MonoBehaviour
 
     public GameObject randomArea;
 
+    public GameObject phase3Land;
+    public GameObject phase2Land;
+
     //// 보스 2페이즈
     //[SerializeField] GameObject burningGroundPrefab; // 불타는 바닥 프리팹
     //[SerializeField] float groundRadius = 2f;        // 데미지 범위 반지름
@@ -397,6 +400,10 @@ public class BossPhaseManager : MonoBehaviour
         //// 보스 다시 등장
         //bossObject.SetActive(true);
         //yield return new WaitForSeconds(1f);
+
+        phase3Land.SetActive(true);
+        phase3Land.SetActive(false);
+
         while (currentPhase == 3)
         {
             if (isPaused) { yield return null; continue; }
