@@ -17,7 +17,7 @@ public class PlayerMental : MonoBehaviour
     public bool isReversingControl = false;
 
     // 제단 오브젝트의 위치를 저장
-    public Transform altar;
+    //public Transform altar;
     //private PlayerMovement playerMovement; // 조작 반전 적용용
 
     private Coroutine recoverCoroutine;
@@ -103,6 +103,8 @@ public class PlayerMental : MonoBehaviour
         //        RecoverMental();
         //    }
         //}
+
+        Debug.Log(currentMental);
 
         // 정신력 상태에 따른 효과
         // 현재 정신력이 30이하이면서 조작반전이 되지않았다면 효과함수 호출

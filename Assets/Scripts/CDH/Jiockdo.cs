@@ -6,7 +6,21 @@ public class Jiockdo : MonoBehaviour, IInteractable
     //필요 열쇠 태그
     public string requiredKeyTag = "Bulsang";
     [SerializeField] private ItemManager itemmanager;
+    [SerializeField] private GameObject JiockdoArt;
 
+    [Header("first door")]
+    [SerializeField] private GameObject fDoor1;
+    [SerializeField] private GameObject fDoor2;
+    [Header("second door")]
+    [SerializeField] private GameObject sDoor1;
+    [SerializeField] private GameObject sDoor2;
+    [Header("third door")]
+    [SerializeField] private GameObject tDoor1;
+    [SerializeField] private GameObject tDoor2;
+    [Header("fourth door")]
+    [SerializeField] private GameObject FDoor1;
+    
+    
     //[SerializeField] private GameObject SCDoorLock;
 
     //IInteractable 구현
@@ -30,9 +44,18 @@ public class Jiockdo : MonoBehaviour, IInteractable
     {
         Debug.Log("불상을 바쳤습니다");
         Destroy(itemmanager.currentItem);
+        // 지옥도 그림 나타남
+        JiockdoArt.SetActive(true);
         // 풀린 자물쇠가 사라짐
         //SCDoorLock.SetActive(false);
         // 숨겨진 문과 상호작용 할 수 있게됨
+        fDoor1.layer = LayerMask.NameToLayer("Interactable");
+        fDoor2.layer = LayerMask.NameToLayer("Interactable");
+        sDoor1.layer = LayerMask.NameToLayer("Interactable");
+        sDoor2.layer = LayerMask.NameToLayer("Interactable");
+        tDoor1.layer = LayerMask.NameToLayer("Interactable");
+        tDoor2.layer = LayerMask.NameToLayer("Interactable");
+        FDoor1.layer = LayerMask.NameToLayer("Interactable");
 
     }
 }
