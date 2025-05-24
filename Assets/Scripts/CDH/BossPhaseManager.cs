@@ -35,6 +35,11 @@ public class BossPhaseManager : MonoBehaviour
     public GameObject burningGroundPrefab; // 불바닥 프리팹
     public float burnDuration = 3f;        // 불바닥 제거 시간
 
+    public GameObject randomArea;
+
+    public GameObject phase3Land;
+    public GameObject phase2Land;
+
     //// 보스 2페이즈
     //[SerializeField] GameObject burningGroundPrefab; // 불타는 바닥 프리팹
     //[SerializeField] float groundRadius = 2f;        // 데미지 범위 반지름
@@ -158,6 +163,106 @@ public class BossPhaseManager : MonoBehaviour
     }
 
 
+    //IEnumerator Phase2Attack()
+    //{
+    //    while (currentPhase == 2)
+    //    {
+    //        if (isPaused) { yield return null; continue; }
+
+    //        RockOff rockScript = rockPrefab.GetComponent<RockOff>();
+    //        rockScript.bossPhaseManager = this; // 혹은 this.bossPhaseManager;
+
+    //        List<GameObject> warnings = new List<GameObject>();
+
+    //        //  랜덤으로 몇 개 생성할지 정하기
+    //        //int spawnCount = 4; // 원하는 수치로 조정
+    //        int spawnCount = Random.Range(5, 7); // 3~5개 사이 랜덤
+
+
+    //        List<Transform> randomPoints = new List<Transform>(rockSpawnPoints);
+
+    //        // 리스트 섞기 (Fisher-Yates 방식)
+    //        for (int i = 0; i < randomPoints.Count; i++)
+    //        {
+    //            Transform temp = randomPoints[i];
+    //            int randomIndex = Random.Range(i, randomPoints.Count);
+    //            randomPoints[i] = randomPoints[randomIndex];
+    //            randomPoints[randomIndex] = temp;
+    //        }
+
+    //        // 랜덤으로 선택된 지점에 워닝 생성
+    //        for (int i = 0; i < spawnCount && i < randomPoints.Count; i++)
+    //        {
+    //            //warnings.Add(Instantiate(warningCirclePrefab, randomPoints[i].position, Quaternion.identity));
+
+    //            //Vector3 warningPosition = randomPoints[i].position + Vector3.down * 4f;
+    //            Vector3 warningPosition = randomPoints[i].position + Vector3.down * 4f;
+    //            warnings.Add(Instantiate(warningCirclePrefab, warningPosition, Quaternion.Euler(90, 0, 0)));
+    //        }
+
+    //        yield return new WaitForSeconds(1f);
+
+    //        foreach (var warning in warnings)
+    //        {
+    //            Destroy(warning);
+    //        }
+
+    //        // 같은 지점에 돌 생성
+    //        for (int i = 0; i < spawnCount && i < randomPoints.Count; i++)
+    //        {
+    //            Instantiate(rockPrefab, randomPoints[i].position, Quaternion.identity);
+    //        }
+    //        //GameObject rock = Instantiate(rockPrefab, randomPoints[i].position, Quaternion.identity);
+    //        yield return new WaitForSeconds(2f);
+    //    }
+    //}
+
+    //IEnumerator Phase2Attack()
+    //{
+    //    while (currentPhase == 2)
+    //    {
+    //        if (isPaused) { yield return null; continue; }
+
+    //        RockOff rockScript = rockPrefab.GetComponent<RockOff>();
+    //        rockScript.bossPhaseManager = this;
+
+    //        List<GameObject> warnings = new List<GameObject>();
+    //        List<Vector3> rockPositions = new List<Vector3>();
+
+    //        int spawnCount = Random.Range(5, 7);
+
+    //        // BoxCollider로부터 랜덤 위치 추출
+    //        BoxCollider area = randomArea.GetComponent<BoxCollider>();
+    //        Vector3 center = area.center + area.transform.position;
+    //        Vector3 size = area.size;
+
+    //        for (int i = 0; i < spawnCount; i++)
+    //        {
+    //            float randomX = Random.Range(center.x - size.x / 2, center.x + size.x / 2);
+    //            float randomZ = Random.Range(center.z - size.z / 2, center.z + size.z / 2);
+    //            Vector3 spawnPosition = new Vector3(randomX, area.transform.position.y, randomZ); // 필요 시 Y 보정
+
+    //            Vector3 warningPosition = spawnPosition + Vector3.down * 4f;
+    //            warnings.Add(Instantiate(warningCirclePrefab, warningPosition, Quaternion.Euler(90, 0, 0)));
+    //            rockPositions.Add(spawnPosition);
+    //        }
+
+    //        yield return new WaitForSeconds(1f);
+
+    //        foreach (var warning in warnings)
+    //        {
+    //            Destroy(warning);
+    //        }
+
+    //        foreach (var pos in rockPositions)
+    //        {
+    //            Instantiate(rockPrefab, pos, Quaternion.identity);
+    //        }
+
+    //        yield return new WaitForSeconds(2f);
+    //    }
+    //}
+
     IEnumerator Phase2Attack()
     {
         while (currentPhase == 2)
@@ -165,34 +270,53 @@ public class BossPhaseManager : MonoBehaviour
             if (isPaused) { yield return null; continue; }
 
             RockOff rockScript = rockPrefab.GetComponent<RockOff>();
-            rockScript.bossPhaseManager = this; // 혹은 this.bossPhaseManager;
+            rockScript.bossPhaseManager = this;
 
             List<GameObject> warnings = new List<GameObject>();
+            List<Vector3> rockPositions = new List<Vector3>();
 
-            //  랜덤으로 몇 개 생성할지 정하기
-            //int spawnCount = 4; // 원하는 수치로 조정
-            int spawnCount = Random.Range(5, 7); // 3~5개 사이 랜덤
+            int spawnCount = Random.Range(7, 10);
+            float minDistance = 4.0f;         // 돌 간 최소 거리
+            int maxAttempts = 50;             // 무한루프 방지 시도 제한
 
+            // BoxCollider로부터 범위 계산
+            BoxCollider area = randomArea.GetComponent<BoxCollider>();
+            Vector3 center = area.center + area.transform.position;
+            Vector3 size = area.size;
 
-            List<Transform> randomPoints = new List<Transform>(rockSpawnPoints);
+            int i = 0;
+            int attempts = 0;
 
-            // 리스트 섞기 (Fisher-Yates 방식)
-            for (int i = 0; i < randomPoints.Count; i++)
+            while (i < spawnCount && attempts < maxAttempts)
             {
-                Transform temp = randomPoints[i];
-                int randomIndex = Random.Range(i, randomPoints.Count);
-                randomPoints[i] = randomPoints[randomIndex];
-                randomPoints[randomIndex] = temp;
+                attempts++;
+
+                float randomX = Random.Range(center.x - size.x / 2, center.x + size.x / 2);
+                float randomZ = Random.Range(center.z - size.z / 2, center.z + size.z / 2);
+                Vector3 spawnPos = new Vector3(randomX, area.transform.position.y, randomZ);
+
+                bool tooClose = false;
+                foreach (var pos in rockPositions)
+                {
+                    if (Vector3.Distance(pos, spawnPos) < minDistance)
+                    {
+                        tooClose = true;
+                        break;
+                    }
+                }
+
+                if (tooClose) continue;
+
+                Vector3 warningPos = spawnPos + Vector3.down * 4f;
+                warnings.Add(Instantiate(warningCirclePrefab, warningPos, Quaternion.Euler(90, 0, 0)));
+                rockPositions.Add(spawnPos);
+                i++;
             }
 
-            // 랜덤으로 선택된 지점에 워닝 생성
-            for (int i = 0; i < spawnCount && i < randomPoints.Count; i++)
+            // 로그 추가 (디버깅용)
+            if (i < spawnCount)
             {
-                //warnings.Add(Instantiate(warningCirclePrefab, randomPoints[i].position, Quaternion.identity));
-
-                //Vector3 warningPosition = randomPoints[i].position + Vector3.down * 4f;
-                Vector3 warningPosition = randomPoints[i].position + Vector3.down * 4f;
-                warnings.Add(Instantiate(warningCirclePrefab, warningPosition, Quaternion.Euler(90, 0, 0)));
+                Debug.LogWarning($"스폰 제한에 도달하여 {i}/{spawnCount}개만 생성됨");
             }
 
             yield return new WaitForSeconds(1f);
@@ -202,15 +326,15 @@ public class BossPhaseManager : MonoBehaviour
                 Destroy(warning);
             }
 
-            // 같은 지점에 돌 생성
-            for (int i = 0; i < spawnCount && i < randomPoints.Count; i++)
+            foreach (var pos in rockPositions)
             {
-                Instantiate(rockPrefab, randomPoints[i].position, Quaternion.identity);
+                Instantiate(rockPrefab, pos, Quaternion.identity);
             }
-            //GameObject rock = Instantiate(rockPrefab, randomPoints[i].position, Quaternion.identity);
+
             yield return new WaitForSeconds(2f);
         }
     }
+
 
     IEnumerator Phase3Attack()
     {
@@ -276,6 +400,10 @@ public class BossPhaseManager : MonoBehaviour
         //// 보스 다시 등장
         //bossObject.SetActive(true);
         //yield return new WaitForSeconds(1f);
+
+        phase3Land.SetActive(true);
+        phase3Land.SetActive(false);
+
         while (currentPhase == 3)
         {
             if (isPaused) { yield return null; continue; }

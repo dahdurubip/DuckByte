@@ -8,6 +8,9 @@ public class Jar : MonoBehaviour
 
     private bool isBroken = false;
 
+    // 이벤트 구독때 필요
+    public GameManager GM;
+
     public void BreakJar()
     {
         if (isBroken) return;
@@ -21,5 +24,11 @@ public class Jar : MonoBehaviour
 
         // 조각에 Rigidbody 붙어 있으면 중력 적용됨
         Debug.Log("장독대 깨짐!");
+
+        // 깨지는 소리 재생
+
+        // 해당 위치로 몬스터 쫓아옴
+        Vector3 soundPosition = transform.position + transform.forward * 2f;
+        GM.EmitSound(soundPosition);  // GameManager에 이벤트 전달
     }
 }
