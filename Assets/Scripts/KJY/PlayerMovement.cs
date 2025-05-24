@@ -196,7 +196,7 @@ public class PlayerMovement : MonoBehaviour
             capsuleCollider.center = new Vector3(originalCapCenter.x, crouchCapCenterY, originalCapCenter.z);
 
             Timer += Time.deltaTime;
-            if (Timer >= 7f)
+            if (Timer >= 14f)
             {
                 isCrouching = false;
                 playerCrouch = false;
