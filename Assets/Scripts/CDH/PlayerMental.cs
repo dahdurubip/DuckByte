@@ -25,6 +25,8 @@ public class PlayerMental : MonoBehaviour
     public bool isInSlowZone { get; private set; }
     public bool IsReversingControl { get; private set; }
 
+    public PlayerMovement pm;
+
     void Start()
     {
         currentMental = maxMental;
@@ -37,6 +39,7 @@ public class PlayerMental : MonoBehaviour
         //}
     }
 
+   
 
     private void OnTriggerEnter(Collider other)
     {
@@ -44,6 +47,7 @@ public class PlayerMental : MonoBehaviour
         {
             isInSlowZone = true;
             // 이동 속도 줄이는 코드넣기
+            pm.speed = 2f;
         }
 
         if (other.CompareTag("HealZone"))
@@ -62,6 +66,7 @@ public class PlayerMental : MonoBehaviour
         {
             isInSlowZone = false;
             // 이동 속도 원상복구하는 코드넣기
+            pm.speed = 5f;
         }
 
         if (other.CompareTag("HealZone") && recoverCoroutine != null)
@@ -104,7 +109,13 @@ public class PlayerMental : MonoBehaviour
         //    }
         //}
 
-        Debug.Log(currentMental);
+        //if (isInSlowZone)
+        //{
+        //    pm.finalSpeed = 2f;
+        //}
+
+        //Debug.Log(currentMental);
+        Debug.Log(pm.finalSpeed);
 
         // 정신력 상태에 따른 효과
         // 현재 정신력이 30이하이면서 조작반전이 되지않았다면 효과함수 호출
@@ -116,7 +127,7 @@ public class PlayerMental : MonoBehaviour
         // 정신력이 0이하가되면 사망함수 호출
         if (currentMental <= 0)
         {
-            Die();
+            //Die();
         }
     }
 

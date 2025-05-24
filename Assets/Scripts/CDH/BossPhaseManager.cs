@@ -402,7 +402,7 @@ public class BossPhaseManager : MonoBehaviour
         //yield return new WaitForSeconds(1f);
 
         phase3Land.SetActive(true);
-        phase3Land.SetActive(false);
+        phase2Land.SetActive(false);
 
         while (currentPhase == 3)
         {

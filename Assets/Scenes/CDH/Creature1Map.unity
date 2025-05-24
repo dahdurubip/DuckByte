@@ -20944,7 +20944,6 @@ MonoBehaviour:
   recoveryRate: 5
   recoveryRange: 3
   isReversingControl: 0
-  altar: {fileID: 315729061547184268}
 --- !u!4 &1219229260 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 6922697606367191593, guid: 1c1b96555739802468e69a1ebcb9c6bb, type: 3}
@@ -27589,7 +27588,6 @@ MonoBehaviour:
   recoveryRate: 5
   recoveryRange: 3
   isReversingControl: 0
-  altar: {fileID: 0}
 --- !u!114 &1568374682 stripped
 MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 3850340034015714051, guid: 1c1b96555739802468e69a1ebcb9c6bb, type: 3}
@@ -94176,6 +94174,9 @@ MonoBehaviour:
   followSpeed: 5
   burningGroundPrefab: {fileID: 0}
   burnDuration: 3
+  randomArea: {fileID: 0}
+  phase3Land: {fileID: 0}
+  phase2Land: {fileID: 0}
 --- !u!1001 &1835453273
 PrefabInstance:
   m_ObjectHideFlags: 0
