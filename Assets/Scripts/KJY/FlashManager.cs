@@ -3,28 +3,46 @@ using UnityEngine;
 public class FlashManager : MonoBehaviour
 {
     [Header("Default Settings")]
-    public Light flashlightLight;
+    [SerializeField] private Light flashlightLight;
+    [SerializeField] private Transform flashTr;
 
     [Header("Camera Tracking")]
-    //따라갈 카메라 pos
-    public Transform cameraTransform; 
-    public bool followCameraRotation = true;
+    [SerializeField] private Transform cameraTransform;
 
 
-    private bool isOn = true;
+    [Header("Battery Settings")]
+    [SerializeField] private float maxBattery = 1000f;
+    [SerializeField] private float currentBattery = 1000f;
+    [SerializeField] private float batteryDrainRate = 5f; // 초당 배터리 감소량
 
+    private bool isOn = false;
     private bool isHeld = false;
+
 
     private void Awake()
     {
         if (flashlightLight == null) flashlightLight = GetComponentInChildren<Light>();
-        if (cameraTransform == null && Camera.main != null) cameraTransform = Camera.main.transform;
+        if (cameraTransform == null && Camera.main != null)
+        {
+            cameraTransform = Camera.main.transform;
+        }
+
         flashlightLight.enabled = false;
     }
 
-   private void LateUpdate()
+    private void Update()
     {
-        if (followCameraRotation && cameraTransform != null && isHeld)
+        if (isHeld && isOn)
+        {
+            DrainBattery();
+        }
+
+    }
+
+    private void LateUpdate()
+    {
+        flashlightLight.transform.position = flashTr.position;
+        if (isHeld && cameraTransform != null)
         {
             transform.rotation = cameraTransform.rotation;
         }
@@ -32,22 +50,54 @@ public class FlashManager : MonoBehaviour
 
     public void Toggle()
     {
+        if (currentBattery <= 0f)
+        {
+            Debug.Log("배터리 없음");
+            return;
+        }
+
         isOn = !isOn;
         if (flashlightLight != null) flashlightLight.enabled = isOn;
-        Debug.Log("isOn" + isOn);
+        Debug.Log("Flashlight isOn: " + isOn);
     }
 
-    public bool IsOn()
+    public bool IsOn() => isOn;
+
+    public void TurnOn()
     {
-        return isOn;
+        if (currentBattery > 0f)
+        {
+            isOn = true;
+            flashlightLight.enabled = true;
+        }
     }
 
-    public void TurnOn() => flashlightLight.enabled = true;
-    public void TurnOff() => flashlightLight.enabled = false;
+    public void TurnOff()
+    {
+        isOn = false;
+        flashlightLight.enabled = false;
+    }
 
     public void SetHeld(bool held)
     {
         isHeld = held;
     }
 
+    private void DrainBattery()
+    {
+        currentBattery -= batteryDrainRate * Time.deltaTime;
+
+        if (currentBattery <= 0f)
+        {
+            currentBattery = 0f;
+            TurnOff();
+            Debug.Log("배터리 소진");
+        }
+    }
+
+    public void RefillBattery(float amount)
+    {
+        currentBattery = Mathf.Clamp(currentBattery + amount, 0, maxBattery);
+        Debug.Log("배터리 충전됨: " + currentBattery);
+    }
 }

@@ -131,7 +131,7 @@ public class Creature2 : MonoBehaviour
         animator.SetBool("isRun", false);
         animator.SetTrigger("Attack");
         player.StartCoroutine(player.PlayerHitEffect());
-        if(itemmanager.currentItem != null)
+        if(itemmanager.currentItem != null && !itemmanager.currentItem.CompareTag("Flashlight"))
         {
             itemmanager.DropCurrentItem();
         }

@@ -84,7 +84,7 @@ public class Creature2Clone : MonoBehaviour
         player.StartCoroutine(player.PlayerHitEffect());
 
         //손에 아이템 있으면 호출
-        if(itemmanager.currentItem != null)
+        if (itemmanager.currentItem != null && !itemmanager.currentItem.CompareTag("Flashlight"))
         {
             itemmanager.DropCurrentItem();
         }

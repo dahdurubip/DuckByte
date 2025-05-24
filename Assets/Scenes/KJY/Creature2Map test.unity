@@ -5408,26 +5408,6 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 6728323440194455029, guid: 6a26595a616ec1943b96576f0a5d0af6, type: 3}
   m_PrefabInstance: {fileID: 574387280}
   m_PrefabAsset: {fileID: 0}
---- !u!1 &593965807 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 4120006549087269644, guid: 74b1d93aeb749c845bb0f4aed171c8ea, type: 3}
-  m_PrefabInstance: {fileID: 1420220773}
-  m_PrefabAsset: {fileID: 0}
---- !u!114 &593965813
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 593965807}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 35faa7041bbceaa4797cd8ccbfcf69e4, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  flashlightLight: {fileID: 668995000}
-  cameraTransform: {fileID: 405264233}
-  followCameraRotation: 1
 --- !u!1001 &613983181
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -6551,11 +6531,6 @@ Rigidbody:
   m_Interpolate: 0
   m_Constraints: 0
   m_CollisionDetection: 0
---- !u!108 &668995000 stripped
-Light:
-  m_CorrespondingSourceObject: {fileID: 3885348068341657742, guid: 74b1d93aeb749c845bb0f4aed171c8ea, type: 3}
-  m_PrefabInstance: {fileID: 1420220773}
-  m_PrefabAsset: {fileID: 0}
 --- !u!1001 &675954329
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -15495,6 +15470,10 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 2434532942878756562, guid: 74b1d93aeb749c845bb0f4aed171c8ea, type: 3}
+      propertyPath: cameraTransform
+      value: 
+      objectReference: {fileID: 405264233}
     - target: {fileID: 3631841440340994486, guid: 74b1d93aeb749c845bb0f4aed171c8ea, type: 3}
       propertyPath: m_LocalPosition.x
       value: -33.33
@@ -15539,17 +15518,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: FlashLight
       objectReference: {fileID: 0}
-    - target: {fileID: 4120006549087269644, guid: 74b1d93aeb749c845bb0f4aed171c8ea, type: 3}
-      propertyPath: m_TagString
-      value: Flashlight
-      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
-    m_AddedComponents:
-    - targetCorrespondingSourceObject: {fileID: 4120006549087269644, guid: 74b1d93aeb749c845bb0f4aed171c8ea, type: 3}
-      insertIndex: -1
-      addedObject: {fileID: 593965813}
+    m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 74b1d93aeb749c845bb0f4aed171c8ea, type: 3}
 --- !u!1001 &1421097136
 PrefabInstance:
@@ -27297,7 +27269,7 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 1233254671802239474, guid: d4b2ada4637a0984287e190d7d5e015a, type: 3}
       propertyPath: maxDistance
-      value: 3
+      value: 5
       objectReference: {fileID: 0}
     - target: {fileID: 1233254671802239474, guid: d4b2ada4637a0984287e190d7d5e015a, type: 3}
       propertyPath: objectTofollow
