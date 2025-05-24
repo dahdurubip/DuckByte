@@ -47,7 +47,7 @@ public class PlayerMovement : MonoBehaviour
     private float rotationVelocity;
     public float rotationSmoothTime = 0.1f;
     public bool IsMoving { get; private set; }
-
+    public GameManager GM;
 
     private void Start()
     {

@@ -25,6 +25,15 @@ public class MonsterAI : MonoBehaviour
     public Animator anim;
 
 
+
+    private void Update()
+    {
+        if (pM.run)
+        {
+            StartChasingPlayer();
+        }
+    }
+
     // 몬스터의 추적 모드
     private enum ChaseMode
     {
