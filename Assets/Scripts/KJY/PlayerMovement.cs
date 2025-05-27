@@ -182,6 +182,7 @@ public class PlayerMovement : MonoBehaviour
             vertical = -vertical;
             horizontal = -horizontal;
         }
+
         Vector3 inputDirection = new Vector3(horizontal, 0f, vertical).normalized;
 
         Vector3 camForward = Vector3.Scale(cam.transform.forward, new Vector3(1, 0, 1)).normalized;
