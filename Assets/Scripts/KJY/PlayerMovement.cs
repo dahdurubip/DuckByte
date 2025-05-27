@@ -211,7 +211,7 @@ public class PlayerMovement : MonoBehaviour
 
     private void UpdateStaminaUI()
     {
-        stamina_UI.text = ((int)(stamina / maxStamina * 100f)).ToString() + "%";
+        //stamina_UI.text = ((int)(stamina / maxStamina * 100f)).ToString() + "%";
     }
 
     IEnumerator WaitrForIt()

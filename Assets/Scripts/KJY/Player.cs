@@ -42,7 +42,7 @@ public class Player : MonoBehaviour
     private void Update()
     {
         //Debug.Log("CurHP" + CurrentHp);
-        Debug.Log("curHP" + currentHp);
+       // Debug.Log("curHP" + currentHp);
     }
 
     public void TakeDamage(float damage)

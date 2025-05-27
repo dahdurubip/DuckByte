@@ -2,15 +2,18 @@ using UnityEngine;
 
 public class StartTriggerZone : MonoBehaviour
 {
-    public EastLampPuzzleManager puzzleManager;
-    private bool triggered = false;
+    private bool started = false;
 
-    private void OnTriggerEnter(Collider other)
+    void OnTriggerEnter(Collider other)
     {
-        if (!triggered && other.CompareTag("Player"))
+        if (started) return;
+        if (other.CompareTag("Player"))
         {
-            triggered = true;
-            puzzleManager.StartPuzzle();
+            started = true;
+            EastRoomPuzzleManager.Instance.StartPuzzle();
+
+            var col = GetComponent<Collider>();
+            if (col) col.enabled = false;
         }
     }
 }
