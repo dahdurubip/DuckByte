@@ -4,41 +4,49 @@ using System.Collections.Generic;
 
 public class BossPhaseManager : MonoBehaviour
 {
+    [Header("기본 설정")]
+    public float phaseInterval = 3f;
+    public float shockwaveRadius = 5f;
+    public int shockwaveMentalDamage = 20;
+    public int currentPhase = 1;
+    public float followDuration = 1f; // 경고 따라다니는 시간
+    public float followSpeed = 5f;    // 따라다니는 부드러움 속도
+    private bool isPaused = false;
+
+    [Header("１ 페이즈")]
+    public Transform player;          // 따라다닐 플레이어
+
+    [Header("2 페이즈")]
+    public GameObject burningGroundPrefab; // 불바닥 프리팹
+    public float burnDuration = 3f;        // 불바닥 제거 시간
+    public GameObject randomArea;
+
+    [Header("3 페이즈")]
+    public GameObject phase3Land;
+    public GameObject phase2Land;
+    private Coroutine phase2Coroutine;
+
+    [Header("스크립트")]
+    [SerializeField] private DialogueManager dialogueManager; // 대사 출력 담당
+    [SerializeField] private DialogueData dialogueData;       // 대사 데이터 보관소
+
+    [Header("프리팹")]
     public GameObject rockPrefab;
     //public GameObject bossObject;
     public GameObject warningCirclePrefab;
     public GameObject shockwaveEffectPrefab;
 
-    public DialogueManager dialogueManager;
 
-    public Transform[] rockSpawnPoints;
 
-    public float phaseInterval = 3f;
-    public float shockwaveRadius = 5f;
-    public int shockwaveMentalDamage = 20;
+    //public Transform[] rockSpawnPoints;
 
-    public int currentPhase = 1;
     // 원하는 수치로 조정
     //public int spawnCount = 4; 
-    private float timer;
+    //private float timer;
 
-    public Transform altar;              // 제단 위치
-    public float altarSafeRadius = 3f;   // 제단 보호 범위
+    //public Transform altar;              // 제단 위치
+    //public float altarSafeRadius = 3f;   // 제단 보호 범위
 
-    public Transform player;          // 따라다닐 플레이어
-
-    public float followDuration = 1f; // 경고 따라다니는 시간
-    public float followSpeed = 5f;    // 따라다니는 부드러움 속도
-
-    private bool isPaused = false;
-
-    public GameObject burningGroundPrefab; // 불바닥 프리팹
-    public float burnDuration = 3f;        // 불바닥 제거 시간
-
-    public GameObject randomArea;
-
-    public GameObject phase3Land;
-    public GameObject phase2Land;
 
     //// 보스 2페이즈
     //[SerializeField] GameObject burningGroundPrefab; // 불타는 바닥 프리팹
@@ -103,6 +111,9 @@ public class BossPhaseManager : MonoBehaviour
                 break;
             case 3:
                 StartCoroutine(Phase3Attack());
+                break;
+            case 4:
+                bossClear();
                 break;
         }
     }
@@ -265,7 +276,7 @@ public class BossPhaseManager : MonoBehaviour
 
     IEnumerator Phase2Attack()
     {
-        while (currentPhase == 2)
+        while (currentPhase == 2 || currentPhase == 3)
         {
             if (isPaused) { yield return null; continue; }
 
@@ -404,6 +415,11 @@ public class BossPhaseManager : MonoBehaviour
         phase3Land.SetActive(true);
         phase2Land.SetActive(false);
 
+        if (phase2Coroutine == null)
+        {
+            phase2Coroutine = StartCoroutine(Phase2Attack());
+        }
+
         while (currentPhase == 3)
         {
             if (isPaused) { yield return null; continue; }
@@ -419,7 +435,7 @@ public class BossPhaseManager : MonoBehaviour
 
 
             //3.충격파 이펙트 발생
-            Instantiate(shockwaveEffectPrefab, altar.transform.position, Quaternion.identity);
+            Instantiate(shockwaveEffectPrefab, player.transform.position, Quaternion.identity);
 
             // 플레이어가 제단 반경 안에 있는지 확인
             //float distanceToAltar = Vector3.Distance(player.position, altar.position);
@@ -442,10 +458,10 @@ public class BossPhaseManager : MonoBehaviour
 
     public void triggerPhaseTransition(int nextPhase)
     {
-        StartCoroutine(hadlePhaseTransition(nextPhase));
+        StartCoroutine(handlePhaseTransition(nextPhase));
     }
 
-    IEnumerator hadlePhaseTransition(int nextPhase)
+    IEnumerator handlePhaseTransition(int nextPhase)
     {
         isPaused = true;
 
@@ -455,17 +471,25 @@ public class BossPhaseManager : MonoBehaviour
         // 페이즈 넘어가는 연출 시작
         Debug.Log("보스 : 으윽");
 
-        string[] lines = new string[]
+        if (dialogueData.phaseDialogues.ContainsKey(nextPhase))
         {
-        "oh",
-        "no",
-        "fuck"
-        };
-
-        foreach (string line in lines)
-        {
-            yield return StartCoroutine(dialogueManager.ShowDialogue("보스", line));
+            foreach (string line in dialogueData.phaseDialogues[nextPhase])
+            {
+                yield return StartCoroutine(dialogueManager.ShowDialogue("보스", line));
+            }
         }
+
+        //string[] lines = new string[]
+        //{
+        //"oh",
+        //"no",
+        //"fuck"
+        //};
+
+        //foreach (string line in lines)
+        //{
+        //    yield return StartCoroutine(dialogueManager.ShowDialogue("보스", line));
+        //}
 
         // 연출 시간
         yield return new WaitForSeconds(2f);
@@ -474,6 +498,9 @@ public class BossPhaseManager : MonoBehaviour
         SetPhase(nextPhase);
     }
     
-
+    void bossClear()
+    {
+        Debug.Log("보스전 클리어");
+    }
 
 }
