@@ -1,6 +1,7 @@
 using UnityEngine;
 using UnityEngine.AI;
 using System.Collections;
+using UnityEngine.Audio;
 
 public class Creature2 : MonoBehaviour
 {
@@ -8,6 +9,9 @@ public class Creature2 : MonoBehaviour
     [SerializeField] private ItemManager itemmanager;
     [SerializeField] private Player player;
     [SerializeField] private CameraMovement camShake;
+    [SerializeField] private AudioClip shutClip;
+    [SerializeField] private AudioClip runClip;
+    [SerializeField] private AudioClip walkClip;
 
     [Header("AI Settings")]
     [SerializeField] private Transform[] wayPoint;
@@ -27,12 +31,19 @@ public class Creature2 : MonoBehaviour
 
     //크리처 애니메이션
     private Animator animator;
+    private AudioSource audioSource;
 
+
+    private void Awake()
+    {        
+        navMeshAgent = GetComponent<NavMeshAgent>();
+        animator = GetComponent<Animator>();
+        audioSource= GetComponent<AudioSource>();
+    }
 
     private void Start()
     {
-        navMeshAgent = GetComponent<NavMeshAgent>();
-        animator = GetComponent<Animator>();
+        audioSource.Stop();
         isAttacking = false;
         currentState = creatureState.Patrol;
         Creature2Patrol();
@@ -88,6 +99,13 @@ public class Creature2 : MonoBehaviour
         animator.SetBool("isIdle", false);
         animator.SetBool("isWalking", true);
 
+        if (audioSource.clip != walkClip || !audioSource.isPlaying)
+        {
+            audioSource.clip = walkClip;
+            audioSource.loop = true;
+            audioSource.Play();
+        }
+
         navMeshAgent.destination = wayPoint[currentPatrolIndex].position;
 
         //순찰 지점에 도착했을 때 Idle상태로 전한
@@ -130,6 +148,10 @@ public class Creature2 : MonoBehaviour
         animator.SetBool("isWalking", false);
         animator.SetBool("isRun", false);
         animator.SetTrigger("Attack");
+
+        audioSource.Stop();
+        audioSource.PlayOneShot(shutClip);
+
         player.StartCoroutine(player.PlayerHitEffect());
         if(itemmanager.currentItem != null && !itemmanager.currentItem.CompareTag("Flashlight"))
         {
@@ -183,16 +205,28 @@ public class Creature2 : MonoBehaviour
     {
         navMeshAgent.isStopped = false;
         navMeshAgent.destination = player.transform.position;
-        navMeshAgent.speed = 5.0f;
+        navMeshAgent.speed = 10.0f;
         animator.SetBool("isRun", true);
         animator.SetBool("isIdle", false);
         animator.SetBool("isWalking", false);
+
+        if (audioSource.clip != runClip || !audioSource.isPlaying)
+        {
+            audioSource.clip = runClip;
+            audioSource.loop = true;
+            audioSource.Play();
+        }
     }
 
     private void Creature2Idle()
     {
         animator.SetBool("isWalking", false);
         animator.SetBool("isIdle", true);
+
+        if (audioSource.isPlaying && (audioSource.clip == walkClip || audioSource.clip == runClip))
+        {
+            audioSource.Stop();
+        }
 
         Timer += Time.deltaTime;
         if (Timer >= idleTime)

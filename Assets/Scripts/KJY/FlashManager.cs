@@ -1,10 +1,11 @@
 using UnityEngine;
+using UnityEngine.UI;
 
 public class FlashManager : MonoBehaviour
 {
     [Header("Default Settings")]
     [SerializeField] private Light flashlightLight;
-    [SerializeField] private Transform flashTr;
+    //[SerializeField] private Transform flashTr;
 
     [Header("Camera Tracking")]
     [SerializeField] private Transform cameraTransform;
@@ -14,6 +15,13 @@ public class FlashManager : MonoBehaviour
     [SerializeField] private float maxBattery = 1000f;
     [SerializeField] private float currentBattery = 1000f;
     [SerializeField] private float batteryDrainRate = 5f; // 초당 배터리 감소량
+
+    [Header("Battery UI")]
+    [SerializeField] private Image batteryUI; // 이미지 방식
+
+    [Header("Flash UI Settings")]
+    [SerializeField] private GameObject flashUI;
+
 
     private bool isOn = false;
     private bool isHeld = false;
@@ -27,26 +35,33 @@ public class FlashManager : MonoBehaviour
             cameraTransform = Camera.main.transform;
         }
 
+        flashUI.SetActive(false);
         flashlightLight.enabled = false;
+        UpdateBatteryUI();
     }
 
     private void Update()
     {
         if (isHeld && isOn)
         {
+            flashUI.SetActive(true);
             DrainBattery();
         }
-
-    }
-
-    private void LateUpdate()
-    {
-        flashlightLight.transform.position = flashTr.position;
-        if (isHeld && cameraTransform != null)
+        else
         {
-            transform.rotation = cameraTransform.rotation;
+            flashUI.SetActive(false);
         }
+
     }
+
+    //private void LateUpdate()
+    //{
+        //flashlightLight.transform.position = flashTr.position;
+        //if (isHeld && cameraTransform != null)
+        //{
+        //    transform.rotation = cameraTransform.rotation;
+        //}
+    //}
 
     public void Toggle()
     {
@@ -93,11 +108,24 @@ public class FlashManager : MonoBehaviour
             TurnOff();
             Debug.Log("배터리 소진");
         }
+
+        UpdateBatteryUI();
     }
 
     public void RefillBattery(float amount)
     {
         currentBattery = Mathf.Clamp(currentBattery + amount, 0, maxBattery);
         Debug.Log("배터리 충전됨: " + currentBattery);
+
+        UpdateBatteryUI();
     }
+
+    private void UpdateBatteryUI()
+    {
+        if (batteryUI != null)
+        {
+            batteryUI.fillAmount = currentBattery / maxBattery; // 0~1 사이로 설정
+        }
+    }
+
 }

@@ -5,27 +5,28 @@ public class ItemManager : MonoBehaviour
 {
     [Header("Hand & Pickup Settings")]
     //손 위치
-    public Transform handTransform;
+    [SerializeField] private Transform handTransform;
     //레이어설정
-    public LayerMask interacterLayer;
-    public LayerMask pickableLayer;
+    [SerializeField] private LayerMask interacterLayer;
+    [SerializeField] private LayerMask pickableLayer;
     //전방 원뿔 반경
-    public float detectRange = 5f;
+    [SerializeField] private float detectRange = 5f;
     //전방 원뿔 절반 각도
-    public float panAngle = 30f;
+    [SerializeField] private float panAngle = 30f;
     //flash
     [SerializeField] private FlashManager flashManager;
 
 
     [Header("Key UI Settings")]
-    public GameObject EKeyUI;
+    [SerializeField] private GameObject EKeyUI;
 
     [Header("Gimmick UI Settings")]
-    public GameObject paperUI;
-    public GameObject bookUI;
-    public GameObject skelUI;
-    public GameObject noteUI;
+    [SerializeField] private GameObject paperUI;
+    [SerializeField] private GameObject bookUI;
+    [SerializeField] private GameObject skelUI;
+    [SerializeField] private GameObject noteUI;
 
+    [Header("Note UI Settings")]
     public TextMeshProUGUI noteUIText;
 
     //object
@@ -50,6 +51,7 @@ public class ItemManager : MonoBehaviour
     private GameObject pickableTarget;
     //애니메이션
     private Animator animator;
+
     
     private void Start()
     {
@@ -88,26 +90,27 @@ public class ItemManager : MonoBehaviour
                 //Debug.Log("Pick");
                 animator.SetTrigger("pickStand");
 
-                if (nearbyInteractable.CompareTag("Paper"))
-                {
-                    paperParticle?.Stop(true, ParticleSystemStopBehavior.StopEmittingAndClear);
-                    paperUI.SetActive(!paperUI.activeSelf);
-                    return;
-                }
-                if (nearbyInteractable.CompareTag("Book"))
-                {
-                    bookParticle?.Stop(true, ParticleSystemStopBehavior.StopEmittingAndClear);
-                    bookUI.SetActive(!bookUI.activeSelf);
-                    return;
-                }
-                if (nearbyInteractable.CompareTag("Skel"))
-                {
-                    skelParticle?.Stop(true, ParticleSystemStopBehavior.StopEmittingAndClear);
-                    skelUI.SetActive(!skelUI.activeSelf);
-                    ItemSkel1.SetActive(false);
-                    ItemSkel2.SetActive(true);
-                    return;
-                }
+                HandleCreature2MapInteractions();
+                //if (nearbyInteractable.CompareTag("Paper"))
+                //{
+                //    paperParticle?.Stop(true, ParticleSystemStopBehavior.StopEmittingAndClear);
+                //    paperUI.SetActive(!paperUI.activeSelf);
+                //    return;
+                //}
+                //if (nearbyInteractable.CompareTag("Book"))
+                //{
+                //    bookParticle?.Stop(true, ParticleSystemStopBehavior.StopEmittingAndClear);
+                //    bookUI.SetActive(!bookUI.activeSelf);
+                //    return;
+                //}
+                //if (nearbyInteractable.CompareTag("Skel"))
+                //{
+                //    skelParticle?.Stop(true, ParticleSystemStopBehavior.StopEmittingAndClear);
+                //    skelUI.SetActive(!skelUI.activeSelf);
+                //    ItemSkel1.SetActive(false);
+                //    ItemSkel2.SetActive(true);
+                //    return;
+                //}
                 //쪽지들은 전부 note태그
                 //각 쪽지마다 noteText스크립트 달고 해당하는 내용은 각각 수정
                 //상호작용 된 쪽지의 컴포넌트 속 Text를 가져와서 글자를 띄움
@@ -146,7 +149,7 @@ public class ItemManager : MonoBehaviour
                     inter.OnInteract(currentItem);
                     return;
                 }
-                // 장독대
+                //장독대
                 {
                     if (nearbyInteractable.CompareTag("Jar"))
                     {
@@ -179,11 +182,11 @@ public class ItemManager : MonoBehaviour
                 Vector3 directionToTarget = pickableTarget.transform.position - transform.position;
                 float verticalOffset = directionToTarget.y;
 
-                if (verticalOffset < 0.5f) // 예: 바닥에 있을 경우
+                if (verticalOffset < 0.5f) //바닥에 있을 경우
                 {
                     animator.SetTrigger("pickSit");
                 }
-                else // 예: 앞에 있을 경우
+                else //앞에 있을 경우
                 {
                     animator.SetTrigger("pickStand");
                 }
@@ -191,14 +194,55 @@ public class ItemManager : MonoBehaviour
                 return;
 
             }
-            // 3. 그 외 상황 - 후레쉬 On/Off 전용 처리
+            //후레쉬 On/Off 전용 처리
             if (currentItem != null && currentItem.CompareTag("Flashlight"))
             {
                 flashManager?.Toggle();
             }
+
         }
 
     }
+
+    private bool HandleCreature2MapInteractions()
+    {
+        if (UnityEngine.SceneManagement.SceneManager.GetActiveScene().name != "Creature2Map")
+            return false;
+
+        if (nearbyInteractable.CompareTag("Paper"))
+        {
+            paperParticle?.Stop(true, ParticleSystemStopBehavior.StopEmittingAndClear);
+            paperUI.SetActive(!paperUI.activeSelf);
+            return true;
+        }
+        if (nearbyInteractable.CompareTag("Book"))
+        {
+            bookParticle?.Stop(true, ParticleSystemStopBehavior.StopEmittingAndClear);
+            bookUI.SetActive(!bookUI.activeSelf);
+            return true;
+        }
+        if (nearbyInteractable.CompareTag("Skel"))
+        {
+            skelParticle?.Stop(true, ParticleSystemStopBehavior.StopEmittingAndClear);
+            skelUI.SetActive(!skelUI.activeSelf);
+            ItemSkel1.SetActive(false);
+            ItemSkel2.SetActive(true);
+            return true;
+        }
+        if (nearbyInteractable.CompareTag("Battery"))
+        {
+            if (flashManager != null)
+            {
+                flashManager.RefillBattery(30f);
+            }
+            Destroy(nearbyInteractable);
+            return true;
+        }
+
+        return false;
+    }
+
+
 
     public void OnPickupAnimationEnd()
     {
@@ -231,6 +275,37 @@ public class ItemManager : MonoBehaviour
         }
     }
 
+    //private void DetectNearbyInteractable()
+    //{
+    //    nearbyInteractable = null;
+
+    //    Vector3 forward = transform.forward;
+    //    Vector3 basePosition = transform.position;
+    //    float minHeight = 0f;     // 발밑
+    //    float maxHeight = 6f;     // 머리
+    //    int rayCount = 30;           // 총 레이 개수
+    //    float detectDistance = detectRange; // 기존 값 사용
+
+    //    for (int i = 0; i < rayCount; i++)
+    //    {
+    //        float t = i / (float)(rayCount - 1);
+    //        float height = Mathf.Lerp(minHeight, maxHeight, t);
+    //        Vector3 rayOrigin = basePosition + Vector3.up * height;
+
+    //        if (Physics.Raycast(rayOrigin, forward, out RaycastHit hit, detectDistance, interacterLayer))
+    //        {
+    //            nearbyInteractable = hit.collider.gameObject;
+    //            Debug.DrawRay(rayOrigin, forward * detectDistance, Color.green);
+    //            break; // 하나라도 맞으면 종료
+    //        }
+
+    //        Debug.DrawRay(rayOrigin, forward * detectDistance, Color.gray); // 디버그용
+    //    }
+    //}
+
+
+
+
     private void DetectNearbyPickable()
     {
         pickableTarget = null;
@@ -259,6 +334,8 @@ public class ItemManager : MonoBehaviour
             }
         }
     }
+
+
 
     private void PickupItem(GameObject item)
     {
@@ -332,6 +409,7 @@ public class ItemManager : MonoBehaviour
             Gizmos.DrawLine(prevPoint, nextP);
             prevPoint = nextP;
         }
+
     }
 
 

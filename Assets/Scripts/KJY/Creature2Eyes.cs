@@ -18,8 +18,8 @@ public class Creature2Eyes : MonoBehaviour
 
     [Header("Settings")]
     [SerializeField] private LayerMask playerLayer;
-    [SerializeField, Range(0f, 30f)] private float viewRange = 3f;
-    [SerializeField, Range(0f, 360f)] private float viewAngle = 80f;
+    [SerializeField, Range(0f, 30f)] private float viewRange = 10f;
+    [SerializeField, Range(0f, 360f)] private float viewAngle = 40f;
 
     [Header("DebugSettings")]
     [SerializeField] private List<CastInfo> lineList;
@@ -27,7 +27,19 @@ public class Creature2Eyes : MonoBehaviour
     private WaitForSeconds checkDelay = new WaitForSeconds(0.1f);
     private Coroutine checkTargetCoroutine;
     private Coroutine drawRayLineCoroutine;
+    private LineRenderer lineRenderer;
 
+
+    private void Awake()
+    {
+        lineRenderer = gameObject.AddComponent<LineRenderer>();
+        lineRenderer.startWidth = 0.05f;
+        lineRenderer.endWidth = 0.05f;
+        lineRenderer.material = new Material(Shader.Find("Sprites/Default"));
+        lineRenderer.startColor = Color.red;
+        lineRenderer.endColor = Color.red;
+        lineRenderer.positionCount = 2;
+    }
 
     void Start()
     {
@@ -36,6 +48,24 @@ public class Creature2Eyes : MonoBehaviour
         StartCheckingTarget();
         StartDrawingRayLines();
     }
+
+    private void Update()
+    {
+        UpdateDirectionLine();
+    }
+
+    private void UpdateDirectionLine()
+    {
+        Vector3 origin = transform.position + Vector3.up;
+        Vector3 end = origin + transform.forward * viewRange;
+
+        if (lineRenderer != null)
+        {
+            lineRenderer.SetPosition(0, origin);
+            lineRenderer.SetPosition(1, end);
+        }
+    }
+
 
     public void StartCheckingTarget()
     {
@@ -82,7 +112,7 @@ public class Creature2Eyes : MonoBehaviour
                     Debug.Log("플레이어 감지됨!");
                     //creature2Manager.CommandTeleport();
                     creature2Manager.OnEyeDetected(transform.position);
-                    break; // 회 감지만 하고 빠짐
+                    break; //1회 감지만 하고 빠짐
                 }
             }
         }

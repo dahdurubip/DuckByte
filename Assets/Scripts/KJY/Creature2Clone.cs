@@ -11,18 +11,21 @@ public class Creature2Clone : MonoBehaviour
 
     [Header("Default Settings")]
     [SerializeField] private float moveSpeed = 3.5f;
-    [SerializeField] private float attackRange = 5f;
+    [SerializeField] private float attackRange = 6f;
     [SerializeField] private float rotationSpeed = 720f;
+    [SerializeField] private AudioClip shutClip;
 
     private Transform playerTransform;
     private Vector3 targetPosition;
     private Animator animator;
     private bool isAttacking = false;
+    private AudioSource audioSource;
 
 
     private void Start()
     {
         animator = GetComponent<Animator>();
+        audioSource = GetComponent<AudioSource>();
     }
 
     public void Initialize(Vector3 eyePos, Transform player)
@@ -80,7 +83,10 @@ public class Creature2Clone : MonoBehaviour
         isAttacking = true;
         animator.SetBool("run", false);
         animator.SetTrigger("attack");
-        player.TakeDamage(15);
+        audioSource.Stop();
+        audioSource.PlayOneShot(shutClip);
+
+        player.TakeDamage(5);
         player.StartCoroutine(player.PlayerHitEffect());
 
         //손에 아이템 있으면 호출
