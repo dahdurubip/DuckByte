@@ -170,9 +170,9 @@ public class PlayerMovement : MonoBehaviour
         float horizontal = Input.GetAxisRaw("Horizontal");
         float vertical = Input.GetAxisRaw("Vertical");
 
-        //뒤로 갈 수 없게 막는다
-        if (vertical < 0)
-            vertical = 0;
+        ////뒤로 갈 수 없게 막는다
+        //if (vertical < 0)
+        //    vertical = 0;
 
         // 내일 이거 해보깅~!
         PlayerMental mental = GetComponent<PlayerMental>();
