@@ -1,4 +1,4 @@
-// ZoneTrigger.cs
+// ZoneTrigger.cs  (변경 없음)
 using UnityEngine;
 
 public class ZoneTrigger : MonoBehaviour

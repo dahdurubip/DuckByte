@@ -18,6 +18,7 @@ public class DoorController : MonoBehaviour
 
     public void Open()
     {
+        Debug.Log($"[DoorController] {gameObject.name} Open() called!");
         isOpen = true;
         if (doorMesh != null)
         {
