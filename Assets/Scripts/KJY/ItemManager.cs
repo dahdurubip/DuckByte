@@ -40,6 +40,10 @@ public class ItemManager : MonoBehaviour
     [SerializeField] private ParticleSystem bookParticle;
     [SerializeField] private ParticleSystem skelParticle;
 
+    //메인 아이템 bool 값 설정
+    public bool creature1MainItem;
+    public bool creature2MainItem;
+
     //상호작용 키
     private KeyCode interactKey = KeyCode.E;
     private Camera mainCamera;
@@ -78,12 +82,34 @@ public class ItemManager : MonoBehaviour
         if (showUI)
         {
             var target = nearbyInteractable != null ? nearbyInteractable : pickableTarget;
-            Vector3 worldPos = target.transform.position + Vector3.up * 0.5f;
+            Vector3 worldPos = target.transform.position + Vector3.up * 0.3f;
             EKeyUI.transform.position = mainCamera.WorldToScreenPoint(worldPos);
         }
 
         if (Input.GetKeyDown(interactKey))
         {
+            //E키를 누르면 무조건 끄는 것
+            if (noteUI.activeSelf)
+            {
+                noteUI.SetActive(false);
+                return;
+            }
+            if (paperUI.activeSelf)
+            {
+                paperUI.SetActive(false);
+                return;
+            }
+            if (bookUI.activeSelf)
+            {
+                bookUI.SetActive(false);
+                return;
+            }
+            if (skelUI.activeSelf)
+            {
+                skelUI.SetActive(false);
+                return;
+            }
+
             //읽기 기믹 (Paper/Book/Skel)
             if (nearbyInteractable != null)
             {
@@ -111,6 +137,7 @@ public class ItemManager : MonoBehaviour
                 //    ItemSkel2.SetActive(true);
                 //    return;
                 //}
+
                 //쪽지들은 전부 note태그
                 //각 쪽지마다 noteText스크립트 달고 해당하는 내용은 각각 수정
                 //상호작용 된 쪽지의 컴포넌트 속 Text를 가져와서 글자를 띄움
@@ -135,13 +162,13 @@ public class ItemManager : MonoBehaviour
                     }
                     return;
                 }
-                //Door 열기/닫기
-                if (nearbyInteractable.TryGetComponent<Door>(out var door))
-                {
-                    //Debug.Log("Door");
-                    door.Toggle();
-                    return;
-                }
+                ////Door 열기/닫기
+                //if (nearbyInteractable.TryGetComponent<Door>(out var door))
+                //{
+                //    //Debug.Log("Door");
+                //    door.Toggle();
+                //    return;
+                //}
 
                 //IInteractable
                 if (nearbyInteractable.TryGetComponent<IInteractable>(out var inter))
@@ -149,25 +176,31 @@ public class ItemManager : MonoBehaviour
                     inter.OnInteract(currentItem);
                     return;
                 }
+
                 //장독대
+                if (nearbyInteractable.CompareTag("Jar"))
                 {
-                    if (nearbyInteractable.CompareTag("Jar"))
+                    Jar breaker = nearbyInteractable.GetComponent<Jar>();
+                    if (breaker != null)
                     {
-                        Jar breaker = nearbyInteractable.GetComponent<Jar>();
-                        if (breaker != null)
-                        {
-                            breaker.BreakJar();
-                        }
+                        breaker.BreakJar();
                     }
                     return;
                 }
-                //if (nearbyInteractable.CompareTag("Note"))
-                //{
 
-                //    noteUI.SetActive(!noteUI.activeSelf);
-                //    return;
-                //}
 
+                //메인 아이템이면
+                if (nearbyInteractable.CompareTag("Creature1MainItem"))
+                {
+                    creature1MainItem = true;
+                    return;
+                }
+                
+                if (nearbyInteractable.CompareTag("Creature2MainItem"))
+                {
+                    creature2MainItem = true;
+                    return;
+                }
 
             }
 

@@ -40,6 +40,7 @@ public class Creature2Clone : MonoBehaviour
 
     private void Update()
     {
+        if (playerTransform == null) return;
 
         float dist = Vector3.Distance(transform.position, playerTransform.position);
 
@@ -85,6 +86,11 @@ public class Creature2Clone : MonoBehaviour
         animator.SetTrigger("attack");
         audioSource.Stop();
         audioSource.PlayOneShot(shutClip);
+    }
+
+    public void ApplyAttackDamage()
+    {
+        if (player == null) return;
 
         player.TakeDamage(5);
         player.StartCoroutine(player.PlayerHitEffect());
@@ -94,8 +100,12 @@ public class Creature2Clone : MonoBehaviour
         {
             itemmanager.DropCurrentItem();
         }
+
         camShake.StartCoroutine(camShake.Shake(0.2f, 0.3f));
     }
 
-
+    public void EndAttack()
+    {
+        isAttacking = false;
+    }
 }

@@ -35,6 +35,7 @@ public class CandleManager : MonoBehaviour
         //새로 켜진 촛불 인덱스 추가
         litIndices.Add(index);
 
+        AudioManager.instance.PlaySfx(AudioManager.sfx.NRwind);
         //정답 개수와 일치할 때만 판정
         if (litIndices.Count == correctIndices.Count)
         {
@@ -49,12 +50,14 @@ public class CandleManager : MonoBehaviour
     private void Correct()
     {
         Debug.Log("정답! 퍼즐이 풀렸습니다.");
+        AudioManager.instance.PlaySfx(AudioManager.sfx.NRbigFire);
         particle.Play();
     }
 
     private void Wrong()
     {
         Debug.Log("다시 시도 필요");
+        AudioManager.instance.PlaySfx(AudioManager.sfx.NRthunderstorm);
         //모든 촛불 초기화
         foreach (var candle in candles)
             candle.ResetCandle();

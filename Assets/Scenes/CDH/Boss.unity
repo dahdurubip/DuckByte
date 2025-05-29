@@ -22559,7 +22559,7 @@ Transform:
   m_GameObject: {fileID: 633873420}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: -8.164249, y: -3.32, z: -7.5612288}
+  m_LocalPosition: {x: -8.164249, y: -3.26, z: -7.5612288}
   m_LocalScale: {x: 3.73, y: 3.73, z: 3.73}
   m_ConstrainProportionsScale: 1
   m_Children: []
@@ -23096,7 +23096,7 @@ MeshCollider:
   m_LayerOverridePriority: 0
   m_IsTrigger: 0
   m_ProvidesContacts: 0
-  m_Enabled: 0
+  m_Enabled: 1
   serializedVersion: 5
   m_Convex: 0
   m_CookingOptions: 30
@@ -26121,7 +26121,7 @@ GameObject:
   - component: {fileID: 692502675}
   m_Layer: 0
   m_Name: Plane (4)
-  m_TagString: Ground
+  m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -27808,7 +27808,7 @@ GameObject:
   - component: {fileID: 748148841}
   m_Layer: 0
   m_Name: Plane (2)
-  m_TagString: Ground
+  m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -29407,7 +29407,7 @@ GameObject:
   - component: {fileID: 768718151}
   m_Layer: 0
   m_Name: Plane (1)
-  m_TagString: Ground
+  m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -34813,7 +34813,7 @@ GameObject:
   - component: {fileID: 921683868}
   m_Layer: 0
   m_Name: Plane
-  m_TagString: Ground
+  m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -77880,7 +77880,7 @@ GameObject:
   - component: {fileID: 1296726515}
   m_Layer: 0
   m_Name: Plane (3)
-  m_TagString: Ground
+  m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -85359,7 +85359,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &1514578076
 Transform:
   m_ObjectHideFlags: 0
@@ -88431,7 +88431,6 @@ GameObject:
   m_Component:
   - component: {fileID: 1591372660}
   - component: {fileID: 1591372659}
-  - component: {fileID: 1591372661}
   m_Layer: 0
   m_Name: TextManager
   m_TagString: Untagged
@@ -88468,18 +88467,6 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &1591372661
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1591372658}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 19d236a273b947548ba95a3641f9b2a3, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!1 &1592670218
 GameObject:
   m_ObjectHideFlags: 0
@@ -90967,14 +90954,6 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 84.86561
       objectReference: {fileID: 0}
-    - target: {fileID: 4945318175805157163, guid: 1c1b96555739802468e69a1ebcb9c6bb, type: 3}
-      propertyPath: m_Height
-      value: 2.1
-      objectReference: {fileID: 0}
-    - target: {fileID: 4945318175805157163, guid: 1c1b96555739802468e69a1ebcb9c6bb, type: 3}
-      propertyPath: m_Enabled
-      value: 1
-      objectReference: {fileID: 0}
     - target: {fileID: 4988899844810396821, guid: 1c1b96555739802468e69a1ebcb9c6bb, type: 3}
       propertyPath: m_Name
       value: HS009
@@ -91409,15 +91388,15 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6922697606367191593, guid: 1c1b96555739802468e69a1ebcb9c6bb, type: 3}
       propertyPath: m_LocalPosition.x
-      value: 39.33
+      value: 5.84
       objectReference: {fileID: 0}
     - target: {fileID: 6922697606367191593, guid: 1c1b96555739802468e69a1ebcb9c6bb, type: 3}
       propertyPath: m_LocalPosition.y
-      value: -0.111
+      value: 1.092
       objectReference: {fileID: 0}
     - target: {fileID: 6922697606367191593, guid: 1c1b96555739802468e69a1ebcb9c6bb, type: 3}
       propertyPath: m_LocalPosition.z
-      value: -13.17
+      value: -11.59
       objectReference: {fileID: 0}
     - target: {fileID: 6922697606367191593, guid: 1c1b96555739802468e69a1ebcb9c6bb, type: 3}
       propertyPath: m_LocalRotation.w
@@ -173343,7 +173322,7 @@ GameObject:
   - component: {fileID: 1824990492}
   m_Layer: 0
   m_Name: Plane (5)
-  m_TagString: Ground
+  m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -287156,7 +287135,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 3806099314799304356, guid: 8ce166a015b60934899e0c1a79c09522, type: 3}
       propertyPath: m_IsActive
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 8845663296742057360, guid: 8ce166a015b60934899e0c1a79c09522, type: 3}
       propertyPath: altar
@@ -287186,10 +287165,6 @@ PrefabInstance:
       propertyPath: rockPrefab
       value: 
       objectReference: {fileID: 3436203253033326675, guid: 87687833a6c32844d8c876951bad593d, type: 3}
-    - target: {fileID: 8845663296742057360, guid: 8ce166a015b60934899e0c1a79c09522, type: 3}
-      propertyPath: dialogueData
-      value: 
-      objectReference: {fileID: 1591372661}
     - target: {fileID: 8845663296742057360, guid: 8ce166a015b60934899e0c1a79c09522, type: 3}
       propertyPath: dialogueManager
       value: 

@@ -51,7 +51,7 @@ public class Creature2Eyes : MonoBehaviour
 
     private void Update()
     {
-        UpdateDirectionLine();
+        //UpdateDirectionLine();
     }
 
     private void UpdateDirectionLine()

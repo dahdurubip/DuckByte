@@ -1,41 +1,77 @@
 using UnityEngine;
 
-
 public class Door : MonoBehaviour
 {
-    private Animator animator;
-    private bool isOpen = false;
+    [Header("Default Settings")]
+    [SerializeField] private Animator animator;
+    [SerializeField] private GameObject icon;
+    [SerializeField] private AudioClip openSound;
+    [SerializeField] private AudioClip closeSound;
+
+    private AudioSource audioSource;
+    private bool isPlayerNearby = false;
+    private bool toggleState = false;
 
 
-    private void Awake()
+    private void Start()
     {
-        animator = GetComponent<Animator>();
+        audioSource = GetComponent<AudioSource>();
+
+        if (icon != null)
+            icon.SetActive(false);
     }
 
-    public void Toggle()
+    private void Update()
     {
-        //if (animator != null && !useMovement)
-        if (animator != null)
+        //플레이어가 가까이 있을 때만 작동
+        if (!isPlayerNearby) return;
+
+        if (Input.GetKeyDown(KeyCode.E))
         {
-            animator.SetTrigger(isOpen ? "Close" : "Open");
-            isOpen = !isOpen;
+            if (animator != null)
+            {
+                if (toggleState)
+                {
+                    animator.Play("DoorClose");
+                    PlaySound(closeSound);
+                    toggleState = false;
+                }
+                else
+                {
+                    animator.Play("DoorOpen");
+                    PlaySound(openSound);
+                    toggleState = true;
+                }
+            }
         }
     }
 
-    public void Open()
+    private void PlaySound(AudioClip clip)
     {
-        if (!isOpen)
+        if (audioSource != null && clip != null)
         {
-            Toggle();
+            audioSource.clip = clip;
+            audioSource.Play();
         }
     }
 
-    public void Close()
+    private void OnTriggerEnter(Collider other)
     {
-        if (isOpen)
+        if (other.CompareTag("Player"))
         {
-            Toggle();
+            isPlayerNearby = true;
+            if (icon != null)
+                icon.SetActive(true);
         }
     }
 
+    private void OnTriggerExit(Collider other)
+    {
+        if (other.CompareTag("Player"))
+        {
+            isPlayerNearby = false;
+            if (icon != null)
+                icon.SetActive(false);
+        }
+    }
 }
