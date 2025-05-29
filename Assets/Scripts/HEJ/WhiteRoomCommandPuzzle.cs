@@ -1,234 +1,200 @@
+using UnityEngine;
+using UnityEngine.VFX;
 using System.Collections;
 using System.Collections.Generic;
-using UnityEngine;
 
 public class WhiteRoomCommandPuzzle : MonoBehaviour
 {
-    public AudioClip forwardClip;
-    public AudioClip backwardClip;
+    [Header("Audio Clips")]
+    public AudioClip rightClip;      // 오른쪽(D/→) 효과음
+    public AudioClip leftClip;       // 왼쪽(A/←) 효과음
     public AudioClip stayClip;
     public AudioSource audioSource;
 
+    [Header("Player Reset")]
     public Transform player;
     public Transform playerStartPosition;
 
+    [Header("VFX")]
     public GameObject failFog;
+
+    [Header("Doors")]
     public List<DoorController> doors;
 
+    [Header("Reward")]
+    public GameObject rewardPrefab;
+    public Transform rewardSpawnPoint;
+
+    [Header("Timing")]
     public float inputDelay = 2.0f;
     public float gracePeriod = 0.5f;
+    public float arrivalThreshold = 2.0f;
 
-    private List<(string command, int zone)> commandSequence = new();
-    private int currentIndex = 0;
-    private int lastSuccessZone = -1;
     public bool PuzzleStarted { get; private set; } = false;
 
-    void Start()
+    private List<(string command, int zone)> sequence = new List<(string, int)>();
+    private int puzzleStartZone = -1;
+
+    void Awake()
     {
-      
-        failFog.SetActive(false);
+        if (audioSource == null) audioSource = GetComponent<AudioSource>();
+        if (failFog != null) failFog.SetActive(false);
+        if (doors == null || doors.Count == 0)
+            Debug.LogWarning("Doors list is empty or not assigned.");
     }
 
-    public void BeginPuzzle()
+    public void BeginPuzzle(int zoneIndex)
     {
         if (PuzzleStarted) return;
-
-        int zone = player.GetComponent<PlayerZoneState>().GetZone();
-        Debug.Log("[퍼즐 시작] 현재 Zone Index: " + zone);
-
-        if (zone < 0 || zone >= doors.Count) return;
+        if (doors == null || zoneIndex < 0 || zoneIndex >= doors.Count)
+        {
+            Debug.LogError("BeginPuzzle: invalid zoneIndex or doors not set.");
+            return;
+        }
 
         PuzzleStarted = true;
-        GenerateCommandSequence(zone);
-        StartCoroutine(StartPuzzle());
+        puzzleStartZone = zoneIndex;
+        GenerateSequence();
+
+        // 디버그: sequence의 zone과 실제 doors[zone] 이름을 보여줌
+        string seqLog = "";
+        for (int i = 0; i < sequence.Count; i++)
+        {
+            seqLog += $"({sequence[i].command}, {sequence[i].zone}, {doors[sequence[i].zone]?.gameObject.name}) ";
+        }
+        Debug.Log($"BeginPuzzle: startZone={puzzleStartZone}, seq=[{seqLog}]");
+        StartCoroutine(PuzzleRoutine());
     }
 
-    IEnumerator StartPuzzle()
+    private void GenerateSequence()
+    {
+        sequence.Clear();
+        int curr = puzzleStartZone;
+        for (int i = 0; i < doors.Count; i++)
+        {
+            var valid = new List<string>();
+            if (curr < doors.Count - 1) valid.Add("Right");    // → or D
+            if (curr > 0) valid.Add("Left");     // ← or A
+            valid.Add("Stay");
+
+            string cmd = valid[Random.Range(0, valid.Count)];
+            sequence.Add((cmd, i)); // 반드시 i! (zone=0이면 Door1, zone=1이면 Door2...)
+
+            if (cmd == "Right") curr++;
+            else if (cmd == "Left") curr--;
+            // Stay는 curr 그대로
+        }
+    }
+
+    private IEnumerator PuzzleRoutine()
     {
         yield return new WaitForSeconds(1f);
 
-        for (int i = 0; i < commandSequence.Count; i++)
+        for (int i = 0; i < sequence.Count; i++)
         {
-            string command = commandSequence[i].command;
-            int zone = commandSequence[i].zone;
+            var (cmd, zone) = sequence[i];
+            Debug.Log($"[Step {i + 1}/{sequence.Count}] Command={cmd}, zone={zone}, doors[{zone}]={doors[zone]?.gameObject.name}");
 
-            while (player.GetComponent<PlayerZoneState>().GetZone() != zone)
-            {
-                yield return null;
-            }
+            // 효과음 (방향에 맞게)
+            AudioClip clip = cmd == "Right" ? rightClip
+                            : cmd == "Left" ? leftClip
+                                             : stayClip;
+            if (clip != null) audioSource.PlayOneShot(clip);
+            yield return new WaitForSeconds((clip?.length ?? 0f) + 0.3f);
 
-            player.GetComponent<PlayerZoneState>().inPuzzleMode = true;
+            // 입력 초기화
+            yield return null; yield return null;
+            Input.ResetInputAxes();
+            yield return null;
 
-            AudioClip clipToPlay = GetClipFromCommand(command);
-            audioSource.PlayOneShot(clipToPlay);
-            yield return new WaitForSeconds(clipToPlay.length + 0.3f);
-
-            float timer = 0f;
             bool success = false;
+            float startT = Time.time, limit = inputDelay + gracePeriod;
 
-            while (timer < inputDelay + gracePeriod)
+            while (Time.time - startT < limit)
             {
-                if (CheckPlayerAction(commandSequence[i]))
+                if (cmd == "Right" &&
+                    (Input.GetKeyDown(KeyCode.D) || Input.GetKey(KeyCode.D)))
                 {
+                    Debug.Log("[Input] Right OK");
                     success = true;
                     break;
                 }
-                timer += Time.deltaTime;
+                if (cmd == "Left" &&
+                    (Input.GetKeyDown(KeyCode.A) || Input.GetKey(KeyCode.A)))
+                {
+                    Debug.Log("[Input] Left OK");
+                    success = true;
+                    break;
+                }
+                if (cmd == "Stay" && Input.anyKeyDown)
+                {
+                    Debug.Log("[Input] Stay 실패: 키 입력됨");
+                    success = false;
+                    break;
+                }
                 yield return null;
             }
+            if (cmd == "Stay" && !success)
+                success = true;
 
+            Debug.Log($"Input check for {cmd}: success={success}");
             if (!success)
             {
-                PuzzleFail();
+                yield return StartCoroutine(FailureRoutine());
                 yield break;
             }
 
-            Debug.Log("[문 열림] 성공한 Zone Index: " + zone);
+            // 모든 명령이든 맞으면 무조건 문 열기!
+            Debug.Log($"[Door] Opening index={zone}, name={doors[zone].gameObject.name}");
+            doors[zone].Open();
 
-            if (zone >= 0 && zone < doors.Count)
-            {
-                doors[zone].Open();
-                lastSuccessZone = zone;
-                Debug.Log("[성공 기록] lastSuccessZone = " + lastSuccessZone);
-            }
-
+            yield return new WaitUntil(() =>
+                Vector3.Distance(player.position, doors[zone].transform.position)
+                <= arrivalThreshold
+            );
             yield return new WaitForSeconds(0.5f);
         }
 
-        FinalSuccess();
+        // 최종 성공: 아이템 스폰, 퍼즐 재시작 불가
+        PuzzleComplete();
     }
 
-    void FinalSuccess()
+
+    private IEnumerator FailureRoutine()
     {
-        Debug.Log("퍼즐 성공: 현재 구역 완료!");
-       
+        foreach (var d in doors) d.ResetDoor();
 
-        PuzzleStarted = false;
-        currentIndex = 0;
-
-        player.GetComponent<PlayerZoneState>().ExitPuzzleMode();
-    }
-
-    void GenerateCommandSequence(int zone)
-    {
-        commandSequence.Clear();
-
-        string[] possibleCommands = { "Forward", "Backward", "Stay" };
-
-        int numberOfQuestions = 3;
-
-        for (int i = 0; i < numberOfQuestions; i++)
+        if (player != null && playerStartPosition != null)
         {
-            string randomCommand = possibleCommands[Random.Range(0, possibleCommands.Length)];
-            commandSequence.Add((randomCommand, zone));
-        }
-    }
-
-    void PlayCommandSound(string command)
-    {
-        if (command == "Forward")
-            audioSource.PlayOneShot(forwardClip);
-        else if (command == "Backward")
-            audioSource.PlayOneShot(backwardClip);
-        else if (command == "Stay")
-            audioSource.PlayOneShot(stayClip);
-    }
-
-    bool CheckPlayerAction((string command, int zone) expected)
-    {
-        var zoneState = player.GetComponent<PlayerZoneState>();
-        int currentZone = zoneState.GetZone();
-
-        if (expected.command == "Forward" && currentZone == expected.zone)
-            return Input.GetKeyDown(KeyCode.W);
-
-        if (expected.command == "Backward" && currentZone == expected.zone)
-            return Input.GetKeyDown(KeyCode.S);
-
-        if (expected.command == "Stay" && currentZone == expected.zone)
-        {
-            return !Input.GetKey(KeyCode.W)
-                && !Input.GetKey(KeyCode.S)
-                && !Input.GetKey(KeyCode.A)
-                && !Input.GetKey(KeyCode.D)
-                && !Input.GetKey(KeyCode.Space)
-                && !Input.anyKey;
-        }
-
-        return false;
-    }
-
-    AudioClip GetClipFromCommand(string command)
-    {
-        if (command == "Forward") return forwardClip;
-        if (command == "Backward") return backwardClip;
-        if (command == "Stay") return stayClip;
-        return null;
-    }
-
-    void PuzzleFail()
-    {
-        Debug.Log("퍼즐 실패. 기억이 흩어졌습니다.");
-
-        StartCoroutine(ShowFailFog());
-
-        ResetAllDoors();
-        lastSuccessZone = -1;
-
-        currentIndex = 0;
-        PuzzleStarted = false;
-
-        if (playerStartPosition != null)
-        {
-            Debug.Log("[이동] 플레이어를 시작 위치로 복귀");
+            var cc = player.GetComponent<CharacterController>();
+            if (cc != null) cc.enabled = false;
             player.position = playerStartPosition.position;
             player.rotation = playerStartPosition.rotation;
-
-            Rigidbody rb = player.GetComponent<Rigidbody>();
-            if (rb != null)
-            {
-                rb.linearVelocity = Vector3.zero;
-            }
-
-            CharacterController cc = player.GetComponent<CharacterController>();
-            if (cc != null)
-            {
-                cc.enabled = false;
-                player.position = playerStartPosition.position;
-                cc.enabled = true;
-            }
+            if (cc != null) cc.enabled = true;
         }
-        else
+
+        if (failFog != null)
         {
-            Debug.LogWarning("[경고] playerStartPosition 연결 안 됨!");
+            failFog.SetActive(true);
+            failFog.GetComponent<VisualEffect>()?.Play();
         }
-
-        player.GetComponent<PlayerZoneState>().ExitPuzzleMode();
-    }
-
-    IEnumerator ShowFailFog()
-    {
-        Vector3 frontPosition = player.position + player.forward * 0.8f;
-        frontPosition.y += 1.5f;
-        failFog.transform.position = frontPosition;
-        failFog.transform.rotation = Quaternion.LookRotation(Camera.main.transform.forward);
-
-        var vfx = failFog.GetComponent<UnityEngine.VFX.VisualEffect>();
-        if (vfx != null) vfx.Play();
-
-        failFog.SetActive(true);
-
         yield return new WaitForSeconds(2f);
-        failFog.SetActive(false);
+        if (failFog != null) failFog.SetActive(false);
+
+        PuzzleStarted = false;
     }
 
-    void ResetAllDoors()
+    private void PuzzleComplete()
     {
-        foreach (var door in doors)
-        {
-            if (door != null)
-                door.ResetDoor();
-        }
-        Debug.Log("[문 닫기] 모든 문 초기화 완료");
+        Debug.Log("Puzzle Complete! Spawning reward.");
+
+        if (rewardPrefab != null && rewardSpawnPoint != null)
+            Instantiate(rewardPrefab,
+                        rewardSpawnPoint.position,
+                        rewardSpawnPoint.rotation);
+        else
+            Debug.LogWarning("RewardPrefab or RewardSpawnPoint not assigned.");
+
+        PuzzleStarted = true;
     }
 }

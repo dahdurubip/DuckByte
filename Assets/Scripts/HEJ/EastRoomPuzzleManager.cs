@@ -1,149 +1,153 @@
+using UnityEngine;
 using System.Collections;
 using System.Collections.Generic;
-using UnityEngine;
 
-public class EastLampPuzzleManager : MonoBehaviour
+public class EastRoomPuzzleManager : MonoBehaviour
 {
-    [Header("Lamp Settings")]
-    public List<GameObject> lamps;          // 5개 Lamp 오브젝트
-    public float showTimePerLamp = 2f;      // 개별 표시 시간
-    public float delayBeforeStart = 1f;     // 전체 깜빡임 후 대기
+    public static EastRoomPuzzleManager Instance { get; private set; }
 
-    [Header("Audio Settings")]
-    public AudioSource audioSource;         // 효과음 재생용
-    public AudioClip startClip;             // 퍼즐 시작 소리
-    public AudioClip blinkClip;             // 램프 켜질 때마다 재생
-    public AudioClip successClip;           // 성공 소리
-    public AudioClip failClip;              // 실패 소리
+    [Header("Assign in Inspector")]
+    public LightProp[] lamps;
 
-    [Header("Success Spawn")]
-    public GameObject successPrefab;        // 성공 시 생성할 오브젝트
-    public Transform successSpawnPoint;     // 생성 위치
+    [Header("Reward")]
+    public GameObject rewardPrefab;       // 스폰할 아이템 프리팹
+    public Transform rewardSpawnPoint;   // 스폰될 위치(Transform)
 
-    private List<GameObject> sequence = new List<GameObject>();
+    private List<int> sequence;
     private int currentIndex = 0;
-    private bool puzzleActive = false;
+    private Transform player;
 
+    void Awake()
+    {
+        if (Instance != null) Destroy(this);
+        Instance = this;
+
+        var pgo = GameObject.FindGameObjectWithTag("Player");
+        if (pgo != null) player = pgo.transform;
+    }
+
+    void Update()
+    {
+        if (player == null || lamps == null || lamps.Length == 0)
+            return;
+
+        // 1) 플레이어와 가까운 램프 하나 찾기
+        LightProp closest = null;
+        float minDist = float.MaxValue;
+        foreach (var lamp in lamps)
+        {
+            if (!lamp.IsInRange(player))
+                continue;
+
+            float d = Vector3.Distance(player.position, lamp.transform.position);
+            if (d < minDist)
+            {
+                minDist = d;
+                closest = lamp;
+            }
+        }
+
+        // 2) 모든 램프 아이콘 끄고, closest만 켬
+        foreach (var lamp in lamps)
+            lamp.ShowIcon(lamp == closest);
+
+        // 3) E키 입력 시 closest 하나만 처리
+        if (closest != null && Input.GetKeyDown(KeyCode.E))
+            OnLampPressed(closest);
+    }
+
+    /// <summary>
+    /// 방 입장 트리거에서 StartPuzzle() 한 번만 호출하세요.
+    /// </summary>
     public void StartPuzzle()
     {
-        Debug.Log("PuzzleManager: StartPuzzle called");
-
         StopAllCoroutines();
-        sequence.Clear();
         currentIndex = 0;
-        puzzleActive = false;
-
-        // 시작 사운드
-        if (audioSource != null && startClip != null)
-            audioSource.PlayOneShot(startClip);
-
-        StartCoroutine(BlinkAllThenSequence());
+        StartCoroutine(InitialFlash());
     }
 
-    private IEnumerator BlinkAllThenSequence()
+    IEnumerator InitialFlash()
     {
-        // 전체 램프 켜기
-        Debug.Log("PuzzleManager: BlinkAll ON");
-        foreach (var lamp in lamps)
-        {
-            var ps = lamp.GetComponentInChildren<ParticleSystem>();
-            if (ps != null)
-            {
-                ps.Clear();
-                ps.Play();
-                // 블링크 사운드
-                if (audioSource != null && blinkClip != null)
-                    audioSource.PlayOneShot(blinkClip);
-            }
-        }
+        // 모두 켜졌다
+        foreach (var lamp in lamps) lamp.SetState(true);
+        yield return new WaitForSeconds(1.0f);
+        // 모두 꺼졌다
+        foreach (var lamp in lamps) lamp.SetState(false);
+        yield return new WaitForSeconds(0.5f);
 
-        yield return new WaitForSeconds(showTimePerLamp);
-
-        // 전체 램프 끄기
-        Debug.Log("PuzzleManager: BlinkAll OFF");
-        foreach (var lamp in lamps)
-        {
-            var ps = lamp.GetComponentInChildren<ParticleSystem>();
-            if (ps != null)
-                ps.Stop(true, ParticleSystemStopBehavior.StopEmittingAndClear);
-        }
-
-        yield return new WaitForSeconds(delayBeforeStart);
-
-        // 시퀀스 표시
-        yield return StartCoroutine(PlaySequence());
+        // 시퀀스 생성 및 재생
+        GenerateSequence();
+        yield return StartCoroutine(ShowSequence());
     }
 
-    private IEnumerator PlaySequence()
+    void GenerateSequence()
     {
-        sequence.Clear();
-        List<GameObject> pool = new List<GameObject>(lamps);
-        while (pool.Count > 0)
+        sequence = new List<int>();
+        for (int i = 0; i < lamps.Length; i++)
+            sequence.Add(i);
+
+        for (int i = 0; i < sequence.Count - 1; i++)
         {
-            int idx = Random.Range(0, pool.Count);
-            sequence.Add(pool[idx]);
-            pool.RemoveAt(idx);
+            int r = Random.Range(i, sequence.Count);
+            int tmp = sequence[i];
+            sequence[i] = sequence[r];
+            sequence[r] = tmp;
         }
-        Debug.Log("PuzzleManager: sequence generated");
-
-        foreach (var lamp in sequence)
-        {
-            Debug.Log("PuzzleManager: lighting " + lamp.name);
-            var ps = lamp.GetComponentInChildren<ParticleSystem>();
-            if (ps != null)
-            {
-                ps.Clear();
-                ps.Play();
-                // 블링크 사운드
-                if (audioSource != null && blinkClip != null)
-                    audioSource.PlayOneShot(blinkClip);
-            }
-
-            yield return new WaitForSeconds(showTimePerLamp);
-
-            if (ps != null)
-                ps.Stop(true, ParticleSystemStopBehavior.StopEmittingAndClear);
-        }
-
-        Debug.Log("PuzzleManager: waiting for player input");
-        puzzleActive = true;
         currentIndex = 0;
     }
 
-    public void TryLamp(GameObject lamp)
+    IEnumerator ShowSequence()
     {
-        if (!puzzleActive) return;
-
-        if (lamp == sequence[currentIndex])
+        yield return new WaitForSeconds(0.5f);
+        foreach (int id in sequence)
         {
-            currentIndex++;
-            Debug.Log("PuzzleManager: correct lamp #" + currentIndex);
+            lamps[id].SetState(true);
+            yield return new WaitForSeconds(1.0f);
+            lamps[id].SetState(false);
+            yield return new WaitForSeconds(0.5f);
+        }
+    }
 
-            if (currentIndex >= sequence.Count)
-            {
-                // 성공 처리
-                puzzleActive = false;
-                Debug.Log("PuzzleManager: puzzle success");
+    void OnLampPressed(LightProp lamp)
+    {
+        if (lamp.lampID != sequence[currentIndex])
+        {
+            StartCoroutine(FailureRoutine());
+            return;
+        }
 
-                if (audioSource != null && successClip != null)
-                    audioSource.PlayOneShot(successClip);
+        lamp.SetState(true);
+        currentIndex++;
+        if (currentIndex >= sequence.Count)
+            PuzzleComplete();
+    }
 
-                if (successPrefab != null && successSpawnPoint != null)
-                {
-                    var go = Instantiate(successPrefab,
-                                         successSpawnPoint.position,
-                                         successSpawnPoint.rotation);
-                    go.SetActive(true);  // 인스턴스 활성화 확실히
-                }
-            }
+    IEnumerator FailureRoutine()
+    {
+        foreach (var l in lamps) l.SetState(true);
+        yield return new WaitForSeconds(1.0f);
+        foreach (var l in lamps) l.SetState(false);
+        yield return new WaitForSeconds(0.5f);
+        StartPuzzle();
+    }
+
+ 
+
+    private void PuzzleComplete()
+    {
+        Debug.Log("Puzzle Complete!");
+
+        // 1) Reward Spawn
+        if (rewardPrefab != null && rewardSpawnPoint != null)
+        {
+            Instantiate(rewardPrefab,
+                        rewardSpawnPoint.position,
+                        rewardSpawnPoint.rotation);
         }
         else
         {
-            // 실패 처리
-            Debug.Log("PuzzleManager: wrong lamp, restarting");
-            if (audioSource != null && failClip != null)
-                audioSource.PlayOneShot(failClip);
-            StartPuzzle();
+            Debug.LogWarning("Reward Prefab or SpawnPoint not set!");
         }
+
     }
 }

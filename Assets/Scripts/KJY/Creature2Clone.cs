@@ -93,6 +93,7 @@ public class Creature2Clone : MonoBehaviour
         if (player == null) return;
 
         player.TakeDamage(5);
+        Debug.Log("때리는중");
         player.StartCoroutine(player.PlayerHitEffect());
 
         //손에 아이템 있으면 호출

@@ -39,11 +39,11 @@ public class Player : MonoBehaviour
         CurrentHp = maxHp;  
     }
 
-    //private void Update()
-    //{
-    //    Debug.Log("CurHP" + CurrentHp);
-    //    Debug.Log("curHP" + currentHp);
-    //}
+    private void Update()
+    {
+        //Debug.Log("CurHP" + CurrentHp);
+       // Debug.Log("curHP" + currentHp);
+    }
 
     public void TakeDamage(float damage)
     {

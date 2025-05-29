@@ -115,7 +115,7 @@ public class PlayerMental : MonoBehaviour
         //}
 
         //Debug.Log(currentMental);
-        Debug.Log(pm.finalSpeed);
+        //Debug.Log(pm.finalSpeed);
 
         // 정신력 상태에 따른 효과
         // 현재 정신력이 30이하이면서 조작반전이 되지않았다면 효과함수 호출

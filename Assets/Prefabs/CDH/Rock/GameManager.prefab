@@ -52,27 +52,25 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 3806099314799304356}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 5d6003674d9ba66498074ae2434769d5, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  rockPrefab: {fileID: 3436203253033326675, guid: 87687833a6c32844d8c876951bad593d, type: 3}
-  warningCirclePrefab: {fileID: 3974795801951057694, guid: 42ecdbd2110d0b94180022c235bc708a, type: 3}
-  shockwaveEffectPrefab: {fileID: 100000, guid: 6bd48b8ad8246424db56d2beee2f8611, type: 3}
-  dialogueManager: {fileID: 0}
-  rockSpawnPoints:
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
   phaseInterval: 3
   shockwaveRadius: 5
   shockwaveMentalDamage: 20
   currentPhase: 1
-  altar: {fileID: 0}
-  altarSafeRadius: 3
-  player: {fileID: 0}
   followDuration: 1
   followSpeed: 5
+  player: {fileID: 0}
+  burningGroundPrefab: {fileID: 0}
+  burnDuration: 3
+  randomArea: {fileID: 0}
+  phase3Land: {fileID: 0}
+  phase2Land: {fileID: 0}
+  dialogueManager: {fileID: 0}
+  dialogueData: {fileID: 0}
+  rockPrefab: {fileID: 3436203253033326675, guid: 87687833a6c32844d8c876951bad593d, type: 3}
+  warningCirclePrefab: {fileID: 3974795801951057694, guid: 42ecdbd2110d0b94180022c235bc708a, type: 3}
+  shockwaveEffectPrefab: {fileID: 100000, guid: 6bd48b8ad8246424db56d2beee2f8611, type: 3}
