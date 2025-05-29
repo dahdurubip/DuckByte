@@ -1,14 +1,20 @@
 using UnityEngine;
 using TMPro;
 using System.Collections;
+using UnityEditor.Rendering.PostProcessing;
 
 public class DialogueManager : MonoBehaviour
 {
     [SerializeField] private TMP_Text dialogueText;
     [SerializeField] private GameObject dialoguePanel;
 
+    public bool isTyping = false;
+
     public IEnumerator ShowDialogue(string speaker, string line)
     {
+        if (isTyping) yield break;
+
+        isTyping = true;
         dialoguePanel.SetActive(true);
         dialogueText.text = "";
 
@@ -20,6 +26,9 @@ public class DialogueManager : MonoBehaviour
         foreach (char c in line)
         {
             dialogueText.text += c;
+
+            
+
             yield return new WaitForSeconds(0.05f);
         }
 
@@ -36,5 +45,9 @@ public class DialogueManager : MonoBehaviour
         yield return new WaitForSeconds(0.2f); // 줄 간 잠깐 텀
 
         dialoguePanel.SetActive(false); // 사라지는 효과 주고 싶으면 여기에 이펙트 추가
+        isTyping = false;
     }
+
+    
+
 }

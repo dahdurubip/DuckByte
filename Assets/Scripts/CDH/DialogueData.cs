@@ -12,4 +12,8 @@ public class DialogueData : MonoBehaviour
     };
 
     // 다른 용도의 대사들도 여기서 관리 가능
+    public Dictionary<string, string[]> interactables = new Dictionary<string, string[]>()
+    {
+        { "goToBossDoor", new string[] { "뭐지...", "어떤 힘에 의해 막혀있는 것 같아", "들어갈 방법을 찾아보자"} }
+    };
 }

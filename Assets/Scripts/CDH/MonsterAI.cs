@@ -261,7 +261,7 @@ public class MonsterAI : MonoBehaviour
             NMA.speed = patrolSpeed;
 
             // 배회 애니메이션 넣기 - walk 모션
-            setWalk();
+            //setWalk();
 
             StartCoroutine(PatrolCoroutine());
         }
@@ -277,9 +277,10 @@ public class MonsterAI : MonoBehaviour
             //    Random.Range(-10f, 10f)
             //);
 
-            Vector3 patrolPosition = GetRandomNavMeshPosition(transform.position, 10f);
+            Vector3 patrolPosition = GetRandomNavMeshPosition(transform.position, 50f);
 
             NMA.SetDestination(patrolPosition);
+            setWalk();
             Debug.Log($"새로운 배회 목적지 설정: {patrolPosition}");
 
             while (true)
@@ -328,6 +329,7 @@ public class MonsterAI : MonoBehaviour
                 if (NMA.remainingDistance < 0.5f && NMA.velocity.magnitude < 0.1f)
                 {
                     Debug.Log("배회 목적지 도착!");
+                    setLook();
                     break;
                 }
 
@@ -373,7 +375,7 @@ public class MonsterAI : MonoBehaviour
         // 플레이어가 멀어지면 의심 해제 될 거리
         float maxDistance = suspicionRange * 2f;
 
-        while (timer < 2f)
+        while (timer < 1f)
         {
             // 계속 바라보게 만듦
             transform.LookAt(new Vector3(player.position.x, transform.position.y, player.position.z));
