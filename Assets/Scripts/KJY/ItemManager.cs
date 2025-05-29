@@ -40,9 +40,8 @@ public class ItemManager : MonoBehaviour
     [SerializeField] private ParticleSystem bookParticle;
     [SerializeField] private ParticleSystem skelParticle;
 
-    //메인 아이템 bool 값 설정
-    public bool creature1MainItem;
-    public bool creature2MainItem;
+    //메인 아이템
+    public int MainItem = 0;
 
     //상호작용 키
     private KeyCode interactKey = KeyCode.E;
@@ -190,17 +189,12 @@ public class ItemManager : MonoBehaviour
 
 
                 //메인 아이템이면
-                if (nearbyInteractable.CompareTag("Creature1MainItem"))
+                if (nearbyInteractable.CompareTag("MainItem"))
                 {
-                    creature1MainItem = true;
+                    MainItem += 1;
                     return;
                 }
-                
-                if (nearbyInteractable.CompareTag("Creature2MainItem"))
-                {
-                    creature2MainItem = true;
-                    return;
-                }
+
 
             }
 

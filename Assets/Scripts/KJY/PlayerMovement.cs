@@ -212,8 +212,8 @@ public class PlayerMovement : MonoBehaviour
         float vertical = Input.GetAxisRaw("Vertical");
 
         //뒤로 이동 방지 (필요에 따라 유지 또는 제거)
-        if (vertical < 0)
-            vertical = 0;
+        //if (vertical < 0)
+        //    vertical = 0;
 
         //PlayerMental 컴포넌트에 따른 입력 반전 처리 (주석 처리된 "내일 이거 해보깅~!" 관련)
         PlayerMental mental = GetComponent<PlayerMental>();
