@@ -12951,6 +12951,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: HS009
       objectReference: {fileID: 0}
+    - target: {fileID: 5587375378287339963, guid: 1c1b96555739802468e69a1ebcb9c6bb, type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 6922697606367191593, guid: 1c1b96555739802468e69a1ebcb9c6bb, type: 3}
       propertyPath: m_LocalPosition.x
       value: -29.08
@@ -13376,7 +13380,7 @@ MonoBehaviour:
   m_OverrideTileSize: 0
   m_TileSize: 256
   m_OverrideVoxelSize: 0
-  m_VoxelSize: 0.16666667
+  m_VoxelSize: 0.06666667
   m_MinRegionArea: 2
   m_NavMeshData: {fileID: 23800000, guid: 45ad8abf6bea78d429e7c73a34c18b5b, type: 2}
   m_BuildHeightMesh: 0
@@ -18131,7 +18135,7 @@ GameObject:
   - component: {fileID: 1288758953}
   m_Layer: 8
   m_Name: item
-  m_TagString: Creature2MainItem
+  m_TagString: MainItem
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
