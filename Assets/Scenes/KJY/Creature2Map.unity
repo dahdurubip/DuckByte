@@ -13040,12 +13040,16 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 507587875}
     - target: {fileID: 7170638558045817283, guid: 1c1b96555739802468e69a1ebcb9c6bb, type: 3}
+      propertyPath: obanggiUIManager
+      value: 
+      objectReference: {fileID: 1369876337}
+    - target: {fileID: 7170638558045817283, guid: 1c1b96555739802468e69a1ebcb9c6bb, type: 3}
       propertyPath: pickableLayer.m_Bits
-      value: 0
+      value: 128
       objectReference: {fileID: 0}
     - target: {fileID: 7170638558045817283, guid: 1c1b96555739802468e69a1ebcb9c6bb, type: 3}
       propertyPath: interacterLayer.m_Bits
-      value: 0
+      value: 256
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -19209,6 +19213,94 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 3249381419937384238, guid: ccc7b9bbfee24b1428e135505aa54153, type: 3}
   m_PrefabInstance: {fileID: 1369405321}
   m_PrefabAsset: {fileID: 0}
+--- !u!1 &1369876336
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1369876338}
+  - component: {fileID: 1369876337}
+  m_Layer: 0
+  m_Name: ObanggiManager
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 0
+--- !u!114 &1369876337
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1369876336}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0dc4645af57934547a1d9863cbd1b3f1, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  mainUIPanel: {fileID: 0}
+  closeMainUIButton: {fileID: 0}
+  DoorCollider: {fileID: 0}
+  Lock: {fileID: 0}
+  slotImage_East: {fileID: 0}
+  openPopup_East_Button: {fileID: 0}
+  slotImage_South: {fileID: 0}
+  openPopup_South_Button: {fileID: 0}
+  slotImage_West: {fileID: 0}
+  openPopup_West_Button: {fileID: 0}
+  slotImage_North: {fileID: 0}
+  openPopup_North_Button: {fileID: 0}
+  popupPanel_East: {fileID: 0}
+  closePopup_East_Button: {fileID: 0}
+  colorButtons_East:
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  popupPanel_South: {fileID: 0}
+  closePopup_South_Button: {fileID: 0}
+  colorButtons_South:
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  popupPanel_West: {fileID: 0}
+  closePopup_West_Button: {fileID: 0}
+  colorButtons_West:
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  popupPanel_North: {fileID: 0}
+  closePopup_North_Button: {fileID: 0}
+  colorButtons_North:
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  red: {r: 0.7058824, g: 0.21960784, b: 0.15294118, a: 0}
+  blue: {r: 0.15294118, g: 0.43529412, b: 0.7058824, a: 0}
+  green: {r: 0.34901962, g: 0.58431375, b: 0.19215687, a: 0}
+  white: {r: 0.96862745, g: 0.9647059, b: 0.9647059, a: 0}
+--- !u!4 &1369876338
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1369876336}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1001 &1374263571
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -29992,8 +30084,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   flashlightLight: {fileID: 3885348069880400162}
   cameraTransform: {fileID: 689595237}
-  maxBattery: 100
-  currentBattery: 100
+  maxBattery: 1000
+  currentBattery: 1000
   batteryDrainRate: 5
   batteryUI: {fileID: 1206144196}
   flashUI: {fileID: 147460382}
@@ -32938,3 +33030,4 @@ SceneRoots:
   - {fileID: 368386608493558959}
   - {fileID: 762852051}
   - {fileID: 3631841440736792602}
+  - {fileID: 1369876338}
