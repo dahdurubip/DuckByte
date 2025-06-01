@@ -5058,6 +5058,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Canvas
       objectReference: {fileID: 0}
+    - target: {fileID: 1020064643683127619, guid: f5d1ff8197a9f5c4d9c48619c7621d97, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 1629998525941310230, guid: f5d1ff8197a9f5c4d9c48619c7621d97, type: 3}
       propertyPath: m_AnchorMax.x
       value: 1
@@ -34245,6 +34249,7 @@ MonoBehaviour:
   detectRange: 2
   panAngle: 8
   flashManager: {fileID: 0}
+  obanggiUIManager: {fileID: 0}
   EKeyUI: {fileID: 0}
   paperUI: {fileID: 0}
   bookUI: {fileID: 0}
