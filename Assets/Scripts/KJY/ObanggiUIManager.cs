@@ -151,10 +151,10 @@ public class ObanggiUIManager : MonoBehaviour
 
     void Start()
     {
-        slotImage_East.sprite = baseSprite;
-        slotImage_South.sprite = baseSprite;
-        slotImage_West.sprite = baseSprite;
-        slotImage_North.sprite = baseSprite;
+        //slotImage_East.sprite = baseSprite;
+        //slotImage_South.sprite = baseSprite;
+        //slotImage_West.sprite = baseSprite;
+        //slotImage_North.sprite = baseSprite;
 
 
         DoorCollider.GetComponent<Collider>().enabled = false;
