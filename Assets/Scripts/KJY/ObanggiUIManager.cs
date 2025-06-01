@@ -147,7 +147,7 @@ public class ObanggiUIManager : MonoBehaviour
     [Header("Color Values")]
     public Color red, blue, green, white;
 
-    public Sprite baseSprite;
+    //public Sprite baseSprite;
 
     void Start()
     {
