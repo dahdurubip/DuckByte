@@ -1,5 +1,6 @@
 using TMPro;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class ItemManager : MonoBehaviour
 {
@@ -56,7 +57,9 @@ public class ItemManager : MonoBehaviour
     //æ÷¥œ∏ﬁ¿Ãº«
     private Animator animator;
 
-    
+
+   // public PlayerTriggerMAnager PTM;
+
     private void Start()
     {
         animator = GetComponent<Animator>();
@@ -185,6 +188,24 @@ public class ItemManager : MonoBehaviour
                     {
                         breaker.BreakJar();
                     }
+                    return;
+
+
+                }
+                if (nearbyInteractable.CompareTag("UnBrokenJar"))
+                {
+                    PlayerTriggerMAnager PTM = GetComponent<PlayerTriggerMAnager>();
+                    Debug.Log("»Ï");
+                    if (PTM != null)
+                    {
+                    Debug.Log("»Ï2");
+                        PTM.unBrokenJar();
+                    }
+                    return;
+                }
+                if (nearbyInteractable.CompareTag("BossDoor"))
+                {
+                    SceneManager.LoadScene("Boss");
                     return;
                 }
 
