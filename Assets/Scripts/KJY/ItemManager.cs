@@ -15,6 +15,7 @@ public class ItemManager : MonoBehaviour
     [SerializeField] private float panAngle = 30f;
     //flash
     [SerializeField] private FlashManager flashManager;
+    [SerializeField] private ObanggiUIManager obanggiUIManager;
 
 
     [Header("Key UI Settings")]
@@ -192,6 +193,12 @@ public class ItemManager : MonoBehaviour
                 if (nearbyInteractable.CompareTag("MainItem"))
                 {
                     MainItem += 1;
+                    return;
+                }
+
+                if (nearbyInteractable.CompareTag("Obanggi"))
+                {
+                    obanggiUIManager.mainUIPanel.SetActive(true);
                     return;
                 }
 
