@@ -17,9 +17,20 @@ public class PlayerTriggerMAnager : MonoBehaviour
         }
     }
 
+    public void unBrokenJar()
+    {
+        if (!isPlayingDialogue)
+        {
+            Debug.Log("안깨지는 장독 충돌");
+            StartCoroutine(PlayDialogue("interactUnBrokenJar"));
+        }
+    }
+
     public IEnumerator PlayDialogue(string Name)
     {
         isPlayingDialogue = true;
+
+        Debug.Log("코루틴 들어옴");
 
         if (dialogueData.interactables.ContainsKey(Name))
         {
