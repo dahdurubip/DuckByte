@@ -9,7 +9,7 @@ namespace KTintercativeProp
     public class AnimProp : MonoBehaviour
     {
         public Animator animator;
-        public bool activate;
+        public bool activate = true;
         public bool toggleState;
         public GameObject icon;
 
