@@ -21,7 +21,7 @@ public class DialogueManager : MonoBehaviour
             StartCoroutine(PlayDialogueCoroutine(Name));
     }
 
-
+      
     public IEnumerator PlayDialogueCoroutine(string Name)
     {
         isPlayingDialogue = true;
