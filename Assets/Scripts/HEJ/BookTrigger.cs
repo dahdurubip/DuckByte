@@ -1,15 +1,14 @@
 using UnityEngine;
 
-public class NoteClick : MonoBehaviour
+public class BookTrigger : MonoBehaviour
 {
-    public int noteIndex;
     public SouthRoomPuzzleManager manager;
 
     void OnMouseDown()
     {
         if (manager != null)
         {
-            manager.ShowNotePopup(noteIndex);
+            manager.OpenNameInputUI();
         }
     }
 }
