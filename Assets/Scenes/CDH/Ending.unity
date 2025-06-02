@@ -483,16 +483,19 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 98479765f0c735d47a441fca724584cd, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  dataSO: {fileID: 11400000, guid: e60f2439c448af0409f01a88c58dbdde, type: 2}
   textPrefab: {fileID: 552428733}
   textParent: {fileID: 515371749}
   typingSpeed: 0.05
-  currentEnding: 0
   goodEndingLines:
   - "\uC548\uB155"
   - "\uD558\uC2E0\uAC00"
   - "\uCFE0\uCFE0\u315C\uCFE0\uCFE0"
-  badEndingLines: []
-  trueEndingLines: []
+  badEndingLines:
+  - "\uBE60\uBE75"
+  - "\uC090\uC090"
+  trueEndingLines:
+  - "\uBFCC\uBFCC\uBFCC\u315C\uBFCC\uBFCC"
 --- !u!4 &1108488442
 Transform:
   m_ObjectHideFlags: 0

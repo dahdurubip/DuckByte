@@ -4,7 +4,12 @@ using TMPro;
 
 public class EndingCredit : MonoBehaviour
 {
-    public enum EndingType { Good, Bad, True }
+    // public enum EndingType { Good, Bad, True }
+
+    // 엔딩분기 데이터SO
+    // 엔딩 분기시작하는 곳에서 데이터 설정해주기
+    // 설정방법 : EndingDataSO.currentEnding = EndingType.Bad;
+    public EndingDataSO dataSO;
 
     [Header("UI 프리팹과 부모")]
     public GameObject textPrefab; // TextMeshProUGUI 프리팹
@@ -14,7 +19,9 @@ public class EndingCredit : MonoBehaviour
     public float typingSpeed = 0.05f; // 글자당 딜레이
 
     [Header("현재 엔딩 타입")]
-    public EndingType currentEnding;
+    //public EndingType currentEnding;
+    //private EndingType currentEnding => dataSO.currentEnding;
+
 
     [Header("엔딩별 대사들")]
     [TextArea(2, 4)] public string[] goodEndingLines;
@@ -29,7 +36,7 @@ public class EndingCredit : MonoBehaviour
 
     string[] GetLinesForEnding()
     {
-        switch (currentEnding)
+        switch (dataSO.currentEnding)
         {
             case EndingType.Good: return goodEndingLines;
             case EndingType.Bad: return badEndingLines;
