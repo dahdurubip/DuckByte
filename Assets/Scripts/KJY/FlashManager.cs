@@ -5,26 +5,29 @@ public class FlashManager : MonoBehaviour
 {
     [Header("Default Settings")]
     [SerializeField] private Light flashlightLight;
-    //[SerializeField] private Transform flashTr;
 
     [Header("Camera Tracking")]
     [SerializeField] private Transform cameraTransform;
 
-
     [Header("Battery Settings")]
+    //배터리 기본 전량
     [SerializeField] private float maxBattery = 1000f;
     [SerializeField] private float currentBattery = 1000f;
-    [SerializeField] private float batteryDrainRate = 5f; // 초당 배터리 감소량
+    //초당 배터리 감소량
+    [SerializeField] private float batteryDrainRate = 5f; 
 
     [Header("Battery UI")]
-    [SerializeField] private Image batteryUI; // 이미지 방식
+    [SerializeField] private Image batteryUI; 
 
     [Header("Flash UI Settings")]
     [SerializeField] private GameObject flashUI;
 
+    [Header("Creature2 Settings")]
+    [SerializeField] private Creature2 creature2;
 
     private bool isOn = false;
     private bool isHeld = false;
+    private float flashTimer = 0f;
 
 
     private void Awake()
@@ -35,8 +38,8 @@ public class FlashManager : MonoBehaviour
             cameraTransform = Camera.main.transform;
         }
 
-        flashUI.SetActive(false);
-        flashlightLight.enabled = false;
+        if (flashUI != null)  flashUI.SetActive(false);
+        if (flashlightLight != null) flashlightLight.enabled = false;
         UpdateBatteryUI();
     }
 
@@ -46,26 +49,38 @@ public class FlashManager : MonoBehaviour
         {
             flashUI.SetActive(true);
             DrainBattery();
+
+            //timer
+            flashTimer += Time.deltaTime;
+            if (flashTimer >= 5f)
+            {
+                //creature2 추적활성화
+                if (creature2 != null) creature2.flashOn = true;
+            }
         }
         else
         {
             flashUI.SetActive(false);
+
+            //만약 isHeld는 true인데 isOn이 false가 되면 creature2.flashOn도 false로 처리
+            if (isHeld && !isOn && creature2 != null && creature2.flashOn)
+            {
+                flashTimer = 0f; // 타이머 리셋
+                creature2.flashOn = false;
+            }
         }
 
     }
 
-    //private void LateUpdate()
-    //{
-        //flashlightLight.transform.position = flashTr.position;
-        //if (isHeld && cameraTransform != null)
-        //{
-        //    transform.rotation = cameraTransform.rotation;
-        //}
-    //}
+    private void LateUpdate()
+    {
+
+        transform.rotation = cameraTransform.rotation;
+    }
 
     public void Toggle()
     {
-        if (currentBattery <= 0f)
+        if (currentBattery <= 0f && !isOn)
         {
             Debug.Log("배터리 없음");
             return;
@@ -74,6 +89,12 @@ public class FlashManager : MonoBehaviour
         isOn = !isOn;
         if (flashlightLight != null) flashlightLight.enabled = isOn;
         Debug.Log("Flashlight isOn: " + isOn);
+
+        if (!isOn) 
+        {
+            flashTimer = 0f;
+            if (creature2 != null) creature2.flashOn = false;
+        }
     }
 
     public bool IsOn() => isOn;
@@ -83,14 +104,17 @@ public class FlashManager : MonoBehaviour
         if (currentBattery > 0f)
         {
             isOn = true;
-            flashlightLight.enabled = true;
+            if (flashlightLight != null) flashlightLight.enabled = true;
         }
     }
 
     public void TurnOff()
     {
         isOn = false;
-        flashlightLight.enabled = false;
+        if (flashlightLight != null) flashlightLight.enabled = false;
+
+        flashTimer = 0f;
+        if (creature2 != null) creature2.flashOn = false;
     }
 
     public void SetHeld(bool held)
@@ -124,7 +148,7 @@ public class FlashManager : MonoBehaviour
     {
         if (batteryUI != null)
         {
-            batteryUI.fillAmount = currentBattery / maxBattery; // 0~1 사이로 설정
+            batteryUI.fillAmount = currentBattery / maxBattery; 
         }
     }
 

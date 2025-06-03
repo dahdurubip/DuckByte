@@ -214,6 +214,7 @@ public class ItemManager : MonoBehaviour
                 if (nearbyInteractable.CompareTag("MainItem"))
                 {
                     MainItem += 1;
+                    Destroy(nearbyInteractable);
                     return;
                 }
 
@@ -403,7 +404,6 @@ public class ItemManager : MonoBehaviour
 
         if (item.CompareTag("Flashlight"))
         {
-            flashManager = item.GetComponent<FlashManager>();
             flashManager.TurnOn();
             flashManager.SetHeld(true);
         }

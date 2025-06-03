@@ -17,21 +17,32 @@ public class Creature2 : MonoBehaviour
     [SerializeField] private Transform[] wayPoint;
     [SerializeField] private NavMeshAgent navMeshAgent;
 
+    [Header("Movement Speeds")]
+    [SerializeField] private float patrolSpeed = 3.5f; 
+    [SerializeField] private float pursuitSpeed = 10.0f; 
+
     //크리처 상태
-    private enum creatureState { Patrol, Pursuit, Attack, Idle };
-    private creatureState currentState;
+    [Header("Combat Stats")]
+    [SerializeField] private float idleTime = 1f;
+    [SerializeField] private float attackRange = 5f;
+    [SerializeField] private float detectionRange = 10f; 
+    [SerializeField] private float damage = 10f;
+
+    private enum CreatureState { Patrol, Pursuit, Attack, Idle };
+    private CreatureState currentState;
+
     private bool isAttacking;
     private int currentPatrolIndex = 0;
-    private bool patrolling = true;
-    private float idleTime = 1f;
-    private float Timer = 0f;
-    private float attackRange = 5f;
-    private float detectionRange = 10f;
-    private float damage = 10f;
+    private bool patrollingForward = true; 
+    private float idleTimer = 0f;
+
 
     //크리처 애니메이션
     private Animator animator;
     private AudioSource audioSource;
+
+    //flashTimer 활성화 여부
+    public bool flashOn;
 
 
     private void Awake()
@@ -45,42 +56,61 @@ public class Creature2 : MonoBehaviour
     {
         audioSource.Stop();
         isAttacking = false;
-        currentState = creatureState.Patrol;
-        Creature2Patrol();
+        currentState = CreatureState.Patrol;
     }
 
     private void Update()
     {
-
+        if (player == null) return;
 
         float distanceToPlayer = Vector3.Distance(player.transform.position, transform.position);
 
-        if (distanceToPlayer <= detectionRange && !isAttacking)
+        if (isAttacking)
         {
-            currentState = creatureState.Pursuit;
+            //만약에 공격중이면 건너뛰기
         }
-
-        if (distanceToPlayer <= attackRange && !isAttacking)
+        else if (flashOn)
         {
-            if (!isAttacking)
+            if (distanceToPlayer <= attackRange)
             {
-                currentState = creatureState.Attack;
-                Creature2Attack();
+                currentState = CreatureState.Attack;
+            }
+            else
+            {
+                currentState = CreatureState.Pursuit;
+            }
+        }
+        else 
+        {
+            if (distanceToPlayer <= attackRange)
+            {
+                currentState = CreatureState.Attack;
+            }
+            else if (distanceToPlayer <= detectionRange)
+            {
+                currentState = CreatureState.Pursuit;
+            }
+            else
+            {
+                if (currentState == CreatureState.Pursuit || (currentState != CreatureState.Idle && currentState != CreatureState.Patrol))
+                {
+                    currentState = CreatureState.Patrol;
+                }
             }
         }
 
         switch (currentState)
         {
-            case creatureState.Patrol:
+            case CreatureState.Patrol:
                 Creature2Patrol();
                 break;
-            case creatureState.Attack:
+            case CreatureState.Attack:
                 Creature2Attack();
                 break;
-            case creatureState.Idle:
+            case CreatureState.Idle:
                 Creature2Idle();
                 break;
-            case creatureState.Pursuit:
+            case CreatureState.Pursuit:
                 Creature2Pursuit();
                 break;
         }
@@ -93,11 +123,18 @@ public class Creature2 : MonoBehaviour
     {
         //루틴대로 걸어가지만 만약에 앞에 막혀있으면 반대로 첫번째 지점으로 돌아가기
 
-        if (wayPoint.Length == 0) return;
+        navMeshAgent.speed = patrolSpeed;
+
+        if (wayPoint.Length == 0)
+        {
+            if (currentState != CreatureState.Idle) currentState = CreatureState.Idle;
+            return;
+        }
 
         navMeshAgent.isStopped = false;
         animator.SetBool("isIdle", false);
         animator.SetBool("isWalking", true);
+        animator.SetBool("isRun", false);
 
         if (audioSource.clip != walkClip || !audioSource.isPlaying)
         {
@@ -106,24 +143,39 @@ public class Creature2 : MonoBehaviour
             audioSource.Play();
         }
 
+        //waypoint 없을 경우
+        if (currentPatrolIndex < 0 || currentPatrolIndex >= wayPoint.Length || wayPoint[currentPatrolIndex] == null)
+        {
+            Debug.LogWarning("Creature2: Invalid waypoint or index. Resetting patrol index.");
+            currentPatrolIndex = 0;
+            if (wayPoint.Length == 0 || wayPoint[currentPatrolIndex] == null)
+            {
+                if (currentState != CreatureState.Idle) currentState = CreatureState.Idle; 
+                return;
+            }
+        }
+
         navMeshAgent.destination = wayPoint[currentPatrolIndex].position;
 
         //순찰 지점에 도착했을 때 Idle상태로 전한
-        if (navMeshAgent.remainingDistance < 0.5f && !navMeshAgent.pathPending)
+        if (!navMeshAgent.pathPending && navMeshAgent.remainingDistance < 0.5f)
         {
-            currentState = creatureState.Idle;
+            currentState = CreatureState.Idle; 
+            idleTimer = 0f;
         }
     }
 
     private void TheNextWayPoint()
     {
-        if (patrolling)
+        if (wayPoint.Length == 0) return;
+
+        if (patrollingForward)
         {
             ++currentPatrolIndex;
             if (currentPatrolIndex >= wayPoint.Length)
             {
-                currentPatrolIndex = wayPoint.Length - 2;
-                patrolling = false;
+                currentPatrolIndex = wayPoint.Length > 1 ? wayPoint.Length - 2 : 0;
+                patrollingForward = false;
             }
         }
         else
@@ -131,12 +183,12 @@ public class Creature2 : MonoBehaviour
             --currentPatrolIndex;
             if (currentPatrolIndex < 0)
             {
-                currentPatrolIndex = 1;
-                patrolling = true;
+                currentPatrolIndex = wayPoint.Length > 1 ? 1 : 0;
+                patrollingForward = true;
             }
         }
 
-        currentState = creatureState.Patrol;
+        currentState = CreatureState.Patrol;
     }
 
     private void Creature2Attack()
@@ -145,6 +197,7 @@ public class Creature2 : MonoBehaviour
 
         isAttacking = true;
         navMeshAgent.isStopped = true;
+
         animator.SetBool("isWalking", false);
         animator.SetBool("isRun", false);
         animator.SetTrigger("Attack");
@@ -152,19 +205,19 @@ public class Creature2 : MonoBehaviour
         audioSource.Stop();
         audioSource.PlayOneShot(shutClip);
 
-        player.StartCoroutine(player.PlayerHitEffect());
-        if(itemmanager.currentItem != null && !itemmanager.currentItem.CompareTag("Flashlight"))
+        if (player != null) player.StartCoroutine(player.PlayerHitEffect());
+        if (itemmanager != null && itemmanager.currentItem != null && !itemmanager.currentItem.CompareTag("Flashlight"))
         {
             itemmanager.DropCurrentItem();
         }
-        //player.PlayerHitEffect();
-        //Invoke("player.PlayerHitEffectEnd", 0.5f);
-        camShake.StartCoroutine(camShake.Shake(0.2f, 0.3f));
+        if (camShake != null) camShake.StartCoroutine(camShake.Shake(0.2f, 0.3f));
 
-        Vector3 dir = (player.transform.position - transform.position).normalized;
-        Quaternion lookRotation = Quaternion.LookRotation(new Vector3(dir.x, 0, dir.z));
-        transform.rotation = Quaternion.Slerp(transform.rotation, lookRotation, Time.deltaTime * 5f);
-
+        if (player != null)
+        {
+            Vector3 directionToPlayer = (player.transform.position - transform.position).normalized;
+            Quaternion lookRotation = Quaternion.LookRotation(new Vector3(directionToPlayer.x, 0, directionToPlayer.z));
+            transform.rotation = Quaternion.Slerp(transform.rotation, lookRotation, Time.deltaTime * navMeshAgent.angularSpeed);
+        }
         StartCoroutine(AttackCooldown());
     }
 
@@ -179,36 +232,75 @@ public class Creature2 : MonoBehaviour
         isAttacking = false;
         navMeshAgent.isStopped = false;
 
+        if (player == null)
+        { 
+            currentState = CreatureState.Patrol;
+            return;
+        }
+
         float distanceToPlayer = Vector3.Distance(player.transform.position, transform.position);
 
         if (distanceToPlayer <= attackRange)
         {
-            player.TakeDamage(damage);
+            if (player != null) player.TakeDamage(damage);
             Debug.Log("Damage");
-            Creature2Attack();
+            //Creature2Attack();
         }
-        else
+
+        if (flashOn)
         {
-            if (distanceToPlayer <= detectionRange)
+            if (distanceToPlayer <= attackRange)
             {
-                currentState = creatureState.Pursuit;
+                Creature2Attack(); 
             }
             else
             {
-                currentState = creatureState.Patrol;
+                currentState = CreatureState.Pursuit; 
             }
-            animator.SetBool("isWalking", true);
         }
+        else 
+        {
+            if (distanceToPlayer <= attackRange)
+            {
+                Creature2Attack(); 
+            }
+            else if (distanceToPlayer <= detectionRange)
+            {
+                currentState = CreatureState.Pursuit; 
+            }
+            else
+            {
+                currentState = CreatureState.Patrol; 
+            }
+        }
+
+        UpdateAnimatorForState(currentState);
     }
+
+    private void UpdateAnimatorForState(CreatureState targetState)
+    {
+        animator.SetBool("isIdle", targetState == CreatureState.Idle);
+        animator.SetBool("isWalking", targetState == CreatureState.Patrol);
+        animator.SetBool("isRun", targetState == CreatureState.Pursuit);
+    }
+
 
     private void Creature2Pursuit()
     {
+        navMeshAgent.speed = pursuitSpeed;
+
+        if (player == null)
+        { 
+            currentState = CreatureState.Patrol;
+            return;
+        }
+
         navMeshAgent.isStopped = false;
         navMeshAgent.destination = player.transform.position;
-        navMeshAgent.speed = 10.0f;
-        animator.SetBool("isRun", true);
+
         animator.SetBool("isIdle", false);
         animator.SetBool("isWalking", false);
+        animator.SetBool("isRun", true);
 
         if (audioSource.clip != runClip || !audioSource.isPlaying)
         {
@@ -220,19 +312,22 @@ public class Creature2 : MonoBehaviour
 
     private void Creature2Idle()
     {
-        animator.SetBool("isWalking", false);
+        navMeshAgent.isStopped = true;
+
         animator.SetBool("isIdle", true);
+        animator.SetBool("isWalking", false);
+        animator.SetBool("isRun", false);
 
         if (audioSource.isPlaying && (audioSource.clip == walkClip || audioSource.clip == runClip))
         {
             audioSource.Stop();
         }
 
-        Timer += Time.deltaTime;
-        if (Timer >= idleTime)
+        idleTimer += Time.deltaTime;
+        if (idleTimer >= idleTime)
         {
-            Timer = 0f;
-            TheNextWayPoint();
+            idleTimer = 0f; 
+            TheNextWayPoint(); 
         }
 
     }

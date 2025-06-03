@@ -7,50 +7,76 @@ public class CameraMovement : MonoBehaviour
     [SerializeField] private PlayerMovement playerMovement;
 
     [Header("Follow Settings")]
-    public Transform objectTofollow;
-    public float followSpeed = 10f;
+    [SerializeField] private Transform objectTofollow;
+    [SerializeField] private float followSpeed = 10f;
+    //원래 카메라 로컬 Y 위치 저장용
+    [SerializeField] private float originalCamLocalY;
 
     [Header("Mouse Look Settings")]
-    public float sensitivity = 100f;
-    public float clampAngle = 70f;
+    [SerializeField] private float sensitivity = 100f;
+    [SerializeField] private float clampAngle = 70f;
 
+    [Header("Camera Collision & Zoom")]
+    //실제 카메라 GameObject
+    [SerializeField] private GameObject realCam;    
+    //카메라 Transform
+    [SerializeField] private Transform realCamera;                   
+    //카메라 로컬 방향
+    [SerializeField] private Vector3 dirNormalized;                   
+    //월드 공간 목표지점
+    [SerializeField] private Vector3 finalDir;                        
+    [SerializeField] private float minDistance;                        
+    [SerializeField] private float maxDistance;                       
+    //충돌 보정 거리
+    [SerializeField] private float finalDistance;                     
+    //보간 속도
+    [SerializeField] private float smoothness = 10f;                  
+
+    [Header("Auto-Alignment Settings")]
+    [SerializeField] private float noMouseInputThreshold = 0.01f;
+    //마우스 입력 없을 시 자동 정렬 시작 시간
+    [SerializeField] private float timeBeforeAutoAlign = 1.0f; 
+    [SerializeField] private float autoAlignSpeed = 3f;
+    [SerializeField] private float defaultAutoAlignRotX = 10f;
+
+    private float timeSinceLastMouseInput = 0f;
+    private bool isAutoAligning = false;
+    //시야 고정 토글
+    private bool isViewLocked = false;
     private float rotX;
     private float rotY;
 
-    [Header("Camera Collision & Zoom")]
-    [SerializeField] private GameObject realCam;    // 실제 카메라 GameObject
-    public Transform realCamera;                    // 카메라 Transform
-    public Vector3 dirNormalized;                   // 카메라 로컬 방향
-    public Vector3 finalDir;                        // 월드 공간 목표지점
-    public float minDistance;                       // 최소 거리
-    public float maxDistance;                       // 최대 거리
-    public float finalDistance;                     // 충돌 보정 거리
-    public float smoothness = 10f;                  // 보간 속도
-
-    //시야 고정 토글
-    private bool isViewLocked = false;
-
-    //원래 카메라 로컬 Y 위치 저장용
-    public float originalCamLocalY;
-
-
     private void Awake()
+
     {
+
         transform.localPosition = objectTofollow.transform.position;
+
     }
 
     private void Start()
     {
-        //마우스 회전 초기값 세팅
-        rotX = transform.localRotation.eulerAngles.x;
-        rotY = transform.localRotation.eulerAngles.y;
+        //if (objectTofollow != null)
+        //{
+        //    rotY = objectTofollow.transform.eulerAngles.y;
+        //    rotX = defaultAutoAlignRotX;
+        //}
+        //else
+        //{
+            rotX = transform.localRotation.eulerAngles.x;
+            rotY = transform.localRotation.eulerAngles.y;
+        //}
 
-        //카메라 로컬 방향 & 거리 초기화
-        dirNormalized = realCamera.localPosition.normalized;
-        finalDistance = realCamera.localPosition.magnitude;
-
-        //원래 카메라 Y 위치 저장
-        //originalCamLocalY = realCamera.localPosition.y;
+        if (realCamera != null)
+        {
+            dirNormalized = realCamera.localPosition.normalized;
+            finalDistance = realCamera.localPosition.magnitude;
+            //originalCamLocalY = realCamera.localPosition.y; 
+        }
+        else
+        {
+            Debug.LogError("Camera Wrong");
+        }
     }
 
     private void Update()
@@ -59,33 +85,90 @@ public class CameraMovement : MonoBehaviour
         if (Input.GetKeyDown(KeyCode.Q))
         {
             isViewLocked = !isViewLocked;
+            if (isViewLocked)
+            {
+                isAutoAligning = false;
+                timeSinceLastMouseInput = 0f;
+            }
         }
 
         //시야가 잠기지 않았을 때만 마우스로 회전
         if (!isViewLocked)
         {
-            rotX += -Input.GetAxis("Mouse Y") * sensitivity * Time.deltaTime;
-            rotY += Input.GetAxis("Mouse X") * sensitivity * Time.deltaTime;
-            rotX = Mathf.Clamp(rotX, -clampAngle, clampAngle);
+            float mouseXInput = Input.GetAxis("Mouse X");
+            float mouseYInput = Input.GetAxis("Mouse Y");
+
+            //마우스 입력 감지
+            if (Mathf.Abs(mouseXInput) > noMouseInputThreshold || Mathf.Abs(mouseYInput) > noMouseInputThreshold)
+            {
+                //마우스로 회전
+                rotX += -mouseYInput * sensitivity * Time.deltaTime;
+                rotY += mouseXInput * sensitivity * Time.deltaTime;
+                rotX = Mathf.Clamp(rotX, -clampAngle, clampAngle);
+
+                //마우스 회전중 리셋 & 중지
+                timeSinceLastMouseInput = 0f;
+                isAutoAligning = false;       
+            }
+            else
+            {
+                //마우스 비활성시 타이머
+                timeSinceLastMouseInput += Time.deltaTime;
+            }
+
+
+            if (!playerMovement.IsMoving)
+            {
+                //플레이어 정지되면 시작
+                if (timeSinceLastMouseInput >= timeBeforeAutoAlign && !isAutoAligning)
+                {
+                    isAutoAligning = true;
+                }
+            }
+            else 
+            {
+                //반면 중지 & 리셋
+                isAutoAligning = false;
+                timeSinceLastMouseInput = 0f; 
+            }
+
+
+            if (isAutoAligning)
+            {
+                float targetRotY = objectTofollow.transform.eulerAngles.y;
+                float targetRotX = defaultAutoAlignRotX;
+
+                rotY = Mathf.LerpAngle(rotY, targetRotY, autoAlignSpeed * Time.deltaTime);
+                rotX = Mathf.Lerp(rotX, targetRotX, autoAlignSpeed * Time.deltaTime);
+
+                if (Mathf.DeltaAngle(rotY, targetRotY) < 0.5f && Mathf.Abs(rotX - targetRotX) < 0.5f)
+                {
+                    rotY = targetRotY;
+                    rotX = targetRotX;
+                    isAutoAligning = false;
+                    //정렬 후 다시 리셋
+                    timeSinceLastMouseInput = 0f; 
+                }
+            }
         }
 
-        //회전 적용 (고정 상태여도 마지막 rotX/rotY 유지)
-        Quaternion rot = Quaternion.Euler(rotX, rotY, 0);
-        transform.rotation = rot;
+        Quaternion camPivotRotation = Quaternion.Euler(rotX, rotY, 0);
+        transform.rotation = camPivotRotation;
     }
 
     private void LateUpdate()
     {
-        //1) 대상 따라가기
+        if (objectTofollow == null || realCamera == null || playerMovement == null) return;
+
         transform.position = Vector3.MoveTowards(
             transform.position,
             objectTofollow.position,
             followSpeed * Time.deltaTime
         );
 
-        //2) 카메라 충돌 거리 계산
         finalDir = transform.TransformPoint(dirNormalized * maxDistance);
-        if (Physics.Linecast(transform.position, finalDir, out RaycastHit hit))
+        RaycastHit hit;
+        if (Physics.Linecast(transform.position, finalDir, out hit))
         {
             finalDistance = Mathf.Clamp(hit.distance, minDistance, maxDistance);
         }
@@ -94,11 +177,9 @@ public class CameraMovement : MonoBehaviour
             finalDistance = maxDistance;
         }
 
-        //3) 목표 로컬 포지션 계산
         Vector3 targetLocalPos = dirNormalized * finalDistance;
 
-        //4) 크라우치 상태에 따른 Y축 보정
-        if (playerMovement.playerCrouch)
+        if (playerMovement != null && playerMovement.playerCrouch)
         {
             targetLocalPos.y = originalCamLocalY * 0.3f;
         }
@@ -107,7 +188,6 @@ public class CameraMovement : MonoBehaviour
             targetLocalPos.y = originalCamLocalY;
         }
 
-        //5) 부드럽게 보간 적용
         realCamera.localPosition = Vector3.Lerp(
             realCamera.localPosition,
             targetLocalPos,
@@ -118,6 +198,8 @@ public class CameraMovement : MonoBehaviour
     //카메라 흔들기 코루틴
     public IEnumerator Shake(float duration, float magnitude)
     {
+        if (realCam == null) yield break;
+
         Vector3 originalPos = realCam.transform.localPosition;
         float elapsed = 0f;
 

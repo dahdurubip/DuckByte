@@ -2590,7 +2590,10 @@ MonoBehaviour:
   crouchCapCenterY: 0.5
   playerCrouch: 0
   gravity: -10
+  initialStamina: 1000
   stamina_UI: {fileID: 0}
+  staminaConsumeRate: 5
+  staminaRegenRate: 3
   rotationSmoothTime: 0.1
   GM: {fileID: 0}
 --- !u!136 &6551614942396899850
@@ -2638,6 +2641,7 @@ MonoBehaviour:
   detectRange: 10
   panAngle: 15
   flashManager: {fileID: 0}
+  obanggiUIManager: {fileID: 0}
   EKeyUI: {fileID: 0}
   paperUI: {fileID: 0}
   bookUI: {fileID: 0}
@@ -2649,8 +2653,7 @@ MonoBehaviour:
   paperParticle: {fileID: 0}
   bookParticle: {fileID: 0}
   skelParticle: {fileID: 0}
-  creature1MainItem: 0
-  creature2MainItem: 0
+  MainItem: 0
   currentItem: {fileID: 0}
 --- !u!54 &4868027830716165686
 Rigidbody:

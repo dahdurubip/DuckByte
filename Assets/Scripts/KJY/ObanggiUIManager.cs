@@ -145,7 +145,7 @@ public class ObanggiUIManager : MonoBehaviour
     public Button[] colorButtons_North;
 
     [Header("Color Values")]
-    public Color red, blue, green, white;
+    public Color red, blue, green, yellow;
 
     //public Sprite baseSprite;
 
@@ -208,7 +208,7 @@ public class ObanggiUIManager : MonoBehaviour
             case 0: return red;
             case 1: return blue;
             case 2: return green;
-            case 3: return white;
+            case 3: return yellow;
             default: return Color.clear;
         }
     }
@@ -216,10 +216,11 @@ public class ObanggiUIManager : MonoBehaviour
     void CheckAnswer()
     {
         if (slotImage_East.color == blue &&
-            slotImage_South.color == white &&
+            slotImage_South.color == yellow &&
             slotImage_West.color == red &&
             slotImage_North.color == green)
         {
+            //성공하는 효과음
             Debug.Log("정답! 문 열림");
             // GameManager.OpenDoor(); 등으로 문 열기
             Lock.SetActive(false);
