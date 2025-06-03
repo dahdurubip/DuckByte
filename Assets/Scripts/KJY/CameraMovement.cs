@@ -1,5 +1,6 @@
 using UnityEngine;
 using System.Collections;
+using UnityEngine.SceneManagement;
 
 public class CameraMovement : MonoBehaviour
 {
@@ -38,6 +39,7 @@ public class CameraMovement : MonoBehaviour
     [SerializeField] private float timeBeforeAutoAlign = 1.0f; 
     [SerializeField] private float autoAlignSpeed = 3f;
     [SerializeField] private float defaultAutoAlignRotX = 10f;
+    [SerializeField] private string autoAlignSceneName = "Creature2Map";
 
     private float timeSinceLastMouseInput = 0f;
     private bool isAutoAligning = false;
@@ -46,26 +48,21 @@ public class CameraMovement : MonoBehaviour
     private float rotX;
     private float rotY;
 
-    private void Awake()
-
-    {
-
-        transform.localPosition = objectTofollow.transform.position;
-
-    }
 
     private void Start()
     {
-        //if (objectTofollow != null)
-        //{
-        //    rotY = objectTofollow.transform.eulerAngles.y;
-        //    rotX = defaultAutoAlignRotX;
-        //}
-        //else
-        //{
+        if (objectTofollow != null)
+        {
+
+            transform.localPosition = objectTofollow.transform.position;
+            rotY = objectTofollow.transform.eulerAngles.y;
+            rotX = defaultAutoAlignRotX;
+        }
+        else
+        {
             rotX = transform.localRotation.eulerAngles.x;
             rotY = transform.localRotation.eulerAngles.y;
-        //}
+        }
 
         if (realCamera != null)
         {
@@ -81,6 +78,7 @@ public class CameraMovement : MonoBehaviour
 
     private void Update()
     {
+
         //Q키로 시야 고정/해제 토글
         if (Input.GetKeyDown(KeyCode.Q))
         {
@@ -91,6 +89,8 @@ public class CameraMovement : MonoBehaviour
                 timeSinceLastMouseInput = 0f;
             }
         }
+
+        string currentSceneName = SceneManager.GetActiveScene().name;
 
         //시야가 잠기지 않았을 때만 마우스로 회전
         if (!isViewLocked)
@@ -116,22 +116,26 @@ public class CameraMovement : MonoBehaviour
                 timeSinceLastMouseInput += Time.deltaTime;
             }
 
-
-            if (!playerMovement.IsMoving)
+            if (currentSceneName == autoAlignSceneName) // <--- 추가된 조건
             {
-                //플레이어 정지되면 시작
-                if (timeSinceLastMouseInput >= timeBeforeAutoAlign && !isAutoAligning)
+                if (playerMovement != null && !playerMovement.IsMoving)
                 {
-                    isAutoAligning = true;
+                    if (timeSinceLastMouseInput >= timeBeforeAutoAlign && !isAutoAligning)
+                    {
+                        isAutoAligning = true;
+                    }
+                }
+                else
+                {
+                    isAutoAligning = false;
+                    timeSinceLastMouseInput = 0f;
                 }
             }
-            else 
+            else // 자동 정렬을 사용하지 않는 씬일 경우
             {
-                //반면 중지 & 리셋
-                isAutoAligning = false;
-                timeSinceLastMouseInput = 0f; 
+                isAutoAligning = false; // 자동 정렬 강제 비활성화
+                // timeSinceLastMouseInput = 0f; // 이 씬에서는 타이머도 리셋할 수 있음 (선택 사항)
             }
-
 
             if (isAutoAligning)
             {
@@ -158,13 +162,16 @@ public class CameraMovement : MonoBehaviour
 
     private void LateUpdate()
     {
+
         if (objectTofollow == null || realCamera == null || playerMovement == null) return;
 
-        transform.position = Vector3.MoveTowards(
-            transform.position,
-            objectTofollow.position,
-            followSpeed * Time.deltaTime
-        );
+        //transform.position = Vector3.MoveTowards(
+        //    transform.position,
+        //    objectTofollow.position,
+        //    followSpeed * Time.deltaTime
+        //);
+        transform.position = objectTofollow.position;
+
 
         finalDir = transform.TransformPoint(dirNormalized * maxDistance);
         RaycastHit hit;

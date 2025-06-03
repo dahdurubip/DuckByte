@@ -6,7 +6,10 @@ public class SceneLoader : MonoBehaviour
 
     private void OnTriggerEnter(Collider other)
     {
-        SceneManager.LoadScene("Creature1Map");
+        if(other.gameObject.tag == "Player")
+        {
+            SceneManager.LoadScene("Creature1Map");
+        }
     }
 
     public void RestartScene()

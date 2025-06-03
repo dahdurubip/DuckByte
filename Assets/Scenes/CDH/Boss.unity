@@ -17982,6 +17982,17 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 4373354122443888516, guid: fef2967e38706394faebf98b09a915b0, type: 3}
   m_PrefabInstance: {fileID: 539872154}
   m_PrefabAsset: {fileID: 0}
+--- !u!114 &546050041 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 4082654896086825707, guid: d4b2ada4637a0984287e190d7d5e015a, type: 3}
+  m_PrefabInstance: {fileID: 1169923035}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 35faa7041bbceaa4797cd8ccbfcf69e4, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1001 &548964198
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -20459,6 +20470,16 @@ BoxCollider:
   serializedVersion: 3
   m_Size: {x: 0.1812613, y: 0.2380062, z: 0.18950275}
   m_Center: {x: 0, y: 0.11890516, z: -0.000000011175871}
+--- !u!1 &599853665 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 6914617014795057129, guid: f5d1ff8197a9f5c4d9c48619c7621d97, type: 3}
+  m_PrefabInstance: {fileID: 88621113}
+  m_PrefabAsset: {fileID: 0}
+--- !u!1 &600956201 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 879986361955354428, guid: f5d1ff8197a9f5c4d9c48619c7621d97, type: 3}
+  m_PrefabInstance: {fileID: 88621113}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &603057933
 GameObject:
   m_ObjectHideFlags: 0
@@ -25269,6 +25290,11 @@ MeshFilter:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 699473659}
   m_Mesh: {fileID: 10202, guid: 0000000000000000e000000000000000, type: 0}
+--- !u!1 &699919764 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 5983402215133267508, guid: f5d1ff8197a9f5c4d9c48619c7621d97, type: 3}
+  m_PrefabInstance: {fileID: 88621113}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1001 &702362878
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -91066,7 +91092,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6922697606367191593, guid: 1c1b96555739802468e69a1ebcb9c6bb, type: 3}
       propertyPath: m_LocalPosition.x
-      value: 33.52
+      value: 36.35
       objectReference: {fileID: 0}
     - target: {fileID: 6922697606367191593, guid: 1c1b96555739802468e69a1ebcb9c6bb, type: 3}
       propertyPath: m_LocalPosition.y
@@ -91074,7 +91100,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6922697606367191593, guid: 1c1b96555739802468e69a1ebcb9c6bb, type: 3}
       propertyPath: m_LocalPosition.z
-      value: 10.629
+      value: -2.75
       objectReference: {fileID: 0}
     - target: {fileID: 6922697606367191593, guid: 1c1b96555739802468e69a1ebcb9c6bb, type: 3}
       propertyPath: m_LocalRotation.w
@@ -91223,15 +91249,19 @@ PrefabInstance:
     - target: {fileID: 7170638558045817283, guid: 1c1b96555739802468e69a1ebcb9c6bb, type: 3}
       propertyPath: bookUI
       value: 
-      objectReference: {fileID: 0}
+      objectReference: {fileID: 600956201}
+    - target: {fileID: 7170638558045817283, guid: 1c1b96555739802468e69a1ebcb9c6bb, type: 3}
+      propertyPath: noteUI
+      value: 
+      objectReference: {fileID: 599853665}
     - target: {fileID: 7170638558045817283, guid: 1c1b96555739802468e69a1ebcb9c6bb, type: 3}
       propertyPath: skelUI
       value: 
-      objectReference: {fileID: 0}
+      objectReference: {fileID: 699919764}
     - target: {fileID: 7170638558045817283, guid: 1c1b96555739802468e69a1ebcb9c6bb, type: 3}
       propertyPath: paperUI
       value: 
-      objectReference: {fileID: 0}
+      objectReference: {fileID: 599853665}
     - target: {fileID: 7170638558045817283, guid: 1c1b96555739802468e69a1ebcb9c6bb, type: 3}
       propertyPath: panAngle
       value: 10
@@ -91240,6 +91270,14 @@ PrefabInstance:
       propertyPath: detectRange
       value: 2.5
       objectReference: {fileID: 0}
+    - target: {fileID: 7170638558045817283, guid: 1c1b96555739802468e69a1ebcb9c6bb, type: 3}
+      propertyPath: flashManager
+      value: 
+      objectReference: {fileID: 546050041}
+    - target: {fileID: 7170638558045817283, guid: 1c1b96555739802468e69a1ebcb9c6bb, type: 3}
+      propertyPath: obanggiUIManager
+      value: 
+      objectReference: {fileID: 1278523878}
     - target: {fileID: 7170638558045817283, guid: 1c1b96555739802468e69a1ebcb9c6bb, type: 3}
       propertyPath: pickableLayer.m_Bits
       value: 128

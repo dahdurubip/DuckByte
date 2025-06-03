@@ -1794,6 +1794,11 @@ MeshFilter:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 163030995}
   m_Mesh: {fileID: 10202, guid: 0000000000000000e000000000000000, type: 0}
+--- !u!108 &173812378 stripped
+Light:
+  m_CorrespondingSourceObject: {fileID: 8521703716791398288, guid: d4b2ada4637a0984287e190d7d5e015a, type: 3}
+  m_PrefabInstance: {fileID: 1297485004}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1001 &175365563
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -18684,6 +18689,14 @@ PrefabInstance:
     m_TransformParent: {fileID: 0}
     m_Modifications:
     - target: {fileID: 1233254671802239474, guid: d4b2ada4637a0984287e190d7d5e015a, type: 3}
+      propertyPath: followSpeed
+      value: 10
+      objectReference: {fileID: 0}
+    - target: {fileID: 1233254671802239474, guid: d4b2ada4637a0984287e190d7d5e015a, type: 3}
+      propertyPath: maxDistance
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 1233254671802239474, guid: d4b2ada4637a0984287e190d7d5e015a, type: 3}
       propertyPath: objectTofollow
       value: 
       objectReference: {fileID: 869172918}
@@ -18691,10 +18704,22 @@ PrefabInstance:
       propertyPath: playerMovement
       value: 
       objectReference: {fileID: 1292644158}
+    - target: {fileID: 1233254671802239474, guid: d4b2ada4637a0984287e190d7d5e015a, type: 3}
+      propertyPath: originalCamLocalY
+      value: 0.7
+      objectReference: {fileID: 0}
     - target: {fileID: 2715546146637666940, guid: d4b2ada4637a0984287e190d7d5e015a, type: 3}
       propertyPath: m_Name
       value: Camera
       objectReference: {fileID: 0}
+    - target: {fileID: 4082654896086825707, guid: d4b2ada4637a0984287e190d7d5e015a, type: 3}
+      propertyPath: flashUI
+      value: 
+      objectReference: {fileID: 2053268261}
+    - target: {fileID: 4082654896086825707, guid: d4b2ada4637a0984287e190d7d5e015a, type: 3}
+      propertyPath: batteryUI
+      value: 
+      objectReference: {fileID: 1794325443}
     - target: {fileID: 9205511425162580087, guid: d4b2ada4637a0984287e190d7d5e015a, type: 3}
       propertyPath: m_LocalPosition.x
       value: 41.13
@@ -89664,7 +89689,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 35faa7041bbceaa4797cd8ccbfcf69e4, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  flashlightLight: {fileID: 2096699819}
+  flashlightLight: {fileID: 173812378}
   cameraTransform: {fileID: 1421140250}
   maxBattery: 100
   currentBattery: 100
@@ -90994,11 +91019,6 @@ BoxCollider:
   serializedVersion: 3
   m_Size: {x: 0.9702294, y: 1.665, z: 0.42493904}
   m_Center: {x: 0, y: 0.8325, z: 0}
---- !u!108 &2096699819 stripped
-Light:
-  m_CorrespondingSourceObject: {fileID: 5577233917229130196, guid: 1c1b96555739802468e69a1ebcb9c6bb, type: 3}
-  m_PrefabInstance: {fileID: 1239578794}
-  m_PrefabAsset: {fileID: 0}
 --- !u!1001 &2098158631
 PrefabInstance:
   m_ObjectHideFlags: 0
