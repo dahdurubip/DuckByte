@@ -2,13 +2,42 @@ using UnityEngine;
 using TMPro;
 using System.Collections;
 using UnityEditor.Rendering.PostProcessing;
+using UnityEngine.InputSystem;
 
 public class DialogueManager : MonoBehaviour
 {
     [SerializeField] private TMP_Text dialogueText;
     [SerializeField] private GameObject dialoguePanel;
+    [SerializeField] private DialogueData dialogueData;       // 대사 데이터 보관소
 
     public bool isTyping = false;
+    public bool isPlayingDialogue = false;
+
+
+
+    public void PlayDialogue(string Name)
+    {
+        if (!isPlayingDialogue)
+            StartCoroutine(PlayDialogueCoroutine(Name));
+    }
+
+      
+    public IEnumerator PlayDialogueCoroutine(string Name)
+    {
+        isPlayingDialogue = true;
+
+        Debug.Log("코루틴 들어옴");
+
+        if (dialogueData.interactables.ContainsKey(Name))
+        {
+            foreach (string line in dialogueData.interactables[Name])
+            {
+                yield return StartCoroutine(ShowDialogue("플레이어", line));
+            }
+        }
+
+        isPlayingDialogue = false;
+    }
 
     public IEnumerator ShowDialogue(string speaker, string line)
     {
