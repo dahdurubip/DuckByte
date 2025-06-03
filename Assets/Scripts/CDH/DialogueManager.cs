@@ -3,6 +3,7 @@ using TMPro;
 using System.Collections;
 using UnityEditor.Rendering.PostProcessing;
 using UnityEngine.InputSystem;
+using GLTFast.Schema;
 
 public class DialogueManager : MonoBehaviour
 {
@@ -12,8 +13,17 @@ public class DialogueManager : MonoBehaviour
 
     public bool isTyping = false;
     public bool isPlayingDialogue = false;
+    private bool skipRequested = false;
 
+    void Update()
+    {
 
+        // 문장이 완성되기전 스페이스바를 누르는걸 알게 할 변수
+        if (Input.GetKeyDown(KeyCode.Space))
+        {
+            skipRequested = true;
+        }
+    }
 
     public void PlayDialogue(string Name)
     {
@@ -47,19 +57,26 @@ public class DialogueManager : MonoBehaviour
         dialoguePanel.SetActive(true);
         dialogueText.text = "";
 
-
+        //bool skip = false;
         //float typingSpeed = 0.05f; // 글자당 출력 시간
         //float extraWait = 0.7f;    // 대사 출력 후 추가 대기 시간
-
+        skipRequested = false;
         // 타이핑 효과
         foreach (char c in line)
         {
-            dialogueText.text += c;
+            if (skipRequested)
+            {
+                // 문장 완성전 스페이스 바 눌렀을 시 전체문장 띄우기
+                // 같은 나레이션을 볼 시 빠르게 넘어가기 위한 기능
+                dialogueText.text = line;
+                break;
+            }
 
-            
+            dialogueText.text += c;
 
             yield return new WaitForSeconds(0.05f);
         }
+       
 
         // 대사가 다 타이핑되면 사용자 입력 대기 (스페이스바 등)
         yield return new WaitUntil(() => Input.GetKeyDown(KeyCode.Space));
@@ -77,6 +94,5 @@ public class DialogueManager : MonoBehaviour
         isTyping = false;
     }
 
-    
 
 }

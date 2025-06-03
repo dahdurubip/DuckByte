@@ -20,7 +20,10 @@ public class AudioManager : MonoBehaviour
     int channelIndex;
 
     //들어갈 효과음들 인스펙터 순서대로 이름정리
+    // 크리처2 맵 효과음
     public enum sfx { NRwCry, NRlighter, NRwind, NRknock, NRhorror, NRthunderstorm, NRbigFire, PbabyCry, Pwall, Phorror, PwaterDrop, PlayerWalk, PlayerRun, PlayerBreathe, PlayerItem, PlayerwalkSlowly }
+    // 크리처1 맵 효과음
+    public enum m1Sfx { }
 
     // SFX 중복 재생 방지
     private Dictionary<sfx, float> sfxLastPlayTime = new Dictionary<sfx, float>();
