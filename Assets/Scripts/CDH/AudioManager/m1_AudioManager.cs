@@ -23,7 +23,7 @@ public class m1_AudioManager : MonoBehaviour
     //들어갈 효과음들 인스펙터 순서대로 이름정리
     public enum m1sfx
     {
-        
+        foot
     }
 
     // SFX 중복 재생 방지
