@@ -17,6 +17,7 @@ public class ItemManager : MonoBehaviour
     //flash
     [SerializeField] private FlashManager flashManager;
     [SerializeField] private ObanggiUIManager obanggiUIManager;
+    [SerializeField] private DialogueManager dialogueManager;
 
 
     [Header("Key UI Settings")]
@@ -153,6 +154,7 @@ public class ItemManager : MonoBehaviour
                     }
 
                     noteUI.SetActive(!noteUI.activeSelf);
+                    m1_AudioManager.instance.PlaySfx(m1_AudioManager.m1sfx.paperOn);
                     return;
                 }
                 // ≈©∏Æ√≥2∏ ø°º≠ ºÆªÛ ∫“ƒ—±‚ «“ ∂ß « ø‰«— ≈¬±◊
@@ -194,13 +196,20 @@ public class ItemManager : MonoBehaviour
                 }
                 if (nearbyInteractable.CompareTag("UnBrokenJar"))
                 {
-                    PlayerTriggerMAnager PTM = GetComponent<PlayerTriggerMAnager>();
-                    Debug.Log("»Ï");
-                    if (PTM != null)
-                    {
-                    Debug.Log("»Ï2");
-                        PTM.unBrokenJar();
-                    }
+                    //PlayerTriggerMAnager PTM = GetComponent<PlayerTriggerMAnager>();
+                    ////Debug.Log("»Ï");
+                    //if (PTM != null)
+                    //{
+                    ////Debug.Log("»Ï2");
+                    //    PTM.unBrokenJar();
+                    //}
+                    m1_AudioManager.instance.PlaySfx(m1_AudioManager.m1sfx.unBrokenJar);
+                    dialogueManager.PlayDialogue("interactUnBrokenJar");
+                    return;
+                }
+                if (nearbyInteractable.CompareTag("Well"))
+                {
+                    dialogueManager.PlayDialogue("interactWell");
                     return;
                 }
                 if (nearbyInteractable.CompareTag("BossDoor"))

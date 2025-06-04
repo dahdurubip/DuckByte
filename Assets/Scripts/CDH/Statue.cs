@@ -7,6 +7,7 @@ public class Statue : MonoBehaviour
     public event Action<Statue> OnFireLit;        // 불 켤 때 호출할 이벤트
     //public GameObject fireEffect;             // 불 켤 때 나타날 파티클
     public ParticleSystem fireEffect;
+    [SerializeField] AudioSource fireAudio;
 
     private void Awake()
     {
@@ -24,6 +25,8 @@ public class Statue : MonoBehaviour
 
         // 이펙트, 소리 등 추가 가능
         Debug.Log($"{gameObject.name} 불 켜짐");
+        m1_AudioManager.instance.PlaySfx(m1_AudioManager.m1sfx.fireOn);
+        fireAudio.Play();
 
         OnFireLit?.Invoke(this);                 // 퍼즐 관리자에게 알림
     }
@@ -36,6 +39,7 @@ public class Statue : MonoBehaviour
         {
             //fireEffect.SetActive(false);
             fireEffect.Stop(true, ParticleSystemStopBehavior.StopEmittingAndClear);
+            fireAudio.Stop();
         }
     }
 }

@@ -13,21 +13,21 @@ public class PlayerTriggerMAnager : MonoBehaviour
         if (other.CompareTag("bossDoor"))
         {
             Debug.Log("보스문 충돌");
-            m1_AudioManager.instance.PlaySfx(m1_AudioManager.m1sfx.foot);
+            //m1_AudioManager.instance.PlaySfx(m1_AudioManager.m1sfx.);
 
             //StartCoroutine(PlayDialogue("goToBossDoor"));
             dialogueManager.PlayDialogue("goToBossDoor");
         }
     }
 
-    public void unBrokenJar()
-    {
+    //public void unBrokenJar()
+    //{
         
-            Debug.Log("안깨지는 장독 충돌");
-            //StartCoroutine(PlayDialogue("interactUnBrokenJar"));
-            dialogueManager.PlayDialogue("interactUnBrokenJar");
+    //        Debug.Log("안깨지는 장독 충돌");
+    //        //StartCoroutine(PlayDialogue("interactUnBrokenJar"));
+    //        dialogueManager.PlayDialogue("interactUnBrokenJar");
         
-    }
+    //}
 
     //public IEnumerator PlayDialogue(string Name)
     //{
