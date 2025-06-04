@@ -14,6 +14,7 @@ public class DialogueManager : MonoBehaviour
     public bool isTyping = false;
     public bool isPlayingDialogue = false;
     private bool skipRequested = false;
+    private bool allSkip = false;
 
     void Update()
     {
@@ -22,6 +23,11 @@ public class DialogueManager : MonoBehaviour
         if (Input.GetKeyDown(KeyCode.Space))
         {
             skipRequested = true;
+        }
+
+        if (Input.GetKeyDown(KeyCode.Tab))
+        {
+            allSkip = true;
         }
     }
 
@@ -61,9 +67,19 @@ public class DialogueManager : MonoBehaviour
         //float typingSpeed = 0.05f; // 글자당 출력 시간
         //float extraWait = 0.7f;    // 대사 출력 후 추가 대기 시간
         skipRequested = false;
+
+        allSkip = false;
+
         // 타이핑 효과
         foreach (char c in line)
         {
+            if (allSkip)
+            {
+                // 강제 스킵 처리
+                ForceEndDialogue();
+                yield break;
+            }
+
             if (skipRequested)
             {
                 // 문장 완성전 스페이스 바 눌렀을 시 전체문장 띄우기
@@ -76,8 +92,13 @@ public class DialogueManager : MonoBehaviour
 
             yield return new WaitForSeconds(0.05f);
         }
-       
 
+        if (allSkip)
+        {
+            // 강제 스킵 처리
+            ForceEndDialogue();
+            yield break;
+        }
         // 대사가 다 타이핑되면 사용자 입력 대기 (스페이스바 등)
         yield return new WaitUntil(() => Input.GetKeyDown(KeyCode.Space));
         // 자동 진행
@@ -85,6 +106,13 @@ public class DialogueManager : MonoBehaviour
         // 전체 대사 길이에 따라 대기 시간 계산
         //float totalWait = (line.Length * typingSpeed) + extraWait;
         //yield return new WaitForSeconds(totalWait);
+
+        if (allSkip)
+        {
+            // 강제 스킵 처리
+            ForceEndDialogue();
+            yield break;
+        }
 
         // 다음 줄 준비
         dialogueText.text = "";
@@ -94,5 +122,9 @@ public class DialogueManager : MonoBehaviour
         isTyping = false;
     }
 
-
+    private void ForceEndDialogue()
+    {
+        dialoguePanel.SetActive(false);
+        isTyping = false;
+    }
 }
