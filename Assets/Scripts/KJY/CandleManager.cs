@@ -57,7 +57,7 @@ public class CandleManager : MonoBehaviour
     private void Wrong()
     {
         Debug.Log("다시 시도 필요");
-        AudioManager.instance.PlaySfx(AudioManager.sfx.NRthunderstorm);
+       // AudioManager.instance.PlaySfx(AudioManager.sfx.NRthunderstorm);
         //모든 촛불 초기화
         foreach (var candle in candles)
             candle.ResetCandle();

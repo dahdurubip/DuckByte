@@ -14,7 +14,7 @@ public class DialogueManager : MonoBehaviour
     public bool isTyping = false;
     public bool isPlayingDialogue = false;
     private bool skipRequested = false;
-    private bool allSkip = false;
+    //private bool allSkip = false;
 
     void Update()
     {
@@ -25,10 +25,10 @@ public class DialogueManager : MonoBehaviour
             skipRequested = true;
         }
 
-        if (Input.GetKeyDown(KeyCode.Tab))
-        {
-            allSkip = true;
-        }
+        //if (Input.GetKeyDown(KeyCode.Tab))
+        //{
+        //    allSkip = true;
+        //}
     }
 
     public void PlayDialogue(string Name)
@@ -48,6 +48,7 @@ public class DialogueManager : MonoBehaviour
         {
             foreach (string line in dialogueData.interactables[Name])
             {
+
                 yield return StartCoroutine(ShowDialogue("플레이어", line));
             }
         }
@@ -68,17 +69,10 @@ public class DialogueManager : MonoBehaviour
         //float extraWait = 0.7f;    // 대사 출력 후 추가 대기 시간
         skipRequested = false;
 
-        allSkip = false;
 
         // 타이핑 효과
         foreach (char c in line)
         {
-            if (allSkip)
-            {
-                // 강제 스킵 처리
-                ForceEndDialogue();
-                yield break;
-            }
 
             if (skipRequested)
             {
@@ -93,12 +87,7 @@ public class DialogueManager : MonoBehaviour
             yield return new WaitForSeconds(0.05f);
         }
 
-        if (allSkip)
-        {
-            // 강제 스킵 처리
-            ForceEndDialogue();
-            yield break;
-        }
+        
         // 대사가 다 타이핑되면 사용자 입력 대기 (스페이스바 등)
         yield return new WaitUntil(() => Input.GetKeyDown(KeyCode.Space));
         // 자동 진행
@@ -107,12 +96,7 @@ public class DialogueManager : MonoBehaviour
         //float totalWait = (line.Length * typingSpeed) + extraWait;
         //yield return new WaitForSeconds(totalWait);
 
-        if (allSkip)
-        {
-            // 강제 스킵 처리
-            ForceEndDialogue();
-            yield break;
-        }
+       
 
         // 다음 줄 준비
         dialogueText.text = "";
@@ -122,9 +106,7 @@ public class DialogueManager : MonoBehaviour
         isTyping = false;
     }
 
-    private void ForceEndDialogue()
-    {
-        dialoguePanel.SetActive(false);
-        isTyping = false;
-    }
+    
+
+    
 }
