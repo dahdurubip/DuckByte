@@ -29,10 +29,10 @@ public class ItemManager : MonoBehaviour
     public TextMeshProUGUI noteUIText;
 
     //particle
-    [Header("Particle Settings")]
-    [SerializeField] private ParticleSystem paperParticle;
-    [SerializeField] private ParticleSystem bookParticle;
-    [SerializeField] private ParticleSystem skelParticle;
+    //[Header("Particle Settings")]
+    //[SerializeField] private ParticleSystem paperParticle;
+    //[SerializeField] private ParticleSystem bookParticle;
+    //[SerializeField] private ParticleSystem skelParticle;
 
     //메인 아이템
     public int MainItem = 0;
