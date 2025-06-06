@@ -1,165 +1,111 @@
-﻿//using UnityEngine;
-//using UnityEngine.UI;
-
-//public class ObanggiUIManager : MonoBehaviour
-//{
-//    [Header("전체 UI")]
-//    public GameObject mainUIPanel;
-//    public Button closeMainUIButton;
-//    [SerializeField] private GameObject DoorCollider;
-//    [SerializeField] private GameObject Lock;
-
-//    [Header("슬롯")]
-//    public Image[] slotImages; // 0: East, 1: South, 2: West, 3: North
-//    public Button[] openPopupButtons; // 각 슬롯 옆 버튼
-
-//    [Header("팝업")]
-//    public GameObject popupPanel;
-//    public Button closePopupButton;
-//    public Button[] colorButtons; // 0: Blue, 1: White, 2: Red, 3: Green
-//    public Color[] colorValues; // 각 버튼의 실제 색
-
-//    [Header("퍼즐 정답")]
-//    public Color eastAnswer ;  // Blue
-//    public Color southAnswer; // White
-//    public Color westAnswer;  // Red
-//    public Color northAnswer; // Green
-
-//    //[Header("정답 판정 시 문 오브젝트")]
-//    //public GameObject doorToOpen;
-
-//    private int currentSlotIndex = -1;
-
-//    private void Start()
-//    {
-//        DoorCollider.GetComponent<Collider>().enabled = false;
-
-//        // 전체 UI 닫기 버튼
-//        closeMainUIButton.onClick.AddListener(() => mainUIPanel.SetActive(false));
-
-//        // 각 슬롯 옆 버튼 클릭 -> 팝업 열기
-//        for (int i = 0; i < openPopupButtons.Length; i++)
-//        {
-//            int index = i;
-//            openPopupButtons[i].onClick.AddListener(() =>
-//            {
-//                currentSlotIndex = index;
-//                popupPanel.SetActive(true);
-//            });
-//        }
-
-//        // 팝업 닫기 버튼
-//        closePopupButton.onClick.AddListener(() =>
-//        {
-//            popupPanel.SetActive(false);
-//        });
-
-//        // 색상 버튼 클릭
-//        for (int i = 0; i < colorButtons.Length; i++)
-//        {
-//            int colorIndex = i;
-//            colorButtons[i].onClick.AddListener(() =>
-//            {
-//                if (currentSlotIndex >= 0 && currentSlotIndex < slotImages.Length)
-//                {
-//                    slotImages[currentSlotIndex].color = colorValues[colorIndex];
-//                    popupPanel.SetActive(false);
-//                    CheckPuzzleAnswer(); // 정답 검사
-//                }
-//            });
-//        }
-//    }
-
-//    //private void Update()
-//    //{
-//    //    if (Input.GetKeyDown(KeyCode.E))
-//    //    {
-//    //        mainUIPanel.SetActive(true);
-//    //    }
-//    //}
-
-//    private void CheckPuzzleAnswer()
-//    {
-//        bool correct =
-//            ColorsMatch(slotImages[0].color, eastAnswer) &&
-//            ColorsMatch(slotImages[1].color, southAnswer) &&
-//            ColorsMatch(slotImages[2].color, westAnswer) &&
-//            ColorsMatch(slotImages[3].color, northAnswer);
-
-//        if (correct)
-//        {
-//            Lock.SetActive(false);
-//            DoorCollider.GetComponent<Collider>().enabled = true;
-//            //doorToOpen.SetActive(false); // 예시: 문 비활성화 = 열림 처리
-//        }
-//    }
-
-//    private bool ColorsMatch(Color a, Color b)
-//    {
-//        return Mathf.Approximately(a.r, b.r) &&
-//               Mathf.Approximately(a.g, b.g) &&
-//               Mathf.Approximately(a.b, b.b);
-//    }
-//}
-
-
-using UnityEngine;
+﻿using UnityEngine;
 using UnityEngine.UI;
 
 public class ObanggiUIManager : MonoBehaviour
 {
     [Header("Main UI")]
     public GameObject mainUIPanel;
-    public Button closeMainUIButton;
+    [SerializeField] private Button closeMainUIButton;
     [SerializeField] private GameObject DoorCollider;
     [SerializeField] private GameObject Lock;
 
     [Header("Slot Panels")]
-    public Image slotImage_East;
-    public Button openPopup_East_Button;
+    [SerializeField] private Image slotImage_East;
+    [SerializeField] private Button openPopup_East_Button;
 
-    public Image slotImage_South;
-    public Button openPopup_South_Button;
+    [SerializeField] private Image slotImage_South;
+    [SerializeField] private Button openPopup_South_Button;
 
-    public Image slotImage_West;
-    public Button openPopup_West_Button;
+    [SerializeField] private Image slotImage_West;
+    [SerializeField] private Button openPopup_West_Button;
 
-    public Image slotImage_North;
-    public Button openPopup_North_Button;
+    [SerializeField] private Image slotImage_North;
+    [SerializeField] private Button openPopup_North_Button;
 
     [Header("Popup Panels")]
-    public GameObject popupPanel_East;
-    public Button closePopup_East_Button;
-    public Button[] colorButtons_East;
+    [SerializeField] private GameObject popupPanel_East;
+    [SerializeField] private Button closePopup_East_Button;
+    [SerializeField] private Button[] colorButtons_East;
 
-    public GameObject popupPanel_South;
-    public Button closePopup_South_Button;
-    public Button[] colorButtons_South;
+    [SerializeField] private GameObject popupPanel_South;
+    [SerializeField] private Button closePopup_South_Button;
+    [SerializeField] private Button[] colorButtons_South;
 
-    public GameObject popupPanel_West;
-    public Button closePopup_West_Button;
-    public Button[] colorButtons_West;
+    [SerializeField] private GameObject popupPanel_West;
+    [SerializeField] private Button closePopup_West_Button;
+    [SerializeField] private Button[] colorButtons_West;
 
-    public GameObject popupPanel_North;
-    public Button closePopup_North_Button;
-    public Button[] colorButtons_North;
+    [SerializeField] private GameObject popupPanel_North;
+    [SerializeField] private Button closePopup_North_Button;
+    [SerializeField] private Button[] colorButtons_North;
 
     [Header("Color Values")]
-    public Color red, blue, green, yellow;
+    [SerializeField] private Color red, blue, white, black;
 
-    //public Sprite baseSprite;
-
-    void Start()
+    private bool _redSouth;
+    public bool redSouth
     {
-        //slotImage_East.sprite = baseSprite;
-        //slotImage_South.sprite = baseSprite;
-        //slotImage_West.sprite = baseSprite;
-        //slotImage_North.sprite = baseSprite;
+        get { return _redSouth; }
+        set
+        {
+            if (_redSouth != value)
+            {
+                _redSouth = value;
+                UpdateAllColorButtonActivationStates();
+            }
+        }
+    }
 
+    private bool _blueEast;
+    public bool blueEast
+    {
+        get { return _blueEast; }
+        set
+        {
+            if (_blueEast != value)
+            {
+                _blueEast = value;
+                UpdateAllColorButtonActivationStates();
+            }
+        }
+    }
 
+    private bool _whiteWest;
+    public bool whiteWest
+    {
+        get { return _whiteWest; }
+        set
+        {
+            if (_whiteWest != value)
+            {
+                _whiteWest = value;
+                UpdateAllColorButtonActivationStates();
+            }
+        }
+    }
+
+    private bool _blackNorth;
+    public bool blackNorth
+    {
+        get { return _blackNorth; }
+        set
+        {
+            if (_blackNorth != value)
+            {
+                _blackNorth = value;
+                UpdateAllColorButtonActivationStates();
+            }
+        }
+    }
+
+    //모든 방향의 색상 버튼 배열을 담을 배열 (편의용)
+    private Button[][] _allDirectionalColorButtons;
+
+    private void Start()
+    {
         DoorCollider.GetComponent<Collider>().enabled = false;
 
-        // 전체 UI 토글
+        //전체 UI 토글
         mainUIPanel.SetActive(false);
         closeMainUIButton.onClick.AddListener(() => mainUIPanel.SetActive(false));
 
@@ -182,14 +128,23 @@ public class ObanggiUIManager : MonoBehaviour
         slotImage_South.color = Color.clear;
         slotImage_West.color = Color.clear;
         slotImage_North.color = Color.clear;
+
+        _allDirectionalColorButtons = new Button[][]
+{
+            colorButtons_East,
+            colorButtons_South,
+            colorButtons_West,
+            colorButtons_North
+};
+        UpdateAllColorButtonActivationStates(); // 게임 시작 시 버튼 활성화 상태 초기 설정
     }
 
-    void SetupColorButtons(Button[] buttons, Image targetSlotImage, GameObject popupPanel)
+    private void SetupColorButtons(Button[] buttons, Image targetSlotImage, GameObject popupPanel)
     {
         for (int i = 0; i < buttons.Length; i++)
         {
             int idx = i;
-            buttons[i].onClick.RemoveAllListeners(); // ✅ 기존 리스너 제거
+            buttons[i].onClick.RemoveAllListeners(); 
             buttons[i].onClick.AddListener(() =>
             {
                 Color selected = GetColorByIndex(idx);
@@ -207,22 +162,51 @@ public class ObanggiUIManager : MonoBehaviour
         {
             case 0: return red;
             case 1: return blue;
-            case 2: return green;
-            case 3: return yellow;
+            case 2: return white;
+            case 3: return black;
             default: return Color.clear;
         }
     }
 
-    void CheckAnswer()
+    private void UpdateAllColorButtonActivationStates()
+    {
+        if (_allDirectionalColorButtons == null) return;
+
+        foreach (Button[] directionalButtons in _allDirectionalColorButtons)
+        {
+            if (directionalButtons == null) continue;
+
+            // 각 버튼 배열의 길이는 4라고 가정 (red, blue, white, black 순서)
+            if (directionalButtons.Length >= 1 && directionalButtons[0] != null) // 빨간색 버튼 (인덱스 0)
+            {
+                directionalButtons[0].gameObject.SetActive(_redSouth);
+            }
+            if (directionalButtons.Length >= 2 && directionalButtons[1] != null) // 파란색 버튼 (인덱스 1)
+            {
+                directionalButtons[1].gameObject.SetActive(_blueEast);
+            }
+            if (directionalButtons.Length >= 3 && directionalButtons[2] != null) // 흰색 버튼 (인덱스 2)
+            {
+                directionalButtons[2].gameObject.SetActive(_whiteWest);
+            }
+            if (directionalButtons.Length >= 4 && directionalButtons[3] != null) // 검은색 버튼 (인덱스 3)
+            {
+                directionalButtons[3].gameObject.SetActive(_blackNorth);
+            }
+        }
+        Debug.Log("색상 버튼 활성화 상태 업데이트 완료.");
+    }
+
+
+    private void CheckAnswer()
     {
         if (slotImage_East.color == blue &&
-            slotImage_South.color == yellow &&
+            slotImage_South.color == white &&
             slotImage_West.color == red &&
-            slotImage_North.color == green)
+            slotImage_North.color == black)
         {
             //성공하는 효과음
             Debug.Log("정답! 문 열림");
-            // GameManager.OpenDoor(); 등으로 문 열기
             Lock.SetActive(false);
             DoorCollider.GetComponent<Collider>().enabled = true;
         }

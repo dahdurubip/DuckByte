@@ -26,7 +26,7 @@ public class Jar : MonoBehaviour
         Debug.Log("장독대 깨짐!");
 
         // 깨지는 소리 재생
-        m1_AudioManager.instance.PlaySfx(m1_AudioManager.m1sfx.brokenJar);
+
         // 해당 위치로 몬스터 쫓아옴
         Vector3 soundPosition = transform.position + transform.forward * 2f;
         GM.EmitSound(soundPosition);  // GameManager에 이벤트 전달

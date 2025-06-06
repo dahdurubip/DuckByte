@@ -97,7 +97,7 @@ public class PlayerMovement : MonoBehaviour
         UpdateStaminaUI();
 
         //CharacterController 설정
-        characterController.stepOffset = 0.6f; //넘을 수 있는 턱의 최대 높이
+        characterController.stepOffset = 0.7f; //넘을 수 있는 턱의 최대 높이
         characterController.slopeLimit = 50f;  //오를 수 있는 최대 경사 각도
     }
 

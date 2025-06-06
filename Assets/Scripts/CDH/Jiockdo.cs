@@ -6,7 +6,6 @@ public class Jiockdo : MonoBehaviour, IInteractable
     //필요 열쇠 태그
     public string requiredKeyTag = "Bulsang";
     [SerializeField] private ItemManager itemmanager;
-    [SerializeField] private DialogueManager dialogueManager;
     [SerializeField] private GameObject JiockdoArt;
 
     [Header("first door")]
@@ -49,8 +48,6 @@ public class Jiockdo : MonoBehaviour, IInteractable
         JiockdoArt.SetActive(true);
         // 풀린 자물쇠가 사라짐
         //SCDoorLock.SetActive(false);
-        // 문들 나타나는 대사
-        dialogueManager.PlayDialogue("clearToJiockdo");
         // 숨겨진 문과 상호작용 할 수 있게됨
         fDoor1.layer = LayerMask.NameToLayer("Interactable");
         fDoor2.layer = LayerMask.NameToLayer("Interactable");
