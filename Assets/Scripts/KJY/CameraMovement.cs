@@ -158,6 +158,8 @@ public class CameraMovement : MonoBehaviour
 
         Quaternion camPivotRotation = Quaternion.Euler(rotX, rotY, 0);
         transform.rotation = camPivotRotation;
+
+
     }
 
     private void LateUpdate()
