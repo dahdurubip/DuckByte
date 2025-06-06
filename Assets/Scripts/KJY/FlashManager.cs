@@ -22,6 +22,9 @@ public class FlashManager : MonoBehaviour
     [Header("Flash UI Settings")]
     [SerializeField] private GameObject flashUI;
 
+    [Header("Flash Particle")]
+    public ParticleSystem flashUIParticleSystem;
+
     [Header("Creature2 Settings")]
     [SerializeField] private Creature2 creature2;
 

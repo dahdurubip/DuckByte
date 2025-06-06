@@ -16,7 +16,7 @@ public class SouthRoomPuzzleManager : MonoBehaviour
     public TMP_InputField nameInputField;
     public Button submitButton;
     public Button cancelButton;
-    //public TextMeshProUGUI feedbackText;
+    public TextMeshProUGUI feedbackText;
 
     [Header("Player")]
     public MonoBehaviour playerMovement;      
@@ -34,7 +34,7 @@ public class SouthRoomPuzzleManager : MonoBehaviour
     {
         if (noteCanvas != null) noteCanvas.SetActive(false);
         if (inputCanvas != null) inputCanvas.SetActive(false);
-       // if (feedbackText != null) feedbackText.text = "";
+        if (feedbackText != null) feedbackText.text = "";
 
         if (closeNoteButton != null) closeNoteButton.onClick.AddListener(CloseNoteUI);
         if (submitButton != null) submitButton.onClick.AddListener(SubmitName);
@@ -42,61 +42,37 @@ public class SouthRoomPuzzleManager : MonoBehaviour
     }
 
     // 쪽지 클릭에서 호출
+    public void ShowNotePopup(int index)
+    {
+        if (index < 0 || index >= noteTexts.Count) return;
+        readNotes.Add(index);
+        if (noteTextUI != null) noteTextUI.text = noteTexts[index];
+        if (noteCanvas != null) noteCanvas.SetActive(true);
+    }
+
+    private void CloseNoteUI()
+    {
+        if (noteCanvas != null) noteCanvas.SetActive(false);
+    }
+
+    // 책 클릭에서 호출
     public void OpenNameInputUI()
     {
-        if (inputCanvas != null)
-            inputCanvas.SetActive(true);
-       // if (feedbackText != null)
-           // feedbackText.text = "";
-        if (playerMovement != null)
-            playerMovement.enabled = false;
+        if (inputCanvas != null) inputCanvas.SetActive(true);
+        if (feedbackText != null) feedbackText.text = "";
+        if (playerMovement != null) playerMovement.enabled = false;
         if (nameInputField != null)
         {
             nameInputField.text = "";
             nameInputField.Select();
         }
-        // 커서 해제
-        Cursor.lockState = CursorLockMode.None;
-        Cursor.visible = true;
     }
 
     private void CancelInputUI()
     {
-        if (inputCanvas != null)
-            inputCanvas.SetActive(false);
-        if (playerMovement != null)
-            playerMovement.enabled = true;
-        // 커서 다시 잠금
-        Cursor.lockState = CursorLockMode.Locked;
-        Cursor.visible = false;
+        if (inputCanvas != null) inputCanvas.SetActive(false);
+        if (playerMovement != null) playerMovement.enabled = true;
     }
-
-    public void ShowNotePopup(int index)
-    {
-        if (index < 0 || noteTexts == null || index >= noteTexts.Count)
-        {
-            Debug.LogWarning("Invalid note index or noteTexts not set!");
-            return;
-        }
-        readNotes.Add(index);
-        if (noteTextUI != null)
-            noteTextUI.text = noteTexts[index];
-        if (noteCanvas != null)
-            noteCanvas.SetActive(true);
-        // 커서 해제
-        Cursor.lockState = CursorLockMode.None;
-        Cursor.visible = true;
-    }
-
-    private void CloseNoteUI()
-    {
-        if (noteCanvas != null)
-            noteCanvas.SetActive(false);
-        // 커서 다시 잠금
-        Cursor.lockState = CursorLockMode.Locked;
-        Cursor.visible = false;
-    }
-
 
     private void SubmitName()
     {
@@ -104,14 +80,14 @@ public class SouthRoomPuzzleManager : MonoBehaviour
 
         if (string.Equals(attempt, correctName, System.StringComparison.Ordinal))
         {
-            //if (feedbackText != null) feedbackText.text = "정답입니다!";
+            if (feedbackText != null) feedbackText.text = "정답입니다!";
             if (itemPrefab != null && itemSpawnPoint != null)
                 Instantiate(itemPrefab, itemSpawnPoint.position, itemSpawnPoint.rotation);
             CancelInputUI();
         }
         else
         {
-           // if (feedbackText != null) feedbackText.text = "틀렸습니다. 다시 입력하세요.";
+            if (feedbackText != null) feedbackText.text = "틀렸습니다. 다시 입력하세요.";
         }
     }
 }

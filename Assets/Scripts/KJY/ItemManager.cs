@@ -17,25 +17,16 @@ public class ItemManager : MonoBehaviour
     //flash
     [SerializeField] private FlashManager flashManager;
     [SerializeField] private ObanggiUIManager obanggiUIManager;
-    [SerializeField] private DialogueManager dialogueManager;
 
 
     [Header("Key UI Settings")]
     [SerializeField] private GameObject EKeyUI;
 
     [Header("Gimmick UI Settings")]
-    [SerializeField] private GameObject paperUI;
-    [SerializeField] private GameObject bookUI;
-    [SerializeField] private GameObject skelUI;
     [SerializeField] private GameObject noteUI;
 
     [Header("Note UI Settings")]
     public TextMeshProUGUI noteUIText;
-
-    //object
-    [Header("SKel Settings")]
-    [SerializeField] private GameObject ItemSkel1;
-    [SerializeField] private GameObject ItemSkel2;
 
     //particle
     [Header("Particle Settings")]
@@ -66,9 +57,6 @@ public class ItemManager : MonoBehaviour
         animator = GetComponent<Animator>();
         mainCamera = Camera.main;
         if (EKeyUI) EKeyUI.SetActive(false);
-        if (paperUI) paperUI.SetActive(false);
-        if (bookUI) bookUI.SetActive(false);
-        if (skelUI) skelUI.SetActive(false);
     }
 
     private void Update()
@@ -98,21 +86,6 @@ public class ItemManager : MonoBehaviour
                 noteUI.SetActive(false);
                 return;
             }
-            if (paperUI.activeSelf)
-            {
-                paperUI.SetActive(false);
-                return;
-            }
-            if (bookUI.activeSelf)
-            {
-                bookUI.SetActive(false);
-                return;
-            }
-            if (skelUI.activeSelf)
-            {
-                skelUI.SetActive(false);
-                return;
-            }
 
             //읽기 기믹 (Paper/Book/Skel)
             if (nearbyInteractable != null)
@@ -121,26 +94,6 @@ public class ItemManager : MonoBehaviour
                 animator.SetTrigger("pickStand");
 
                 HandleCreature2MapInteractions();
-                //if (nearbyInteractable.CompareTag("Paper"))
-                //{
-                //    paperParticle?.Stop(true, ParticleSystemStopBehavior.StopEmittingAndClear);
-                //    paperUI.SetActive(!paperUI.activeSelf);
-                //    return;
-                //}
-                //if (nearbyInteractable.CompareTag("Book"))
-                //{
-                //    bookParticle?.Stop(true, ParticleSystemStopBehavior.StopEmittingAndClear);
-                //    bookUI.SetActive(!bookUI.activeSelf);
-                //    return;
-                //}
-                //if (nearbyInteractable.CompareTag("Skel"))
-                //{
-                //    skelParticle?.Stop(true, ParticleSystemStopBehavior.StopEmittingAndClear);
-                //    skelUI.SetActive(!skelUI.activeSelf);
-                //    ItemSkel1.SetActive(false);
-                //    ItemSkel2.SetActive(true);
-                //    return;
-                //}
 
                 //쪽지들은 전부 note태그
                 //각 쪽지마다 noteText스크립트 달고 해당하는 내용은 각각 수정
@@ -154,9 +107,9 @@ public class ItemManager : MonoBehaviour
                     }
 
                     noteUI.SetActive(!noteUI.activeSelf);
-                    m1_AudioManager.instance.PlaySfx(m1_AudioManager.m1sfx.paperOn);
                     return;
                 }
+
                 // 크리처2맵에서 석상 불켜기 할 때 필요한 태그
                 if (nearbyInteractable.CompareTag("Statue"))
                 {
@@ -167,13 +120,6 @@ public class ItemManager : MonoBehaviour
                     }
                     return;
                 }
-                ////Door 열기/닫기
-                //if (nearbyInteractable.TryGetComponent<Door>(out var door))
-                //{
-                //    //Debug.Log("Door");
-                //    door.Toggle();
-                //    return;
-                //}
 
                 //IInteractable
                 if (nearbyInteractable.TryGetComponent<IInteractable>(out var inter))
@@ -196,20 +142,13 @@ public class ItemManager : MonoBehaviour
                 }
                 if (nearbyInteractable.CompareTag("UnBrokenJar"))
                 {
-                    //PlayerTriggerMAnager PTM = GetComponent<PlayerTriggerMAnager>();
-                    ////Debug.Log("흠");
-                    //if (PTM != null)
-                    //{
-                    ////Debug.Log("흠2");
-                    //    PTM.unBrokenJar();
-                    //}
-                    m1_AudioManager.instance.PlaySfx(m1_AudioManager.m1sfx.unBrokenJar);
-                    dialogueManager.PlayDialogue("interactUnBrokenJar");
-                    return;
-                }
-                if (nearbyInteractable.CompareTag("Well"))
-                {
-                    dialogueManager.PlayDialogue("interactWell");
+                    PlayerTriggerMAnager PTM = GetComponent<PlayerTriggerMAnager>();
+                    Debug.Log("흠");
+                    if (PTM != null)
+                    {
+                    Debug.Log("흠2");
+                        PTM.unBrokenJar();
+                    }
                     return;
                 }
                 if (nearbyInteractable.CompareTag("BossDoor"))
@@ -233,16 +172,40 @@ public class ItemManager : MonoBehaviour
                     return;
                 }
 
+                if (nearbyInteractable.CompareTag("ObanggiEast"))
+                {
+                    obanggiUIManager.blueEast = true;
+                    Destroy(nearbyInteractable);
+                    return;
+                }
+
+                if (nearbyInteractable.CompareTag("ObanggiWest"))
+                {
+                    obanggiUIManager.whiteWest = true;
+                    Destroy(nearbyInteractable);
+                    return;
+                }
+
+                if (nearbyInteractable.CompareTag("ObanggiSouth"))
+                {
+                    obanggiUIManager.redSouth = true;
+                    Destroy(nearbyInteractable);
+                    return;
+                }
+
+                if (nearbyInteractable.CompareTag("ObanggiNorth"))
+                {
+                    obanggiUIManager.blackNorth = true;
+                    Destroy(nearbyInteractable);
+                    return;
+                }
+
 
             }
 
             //픽업
             if (pickableTarget != null)
             {
-                //animator.SetTrigger("pickSit");
-                //PickupItem(pickableTarget);
-                //return;
-
 
                 Vector3 directionToTarget = pickableTarget.transform.position - transform.position;
                 float verticalOffset = directionToTarget.y;
@@ -274,26 +237,6 @@ public class ItemManager : MonoBehaviour
         if (UnityEngine.SceneManagement.SceneManager.GetActiveScene().name != "Creature2Map")
             return false;
 
-        if (nearbyInteractable.CompareTag("Paper"))
-        {
-            paperParticle?.Stop(true, ParticleSystemStopBehavior.StopEmittingAndClear);
-            paperUI.SetActive(!paperUI.activeSelf);
-            return true;
-        }
-        if (nearbyInteractable.CompareTag("Book"))
-        {
-            bookParticle?.Stop(true, ParticleSystemStopBehavior.StopEmittingAndClear);
-            bookUI.SetActive(!bookUI.activeSelf);
-            return true;
-        }
-        if (nearbyInteractable.CompareTag("Skel"))
-        {
-            skelParticle?.Stop(true, ParticleSystemStopBehavior.StopEmittingAndClear);
-            skelUI.SetActive(!skelUI.activeSelf);
-            ItemSkel1.SetActive(false);
-            ItemSkel2.SetActive(true);
-            return true;
-        }
         if (nearbyInteractable.CompareTag("Battery"))
         {
             if (flashManager != null)
@@ -306,8 +249,6 @@ public class ItemManager : MonoBehaviour
 
         return false;
     }
-
-
 
     public void OnPickupAnimationEnd()
     {
@@ -340,37 +281,6 @@ public class ItemManager : MonoBehaviour
         }
     }
 
-    //private void DetectNearbyInteractable()
-    //{
-    //    nearbyInteractable = null;
-
-    //    Vector3 forward = transform.forward;
-    //    Vector3 basePosition = transform.position;
-    //    float minHeight = 0f;     // 발밑
-    //    float maxHeight = 6f;     // 머리
-    //    int rayCount = 30;           // 총 레이 개수
-    //    float detectDistance = detectRange; // 기존 값 사용
-
-    //    for (int i = 0; i < rayCount; i++)
-    //    {
-    //        float t = i / (float)(rayCount - 1);
-    //        float height = Mathf.Lerp(minHeight, maxHeight, t);
-    //        Vector3 rayOrigin = basePosition + Vector3.up * height;
-
-    //        if (Physics.Raycast(rayOrigin, forward, out RaycastHit hit, detectDistance, interacterLayer))
-    //        {
-    //            nearbyInteractable = hit.collider.gameObject;
-    //            Debug.DrawRay(rayOrigin, forward * detectDistance, Color.green);
-    //            break; // 하나라도 맞으면 종료
-    //        }
-
-    //        Debug.DrawRay(rayOrigin, forward * detectDistance, Color.gray); // 디버그용
-    //    }
-    //}
-
-
-
-
     private void DetectNearbyPickable()
     {
         pickableTarget = null;
@@ -400,8 +310,6 @@ public class ItemManager : MonoBehaviour
         }
     }
 
-
-
     private void PickupItem(GameObject item)
     {
         if (currentItem != null)
@@ -413,6 +321,7 @@ public class ItemManager : MonoBehaviour
 
         if (item.CompareTag("Flashlight"))
         {
+            flashManager.flashUIParticleSystem.Stop();
             flashManager.TurnOn();
             flashManager.SetHeld(true);
         }

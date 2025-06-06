@@ -443,8 +443,6 @@ public class MonsterAI : MonoBehaviour
 
             // 공격 애니메이션 넣기 - attack 트리거
             anim.SetTrigger("attackTrigger");
-            // 울음소리
-            m1_AudioManager.instance.PlaySfx(m1_AudioManager.m1sfx.m1Attack);
 
             GM.KillPlayer();
         }

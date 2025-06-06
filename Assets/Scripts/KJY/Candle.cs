@@ -50,7 +50,7 @@ public class Candle : MonoBehaviour, IInteractable
     private void OpenCandle()
     {
         Debug.Log("켜졌습니다!");
-        AudioManager.instance.PlaySfx(AudioManager.sfx.NRlighter);
+        //AudioManager.instance.PlaySfx(AudioManager.sfx.NRlighter);
         particle.Play();
         //촛불 상태를 켜진 상태로 설정
         isLit = true;  

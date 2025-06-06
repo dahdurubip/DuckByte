@@ -4,7 +4,7 @@ using UnityEngine.SceneManagement;
 
 public class CameraMovement : MonoBehaviour
 {
-    [Header("Gimmick Manager")]
+    [Header("Default Settings")]
     [SerializeField] private PlayerMovement playerMovement;
 
     [Header("Follow Settings")]
@@ -158,8 +158,6 @@ public class CameraMovement : MonoBehaviour
 
         Quaternion camPivotRotation = Quaternion.Euler(rotX, rotY, 0);
         transform.rotation = camPivotRotation;
-
-
     }
 
     private void LateUpdate()
