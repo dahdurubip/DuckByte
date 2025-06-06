@@ -6130,6 +6130,10 @@ PrefabInstance:
       value: 0.8907456
       objectReference: {fileID: 0}
     - target: {fileID: 6677386368598066322, guid: aed4d840180dff94087ddddc21024a31, type: 3}
+      propertyPath: m_Enabled
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6677386368598066322, guid: aed4d840180dff94087ddddc21024a31, type: 3}
       propertyPath: m_Center.x
       value: 0.010884094
       objectReference: {fileID: 0}
@@ -40760,6 +40764,14 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 2405909874974076420, guid: fee12304225405f478ba8ef371b552c0, type: 3}
+      propertyPath: m_Camera
+      value: 
+      objectReference: {fileID: 1360027069}
+    - target: {fileID: 2405909874974076420, guid: fee12304225405f478ba8ef371b552c0, type: 3}
+      propertyPath: m_RenderMode
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 4532332746942146230, guid: fee12304225405f478ba8ef371b552c0, type: 3}
       propertyPath: m_Name
       value: NCanvas
@@ -41692,7 +41704,7 @@ MonoBehaviour:
   closeNoteButton: {fileID: 1121532380}
   noteTexts:
   - 12
-  - 12
+  - 13
   - 12
   inputCanvas: {fileID: 478535960}
   nameInputField: {fileID: 478535959}
@@ -79636,6 +79648,11 @@ MeshRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
+--- !u!20 &1360027069 stripped
+Camera:
+  m_CorrespondingSourceObject: {fileID: 8632273732006427969, guid: d4b2ada4637a0984287e190d7d5e015a, type: 3}
+  m_PrefabInstance: {fileID: 1169923035}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1001 &1360752745
 PrefabInstance:
   m_ObjectHideFlags: 0
