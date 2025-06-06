@@ -9,7 +9,7 @@ public class CameraMovement : MonoBehaviour
 
     [Header("Follow Settings")]
     [SerializeField] private Transform objectTofollow;
-    [SerializeField] private float followSpeed = 10f;
+    //[SerializeField] private float followSpeed = 10f;
     //원래 카메라 로컬 Y 위치 저장용
     [SerializeField] private float originalCamLocalY;
 
