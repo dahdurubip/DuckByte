@@ -14,6 +14,7 @@ public class EndingCredit : MonoBehaviour
     [Header("UI 프리팹과 부모")]
     public GameObject textPrefab; // TextMeshProUGUI 프리팹
     public Transform textParent; // Text들이 들어갈 부모 (Vertical Layout Group 포함)
+    public GameObject canbas;
 
     [Header("타이핑 설정")]
     public float typingSpeed = 0.05f; // 글자당 딜레이
@@ -60,6 +61,12 @@ public class EndingCredit : MonoBehaviour
             }
 
             yield return new WaitForSeconds(1f); // 다음 줄로 넘어가기 전 대기
+        }
+
+        if (dataSO.currentEnding == EndingType.True)
+        {
+            Debug.Log("True 엔딩이 끝났습니다!");
+            canbas.SetActive(false);
         }
     }
 }
