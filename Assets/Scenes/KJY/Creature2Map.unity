@@ -1778,11 +1778,6 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 4380190821754405079, guid: 7d39067bead4bc14aa0b451564aa5198, type: 3}
   m_PrefabInstance: {fileID: 171453021}
   m_PrefabAsset: {fileID: 0}
---- !u!198 &171453023 stripped
-ParticleSystem:
-  m_CorrespondingSourceObject: {fileID: 6859094472005569181, guid: 7d39067bead4bc14aa0b451564aa5198, type: 3}
-  m_PrefabInstance: {fileID: 171453021}
-  m_PrefabAsset: {fileID: 0}
 --- !u!1 &171453024 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 1193953125369175018, guid: 7d39067bead4bc14aa0b451564aa5198, type: 3}
@@ -9694,11 +9689,6 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 4380190821754405079, guid: 7d39067bead4bc14aa0b451564aa5198, type: 3}
   m_PrefabInstance: {fileID: 507587873}
   m_PrefabAsset: {fileID: 0}
---- !u!198 &507587875 stripped
-ParticleSystem:
-  m_CorrespondingSourceObject: {fileID: 6859094472005569181, guid: 7d39067bead4bc14aa0b451564aa5198, type: 3}
-  m_PrefabInstance: {fileID: 507587873}
-  m_PrefabAsset: {fileID: 0}
 --- !u!1001 &519677288
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -11594,7 +11584,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!65 &692342423
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -22086,11 +22076,6 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 4380190821754405079, guid: 7d39067bead4bc14aa0b451564aa5198, type: 3}
   m_PrefabInstance: {fileID: 1546119184}
   m_PrefabAsset: {fileID: 0}
---- !u!198 &1546119186 stripped
-ParticleSystem:
-  m_CorrespondingSourceObject: {fileID: 6859094472005569181, guid: 7d39067bead4bc14aa0b451564aa5198, type: 3}
-  m_PrefabInstance: {fileID: 1546119184}
-  m_PrefabAsset: {fileID: 0}
 --- !u!1 &1550997574
 GameObject:
   m_ObjectHideFlags: 0
@@ -27254,7 +27239,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!108 &1952448670
 Light:
   m_ObjectHideFlags: 0
@@ -36180,9 +36165,6 @@ MonoBehaviour:
   EKeyUI: {fileID: 171768526922599334}
   noteUI: {fileID: 84883401}
   noteUIText: {fileID: 84883400}
-  paperParticle: {fileID: 507587875}
-  bookParticle: {fileID: 1546119186}
-  skelParticle: {fileID: 171453023}
   MainItem: 0
   currentItem: {fileID: 0}
 --- !u!1 &7174922905286864490
