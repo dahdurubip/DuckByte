@@ -16380,6 +16380,10 @@ PrefabInstance:
       value: SM_Unhyun_Iro_Wall_F001 (2)
       objectReference: {fileID: 0}
     - target: {fileID: 6949210444609760699, guid: 98e85241daf66e14881e88dd2e8d52a1, type: 3}
+      propertyPath: m_Layer
+      value: 10
+      objectReference: {fileID: 0}
+    - target: {fileID: 6949210444609760699, guid: 98e85241daf66e14881e88dd2e8d52a1, type: 3}
       propertyPath: m_IsActive
       value: 1
       objectReference: {fileID: 0}
@@ -19052,6 +19056,10 @@ PrefabInstance:
       propertyPath: obanggiUIManager
       value: 
       objectReference: {fileID: 842378099}
+    - target: {fileID: 7170638558045817283, guid: 1c1b96555739802468e69a1ebcb9c6bb, type: 3}
+      propertyPath: obstacleLayer.m_Bits
+      value: 1024
+      objectReference: {fileID: 0}
     - target: {fileID: 7170638558045817283, guid: 1c1b96555739802468e69a1ebcb9c6bb, type: 3}
       propertyPath: pickableLayer.m_Bits
       value: 128

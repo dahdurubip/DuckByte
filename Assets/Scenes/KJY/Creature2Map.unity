@@ -27239,7 +27239,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!108 &1952448670
 Light:
   m_ObjectHideFlags: 0
@@ -35971,7 +35971,7 @@ Transform:
   m_GameObject: {fileID: 4988899844015800100}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 36.06, y: 0, z: -0.3}
+  m_LocalPosition: {x: -29.1, y: 0, z: 28.6}
   m_LocalScale: {x: 2.9999998, y: 2.9999998, z: 2.9999998}
   m_ConstrainProportionsScale: 1
   m_Children:
@@ -36158,6 +36158,9 @@ MonoBehaviour:
   pickableLayer:
     serializedVersion: 2
     m_Bits: 128
+  obstacleLayer:
+    serializedVersion: 2
+    m_Bits: 0
   detectRange: 10
   panAngle: 15
   flashManager: {fileID: 143854699}
