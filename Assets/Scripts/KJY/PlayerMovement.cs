@@ -115,7 +115,7 @@ public class PlayerMovement : MonoBehaviour
         }
 
         HandleCrouch();
-        HandleAttack();
+        //HandleAttack();
     }
 
     //중력 처리
@@ -305,14 +305,14 @@ public class PlayerMovement : MonoBehaviour
         }
     }
 
-    //공격 처리
-    private void HandleAttack()
-    {
-        if (Input.GetKeyDown(KeyCode.Space))
-        {
-            animator.SetTrigger("attack");
-        }
-    }
+    ////공격 처리
+    //private void HandleAttack()
+    //{
+    //    if (Input.GetKeyDown(KeyCode.Space))
+    //    {
+    //        animator.SetTrigger("attack");
+    //    }
+    //}
 
     //스태미나 UI 업데이트
     private void UpdateStaminaUI()

@@ -10,6 +10,7 @@ public class ItemManager : MonoBehaviour
     //레이어설정
     [SerializeField] private LayerMask interacterLayer;
     [SerializeField] private LayerMask pickableLayer;
+    [SerializeField] private LayerMask obstacleLayer;
     //전방 원뿔 반경
     [SerializeField] private float detectRange = 5f;
     //전방 원뿔 절반 각도
@@ -275,8 +276,12 @@ public class ItemManager : MonoBehaviour
             Vector3 toTarget = (col.transform.position - origin).normalized;
             if (Vector3.Angle(forward, toTarget) <= panAngle)
             {
-                nearbyInteractable = col.gameObject;
-                break;
+                //<<<-- 시야 확인 로직 추가 -->>>
+                if (HasLineOfSight(col.gameObject))
+                {
+                    nearbyInteractable = col.gameObject;
+                    break; //시야가 확보된 가장 가까운 대상을 찾았으므로 반복 종료
+                }
             }
         }
     }
@@ -304,8 +309,11 @@ public class ItemManager : MonoBehaviour
             Vector3 toTarget = (col.transform.position - origin).normalized;
             if (Vector3.Angle(forward, toTarget) <= panAngle)
             {
-                pickableTarget = obj;
-                break;
+                if (HasLineOfSight(obj))
+                {
+                    pickableTarget = obj;
+                    break; 
+                }
             }
         }
     }
@@ -349,6 +357,18 @@ public class ItemManager : MonoBehaviour
             rb.AddForce(transform.forward * 2f, ForceMode.Impulse);
         }
         currentItem = null;
+    }
+
+    private bool HasLineOfSight(GameObject target)
+    {
+        //레이캐스트 시작점(카메라 위치)과 방향, 거리 계산
+        Vector3 startPoint = mainCamera.transform.position;
+        Vector3 direction = (target.transform.position - startPoint).normalized;
+        float distance = Vector3.Distance(startPoint, target.transform.position);
+
+        //카메라와 대상 사이에 obstacleLayer에 해당하는 장애물이 있는지 확인
+        //장애물이 감지되면 'true'가 되어, ! 연산자로 인해 false가 반환됩니다.
+        return !Physics.Raycast(startPoint, direction, distance, obstacleLayer);
     }
 
     private void OnDrawGizmosSelected()
