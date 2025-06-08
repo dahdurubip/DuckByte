@@ -14081,8 +14081,8 @@ MonoBehaviour:
   - {fileID: 0}
   red: {r: 0.7058824, g: 0.21960784, b: 0.15294118, a: 1}
   blue: {r: 0.15294118, g: 0.43529412, b: 0.7058824, a: 1}
-  green: {r: 0.34901962, g: 0.58431375, b: 0.19215687, a: 1}
-  yellow: {r: 0.78431374, g: 0.68235296, b: 0.20784314, a: 1}
+  white: {r: 0, g: 0, b: 0, a: 0}
+  black: {r: 0, g: 0, b: 0, a: 0}
 --- !u!1 &556668979
 GameObject:
   m_ObjectHideFlags: 0
@@ -33553,16 +33553,8 @@ MonoBehaviour:
   flashManager: {fileID: 0}
   obanggiUIManager: {fileID: 0}
   EKeyUI: {fileID: 0}
-  paperUI: {fileID: 0}
-  bookUI: {fileID: 0}
-  skelUI: {fileID: 0}
   noteUI: {fileID: 0}
   noteUIText: {fileID: 0}
-  ItemSkel1: {fileID: 0}
-  ItemSkel2: {fileID: 0}
-  paperParticle: {fileID: 0}
-  bookParticle: {fileID: 0}
-  skelParticle: {fileID: 0}
   MainItem: 0
   currentItem: {fileID: 0}
 --- !u!114 &1219229253
@@ -37980,27 +37972,27 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6922697606367191593, guid: 1c1b96555739802468e69a1ebcb9c6bb, type: 3}
       propertyPath: m_LocalScale.x
-      value: 0.7
+      value: 0.8
       objectReference: {fileID: 0}
     - target: {fileID: 6922697606367191593, guid: 1c1b96555739802468e69a1ebcb9c6bb, type: 3}
       propertyPath: m_LocalScale.y
-      value: 0.7
+      value: 0.8
       objectReference: {fileID: 0}
     - target: {fileID: 6922697606367191593, guid: 1c1b96555739802468e69a1ebcb9c6bb, type: 3}
       propertyPath: m_LocalScale.z
-      value: 0.7
+      value: 0.8
       objectReference: {fileID: 0}
     - target: {fileID: 6922697606367191593, guid: 1c1b96555739802468e69a1ebcb9c6bb, type: 3}
       propertyPath: m_LocalPosition.x
-      value: 17.78
+      value: -14.91
       objectReference: {fileID: 0}
     - target: {fileID: 6922697606367191593, guid: 1c1b96555739802468e69a1ebcb9c6bb, type: 3}
       propertyPath: m_LocalPosition.y
-      value: 0.59
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 6922697606367191593, guid: 1c1b96555739802468e69a1ebcb9c6bb, type: 3}
       propertyPath: m_LocalPosition.z
-      value: 5.7
+      value: 7.29
       objectReference: {fileID: 0}
     - target: {fileID: 6922697606367191593, guid: 1c1b96555739802468e69a1ebcb9c6bb, type: 3}
       propertyPath: m_LocalRotation.w

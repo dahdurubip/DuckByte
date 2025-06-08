@@ -154,7 +154,8 @@ public class ItemManager : MonoBehaviour
                 }
                 if (nearbyInteractable.CompareTag("BossDoor"))
                 {
-                    SceneManager.LoadScene("Boss");
+                    SceneLoad.LoadSceneWithLoading("Boss");
+                    //SceneManager.LoadScene("Boss");
                     return;
                 }
 
