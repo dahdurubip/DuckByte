@@ -25362,6 +25362,51 @@ Transform:
   m_Children: []
   m_Father: {fileID: 1281455732}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &658357809
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 658357811}
+  - component: {fileID: 658357810}
+  m_Layer: 0
+  m_Name: BossSceneManager
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &658357810
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 658357809}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 195a615f5009aef459f6fa13ee7d9c73, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  itemmanager: {fileID: 1640290410}
+--- !u!4 &658357811
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 658357809}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1001 &662010130
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -95279,6 +95324,17 @@ PrefabInstance:
       insertIndex: -1
       addedObject: {fileID: 1219229261}
   m_SourcePrefab: {fileID: 100100000, guid: 1c1b96555739802468e69a1ebcb9c6bb, type: 3}
+--- !u!114 &1640290410 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 7170638558045817283, guid: 1c1b96555739802468e69a1ebcb9c6bb, type: 3}
+  m_PrefabInstance: {fileID: 1640290409}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1219229251}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5ff48fe90f03dd245b8eee98d341d1fe, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &1643537998
 GameObject:
   m_ObjectHideFlags: 0
@@ -305305,3 +305361,4 @@ SceneRoots:
   - {fileID: 1591372660}
   - {fileID: 246202372}
   - {fileID: 1109037676}
+  - {fileID: 658357811}

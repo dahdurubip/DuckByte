@@ -51,7 +51,7 @@ public class ItemManager : MonoBehaviour
     private Animator animator;
 
 
-   // public PlayerTriggerMAnager PTM;
+    // public PlayerTriggerMAnager PTM;
 
     private void Start()
     {
@@ -154,6 +154,8 @@ public class ItemManager : MonoBehaviour
                 }
                 if (nearbyInteractable.CompareTag("BossDoor"))
                 {
+                    PlayerPrefs.SetInt("MainItemValue", MainItem);
+                    PlayerPrefs.Save();
                     SceneLoad.LoadSceneWithLoading("Boss");
                     //SceneManager.LoadScene("Boss");
                     return;
