@@ -35,7 +35,7 @@ public class Creature2 : MonoBehaviour
     private int currentPatrolIndex = 0;
     private bool patrollingForward = true; 
     private float idleTimer = 0f;
-
+    private bool isReversingCooldown = false;
 
     //크리처 애니메이션
     private Animator animator;
@@ -155,6 +155,15 @@ public class Creature2 : MonoBehaviour
             }
         }
 
+        //경로가 막혔는지 확인하고, 방향 전환 쿨타임 중이 아니라면 방향을 바꿉니다.
+        if (!isReversingCooldown && navMeshAgent.pathStatus == NavMeshPathStatus.PathPartial)
+        {
+            Debug.Log("경로가 막혔습니다. 순찰 방향을 반대로 전환합니다.");
+            ReversePatrolDirection();
+            return; //이번 프레임은 여기서 종료하여 새 경로를 계산할 시간을 줍니다.
+        }
+
+
         navMeshAgent.destination = wayPoint[currentPatrolIndex].position;
 
         //순찰 지점에 도착했을 때 Idle상태로 전한
@@ -163,6 +172,25 @@ public class Creature2 : MonoBehaviour
             currentState = CreatureState.Idle; 
             idleTimer = 0f;
         }
+    }
+
+    //경로가 막혔을 때 호출될 함수
+    private void ReversePatrolDirection()
+    {
+        //방향을 뒤집습니다.
+        patrollingForward = !patrollingForward;
+        //다음 웨이포인트를 계산합니다.
+        TheNextWayPoint();
+        //짧은 쿨타임을 시작하여 무한정 방향을 바꾸는 것을 방지합니다.
+        StartCoroutine(ReverseCooldown());
+    }
+
+    //방향 전환 쿨타임 코루틴
+    private IEnumerator ReverseCooldown()
+    {
+        isReversingCooldown = true;
+        yield return new WaitForSeconds(1.0f); //1초 동안은 다시 방향을 바꾸지 않습니다.
+        isReversingCooldown = false;
     }
 
     private void TheNextWayPoint()
