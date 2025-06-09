@@ -1226,6 +1226,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5c0040978a013334ba31108a5154dbc8, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  itemmanager: {fileID: 0}
 --- !u!4 &127982793
 Transform:
   m_ObjectHideFlags: 0
@@ -23313,8 +23314,8 @@ MonoBehaviour:
   - {fileID: 8300000, guid: 46ee065e93af0ba4bb8c9b24c0056bc3, type: 3}
   - {fileID: 8300000, guid: d86b1ef3cde007e44b41d64f1fc1c48d, type: 3}
   - {fileID: 8300000, guid: 7aefe04232b39254cad7899083ec0dbf, type: 3}
-  sfxVolume: 0
-  channels: 0
+  sfxVolume: 5
+  channels: 10
   sfxCooldown: 0.1
 --- !u!4 &1524396783
 Transform:
