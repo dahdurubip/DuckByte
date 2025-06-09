@@ -13,6 +13,8 @@ public class PlayerTriggerMAnager : MonoBehaviour
         if (other.CompareTag("bossDoor"))
         {
             Debug.Log("보스문 충돌");
+            m1_AudioManager.instance.PlaySfx(m1_AudioManager.m1sfx.foot);
+
             //StartCoroutine(PlayDialogue("goToBossDoor"));
             dialogueManager.PlayDialogue("goToBossDoor");
         }
