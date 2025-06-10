@@ -27,7 +27,7 @@ public class Player : MonoBehaviour
     [SerializeField] private GameObject hitEffect2;
     [SerializeField] private CameraMovement cam;
 
-    [SerializeField] private SceneLoader sceneLoader;
+    [SerializeField] private Creature2SceneManager creature2scenemanager;
     private float currentHp;
     private Animator animator;
 
@@ -71,7 +71,7 @@ public class Player : MonoBehaviour
         //여기서 사망 애니메이션, 게임 오버 처리 등 넣기
         animator.SetBool("die", true);
         //게임오버 화면 전환
-        sceneLoader.RestartScene();
+        creature2scenemanager.RestartScene();
     }
 
     public void Heal(float amount)

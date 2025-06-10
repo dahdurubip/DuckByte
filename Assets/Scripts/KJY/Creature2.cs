@@ -28,6 +28,9 @@ public class Creature2 : MonoBehaviour
     [SerializeField] private float detectionRange = 10f; 
     [SerializeField] private float damage = 10f;
 
+    [Header("Raycast Settings")]
+    [SerializeField] private float raycastDistance = 2.0f; // 레이캐스트 감지 거리
+
     private enum CreatureState { Patrol, Pursuit, Attack, Idle };
     private CreatureState currentState;
 
@@ -131,6 +134,28 @@ public class Creature2 : MonoBehaviour
             return;
         }
 
+        // [핵심 로직 추가] 전방에 'Wall' 태그를 가진 장애물이 있는지 확인
+        RaycastHit hit;
+        Vector3 raycastOrigin = transform.position + Vector3.up * 0.5f; // 레이 시작 위치를 살짝 위로 조정
+        Vector3 direction = transform.forward; // AI가 바라보는 정면 방향
+
+        // isReversingCooldown은 이전에 추가했던 '무한 반복 방지' 플래그입니다. 그대로 사용합니다.
+        if (!isReversingCooldown && Physics.Raycast(raycastOrigin, direction, out hit, raycastDistance))
+        {
+            // 레이캐스트에 부딪힌 물체의 태그가 'Wall'이라면
+            if (hit.collider.CompareTag("Wall"))
+            {
+                Debug.Log("전방에 'Wall' 장애물 감지! 순찰 방향을 반대로 전환합니다.");
+                ReversePatrolDirection(); // 방향 전환 함수 호출
+                return; //이번 프레임의 나머지 순찰 로직은 건너뜁니다.
+            }
+        }
+
+        //디버깅용: 에디터에서 레이캐스트를 시각적으로 확인
+        Debug.DrawRay(raycastOrigin, direction * raycastDistance, Color.red);
+
+
+
         navMeshAgent.isStopped = false;
         animator.SetBool("isIdle", false);
         animator.SetBool("isWalking", true);
@@ -155,14 +180,6 @@ public class Creature2 : MonoBehaviour
             }
         }
 
-        //경로가 막혔는지 확인하고, 방향 전환 쿨타임 중이 아니라면 방향을 바꿉니다.
-        if (!isReversingCooldown && navMeshAgent.pathStatus == NavMeshPathStatus.PathPartial)
-        {
-            Debug.Log("경로가 막혔습니다. 순찰 방향을 반대로 전환합니다.");
-            ReversePatrolDirection();
-            return; //이번 프레임은 여기서 종료하여 새 경로를 계산할 시간을 줍니다.
-        }
-
 
         navMeshAgent.destination = wayPoint[currentPatrolIndex].position;
 
@@ -174,7 +191,6 @@ public class Creature2 : MonoBehaviour
         }
     }
 
-    //경로가 막혔을 때 호출될 함수
     private void ReversePatrolDirection()
     {
         //방향을 뒤집습니다.
@@ -185,13 +201,13 @@ public class Creature2 : MonoBehaviour
         StartCoroutine(ReverseCooldown());
     }
 
-    //방향 전환 쿨타임 코루틴
     private IEnumerator ReverseCooldown()
     {
         isReversingCooldown = true;
         yield return new WaitForSeconds(1.0f); //1초 동안은 다시 방향을 바꾸지 않습니다.
         isReversingCooldown = false;
     }
+
 
     private void TheNextWayPoint()
     {

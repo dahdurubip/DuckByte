@@ -1,10 +1,15 @@
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
-public class SceneLoader : MonoBehaviour
+public class Creature2SceneManager : MonoBehaviour
 {
 
     [SerializeField] private ItemManager itemmanager;
+
+    private void Start()
+    {
+        Creature2AudioManager.instance.PlaySfx(Creature2AudioManager.sfx.Phorror);
+    }
 
     private void OnTriggerEnter(Collider other)
     {

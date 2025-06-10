@@ -165,6 +165,7 @@ public class ItemManager : MonoBehaviour
                 //메인 아이템이면
                 if (nearbyInteractable.CompareTag("MainItem"))
                 {
+                    Creature2AudioManager.instance.PlaySfx(Creature2AudioManager.sfx.PhorrorEffect);
                     MainItem += 1;
                     Destroy(nearbyInteractable);
                     return;
@@ -213,6 +214,11 @@ public class ItemManager : MonoBehaviour
 
                 Vector3 directionToTarget = pickableTarget.transform.position - transform.position;
                 float verticalOffset = directionToTarget.y;
+
+                if(pickableTarget.tag == "Flashlight")
+                {
+                    flashManager.flashUIParticleSystem.Stop();
+                }
 
                 if (verticalOffset < 0.5f) //바닥에 있을 경우
                 {
@@ -332,7 +338,6 @@ public class ItemManager : MonoBehaviour
 
         if (item.CompareTag("Flashlight"))
         {
-            flashManager.flashUIParticleSystem.Stop();
             flashManager.TurnOn();
             flashManager.SetHeld(true);
         }

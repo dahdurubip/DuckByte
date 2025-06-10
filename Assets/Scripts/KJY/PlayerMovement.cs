@@ -1,6 +1,7 @@
 using TMPro;
 using UnityEngine;
 using System.Collections;
+using UnityEngine.Audio;
 
 public class PlayerMovement : MonoBehaviour
 {
@@ -67,6 +68,14 @@ public class PlayerMovement : MonoBehaviour
     //프레임당 스태미나 회복량
     [SerializeField] private float staminaRegenRate = 3f;
 
+
+    [Header("AudioClip")]
+    [SerializeField] private AudioClip walkClip;
+    [SerializeField] private AudioClip runClip;
+    [SerializeField] private AudioClip breatheClip;
+    [SerializeField] private AudioClip crouchingWalkClip;
+
+    private AudioSource audioSource;
     //플레이어 이동 가능 여부
     private bool isMovable = true;
     //회전 시 사용되는 속도
@@ -77,12 +86,19 @@ public class PlayerMovement : MonoBehaviour
     public GameManager GM;
 
 
-    private void Start()
+    private void Awake()
     {
-        animator = GetComponent<Animator>();
         cam = Camera.main;
+        animator = GetComponent<Animator>();
         characterController = GetComponent<CharacterController>();
         capsuleCollider = GetComponent<CapsuleCollider>();
+        audioSource = GetComponent<AudioSource>();        
+    }
+
+    private void Start()
+    {
+        audioSource.Stop();
+        audioSource.loop = true;
 
         //CharacterController 원래 값 저장
         originalHeight = characterController.height;
@@ -115,7 +131,7 @@ public class PlayerMovement : MonoBehaviour
         }
 
         HandleCrouch();
-        //HandleAttack();
+        HandleAudio();
     }
 
     //중력 처리
@@ -152,20 +168,15 @@ public class PlayerMovement : MonoBehaviour
                 if (currentStamina < 0) currentStamina = 0;
 
                 ////스태미나가 방금 0이 되었다면 "breathe" 애니메이션 재생
-                //if (previousStamina > 0 && currentStamina == 0)
-                //{
-                //}
+                if (previousStamina > 0 && currentStamina == 0)
+                {
+                    audioSource.PlayOneShot(breatheClip);
+                }
             }
             else //달리기를 원하지만 스태미나가 없다면
             {
                 this.run = false; // 달릴 수 없음
                 moveDirection = Vector3.zero; // 스태미나가 0일 때 이동 자체를 막음
-                //animator.SetTrigger("breathe");
-                // 스태미나가 0인 상태에서 계속 달리려고 할 때 "breathe" 애니메이션을 반복 재생할 수 있음 (필요시 주석 해제)
-                // if (animator.GetCurrentAnimatorStateInfo(0).IsName("YourLocomotionStateName")) // 특정 상태일 때만 재생하도록 조건 추가 가능
-                // {
-                //     animator.SetTrigger("breathe");
-                // }
             }
         }
     }
@@ -255,27 +266,13 @@ public class PlayerMovement : MonoBehaviour
         }
 
 
-        //애니메이션 파라미터 설정
-        //this.run은 스태미나를 고려한 실제 달리기 상태
-        //inputDirection.magnitude는 순수 입력 강도
-        //float animatorSpeedPercent = 0f;
-        //if (IsMoving)
-        //{
-        //    if (isCrouching)
-        //        animatorSpeedPercent = 0.3f;
-        //    else if (run)
-        //        animatorSpeedPercent = 1f;
-        //    else
-        //        animatorSpeedPercent = 0.5f;
-        //}
-        //animator.SetFloat("Blend", animatorSpeedPercent * inputDirection.magnitude, 0.1f, Time.deltaTime);
         float animatorSpeedPercent = 0f;
         if (IsMoving)
         {
             animatorSpeedPercent = (this.run && !isCrouching) ? 1f : 0.5f;
         }
 
-        if (!this.run || currentStamina > 0) // 스태미나가 0일 때는 애니메이션을 멈추지 않게 설정
+        if (!this.run || currentStamina > 0) //스태미나가 0일 때는 애니메이션을 멈추지 않게 설정
         {
             animator.SetFloat("Blend", animatorSpeedPercent * inputDirection.magnitude, 0.1f, Time.deltaTime);
         }
@@ -292,11 +289,11 @@ public class PlayerMovement : MonoBehaviour
             crouchTimer = 0f; //앉기/일어서기 시 타이머 초기화
         }
 
-        //앉기 상태일 때 타이머 로직 (14초 후 강제 기상)
+        //앉기 상태일 때 타이머 로직 (7초 후 강제 기상)
         if (isCrouching)
         {
             crouchTimer += Time.deltaTime;
-            if (crouchTimer >= 14f)
+            if (crouchTimer >= 7f)
             {
                 isCrouching = false;
                 playerCrouch = false;
@@ -305,14 +302,47 @@ public class PlayerMovement : MonoBehaviour
         }
     }
 
-    ////공격 처리
-    //private void HandleAttack()
-    //{
-    //    if (Input.GetKeyDown(KeyCode.Space))
-    //    {
-    //        animator.SetTrigger("attack");
-    //    }
-    //}
+    private void HandleAudio()
+    {
+        if (IsMoving) //플레이어가 움직이고 있을 때
+        {
+            AudioClip targetClip = null; // 현재 상태에 맞는 클립을 담을 변수
+
+            //상태에 따라 목표 클립(targetClip)을 정합니다.
+            if (isCrouching)
+            {
+                targetClip = crouchingWalkClip;
+            }
+            else if (run)
+            {
+                targetClip = runClip;
+            }
+            else
+            {
+                targetClip = walkClip;
+            }
+
+            //1. 현재 재생 클립이 목표 클립과 다를 경우 -> 클립을 교체하고 재생
+            if (audioSource.clip != targetClip)
+            {
+                audioSource.clip = targetClip;
+                audioSource.Play();
+            }
+            //2. (가장 중요) 클립은 맞는데, 어떤 이유로든 소리가 멈췄을 경우 -> 다시 재생
+            else if (!audioSource.isPlaying)
+            {
+                audioSource.Play();
+            }
+        }
+        else //플레이어가 멈췄을 때
+        {
+            //재생중인 모든 발소리를 멈춤
+            if (audioSource.isPlaying)
+            {
+                audioSource.Stop();
+            }
+        }
+    }
 
     //스태미나 UI 업데이트
     private void UpdateStaminaUI()
@@ -327,13 +357,4 @@ public class PlayerMovement : MonoBehaviour
         }
     }
 
-    //WaitrForIt 코루틴은 스태미나로 인해 isMovable을 false로 만들던 로직이 제거되어 현재 직접 호출되지 않습니다.
-    //만약 다른 용도로 필요하다면 유지하고, 아니라면 제거해도 됩니다.
-    IEnumerator WaitrForIt()
-    {
-        //GetComponent<AudioSource>().Stop(); // 예시: 오디오 관련 코드
-        //GetComponent<AudioSource>().PlayOneShot(girlBreath); // 예시: 오디오 관련 코드
-        yield return new WaitForSeconds(1.5f);
-        // isMovable = true; // 이 부분은 스태미나 관련 로직에서 제거됨
-    }
 }

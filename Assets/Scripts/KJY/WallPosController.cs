@@ -15,14 +15,17 @@ public class WallPosController : MonoBehaviour
     {
         if(Cnt == 3)
         {
+            Creature2AudioManager.instance.PlaySfx(Creature2AudioManager.sfx.Pwall);
             wallPos();
         }
         else if (Cnt == 6)
         {
+            Creature2AudioManager.instance.PlaySfx(Creature2AudioManager.sfx.Pwall);
             otherWallPos();
         }
         else if (Cnt == 9)
         {
+            Creature2AudioManager.instance.PlaySfx(Creature2AudioManager.sfx.Pwall);
             fixedWallPos();
         }
     }

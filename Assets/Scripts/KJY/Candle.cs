@@ -6,6 +6,7 @@ public class Candle : MonoBehaviour, IInteractable
     //열쇠 태그
     [SerializeField] private string KeyTag = "Fire";   
     [SerializeField] private ParticleSystem particle;
+    private Light candlelight;
     //열리는 애니메이터
     //[SerializeField] private Animator animator; 
 
@@ -23,11 +24,13 @@ public class Candle : MonoBehaviour, IInteractable
     private void Awake()
     {
         particle = GetComponentInChildren<ParticleSystem>();
+        candlelight = GetComponentInChildren<Light>();
     }
 
     private void Start()
     {
         particle.Stop();
+        candlelight.enabled = false;
     }
 
     public void OnInteract(GameObject heldItem)
@@ -52,6 +55,7 @@ public class Candle : MonoBehaviour, IInteractable
         Debug.Log("켜졌습니다!");
         //AudioManager.instance.PlaySfx(AudioManager.sfx.NRlighter);
         particle.Play();
+        candlelight.enabled = true;
         //촛불 상태를 켜진 상태로 설정
         isLit = true;  
 
@@ -62,6 +66,7 @@ public class Candle : MonoBehaviour, IInteractable
     public void ResetCandle()
     {
         particle.Stop();
+        candlelight.enabled = false;
         isLit = false;
     }
 }
