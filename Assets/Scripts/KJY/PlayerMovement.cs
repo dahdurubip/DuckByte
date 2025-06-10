@@ -56,17 +56,15 @@ public class PlayerMovement : MonoBehaviour
 
     [Header("Stamina Settings")]
     //초기 스태미나
-    [SerializeField] private float initialStamina = 1000f;
+    [SerializeField] private float initialStamina = 100f;
     //현재 스태미나
     private float currentStamina;
     //최대 스태미나
     private float maxStamina;
     //스태미나 표시 UI
     [SerializeField] TMP_Text stamina_UI;
-    //프레임당 스태미나 소모량
-    [SerializeField] private float staminaConsumeRate = 5f;
-    //프레임당 스태미나 회복량
-    [SerializeField] private float staminaRegenRate = 3f;
+    [SerializeField] private float staminaConsumeRate = 20f; //<<< 초당 소모량
+    [SerializeField] private float staminaRegenRate = 15f;  //<<< 초당 회복량
 
 
     [Header("AudioClip")]
@@ -189,7 +187,7 @@ public class PlayerMovement : MonoBehaviour
         {
             if (currentStamina < maxStamina)
             {
-                currentStamina += staminaRegenRate; //스태미나 회복 (Time.deltaTime 곱해서 초당 회복량으로 변경 가능)
+                currentStamina += staminaRegenRate * Time.deltaTime; //스태미나 회복 (Time.deltaTime 곱해서 초당 회복량으로 변경 가능)
                 if (currentStamina > maxStamina) currentStamina = maxStamina;
             }
         }
@@ -349,7 +347,8 @@ public class PlayerMovement : MonoBehaviour
     {
         if (stamina_UI != null) // UI 요소가 할당되었는지 확인
         {
-            stamina_UI.text = ((int)(currentStamina / maxStamina * 100f)).ToString() + "%";
+           //stamina_UI.text = ((int)(currentStamina / maxStamina * 100f)).ToString() + "%";
+            stamina_UI.text = ((int)currentStamina).ToString() + " / " + ((int)maxStamina).ToString();
         }
         else
         {
