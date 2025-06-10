@@ -15,6 +15,9 @@ public class CandleManager : MonoBehaviour
 
     [Header("northRoomItem")]
     [SerializeField] private GameObject blackNorth;
+
+    [Header("doorCollider")]
+    [SerializeField] private Collider northRoomDoor;
    
     //현재까지 켜진 촛불 인덱스를 순서대로 저장
     private List<int> litIndices = new List<int>();
@@ -23,6 +26,7 @@ public class CandleManager : MonoBehaviour
     private void Start()
     {
         particle.Stop();
+        northRoomDoor.enabled = false;
         for (int i = 0; i < candles.Count; i++)
         {
             candles[i].Initialize(this, i);
@@ -56,6 +60,7 @@ public class CandleManager : MonoBehaviour
         //AudioManager.instance.PlaySfx(AudioManager.sfx.NRbigFire);
         blackNorth.SetActive(true);
         particle.Play();
+        northRoomDoor.enabled = true;
     }
 
     private void Wrong()
