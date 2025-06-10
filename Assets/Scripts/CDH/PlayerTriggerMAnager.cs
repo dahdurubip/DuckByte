@@ -4,28 +4,30 @@ using System.Collections;
 public class PlayerTriggerMAnager : MonoBehaviour
 {
     [SerializeField] private DialogueManager dialogueManager; // 대사 출력 담당
-    //[SerializeField] private DialogueData dialogueData;       // 대사 데이터 보관소
+                                                              //[SerializeField] private DialogueData dialogueData;       // 대사 데이터 보관소
 
-   // private bool isPlayingDialogue = false;
+    // private bool isPlayingDialogue = false;
 
     private void OnTriggerEnter(Collider other)
     {
         if (other.CompareTag("bossDoor"))
         {
             Debug.Log("보스문 충돌");
+            //m1_AudioManager.instance.PlaySfx(m1_AudioManager.m1sfx.);
+
             //StartCoroutine(PlayDialogue("goToBossDoor"));
             dialogueManager.PlayDialogue("goToBossDoor");
         }
     }
 
-    public void unBrokenJar()
-    {
-        
-            Debug.Log("안깨지는 장독 충돌");
-            //StartCoroutine(PlayDialogue("interactUnBrokenJar"));
-            dialogueManager.PlayDialogue("interactUnBrokenJar");
-        
-    }
+    //public void unBrokenJar()
+    //{
+
+    //        Debug.Log("안깨지는 장독 충돌");
+    //        //StartCoroutine(PlayDialogue("interactUnBrokenJar"));
+    //        dialogueManager.PlayDialogue("interactUnBrokenJar");
+
+    //}
 
     //public IEnumerator PlayDialogue(string Name)
     //{

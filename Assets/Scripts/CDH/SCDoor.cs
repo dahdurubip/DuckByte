@@ -8,6 +8,7 @@ public class SCDoor : MonoBehaviour, IInteractable
     [SerializeField] private ItemManager itemmanager;
 
     [SerializeField] private GameObject SCDoorLock;
+    [SerializeField] private DialogueManager dialogueManager;
 
     public GameObject door1;
     public GameObject door2;
@@ -16,7 +17,11 @@ public class SCDoor : MonoBehaviour, IInteractable
     public void OnInteract(GameObject heldItem)
     {
         //1) 아이템이 널(null)이면 무시
-        if (heldItem == null) return;
+        if (heldItem == null)
+        {
+            dialogueManager.PlayDialogue("interactSCDoor");
+            return;
+        }
 
         //2) 태그가 맞는 열쇠인지 확인
         if (heldItem.CompareTag(requiredKeyTag))
@@ -32,6 +37,8 @@ public class SCDoor : MonoBehaviour, IInteractable
     private void OpenSCD()
     {
         Debug.Log("자물쇠가 풀렸습니다");
+        //풀리는 소리
+        m1_AudioManager.instance.PlaySfx(m1_AudioManager.m1sfx.doorLock);
         Destroy(itemmanager.currentItem);
         // 풀린 자물쇠가 사라짐
         SCDoorLock.SetActive(false);
