@@ -9101,7 +9101,7 @@ MonoBehaviour:
   bonginEffect: {fileID: 1468650694}
   bossDoor1: {fileID: 1157797636}
   bossDoor2: {fileID: 1952234132}
-  dialogueManager: {fileID: 0}
+  dialogueManager: {fileID: 1777336346}
 --- !u!4 &379437565
 Transform:
   m_ObjectHideFlags: 0
@@ -17044,7 +17044,7 @@ MonoBehaviour:
   requiredKeyTag: SCDoorKey
   itemmanager: {fileID: 1219229273}
   SCDoorLock: {fileID: 621735556}
-  dialogueManager: {fileID: 0}
+  dialogueManager: {fileID: 1777336346}
   door1: {fileID: 0}
   door2: {fileID: 0}
 --- !u!54 &622525884
@@ -24618,6 +24618,10 @@ PrefabInstance:
       propertyPath: m_audioClip
       value: 
       objectReference: {fileID: 8300000, guid: ab6ece1d34bd6d941811fa7988a9e7ca, type: 3}
+    - target: {fileID: 9006583734988236709, guid: e92a0207ed6f749459a3646c2aaf3cd9, type: 3}
+      propertyPath: m_PlayOnAwake
+      value: 0
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -24631,6 +24635,11 @@ Transform:
 --- !u!198 &922112442 stripped
 ParticleSystem:
   m_CorrespondingSourceObject: {fileID: 1781949194303238864, guid: e92a0207ed6f749459a3646c2aaf3cd9, type: 3}
+  m_PrefabInstance: {fileID: 922112440}
+  m_PrefabAsset: {fileID: 0}
+--- !u!82 &922112443 stripped
+AudioSource:
+  m_CorrespondingSourceObject: {fileID: 9006583734988236709, guid: e92a0207ed6f749459a3646c2aaf3cd9, type: 3}
   m_PrefabInstance: {fileID: 922112440}
   m_PrefabAsset: {fileID: 0}
 --- !u!1 &928008569
@@ -30374,6 +30383,10 @@ PrefabInstance:
       propertyPath: m_audioClip
       value: 
       objectReference: {fileID: 8300000, guid: ab6ece1d34bd6d941811fa7988a9e7ca, type: 3}
+    - target: {fileID: 9006583734988236709, guid: e92a0207ed6f749459a3646c2aaf3cd9, type: 3}
+      propertyPath: m_PlayOnAwake
+      value: 0
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -30382,6 +30395,11 @@ PrefabInstance:
 --- !u!198 &1126666687 stripped
 ParticleSystem:
   m_CorrespondingSourceObject: {fileID: 1781949194303238864, guid: e92a0207ed6f749459a3646c2aaf3cd9, type: 3}
+  m_PrefabInstance: {fileID: 1126666686}
+  m_PrefabAsset: {fileID: 0}
+--- !u!82 &1126666688 stripped
+AudioSource:
+  m_CorrespondingSourceObject: {fileID: 9006583734988236709, guid: e92a0207ed6f749459a3646c2aaf3cd9, type: 3}
   m_PrefabInstance: {fileID: 1126666686}
   m_PrefabAsset: {fileID: 0}
 --- !u!1 &1127607112
@@ -39016,6 +39034,10 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 4082654894924243248}
     - target: {fileID: 7170638558045817283, guid: 1c1b96555739802468e69a1ebcb9c6bb, type: 3}
+      propertyPath: dialogueManager
+      value: 
+      objectReference: {fileID: 1777336346}
+    - target: {fileID: 7170638558045817283, guid: 1c1b96555739802468e69a1ebcb9c6bb, type: 3}
       propertyPath: obanggiUIManager
       value: 
       objectReference: {fileID: 554590192}
@@ -46332,6 +46354,10 @@ PrefabInstance:
       propertyPath: m_audioClip
       value: 
       objectReference: {fileID: 8300000, guid: ab6ece1d34bd6d941811fa7988a9e7ca, type: 3}
+    - target: {fileID: 9006583734988236709, guid: e92a0207ed6f749459a3646c2aaf3cd9, type: 3}
+      propertyPath: m_PlayOnAwake
+      value: 0
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -46345,6 +46371,11 @@ Transform:
 --- !u!198 &1659622561 stripped
 ParticleSystem:
   m_CorrespondingSourceObject: {fileID: 1781949194303238864, guid: e92a0207ed6f749459a3646c2aaf3cd9, type: 3}
+  m_PrefabInstance: {fileID: 1659622559}
+  m_PrefabAsset: {fileID: 0}
+--- !u!82 &1659622562 stripped
+AudioSource:
+  m_CorrespondingSourceObject: {fileID: 9006583734988236709, guid: e92a0207ed6f749459a3646c2aaf3cd9, type: 3}
   m_PrefabInstance: {fileID: 1659622559}
   m_PrefabAsset: {fileID: 0}
 --- !u!1 &1667350688
@@ -167158,7 +167189,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   isLit: 0
   fireEffect: {fileID: 1659622561}
-  fireAudio: {fileID: 0}
+  fireAudio: {fileID: 1659622562}
 --- !u!54 &3774798629874726222
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -182135,7 +182166,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   isLit: 0
   fireEffect: {fileID: 1126666687}
-  fireAudio: {fileID: 0}
+  fireAudio: {fileID: 1126666688}
 --- !u!54 &4963574078211205735
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -202481,7 +202512,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   isLit: 0
   fireEffect: {fileID: 922112442}
-  fireAudio: {fileID: 0}
+  fireAudio: {fileID: 922112443}
 --- !u!1001 &6531457887043891845
 PrefabInstance:
   m_ObjectHideFlags: 0
