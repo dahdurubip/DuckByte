@@ -73,7 +73,7 @@ public class CameraMovement : MonoBehaviour
             // 초기 카메라 거리를 currentCollisionDistance에 저장
             currentCollisionDistance = Vector3.Distance(transform.position, realCamera.position);
             // originalCamLocalY 설정 (realCamera의 초기 로컬 y값을 사용)
-            originalCamLocalY = realCamera.localPosition.y;
+            //originalCamLocalY = realCamera.localPosition.y;
         }
         else
         {
