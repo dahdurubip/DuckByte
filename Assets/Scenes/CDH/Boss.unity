@@ -45226,6 +45226,10 @@ PrefabInstance:
       propertyPath: originalCamLocalY
       value: 0.7
       objectReference: {fileID: 0}
+    - target: {fileID: 1233254671802239474, guid: d4b2ada4637a0984287e190d7d5e015a, type: 3}
+      propertyPath: collisionLayer.m_Bits
+      value: 1024
+      objectReference: {fileID: 0}
     - target: {fileID: 1889586372338735480, guid: d4b2ada4637a0984287e190d7d5e015a, type: 3}
       propertyPath: m_RenderPostProcessing
       value: 1
@@ -183739,6 +183743,10 @@ PrefabInstance:
       propertyPath: m_Center.y
       value: -0.20905097
       objectReference: {fileID: 0}
+    - target: {fileID: 6295983539035972651, guid: b67b323cafcc915418b74490eba32673, type: 3}
+      propertyPath: m_Controller
+      value: 
+      objectReference: {fileID: 9100000, guid: 3ef7da67963c41d428af8badf66627cf, type: 2}
     - target: {fileID: 7259832653382135684, guid: b67b323cafcc915418b74490eba32673, type: 3}
       propertyPath: m_Name
       value: Door (4)

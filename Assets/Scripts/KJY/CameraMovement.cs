@@ -9,8 +9,6 @@ public class CameraMovement : MonoBehaviour
 
     [Header("Follow Settings")]
     [SerializeField] private Transform objectTofollow;
-    //[SerializeField] private float followSpeed = 10f;
-    //원래 카메라 로컬 Y 위치 저장용
     [SerializeField] private float originalCamLocalY;
 
     [Header("Mouse Look Settings")]
@@ -19,24 +17,29 @@ public class CameraMovement : MonoBehaviour
 
     [Header("Camera Collision & Zoom")]
     //실제 카메라 GameObject
-    [SerializeField] private GameObject realCam;    
+    [SerializeField] private GameObject realCam;
     //카메라 Transform
-    [SerializeField] private Transform realCamera;                   
+    [SerializeField] private Transform realCamera;
     //카메라 로컬 방향
-    [SerializeField] private Vector3 dirNormalized;                   
-    //월드 공간 목표지점
-    [SerializeField] private Vector3 finalDir;                        
-    [SerializeField] private float minDistance;                        
-    [SerializeField] private float maxDistance;                       
+    [SerializeField] private Vector3 dirNormalized;
+    //월드 공간 목표지점 (사용 안 함)
+    //[SerializeField] private Vector3 finalDir;                
+    [SerializeField] private float minDistance;
+    [SerializeField] private float maxDistance;
     //충돌 보정 거리
-    [SerializeField] private float finalDistance;                     
+    [SerializeField] private float currentCollisionDistance; // 충돌 시 계산된 최종 카메라 거리
     //보간 속도
-    [SerializeField] private float smoothness = 10f;                  
+    [SerializeField] private float smoothness = 10f;
+    [SerializeField] private float collisionOffset = 0.2f; // 충돌 시 카메라가 벽에서 살짝 떨어지게 하는 값
+    [SerializeField] private LayerMask collisionLayer; // 카메라 충돌을 감지할 레이어 마스크
+
+    // SphereCast에 사용할 카메라 구체 반경
+    [SerializeField] private float cameraRadius = 0.2f;
 
     [Header("Auto-Alignment Settings")]
     [SerializeField] private float noMouseInputThreshold = 0.01f;
     //마우스 입력 없을 시 자동 정렬 시작 시간
-    [SerializeField] private float timeBeforeAutoAlign = 1.0f; 
+    [SerializeField] private float timeBeforeAutoAlign = 1.0f;
     [SerializeField] private float autoAlignSpeed = 3f;
     [SerializeField] private float defaultAutoAlignRotX = 10f;
     [SerializeField] private string autoAlignSceneName = "Creature2Map";
@@ -53,7 +56,6 @@ public class CameraMovement : MonoBehaviour
     {
         if (objectTofollow != null)
         {
-
             transform.localPosition = objectTofollow.transform.position;
             rotY = objectTofollow.transform.eulerAngles.y;
             rotX = defaultAutoAlignRotX;
@@ -66,19 +68,24 @@ public class CameraMovement : MonoBehaviour
 
         if (realCamera != null)
         {
+            // realCamera의 초기 로컬 위치를 기준으로 dirNormalized 설정
             dirNormalized = realCamera.localPosition.normalized;
-            finalDistance = realCamera.localPosition.magnitude;
-            //originalCamLocalY = realCamera.localPosition.y; 
+            // 초기 카메라 거리를 currentCollisionDistance에 저장
+            currentCollisionDistance = Vector3.Distance(transform.position, realCamera.position);
+            // originalCamLocalY 설정 (realCamera의 초기 로컬 y값을 사용)
+            originalCamLocalY = realCamera.localPosition.y;
         }
         else
         {
             Debug.LogError("Camera Wrong");
         }
+
+        // 초기 currentCollisionDistance를 maxDistance로 설정
+        currentCollisionDistance = maxDistance;
     }
 
     private void Update()
     {
-
         //Q키로 시야 고정/해제 토글
         if (Input.GetKeyDown(KeyCode.Q))
         {
@@ -108,7 +115,7 @@ public class CameraMovement : MonoBehaviour
 
                 //마우스 회전중 리셋 & 중지
                 timeSinceLastMouseInput = 0f;
-                isAutoAligning = false;       
+                isAutoAligning = false;
             }
             else
             {
@@ -151,7 +158,7 @@ public class CameraMovement : MonoBehaviour
                     rotX = targetRotX;
                     isAutoAligning = false;
                     //정렬 후 다시 리셋
-                    timeSinceLastMouseInput = 0f; 
+                    timeSinceLastMouseInput = 0f;
                 }
             }
         }
@@ -162,39 +169,42 @@ public class CameraMovement : MonoBehaviour
 
     private void LateUpdate()
     {
-
         if (objectTofollow == null || realCamera == null || playerMovement == null) return;
 
-        //transform.position = Vector3.MoveTowards(
-        //    transform.position,
-        //    objectTofollow.position,
-        //    followSpeed * Time.deltaTime
-        //);
+        // 카메라 피봇을 플레이어 위치에 고정
         transform.position = objectTofollow.position;
 
+        // 카메라의 목표 월드 위치 계산 (최대 거리 기준)
+        Vector3 desiredCameraWorldPos = transform.position + transform.rotation * (dirNormalized * maxDistance);
 
-        finalDir = transform.TransformPoint(dirNormalized * maxDistance);
         RaycastHit hit;
-        if (Physics.Linecast(transform.position, finalDir, out hit))
+        // SphereCast를 사용하여 충돌 감지
+        // 플레이어의 위치에서 목표 카메라 위치까지 cameraRadius 크기의 구체를 발사
+        if (Physics.SphereCast(transform.position, cameraRadius, (desiredCameraWorldPos - transform.position).normalized, out hit, maxDistance, collisionLayer))
         {
-            finalDistance = Mathf.Clamp(hit.distance, minDistance, maxDistance);
+            // 충돌이 감지되면 충돌 지점에서 살짝 뒤로 물러난 거리를 목표 거리로 설정
+            currentCollisionDistance = Mathf.Clamp(hit.distance - collisionOffset, minDistance, maxDistance);
         }
         else
         {
-            finalDistance = maxDistance;
+            // 충돌이 없으면 최대 거리로 설정
+            currentCollisionDistance = maxDistance;
         }
 
-        Vector3 targetLocalPos = dirNormalized * finalDistance;
+        // 최종 카메라의 로컬 위치 계산 (y축은 따로 처리)
+        Vector3 targetLocalPos = dirNormalized * currentCollisionDistance;
 
+        // 플레이어 상태에 따른 카메라 Y 위치 조정
         if (playerMovement != null && playerMovement.playerCrouch)
         {
-            targetLocalPos.y = originalCamLocalY * 0.3f;
+            targetLocalPos.y = originalCamLocalY * 0.3f; // 웅크릴 때 Y 위치 조정
         }
         else
         {
-            targetLocalPos.y = originalCamLocalY;
+            targetLocalPos.y = originalCamLocalY; // 평상시 Y 위치 유지
         }
 
+        // realCamera의 로컬 위치를 부드럽게 목표 위치로 이동
         realCamera.localPosition = Vector3.Lerp(
             realCamera.localPosition,
             targetLocalPos,
