@@ -15,6 +15,7 @@ public class EndingCredit : MonoBehaviour
     public GameObject textPrefab; // TextMeshProUGUI 프리팹
     public Transform textParent; // Text들이 들어갈 부모 (Vertical Layout Group 포함)
     public GameObject canbas;
+    public GameObject TM;
 
     [Header("타이핑 설정")]
     public float typingSpeed = 0.05f; // 글자당 딜레이
@@ -67,6 +68,7 @@ public class EndingCredit : MonoBehaviour
         {
             Debug.Log("True 엔딩이 끝났습니다!");
             canbas.SetActive(false);
+            TM.SetActive(true);
         }
     }
 }
