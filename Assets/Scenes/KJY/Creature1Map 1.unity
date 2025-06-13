@@ -4854,6 +4854,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Canvas
       objectReference: {fileID: 0}
+    - target: {fileID: 1020064643683127619, guid: f5d1ff8197a9f5c4d9c48619c7621d97, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 2164466061207435081, guid: f5d1ff8197a9f5c4d9c48619c7621d97, type: 3}
       propertyPath: m_Pivot.x
       value: 0
@@ -8643,6 +8647,7 @@ MonoBehaviour:
   bonginEffect: {fileID: 1468650694}
   bossDoor1: {fileID: 1157797636}
   bossDoor2: {fileID: 1952234132}
+  dialogueManager: {fileID: 0}
 --- !u!4 &379437565
 Transform:
   m_ObjectHideFlags: 0
@@ -16736,6 +16741,7 @@ MonoBehaviour:
   requiredKeyTag: SCDoorKey
   itemmanager: {fileID: 1219229273}
   SCDoorLock: {fileID: 621735556}
+  dialogueManager: {fileID: 0}
   door1: {fileID: 0}
   door2: {fileID: 0}
 --- !u!54 &622525884
@@ -28565,6 +28571,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   isLit: 0
   fireEffect: {fileID: 1823461181}
+  fireAudio: {fileID: 0}
 --- !u!65 &1078257839
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -33893,6 +33900,7 @@ MonoBehaviour:
   panAngle: 8
   flashManager: {fileID: 0}
   obanggiUIManager: {fileID: 0}
+  dialogueManager: {fileID: 0}
   EKeyUI: {fileID: 0}
   noteUI: {fileID: 0}
   noteUIText: {fileID: 0}
@@ -36743,11 +36751,6 @@ MeshCollider:
   m_Convex: 1
   m_CookingOptions: 30
   m_Mesh: {fileID: -191486523739650092, guid: 31692f2afc87a0f49879663505e88b9b, type: 3}
---- !u!1 &1327893043 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 6914617014795057129, guid: f5d1ff8197a9f5c4d9c48619c7621d97, type: 3}
-  m_PrefabInstance: {fileID: 220939626}
-  m_PrefabAsset: {fileID: 0}
 --- !u!1 &1331974301
 GameObject:
   m_ObjectHideFlags: 0
@@ -39176,7 +39179,7 @@ PrefabInstance:
     - target: {fileID: 7170638558045817283, guid: 1c1b96555739802468e69a1ebcb9c6bb, type: 3}
       propertyPath: bookUI
       value: 
-      objectReference: {fileID: 2112595884}
+      objectReference: {fileID: 0}
     - target: {fileID: 7170638558045817283, guid: 1c1b96555739802468e69a1ebcb9c6bb, type: 3}
       propertyPath: noteUI
       value: 
@@ -39184,11 +39187,11 @@ PrefabInstance:
     - target: {fileID: 7170638558045817283, guid: 1c1b96555739802468e69a1ebcb9c6bb, type: 3}
       propertyPath: skelUI
       value: 
-      objectReference: {fileID: 1442559557}
+      objectReference: {fileID: 0}
     - target: {fileID: 7170638558045817283, guid: 1c1b96555739802468e69a1ebcb9c6bb, type: 3}
       propertyPath: paperUI
       value: 
-      objectReference: {fileID: 1327893043}
+      objectReference: {fileID: 0}
     - target: {fileID: 7170638558045817283, guid: 1c1b96555739802468e69a1ebcb9c6bb, type: 3}
       propertyPath: panAngle
       value: 10
@@ -40818,11 +40821,6 @@ MeshCollider:
   m_Convex: 1
   m_CookingOptions: 30
   m_Mesh: {fileID: -7130574477234145685, guid: 31692f2afc87a0f49879663505e88b9b, type: 3}
---- !u!1 &1442559557 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 5983402215133267508, guid: f5d1ff8197a9f5c4d9c48619c7621d97, type: 3}
-  m_PrefabInstance: {fileID: 220939626}
-  m_PrefabAsset: {fileID: 0}
 --- !u!1 &1444153636 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 1030995200, guid: abc00000000012198840388004233282, type: 3}
@@ -110200,6 +110198,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   requiredKeyTag: Bulsang
   itemmanager: {fileID: 1219229273}
+  dialogueManager: {fileID: 0}
   JiockdoArt: {fileID: 0}
   fDoor1: {fileID: 0}
   fDoor2: {fileID: 0}
@@ -110900,6 +110899,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   isLit: 0
   fireEffect: {fileID: 1942454414}
+  fireAudio: {fileID: 0}
 --- !u!65 &1849894637
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -113872,6 +113872,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   requiredKeyTag: Bulsang
   itemmanager: {fileID: 1219229273}
+  dialogueManager: {fileID: 0}
   JiockdoArt: {fileID: 0}
   fDoor1: {fileID: 0}
   fDoor2: {fileID: 0}
@@ -114745,6 +114746,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   isLit: 0
   fireEffect: {fileID: 136975157}
+  fireAudio: {fileID: 0}
 --- !u!65 &1990396066
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -117235,11 +117237,6 @@ MeshCollider:
   m_Convex: 1
   m_CookingOptions: 30
   m_Mesh: {fileID: 410432910855914930, guid: 0ef01c149448977428ae5664d595fc28, type: 3}
---- !u!1 &2112595884 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 879986361955354428, guid: f5d1ff8197a9f5c4d9c48619c7621d97, type: 3}
-  m_PrefabInstance: {fileID: 220939626}
-  m_PrefabAsset: {fileID: 0}
 --- !u!1 &2115870596
 GameObject:
   m_ObjectHideFlags: 0
@@ -166782,6 +166779,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   isLit: 0
   fireEffect: {fileID: 1659622561}
+  fireAudio: {fileID: 0}
 --- !u!54 &3774798629874726222
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -181747,6 +181745,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   isLit: 0
   fireEffect: {fileID: 1126666687}
+  fireAudio: {fileID: 0}
 --- !u!54 &4963574078211205735
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -202092,6 +202091,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   isLit: 0
   fireEffect: {fileID: 922112442}
+  fireAudio: {fileID: 0}
 --- !u!1001 &6531457887043891845
 PrefabInstance:
   m_ObjectHideFlags: 0
