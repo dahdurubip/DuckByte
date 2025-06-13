@@ -83,6 +83,7 @@ public class ItemManager : MonoBehaviour
 
         if (Input.GetKeyDown(interactKey))
         {
+            Debug.Log("mainItem" + MainItem);
             //E키를 누르면 무조건 끄는 것
             if (noteUI.activeSelf)
             {
@@ -128,6 +129,10 @@ public class ItemManager : MonoBehaviour
                 //IInteractable
                 if (nearbyInteractable.TryGetComponent<IInteractable>(out var inter))
                 {
+                    if (UnityEngine.SceneManagement.SceneManager.GetActiveScene().name == "Creature2Map")
+                    {
+                        Creature2AudioManager.instance.PlaySfx(Creature2AudioManager.sfx.Pwall);
+                    }
                     inter.OnInteract(currentItem);
                     return;
                 }
@@ -176,7 +181,10 @@ public class ItemManager : MonoBehaviour
                 //메인 아이템이면
                 if (nearbyInteractable.CompareTag("MainItem"))
                 {
-                    Creature2AudioManager.instance.PlaySfx(Creature2AudioManager.sfx.PhorrorEffect);
+                    if (UnityEngine.SceneManagement.SceneManager.GetActiveScene().name == "Creature2Map")
+                    {
+                        Creature2AudioManager.instance.PlaySfx(Creature2AudioManager.sfx.PhorrorEffect);
+                    }
                     MainItem += 1;
                     Destroy(nearbyInteractable);
                     return;

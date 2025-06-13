@@ -54,7 +54,7 @@ public class Torch : MonoBehaviour, IInteractable
             elapsed += Time.deltaTime;
             float t = elapsed / duration;
 
-            Creature2AudioManager.instance.PlaySfx(Creature2AudioManager.sfx.Pwall);
+            //Creature2AudioManager.instance.PlaySfx(Creature2AudioManager.sfx.Pwall);
 
             FirstWall.transform.position = Vector3.Lerp(firstStart, firstWallTargetPos, t);
             SecondWall.transform.position = Vector3.Lerp(secondStart, secondWallTargetPos, t);

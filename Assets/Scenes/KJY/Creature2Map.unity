@@ -214,18 +214,6 @@ PrefabInstance:
       value: P_Brick_Fence_03 (6)
       objectReference: {fileID: 0}
     - target: {fileID: 4846889021609408, guid: 1cdf58ba2fcee8d488a8bba0d44831f2, type: 3}
-      propertyPath: m_LocalScale.x
-      value: 2
-      objectReference: {fileID: 0}
-    - target: {fileID: 4846889021609408, guid: 1cdf58ba2fcee8d488a8bba0d44831f2, type: 3}
-      propertyPath: m_LocalScale.y
-      value: 7.5
-      objectReference: {fileID: 0}
-    - target: {fileID: 4846889021609408, guid: 1cdf58ba2fcee8d488a8bba0d44831f2, type: 3}
-      propertyPath: m_LocalScale.z
-      value: 2
-      objectReference: {fileID: 0}
-    - target: {fileID: 4846889021609408, guid: 1cdf58ba2fcee8d488a8bba0d44831f2, type: 3}
       propertyPath: m_LocalPosition.x
       value: 0
       objectReference: {fileID: 0}
@@ -265,14 +253,6 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 4846889021609408, guid: 1cdf58ba2fcee8d488a8bba0d44831f2, type: 3}
-      propertyPath: m_ConstrainProportionsScale
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 23094415612341072, guid: 1cdf58ba2fcee8d488a8bba0d44831f2, type: 3}
-      propertyPath: 'm_Materials.Array.data[0]'
-      value: 
-      objectReference: {fileID: 2100000, guid: 52a135d5ab2b2ff46aabce62ce729862, type: 2}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -9600,6 +9580,10 @@ PrefabInstance:
       value: wall6-2
       objectReference: {fileID: 0}
     - target: {fileID: 1699559904580314, guid: b87d6ca0773b9c045934dc8695f8b668, type: 3}
+      propertyPath: m_Layer
+      value: 10
+      objectReference: {fileID: 0}
+    - target: {fileID: 1699559904580314, guid: b87d6ca0773b9c045934dc8695f8b668, type: 3}
       propertyPath: m_TagString
       value: Wall
       objectReference: {fileID: 0}
@@ -10553,18 +10537,6 @@ PrefabInstance:
       value: P_Brick_Fence_03b (11)
       objectReference: {fileID: 0}
     - target: {fileID: 4900118775726102, guid: b87d6ca0773b9c045934dc8695f8b668, type: 3}
-      propertyPath: m_LocalScale.x
-      value: 2
-      objectReference: {fileID: 0}
-    - target: {fileID: 4900118775726102, guid: b87d6ca0773b9c045934dc8695f8b668, type: 3}
-      propertyPath: m_LocalScale.y
-      value: 7.5
-      objectReference: {fileID: 0}
-    - target: {fileID: 4900118775726102, guid: b87d6ca0773b9c045934dc8695f8b668, type: 3}
-      propertyPath: m_LocalScale.z
-      value: 2
-      objectReference: {fileID: 0}
-    - target: {fileID: 4900118775726102, guid: b87d6ca0773b9c045934dc8695f8b668, type: 3}
       propertyPath: m_LocalPosition.x
       value: 0
       objectReference: {fileID: 0}
@@ -10604,14 +10576,6 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 4900118775726102, guid: b87d6ca0773b9c045934dc8695f8b668, type: 3}
-      propertyPath: m_ConstrainProportionsScale
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 23150228414122312, guid: b87d6ca0773b9c045934dc8695f8b668, type: 3}
-      propertyPath: 'm_Materials.Array.data[0]'
-      value: 
-      objectReference: {fileID: 2100000, guid: 52a135d5ab2b2ff46aabce62ce729862, type: 2}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -11749,6 +11713,62 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 3249381419937384238, guid: ccc7b9bbfee24b1428e135505aa54153, type: 3}
   m_PrefabInstance: {fileID: 675954329}
   m_PrefabAsset: {fileID: 0}
+--- !u!1 &689957203
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 689957205}
+  - component: {fileID: 689957204}
+  m_Layer: 0
+  m_Name: AudioManager (1)
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &689957204
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 689957203}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6594e00a55ce96449b543591c953b1a4, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  bgmClip: {fileID: 0}
+  bgmVolume: 0
+  sfxClip:
+  - {fileID: 8300000, guid: 267eb1f7d79c16b448bd7a821f314d91, type: 3}
+  - {fileID: 8300000, guid: e1fecac3efa7fd14ca82bf9f5b55689a, type: 3}
+  - {fileID: 8300000, guid: 43e8908c55cedc141a2e33005fd2b4c3, type: 3}
+  - {fileID: 8300000, guid: 46fa5b70b0fbf414893ef7270ed7df8e, type: 3}
+  - {fileID: 8300000, guid: d8595ed93598b1e479146a8fa569f169, type: 3}
+  - {fileID: 8300000, guid: 09e4dafdeab3be543a91b600b3709e74, type: 3}
+  sfxVolume: 5
+  channels: 10
+  sfxCooldown: 0.1
+--- !u!4 &689957205
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 689957203}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 10.217506, y: 11.267295, z: 12.397459}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &692342422
 GameObject:
   m_ObjectHideFlags: 0
@@ -11761,7 +11781,7 @@ GameObject:
   - component: {fileID: 692342425}
   - component: {fileID: 692342424}
   - component: {fileID: 692342423}
-  m_Layer: 0
+  m_Layer: 10
   m_Name: Floor2
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -14039,6 +14059,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: P_Brick_Fence_03b (27)
       objectReference: {fileID: 0}
+    - target: {fileID: 1699559904580314, guid: b87d6ca0773b9c045934dc8695f8b668, type: 3}
+      propertyPath: m_Layer
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 4900118775726102, guid: b87d6ca0773b9c045934dc8695f8b668, type: 3}
       propertyPath: m_LocalScale.x
       value: 2
@@ -15080,6 +15104,10 @@ PrefabInstance:
     - target: {fileID: 1538815344984830, guid: b87d6ca0773b9c045934dc8695f8b668, type: 3}
       propertyPath: m_Name
       value: wall6-2&7-1
+      objectReference: {fileID: 0}
+    - target: {fileID: 1699559904580314, guid: b87d6ca0773b9c045934dc8695f8b668, type: 3}
+      propertyPath: m_Layer
+      value: 10
       objectReference: {fileID: 0}
     - target: {fileID: 1699559904580314, guid: b87d6ca0773b9c045934dc8695f8b668, type: 3}
       propertyPath: m_TagString
@@ -16127,6 +16155,10 @@ PrefabInstance:
     - target: {fileID: 1538815344984830, guid: b87d6ca0773b9c045934dc8695f8b668, type: 3}
       propertyPath: m_Name
       value: wall6-1&2-2
+      objectReference: {fileID: 0}
+    - target: {fileID: 1699559904580314, guid: b87d6ca0773b9c045934dc8695f8b668, type: 3}
+      propertyPath: m_Layer
+      value: 10
       objectReference: {fileID: 0}
     - target: {fileID: 1699559904580314, guid: b87d6ca0773b9c045934dc8695f8b668, type: 3}
       propertyPath: m_TagString
@@ -18011,6 +18043,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: P_Brick_Fence_03b (18)
       objectReference: {fileID: 0}
+    - target: {fileID: 1699559904580314, guid: b87d6ca0773b9c045934dc8695f8b668, type: 3}
+      propertyPath: m_Layer
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 4900118775726102, guid: b87d6ca0773b9c045934dc8695f8b668, type: 3}
       propertyPath: m_LocalScale.x
       value: 2
@@ -19643,6 +19679,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: P_Brick_Fence_03b (21)
       objectReference: {fileID: 0}
+    - target: {fileID: 1699559904580314, guid: b87d6ca0773b9c045934dc8695f8b668, type: 3}
+      propertyPath: m_Layer
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 4900118775726102, guid: b87d6ca0773b9c045934dc8695f8b668, type: 3}
       propertyPath: m_LocalScale.x
       value: 2
@@ -20216,6 +20256,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: P_Brick_Fence_03b (26)
       objectReference: {fileID: 0}
+    - target: {fileID: 1699559904580314, guid: b87d6ca0773b9c045934dc8695f8b668, type: 3}
+      propertyPath: m_Layer
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 4900118775726102, guid: b87d6ca0773b9c045934dc8695f8b668, type: 3}
       propertyPath: m_LocalScale.x
       value: 2
@@ -20376,6 +20420,10 @@ PrefabInstance:
     - target: {fileID: 1538815344984830, guid: b87d6ca0773b9c045934dc8695f8b668, type: 3}
       propertyPath: m_Name
       value: wall5-1
+      objectReference: {fileID: 0}
+    - target: {fileID: 1699559904580314, guid: b87d6ca0773b9c045934dc8695f8b668, type: 3}
+      propertyPath: m_Layer
+      value: 10
       objectReference: {fileID: 0}
     - target: {fileID: 1699559904580314, guid: b87d6ca0773b9c045934dc8695f8b668, type: 3}
       propertyPath: m_TagString
@@ -21464,6 +21512,10 @@ PrefabInstance:
     - target: {fileID: 1538815344984830, guid: b87d6ca0773b9c045934dc8695f8b668, type: 3}
       propertyPath: m_Name
       value: P_Brick_Fence_03b (34)
+      objectReference: {fileID: 0}
+    - target: {fileID: 1699559904580314, guid: b87d6ca0773b9c045934dc8695f8b668, type: 3}
+      propertyPath: m_Layer
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 4900118775726102, guid: b87d6ca0773b9c045934dc8695f8b668, type: 3}
       propertyPath: m_LocalScale.x
@@ -24011,6 +24063,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: P_Brick_Fence_03b (23)
       objectReference: {fileID: 0}
+    - target: {fileID: 1699559904580314, guid: b87d6ca0773b9c045934dc8695f8b668, type: 3}
+      propertyPath: m_Layer
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 4900118775726102, guid: b87d6ca0773b9c045934dc8695f8b668, type: 3}
       propertyPath: m_LocalScale.x
       value: 2
@@ -24737,18 +24793,6 @@ PrefabInstance:
       value: P_Brick_Fence_03b (20)
       objectReference: {fileID: 0}
     - target: {fileID: 4900118775726102, guid: b87d6ca0773b9c045934dc8695f8b668, type: 3}
-      propertyPath: m_LocalScale.x
-      value: 2
-      objectReference: {fileID: 0}
-    - target: {fileID: 4900118775726102, guid: b87d6ca0773b9c045934dc8695f8b668, type: 3}
-      propertyPath: m_LocalScale.y
-      value: 7.5
-      objectReference: {fileID: 0}
-    - target: {fileID: 4900118775726102, guid: b87d6ca0773b9c045934dc8695f8b668, type: 3}
-      propertyPath: m_LocalScale.z
-      value: 2
-      objectReference: {fileID: 0}
-    - target: {fileID: 4900118775726102, guid: b87d6ca0773b9c045934dc8695f8b668, type: 3}
       propertyPath: m_LocalPosition.x
       value: 0
       objectReference: {fileID: 0}
@@ -24788,14 +24832,6 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 4900118775726102, guid: b87d6ca0773b9c045934dc8695f8b668, type: 3}
-      propertyPath: m_ConstrainProportionsScale
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 23150228414122312, guid: b87d6ca0773b9c045934dc8695f8b668, type: 3}
-      propertyPath: 'm_Materials.Array.data[0]'
-      value: 
-      objectReference: {fileID: 2100000, guid: 52a135d5ab2b2ff46aabce62ce729862, type: 2}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -26813,6 +26849,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: P_Brick_Fence_03b (24)
       objectReference: {fileID: 0}
+    - target: {fileID: 1699559904580314, guid: b87d6ca0773b9c045934dc8695f8b668, type: 3}
+      propertyPath: m_Layer
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 4900118775726102, guid: b87d6ca0773b9c045934dc8695f8b668, type: 3}
       propertyPath: m_LocalScale.x
       value: 2
@@ -27004,6 +27044,10 @@ PrefabInstance:
     - target: {fileID: 1538815344984830, guid: b87d6ca0773b9c045934dc8695f8b668, type: 3}
       propertyPath: m_Name
       value: wall2-1&3-2
+      objectReference: {fileID: 0}
+    - target: {fileID: 1699559904580314, guid: b87d6ca0773b9c045934dc8695f8b668, type: 3}
+      propertyPath: m_Layer
+      value: 10
       objectReference: {fileID: 0}
     - target: {fileID: 1699559904580314, guid: b87d6ca0773b9c045934dc8695f8b668, type: 3}
       propertyPath: m_TagString
@@ -28776,6 +28820,10 @@ PrefabInstance:
       value: wall1-1&4-2
       objectReference: {fileID: 0}
     - target: {fileID: 1699559904580314, guid: b87d6ca0773b9c045934dc8695f8b668, type: 3}
+      propertyPath: m_Layer
+      value: 10
+      objectReference: {fileID: 0}
+    - target: {fileID: 1699559904580314, guid: b87d6ca0773b9c045934dc8695f8b668, type: 3}
       propertyPath: m_TagString
       value: Wall
       objectReference: {fileID: 0}
@@ -29549,6 +29597,10 @@ PrefabInstance:
     - target: {fileID: 1111917229153936796, guid: f5d1ff8197a9f5c4d9c48619c7621d97, type: 3}
       propertyPath: m_hasFontAssetChanged
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1724107000735027049, guid: f5d1ff8197a9f5c4d9c48619c7621d97, type: 3}
+      propertyPath: m_SizeDelta.x
+      value: 400
       objectReference: {fileID: 0}
     - target: {fileID: 2133848330756709413, guid: f5d1ff8197a9f5c4d9c48619c7621d97, type: 3}
       propertyPath: m_text
@@ -33441,9 +33493,9 @@ MonoBehaviour:
   crouchCapCenterY: 0.5
   playerCrouch: 0
   gravity: -10
-  initialStamina: 1000
+  initialStamina: 100
   stamina_UI: {fileID: 171768526922599333}
-  staminaConsumeRate: 5
+  staminaConsumeRate: 1
   staminaRegenRate: 3
   walkClip: {fileID: 8300000, guid: bb809a75f1ca9fb48a67dbde5a8cf8a6, type: 3}
   runClip: {fileID: 8300000, guid: 2f60b4c94556d814a930b55a79125377, type: 3}
@@ -35227,6 +35279,14 @@ PrefabInstance:
     m_TransformParent: {fileID: 0}
     m_Modifications:
     - target: {fileID: 1233254671802239474, guid: d4b2ada4637a0984287e190d7d5e015a, type: 3}
+      propertyPath: maxDistance
+      value: 5
+      objectReference: {fileID: 0}
+    - target: {fileID: 1233254671802239474, guid: d4b2ada4637a0984287e190d7d5e015a, type: 3}
+      propertyPath: minDistance
+      value: 0.3
+      objectReference: {fileID: 0}
+    - target: {fileID: 1233254671802239474, guid: d4b2ada4637a0984287e190d7d5e015a, type: 3}
       propertyPath: objectTofollow
       value: 
       objectReference: {fileID: 6330891841116228124}
@@ -35234,6 +35294,10 @@ PrefabInstance:
       propertyPath: playerMovement
       value: 
       objectReference: {fileID: 3850340033689301170}
+    - target: {fileID: 1233254671802239474, guid: d4b2ada4637a0984287e190d7d5e015a, type: 3}
+      propertyPath: collisionLayer.m_Bits
+      value: 1024
+      objectReference: {fileID: 0}
     - target: {fileID: 2715546146637666940, guid: d4b2ada4637a0984287e190d7d5e015a, type: 3}
       propertyPath: m_Name
       value: Camera
@@ -36689,6 +36753,7 @@ MonoBehaviour:
   panAngle: 15
   flashManager: {fileID: 143854699}
   obanggiUIManager: {fileID: 1369876337}
+  dialogueManager: {fileID: 0}
   EKeyUI: {fileID: 171768526922599334}
   noteUI: {fileID: 84883401}
   noteUIText: {fileID: 84883400}
@@ -38630,3 +38695,4 @@ SceneRoots:
   - {fileID: 3631841440736792602}
   - {fileID: 1369876338}
   - {fileID: 276745210}
+  - {fileID: 689957205}

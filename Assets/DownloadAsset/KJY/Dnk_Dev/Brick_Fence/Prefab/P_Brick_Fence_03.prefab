@@ -24,9 +24,9 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1156717333973732}
   serializedVersion: 2
-  m_LocalRotation: {x: 0, y: -0, z: -0, w: 1}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: -0.03, z: 16.79}
-  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalScale: {x: 2, y: 7.5, z: 2}
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 4721469429912510}
@@ -43,8 +43,8 @@ GameObject:
   - component: {fileID: 4721469429912510}
   - component: {fileID: 33865753273404968}
   - component: {fileID: 23094415612341072}
-  - component: {fileID: 64824806547065576}
-  m_Layer: 0
+  - component: {fileID: 510731570993651274}
+  m_Layer: 10
   m_Name: Brick_Fence_03
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -97,7 +97,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: 4fafb8d6b3b36774abf2b2b93f29e09f, type: 2}
+  - {fileID: 2100000, guid: 52a135d5ab2b2ff46aabce62ce729862, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -119,8 +119,8 @@ MeshRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
---- !u!64 &64824806547065576
-MeshCollider:
+--- !u!65 &510731570993651274
+BoxCollider:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
@@ -137,7 +137,6 @@ MeshCollider:
   m_IsTrigger: 0
   m_ProvidesContacts: 0
   m_Enabled: 1
-  serializedVersion: 5
-  m_Convex: 1
-  m_CookingOptions: 30
-  m_Mesh: {fileID: 4300000, guid: 93f8f90b2b57c3f4980bafa841d4f8f1, type: 3}
+  serializedVersion: 3
+  m_Size: {x: 0.5526, y: 2.3232, z: 3.2388}
+  m_Center: {x: 0, y: 0.83860004, z: 0}
