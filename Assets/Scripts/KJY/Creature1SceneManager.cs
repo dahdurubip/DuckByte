@@ -7,7 +7,7 @@ public class Creature1SceneManager : MonoBehaviour
 
     private void Awake()
     {
-        itemmanager.MainItem = PlayerPrefs.GetInt("MainItemValue", 0);
+        itemmanager.MainItem = PlayerPrefs.GetInt("MainItemValue1", 0);
     }
 
 }

@@ -3,7 +3,7 @@ using UnityEngine;
 public class Candle : MonoBehaviour, IInteractable
 {
     [Header("Key Settings")]
-    //열쇠 태그
+    //태그
     [SerializeField] private string KeyTag = "Fire";   
     [SerializeField] private ParticleSystem particle;
     private Light candlelight;
@@ -42,6 +42,7 @@ public class Candle : MonoBehaviour, IInteractable
 
         if (heldItem.CompareTag(KeyTag))
         {
+            m1_AudioManager.instance.PlaySfx(m1_AudioManager.m1sfx.northRsmallFire);
             OpenCandle();
         }
         else
@@ -53,7 +54,6 @@ public class Candle : MonoBehaviour, IInteractable
     private void OpenCandle()
     {
         Debug.Log("켜졌습니다!");
-        //AudioManager.instance.PlaySfx(AudioManager.sfx.NRlighter);
         particle.Play();
         candlelight.enabled = true;
         //촛불 상태를 켜진 상태로 설정

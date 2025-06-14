@@ -347,8 +347,8 @@ public class PlayerMovement : MonoBehaviour
     {
         if (stamina_UI != null) // UI 요소가 할당되었는지 확인
         {
-           //stamina_UI.text = ((int)(currentStamina / maxStamina * 100f)).ToString() + "%";
-            stamina_UI.text = ((int)currentStamina).ToString() + " / " + ((int)maxStamina).ToString();
+            stamina_UI.text = ((int)(currentStamina / maxStamina * 100f)).ToString() + "%";
+            //stamina_UI.text = ((int)currentStamina).ToString() + " / " + ((int)maxStamina).ToString();
         }
         else
         {

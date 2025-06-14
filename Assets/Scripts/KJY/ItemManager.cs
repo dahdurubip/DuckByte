@@ -170,7 +170,7 @@ public class ItemManager : MonoBehaviour
                 }
                 if (nearbyInteractable.CompareTag("BossDoor"))
                 {
-                    PlayerPrefs.SetInt("MainItemValue", MainItem);
+                    PlayerPrefs.SetInt("MainItemValue2", MainItem);
                     PlayerPrefs.Save();
                     SceneLoad.LoadSceneWithLoading("Boss");
                     //SceneManager.LoadScene("Boss");

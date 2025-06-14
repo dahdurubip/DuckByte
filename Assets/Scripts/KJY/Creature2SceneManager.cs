@@ -15,7 +15,7 @@ public class Creature2SceneManager : MonoBehaviour
     {
         if (other.gameObject.tag == "Player")
         {
-            PlayerPrefs.SetInt("MainItemValue", itemmanager.MainItem);
+            PlayerPrefs.SetInt("MainItemValue1", itemmanager.MainItem);
             PlayerPrefs.Save();
             //SceneManager.LoadScene("Creature1Map");
             SceneLoad.LoadSceneWithLoading("Creature1Map");

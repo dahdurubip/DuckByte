@@ -1,6 +1,7 @@
 using UnityEngine;
 using System.Collections.Generic;
 using System.Linq;
+using UnityEngine.Rendering;
 
 public class CandleManager : MonoBehaviour
 {
@@ -18,6 +19,9 @@ public class CandleManager : MonoBehaviour
 
     [Header("doorCollider")]
     [SerializeField] private Collider northRoomDoor;
+
+    [Header("volume")]
+    [SerializeField] private GameObject volumeBlack;
    
     //현재까지 켜진 촛불 인덱스를 순서대로 저장
     private List<int> litIndices = new List<int>();
@@ -42,7 +46,6 @@ public class CandleManager : MonoBehaviour
         //새로 켜진 촛불 인덱스 추가
         litIndices.Add(index);
 
-        //AudioManager.instance.PlaySfx(AudioManager.sfx.NRwind);
         //정답 개수와 일치할 때만 판정
         if (litIndices.Count == correctIndices.Count)
         {
@@ -57,8 +60,9 @@ public class CandleManager : MonoBehaviour
     private void Correct()
     {
         Debug.Log("정답! 퍼즐이 풀렸습니다.");
-        //AudioManager.instance.PlaySfx(AudioManager.sfx.NRbigFire);
+        m1_AudioManager.instance.PlaySfx(m1_AudioManager.m1sfx.northRbigFire);
         blackNorth.SetActive(true);
+        volumeBlack.SetActive(false);
         particle.Play();
         northRoomDoor.enabled = true;
     }
@@ -66,7 +70,7 @@ public class CandleManager : MonoBehaviour
     private void Wrong()
     {
         Debug.Log("다시 시도 필요");
-        //AudioManager.instance.PlaySfx(AudioManager.sfx.NRthunderstorm);
+        m1_AudioManager.instance.PlaySfx(m1_AudioManager.m1sfx.northRwomanCry);
         //모든 촛불 초기화
         foreach (var candle in candles)
             candle.ResetCandle();

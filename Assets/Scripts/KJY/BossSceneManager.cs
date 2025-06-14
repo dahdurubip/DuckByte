@@ -8,7 +8,7 @@ public class BossSceneManager : MonoBehaviour
 
     private void Awake()
     {
-        itemmanager.MainItem = PlayerPrefs.GetInt("MainItemValue", 0);
+        itemmanager.MainItem = PlayerPrefs.GetInt("MainItemValue2", 0);
     }
 
 }
