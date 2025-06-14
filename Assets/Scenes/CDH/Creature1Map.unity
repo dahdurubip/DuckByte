@@ -447,9 +447,17 @@ PrefabInstance:
       value: SM_Unhyun_Noan_W_Haenggak_Door_C001
       objectReference: {fileID: 0}
     - target: {fileID: 3397339547512406504, guid: 4fbd1ebb77381f94fad5c86ca62092f6, type: 3}
+      propertyPath: m_Layer
+      value: 10
+      objectReference: {fileID: 0}
+    - target: {fileID: 3397339547512406504, guid: 4fbd1ebb77381f94fad5c86ca62092f6, type: 3}
       propertyPath: m_IsActive
       value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: 3757473380613398589, guid: 4fbd1ebb77381f94fad5c86ca62092f6, type: 3}
+      propertyPath: 'm_Materials.Array.data[0]'
+      value: 
+      objectReference: {fileID: 2100000, guid: d4cda12b85ac73742931fe118c34c5ff, type: 2}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -7257,6 +7265,10 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 2465947233931240392, guid: b67b323cafcc915418b74490eba32673, type: 3}
+      propertyPath: 'm_Materials.Array.data[0]'
+      value: 
+      objectReference: {fileID: 2100000, guid: d4cda12b85ac73742931fe118c34c5ff, type: 2}
     - target: {fileID: 2806825484523080279, guid: b67b323cafcc915418b74490eba32673, type: 3}
       propertyPath: m_Size.y
       value: 0.9941136
@@ -7281,6 +7293,18 @@ PrefabInstance:
       propertyPath: m_Center.z
       value: 0.006385803
       objectReference: {fileID: 0}
+    - target: {fileID: 4123099891259638301, guid: b67b323cafcc915418b74490eba32673, type: 3}
+      propertyPath: m_Layer
+      value: 10
+      objectReference: {fileID: 0}
+    - target: {fileID: 5108287926303361993, guid: b67b323cafcc915418b74490eba32673, type: 3}
+      propertyPath: m_Layer
+      value: 10
+      objectReference: {fileID: 0}
+    - target: {fileID: 6765731268070287900, guid: b67b323cafcc915418b74490eba32673, type: 3}
+      propertyPath: 'm_Materials.Array.data[0]'
+      value: 
+      objectReference: {fileID: 2100000, guid: d4cda12b85ac73742931fe118c34c5ff, type: 2}
     - target: {fileID: 7259832653382135684, guid: b67b323cafcc915418b74490eba32673, type: 3}
       propertyPath: m_Name
       value: Door (2)
@@ -7991,9 +8015,17 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: -7511558181221131132, guid: 227c667a46bf7c5469d8c7c867d69cd3, type: 3}
+      propertyPath: 'm_Materials.Array.data[0]'
+      value: 
+      objectReference: {fileID: 2100000, guid: d4cda12b85ac73742931fe118c34c5ff, type: 2}
     - target: {fileID: 919132149155446097, guid: 227c667a46bf7c5469d8c7c867d69cd3, type: 3}
       propertyPath: m_Name
       value: SM_Unhyun_Norak_N_Haenggak_Door_T001
+      objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: 227c667a46bf7c5469d8c7c867d69cd3, type: 3}
+      propertyPath: m_Layer
+      value: 10
       objectReference: {fileID: 0}
     - target: {fileID: 919132149155446097, guid: 227c667a46bf7c5469d8c7c867d69cd3, type: 3}
       propertyPath: m_IsActive
@@ -9048,7 +9080,7 @@ MonoBehaviour:
   - {fileID: 6529724340340998162}
   - {fileID: 4963574078211205732}
   - {fileID: 3774798629874726219}
-  timerText: {fileID: 0}
+  timerText: {fileID: 1866301284}
   timeLimit: 30
   bonginEffect: {fileID: 1468650694}
   bossDoor1: {fileID: 1157797636}
@@ -24291,6 +24323,10 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 910532046}
+  - component: {fileID: 910532050}
+  - component: {fileID: 910532049}
+  - component: {fileID: 910532048}
+  - component: {fileID: 910532047}
   m_Layer: 0
   m_Name: Door(7)
   m_TagString: Untagged
@@ -24314,6 +24350,167 @@ Transform:
   - {fileID: 1965924938}
   m_Father: {fileID: 45292199}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!65 &910532047
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 910532045}
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_IsTrigger: 1
+  m_ProvidesContacts: 0
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Size: {x: 1, y: 0.674881, z: 0.5877743}
+  m_Center: {x: 0, y: -0.5752984, z: -0.41206264}
+--- !u!54 &910532048
+Rigidbody:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 910532045}
+  serializedVersion: 4
+  m_Mass: 1
+  m_Drag: 0
+  m_AngularDrag: 0.05
+  m_CenterOfMass: {x: 0, y: 0, z: 0}
+  m_InertiaTensor: {x: 1, y: 1, z: 1}
+  m_InertiaRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ImplicitCom: 1
+  m_ImplicitTensor: 1
+  m_UseGravity: 0
+  m_IsKinematic: 1
+  m_Interpolate: 0
+  m_Constraints: 0
+  m_CollisionDetection: 0
+--- !u!82 &910532049
+AudioSource:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 910532045}
+  m_Enabled: 1
+  serializedVersion: 4
+  OutputAudioMixerGroup: {fileID: 0}
+  m_audioClip: {fileID: 0}
+  m_Resource: {fileID: 0}
+  m_PlayOnAwake: 1
+  m_Volume: 1
+  m_Pitch: 1
+  Loop: 0
+  Mute: 0
+  Spatialize: 0
+  SpatializePostEffects: 0
+  Priority: 128
+  DopplerLevel: 1
+  MinDistance: 1
+  MaxDistance: 500
+  Pan2D: 0
+  rolloffMode: 0
+  BypassEffects: 0
+  BypassListenerEffects: 0
+  BypassReverbZones: 0
+  rolloffCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 1
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    - serializedVersion: 3
+      time: 1
+      value: 0
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  panLevelCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 0
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  spreadCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 0
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  reverbZoneMixCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 1
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+--- !u!114 &910532050
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 910532045}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 02cd6691bb1dfb24ea562f8069ac1913, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  animator: {fileID: 1965924939}
+  icon: {fileID: 0}
+  openSound: {fileID: 8300000, guid: f85f4798c89137846a15c25ae85cde97, type: 3}
+  closeSound: {fileID: 8300000, guid: 3eed367c664e5534fadb4ff831d7f6ba, type: 3}
 --- !u!1 &912529407
 GameObject:
   m_ObjectHideFlags: 0
@@ -28075,6 +28272,10 @@ PrefabInstance:
       propertyPath: m_IsActive
       value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: 6235593044707969760, guid: 1d8a287c806278f428e548d892b130ac, type: 3}
+      propertyPath: 'm_Materials.Array.data[0]'
+      value: 
+      objectReference: {fileID: 2100000, guid: d4cda12b85ac73742931fe118c34c5ff, type: 2}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -31238,6 +31439,10 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 2465947233931240392, guid: b67b323cafcc915418b74490eba32673, type: 3}
+      propertyPath: 'm_Materials.Array.data[0]'
+      value: 
+      objectReference: {fileID: 2100000, guid: d4cda12b85ac73742931fe118c34c5ff, type: 2}
     - target: {fileID: 2806825484523080279, guid: b67b323cafcc915418b74490eba32673, type: 3}
       propertyPath: m_Size.y
       value: 0.9941136
@@ -31258,6 +31463,18 @@ PrefabInstance:
       propertyPath: m_Center.z
       value: -0.08887386
       objectReference: {fileID: 0}
+    - target: {fileID: 4123099891259638301, guid: b67b323cafcc915418b74490eba32673, type: 3}
+      propertyPath: m_Layer
+      value: 10
+      objectReference: {fileID: 0}
+    - target: {fileID: 5108287926303361993, guid: b67b323cafcc915418b74490eba32673, type: 3}
+      propertyPath: m_Layer
+      value: 10
+      objectReference: {fileID: 0}
+    - target: {fileID: 6765731268070287900, guid: b67b323cafcc915418b74490eba32673, type: 3}
+      propertyPath: 'm_Materials.Array.data[0]'
+      value: 
+      objectReference: {fileID: 2100000, guid: d4cda12b85ac73742931fe118c34c5ff, type: 2}
     - target: {fileID: 7259832653382135684, guid: b67b323cafcc915418b74490eba32673, type: 3}
       propertyPath: m_Name
       value: Door (3)
@@ -39713,6 +39930,10 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 1679468808}
     m_Modifications:
+    - target: {fileID: 268230395363408899, guid: 201c52aeaec012d409e9282fbe2871bd, type: 3}
+      propertyPath: 'm_Materials.Array.data[0]'
+      value: 
+      objectReference: {fileID: 2100000, guid: d4cda12b85ac73742931fe118c34c5ff, type: 2}
     - target: {fileID: 1437737636059334508, guid: 201c52aeaec012d409e9282fbe2871bd, type: 3}
       propertyPath: m_RootOrder
       value: 1
@@ -40871,6 +41092,10 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 2465947233931240392, guid: b67b323cafcc915418b74490eba32673, type: 3}
+      propertyPath: 'm_Materials.Array.data[0]'
+      value: 
+      objectReference: {fileID: 2100000, guid: d4cda12b85ac73742931fe118c34c5ff, type: 2}
     - target: {fileID: 2806825484523080279, guid: b67b323cafcc915418b74490eba32673, type: 3}
       propertyPath: m_Size.y
       value: 0.9941137
@@ -40895,6 +41120,10 @@ PrefabInstance:
       propertyPath: m_Center.z
       value: 0.02866286
       objectReference: {fileID: 0}
+    - target: {fileID: 6765731268070287900, guid: b67b323cafcc915418b74490eba32673, type: 3}
+      propertyPath: 'm_Materials.Array.data[0]'
+      value: 
+      objectReference: {fileID: 2100000, guid: d4cda12b85ac73742931fe118c34c5ff, type: 2}
     - target: {fileID: 7259832653382135684, guid: b67b323cafcc915418b74490eba32673, type: 3}
       propertyPath: m_Name
       value: Door (1)
@@ -41949,6 +42178,10 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 1293139344}
     m_Modifications:
+    - target: {fileID: 303674028701693510, guid: b3f601b4de0192e44baa821f6298a036, type: 3}
+      propertyPath: 'm_Materials.Array.data[0]'
+      value: 
+      objectReference: {fileID: 2100000, guid: d4cda12b85ac73742931fe118c34c5ff, type: 2}
     - target: {fileID: 1476601472385371433, guid: b3f601b4de0192e44baa821f6298a036, type: 3}
       propertyPath: m_RootOrder
       value: 0
@@ -41999,7 +42232,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 2249022016322082707, guid: b3f601b4de0192e44baa821f6298a036, type: 3}
       propertyPath: m_Layer
-      value: 0
+      value: 10
       objectReference: {fileID: 0}
     - target: {fileID: 2249022016322082707, guid: b3f601b4de0192e44baa821f6298a036, type: 3}
       propertyPath: m_IsActive
@@ -112143,6 +112376,17 @@ MeshCollider:
   m_Convex: 1
   m_CookingOptions: 30
   m_Mesh: {fileID: 8141899479452089080, guid: 50f8ce79331e9e748a2d688977bb22ee, type: 3}
+--- !u!114 &1866301284 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 3338845786099270385, guid: f5d1ff8197a9f5c4d9c48619c7621d97, type: 3}
+  m_PrefabInstance: {fileID: 220939626}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f4688fdb7df04437aeb418b961361dc5, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &1866440864
 GameObject:
   m_ObjectHideFlags: 0
@@ -118226,6 +118470,10 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 2120673545}
+  - component: {fileID: 2120673549}
+  - component: {fileID: 2120673548}
+  - component: {fileID: 2120673547}
+  - component: {fileID: 2120673546}
   m_Layer: 0
   m_Name: Door(6)
   m_TagString: Untagged
@@ -118249,6 +118497,167 @@ Transform:
   - {fileID: 1679468808}
   m_Father: {fileID: 45292199}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!65 &2120673546
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2120673544}
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_IsTrigger: 1
+  m_ProvidesContacts: 0
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Size: {x: 1, y: 1, z: 1}
+  m_Center: {x: 0, y: 0, z: 0}
+--- !u!54 &2120673547
+Rigidbody:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2120673544}
+  serializedVersion: 4
+  m_Mass: 1
+  m_Drag: 0
+  m_AngularDrag: 0.05
+  m_CenterOfMass: {x: 0, y: 0, z: 0}
+  m_InertiaTensor: {x: 1, y: 1, z: 1}
+  m_InertiaRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ImplicitCom: 1
+  m_ImplicitTensor: 1
+  m_UseGravity: 0
+  m_IsKinematic: 1
+  m_Interpolate: 0
+  m_Constraints: 0
+  m_CollisionDetection: 0
+--- !u!82 &2120673548
+AudioSource:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2120673544}
+  m_Enabled: 1
+  serializedVersion: 4
+  OutputAudioMixerGroup: {fileID: 0}
+  m_audioClip: {fileID: 0}
+  m_Resource: {fileID: 0}
+  m_PlayOnAwake: 1
+  m_Volume: 1
+  m_Pitch: 1
+  Loop: 0
+  Mute: 0
+  Spatialize: 0
+  SpatializePostEffects: 0
+  Priority: 128
+  DopplerLevel: 1
+  MinDistance: 1
+  MaxDistance: 500
+  Pan2D: 0
+  rolloffMode: 0
+  BypassEffects: 0
+  BypassListenerEffects: 0
+  BypassReverbZones: 0
+  rolloffCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 1
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    - serializedVersion: 3
+      time: 1
+      value: 0
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  panLevelCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 0
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  spreadCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 0
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  reverbZoneMixCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 1
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+--- !u!114 &2120673549
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2120673544}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 02cd6691bb1dfb24ea562f8069ac1913, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  animator: {fileID: 1679468809}
+  icon: {fileID: 0}
+  openSound: {fileID: 8300000, guid: f85f4798c89137846a15c25ae85cde97, type: 3}
+  closeSound: {fileID: 8300000, guid: 3eed367c664e5534fadb4ff831d7f6ba, type: 3}
 --- !u!4 &2120907391 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 1257126973714322935, guid: 32d86f76c36e5924abc3f78fbb0c6ef1, type: 3}
@@ -126876,6 +127285,10 @@ PrefabInstance:
     - target: {fileID: 3283127610662470171, guid: 342c74748f7c91e4e9a7f98d16c5f2b1, type: 3}
       propertyPath: m_Name
       value: SM_Unhyun_Noan_W_Haenggak_Door_J001
+      objectReference: {fileID: 0}
+    - target: {fileID: 3283127610662470171, guid: 342c74748f7c91e4e9a7f98d16c5f2b1, type: 3}
+      propertyPath: m_Layer
+      value: 10
       objectReference: {fileID: 0}
     - target: {fileID: 3283127610662470171, guid: 342c74748f7c91e4e9a7f98d16c5f2b1, type: 3}
       propertyPath: m_IsActive
@@ -146443,6 +146856,10 @@ PrefabInstance:
       value: SM_Unhyun_Noan_W_Haenggak_Door_K001
       objectReference: {fileID: 0}
     - target: {fileID: 493259672441791261, guid: ed0e75bcbc575fe42985945c4b78ce1f, type: 3}
+      propertyPath: m_Layer
+      value: 10
+      objectReference: {fileID: 0}
+    - target: {fileID: 493259672441791261, guid: ed0e75bcbc575fe42985945c4b78ce1f, type: 3}
       propertyPath: m_IsActive
       value: 1
       objectReference: {fileID: 0}
@@ -147194,6 +147611,10 @@ PrefabInstance:
     - target: {fileID: 4677975881646793649, guid: 7b87973c118c06c43b478b61d3dfffe4, type: 3}
       propertyPath: m_Name
       value: SM_Unhyun_Noan_W_Haenggak_Wall_T001
+      objectReference: {fileID: 0}
+    - target: {fileID: 4677975881646793649, guid: 7b87973c118c06c43b478b61d3dfffe4, type: 3}
+      propertyPath: m_Layer
+      value: 10
       objectReference: {fileID: 0}
     - target: {fileID: 4677975881646793649, guid: 7b87973c118c06c43b478b61d3dfffe4, type: 3}
       propertyPath: m_IsActive
@@ -149390,6 +149811,10 @@ PrefabInstance:
     - target: {fileID: 6298184837291996123, guid: 23fa53b4e03bae74fad3618429925aaa, type: 3}
       propertyPath: m_Name
       value: SM_Unhyun_Noan_W_Haenggak_Door_I001
+      objectReference: {fileID: 0}
+    - target: {fileID: 6298184837291996123, guid: 23fa53b4e03bae74fad3618429925aaa, type: 3}
+      propertyPath: m_Layer
+      value: 10
       objectReference: {fileID: 0}
     - target: {fileID: 6298184837291996123, guid: 23fa53b4e03bae74fad3618429925aaa, type: 3}
       propertyPath: m_IsActive
@@ -155941,6 +156366,10 @@ PrefabInstance:
       value: SM_Unhyun_Noan_W_Haenggak_Wall_D001
       objectReference: {fileID: 0}
     - target: {fileID: 1549742509798630252, guid: 2977f4444ecf05f49a7e633bb68c6e64, type: 3}
+      propertyPath: m_Layer
+      value: 10
+      objectReference: {fileID: 0}
+    - target: {fileID: 1549742509798630252, guid: 2977f4444ecf05f49a7e633bb68c6e64, type: 3}
       propertyPath: m_IsActive
       value: 1
       objectReference: {fileID: 0}
@@ -156223,42 +156652,13 @@ PrefabInstance:
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
-    m_AddedComponents:
-    - targetCorrespondingSourceObject: {fileID: 7472582261281296673, guid: f3eff7b975559f44b8048f2b091575ab, type: 3}
-      insertIndex: -1
-      addedObject: {fileID: 2789187124665403360}
+    m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: f3eff7b975559f44b8048f2b091575ab, type: 3}
 --- !u!4 &2789187124665403358 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 7852062600287144859, guid: f3eff7b975559f44b8048f2b091575ab, type: 3}
   m_PrefabInstance: {fileID: 2789187124665403357}
   m_PrefabAsset: {fileID: 0}
---- !u!1 &2789187124665403359 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 7472582261281296673, guid: f3eff7b975559f44b8048f2b091575ab, type: 3}
-  m_PrefabInstance: {fileID: 2789187124665403357}
-  m_PrefabAsset: {fileID: 0}
---- !u!65 &2789187124665403360
-BoxCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2789187124665403359}
-  m_Material: {fileID: 0}
-  m_IncludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_ExcludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_LayerOverridePriority: 0
-  m_IsTrigger: 0
-  m_ProvidesContacts: 0
-  m_Enabled: 1
-  serializedVersion: 3
-  m_Size: {x: 0.19493727, y: 1.468965, z: 2.447788}
-  m_Center: {x: 0.09746862, y: 0.7344832, z: -1.223894}
 --- !u!4 &2790799820261450256
 Transform:
   m_ObjectHideFlags: 0
@@ -164982,6 +165382,10 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 6435535758022827102, guid: c203c3cdb55b7ca4ab6c83b61fc8f4bd, type: 3}
+      propertyPath: 'm_Materials.Array.data[0]'
+      value: 
+      objectReference: {fileID: 2100000, guid: d4cda12b85ac73742931fe118c34c5ff, type: 2}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -166356,6 +166760,10 @@ PrefabInstance:
       value: SM_Unhyun_Noan_W_Haenggak_Door_L001
       objectReference: {fileID: 0}
     - target: {fileID: 2264290776064504501, guid: 9c1260e654b52ab40afd6c0bc5affd3b, type: 3}
+      propertyPath: m_Layer
+      value: 10
+      objectReference: {fileID: 0}
+    - target: {fileID: 2264290776064504501, guid: 9c1260e654b52ab40afd6c0bc5affd3b, type: 3}
       propertyPath: m_IsActive
       value: 1
       objectReference: {fileID: 0}
@@ -167727,6 +168135,10 @@ PrefabInstance:
     - target: {fileID: 3283127610662470171, guid: 342c74748f7c91e4e9a7f98d16c5f2b1, type: 3}
       propertyPath: m_Name
       value: SM_Unhyun_Noan_W_Haenggak_Door_J001
+      objectReference: {fileID: 0}
+    - target: {fileID: 3283127610662470171, guid: 342c74748f7c91e4e9a7f98d16c5f2b1, type: 3}
+      propertyPath: m_Layer
+      value: 10
       objectReference: {fileID: 0}
     - target: {fileID: 3283127610662470171, guid: 342c74748f7c91e4e9a7f98d16c5f2b1, type: 3}
       propertyPath: m_IsActive
@@ -169481,6 +169893,10 @@ PrefabInstance:
     - target: {fileID: 1529887730544987517, guid: c29b5058c6a4b0c4e8f05cbe4e99b53a, type: 3}
       propertyPath: m_Name
       value: SM_Unhyun_Noan_W_Haenggak_Door_H001
+      objectReference: {fileID: 0}
+    - target: {fileID: 1529887730544987517, guid: c29b5058c6a4b0c4e8f05cbe4e99b53a, type: 3}
+      propertyPath: m_Layer
+      value: 10
       objectReference: {fileID: 0}
     - target: {fileID: 1529887730544987517, guid: c29b5058c6a4b0c4e8f05cbe4e99b53a, type: 3}
       propertyPath: m_IsActive
@@ -173642,6 +174058,10 @@ PrefabInstance:
     - target: {fileID: 1529887730544987517, guid: c29b5058c6a4b0c4e8f05cbe4e99b53a, type: 3}
       propertyPath: m_Name
       value: SM_Unhyun_Noan_W_Haenggak_Door_H001
+      objectReference: {fileID: 0}
+    - target: {fileID: 1529887730544987517, guid: c29b5058c6a4b0c4e8f05cbe4e99b53a, type: 3}
+      propertyPath: m_Layer
+      value: 10
       objectReference: {fileID: 0}
     - target: {fileID: 1529887730544987517, guid: c29b5058c6a4b0c4e8f05cbe4e99b53a, type: 3}
       propertyPath: m_IsActive
@@ -182217,6 +182637,10 @@ PrefabInstance:
     - target: {fileID: 919132149155446097, guid: 7b02c32eb2d8fd54a8de9e2bbe904118, type: 3}
       propertyPath: m_Name
       value: SM_Unhyun_Norak_N_Haenggak_Door_S001
+      objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: 7b02c32eb2d8fd54a8de9e2bbe904118, type: 3}
+      propertyPath: m_Layer
+      value: 10
       objectReference: {fileID: 0}
     - target: {fileID: 919132149155446097, guid: 7b02c32eb2d8fd54a8de9e2bbe904118, type: 3}
       propertyPath: m_IsActive
@@ -192168,6 +192592,10 @@ PrefabInstance:
       value: SM_Unhyun_Noan_W_Haenggak_Door_I001
       objectReference: {fileID: 0}
     - target: {fileID: 6298184837291996123, guid: 23fa53b4e03bae74fad3618429925aaa, type: 3}
+      propertyPath: m_Layer
+      value: 10
+      objectReference: {fileID: 0}
+    - target: {fileID: 6298184837291996123, guid: 23fa53b4e03bae74fad3618429925aaa, type: 3}
       propertyPath: m_IsActive
       value: 1
       objectReference: {fileID: 0}
@@ -194365,6 +194793,10 @@ PrefabInstance:
     - target: {fileID: 1549742509798630252, guid: 2977f4444ecf05f49a7e633bb68c6e64, type: 3}
       propertyPath: m_Name
       value: SM_Unhyun_Noan_W_Haenggak_Wall_D001
+      objectReference: {fileID: 0}
+    - target: {fileID: 1549742509798630252, guid: 2977f4444ecf05f49a7e633bb68c6e64, type: 3}
+      propertyPath: m_Layer
+      value: 10
       objectReference: {fileID: 0}
     - target: {fileID: 1549742509798630252, guid: 2977f4444ecf05f49a7e633bb68c6e64, type: 3}
       propertyPath: m_IsActive
@@ -202660,6 +203092,10 @@ PrefabInstance:
     - target: {fileID: 4184009687127125871, guid: ece0bfdd47d119549bfa1da259c62313, type: 3}
       propertyPath: m_Name
       value: SM_Unhyun_Noan_W_Haenggak_Pillar_A001 (2)
+      objectReference: {fileID: 0}
+    - target: {fileID: 4184009687127125871, guid: ece0bfdd47d119549bfa1da259c62313, type: 3}
+      propertyPath: m_Layer
+      value: 10
       objectReference: {fileID: 0}
     - target: {fileID: 4184009687127125871, guid: ece0bfdd47d119549bfa1da259c62313, type: 3}
       propertyPath: m_IsActive
@@ -215529,6 +215965,10 @@ PrefabInstance:
       value: SM_Unhyun_Noan_W_Haenggak_Pillar_A001 (3)
       objectReference: {fileID: 0}
     - target: {fileID: 4184009687127125871, guid: ece0bfdd47d119549bfa1da259c62313, type: 3}
+      propertyPath: m_Layer
+      value: 10
+      objectReference: {fileID: 0}
+    - target: {fileID: 4184009687127125871, guid: ece0bfdd47d119549bfa1da259c62313, type: 3}
       propertyPath: m_IsActive
       value: 1
       objectReference: {fileID: 0}
@@ -216172,6 +216612,10 @@ PrefabInstance:
       value: SM_Unhyun_Norak_Wall_R001
       objectReference: {fileID: 0}
     - target: {fileID: 3126893208690643716, guid: ab99110c320d3884087e53a30a9f066a, type: 3}
+      propertyPath: m_Layer
+      value: 10
+      objectReference: {fileID: 0}
+    - target: {fileID: 3126893208690643716, guid: ab99110c320d3884087e53a30a9f066a, type: 3}
       propertyPath: m_IsActive
       value: 1
       objectReference: {fileID: 0}
@@ -216212,8 +216656,8 @@ BoxCollider:
   m_ProvidesContacts: 0
   m_Enabled: 1
   serializedVersion: 3
-  m_Size: {x: 7.6677628, y: 2.9010415, z: 0.28440586}
-  m_Center: {x: -3.833881, y: 1.3228974, z: -0.14165802}
+  m_Size: {x: 5.1759477, y: 2.9010415, z: 0.28440586}
+  m_Center: {x: -2.5879734, y: 1.3228974, z: -0.14165802}
 --- !u!4 &7204393744199296018
 Transform:
   m_ObjectHideFlags: 0
@@ -225504,6 +225948,10 @@ PrefabInstance:
       value: SM_Unhyun_Noan_Joongmoon_Wall_A001
       objectReference: {fileID: 0}
     - target: {fileID: 4419617166294302244, guid: 22773111f949c9a4b8e18e7cb6d6a008, type: 3}
+      propertyPath: m_Layer
+      value: 10
+      objectReference: {fileID: 0}
+    - target: {fileID: 4419617166294302244, guid: 22773111f949c9a4b8e18e7cb6d6a008, type: 3}
       propertyPath: m_IsActive
       value: 1
       objectReference: {fileID: 0}
@@ -232194,6 +232642,10 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 2813518037391250862}
     m_Modifications:
+    - target: {fileID: 4864420016120248163, guid: 94a8dac73a5ff1f4ab6e8ff3f4a02797, type: 3}
+      propertyPath: 'm_Materials.Array.data[0]'
+      value: 
+      objectReference: {fileID: 2100000, guid: d4cda12b85ac73742931fe118c34c5ff, type: 2}
     - target: {fileID: 6037859149054364684, guid: 94a8dac73a5ff1f4ab6e8ff3f4a02797, type: 3}
       propertyPath: m_RootOrder
       value: 0
@@ -234606,6 +235058,10 @@ PrefabInstance:
     - target: {fileID: 8134580726298752235, guid: 36c611d3a84132d48a9ab288358e6b53, type: 3}
       propertyPath: m_Name
       value: SM_Unhyun_Noan_W_Haenggak_Wall_E001 (1)
+      objectReference: {fileID: 0}
+    - target: {fileID: 8134580726298752235, guid: 36c611d3a84132d48a9ab288358e6b53, type: 3}
+      propertyPath: m_Layer
+      value: 10
       objectReference: {fileID: 0}
     - target: {fileID: 8134580726298752235, guid: 36c611d3a84132d48a9ab288358e6b53, type: 3}
       propertyPath: m_IsActive
@@ -238685,6 +239141,10 @@ PrefabInstance:
     - target: {fileID: 493259672441791261, guid: ed0e75bcbc575fe42985945c4b78ce1f, type: 3}
       propertyPath: m_Name
       value: SM_Unhyun_Noan_W_Haenggak_Door_K001
+      objectReference: {fileID: 0}
+    - target: {fileID: 493259672441791261, guid: ed0e75bcbc575fe42985945c4b78ce1f, type: 3}
+      propertyPath: m_Layer
+      value: 10
       objectReference: {fileID: 0}
     - target: {fileID: 493259672441791261, guid: ed0e75bcbc575fe42985945c4b78ce1f, type: 3}
       propertyPath: m_IsActive
@@ -244659,6 +245119,10 @@ PrefabInstance:
     - target: {fileID: 1529887730544987517, guid: c29b5058c6a4b0c4e8f05cbe4e99b53a, type: 3}
       propertyPath: m_Name
       value: SM_Unhyun_Noan_W_Haenggak_Door_H001 (1)
+      objectReference: {fileID: 0}
+    - target: {fileID: 1529887730544987517, guid: c29b5058c6a4b0c4e8f05cbe4e99b53a, type: 3}
+      propertyPath: m_Layer
+      value: 10
       objectReference: {fileID: 0}
     - target: {fileID: 1529887730544987517, guid: c29b5058c6a4b0c4e8f05cbe4e99b53a, type: 3}
       propertyPath: m_IsActive
