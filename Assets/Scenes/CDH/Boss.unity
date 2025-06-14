@@ -5075,6 +5075,14 @@ PrefabInstance:
       propertyPath: m_LocalPosition.x
       value: -0.726
       objectReference: {fileID: 0}
+    - target: {fileID: 4123099891259638301, guid: b67b323cafcc915418b74490eba32673, type: 3}
+      propertyPath: m_Layer
+      value: 10
+      objectReference: {fileID: 0}
+    - target: {fileID: 5108287926303361993, guid: b67b323cafcc915418b74490eba32673, type: 3}
+      propertyPath: m_Layer
+      value: 10
+      objectReference: {fileID: 0}
     - target: {fileID: 5597860405348847987, guid: b67b323cafcc915418b74490eba32673, type: 3}
       propertyPath: m_LocalScale.x
       value: 1.2
@@ -20594,6 +20602,10 @@ PrefabInstance:
       value: SM_Unhyun_Norak_Wall_A001 (7)
       objectReference: {fileID: 0}
     - target: {fileID: 2950925047642088122, guid: 070d3a14ddad8b54d87e56664828228b, type: 3}
+      propertyPath: m_Layer
+      value: 10
+      objectReference: {fileID: 0}
+    - target: {fileID: 2950925047642088122, guid: 070d3a14ddad8b54d87e56664828228b, type: 3}
       propertyPath: m_IsActive
       value: 1
       objectReference: {fileID: 0}
@@ -30003,15 +30015,15 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 4382071522870698, guid: 4ef4628f5f55fbd43b9fd014cc065b34, type: 3}
       propertyPath: m_LocalScale.x
-      value: 1
+      value: 2
       objectReference: {fileID: 0}
     - target: {fileID: 4382071522870698, guid: 4ef4628f5f55fbd43b9fd014cc065b34, type: 3}
       propertyPath: m_LocalScale.y
-      value: 1
+      value: 2
       objectReference: {fileID: 0}
     - target: {fileID: 4382071522870698, guid: 4ef4628f5f55fbd43b9fd014cc065b34, type: 3}
       propertyPath: m_LocalScale.z
-      value: 1
+      value: 2
       objectReference: {fileID: 0}
     - target: {fileID: 4382071522870698, guid: 4ef4628f5f55fbd43b9fd014cc065b34, type: 3}
       propertyPath: m_LocalPosition.x
@@ -30019,11 +30031,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 4382071522870698, guid: 4ef4628f5f55fbd43b9fd014cc065b34, type: 3}
       propertyPath: m_LocalPosition.y
-      value: 1.431
+      value: 1.414
       objectReference: {fileID: 0}
     - target: {fileID: 4382071522870698, guid: 4ef4628f5f55fbd43b9fd014cc065b34, type: 3}
       propertyPath: m_LocalPosition.z
-      value: -3.05
+      value: -3.043
       objectReference: {fileID: 0}
     - target: {fileID: 4382071522870698, guid: 4ef4628f5f55fbd43b9fd014cc065b34, type: 3}
       propertyPath: m_LocalRotation.w
@@ -30060,6 +30072,30 @@ PrefabInstance:
     - target: {fileID: 5080104520329682997, guid: 4ef4628f5f55fbd43b9fd014cc065b34, type: 3}
       propertyPath: m_IsKinematic
       value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 7200675097730160760, guid: 4ef4628f5f55fbd43b9fd014cc065b34, type: 3}
+      propertyPath: m_Size.x
+      value: 0.02579805
+      objectReference: {fileID: 0}
+    - target: {fileID: 7200675097730160760, guid: 4ef4628f5f55fbd43b9fd014cc065b34, type: 3}
+      propertyPath: m_Size.y
+      value: 0.089276254
+      objectReference: {fileID: 0}
+    - target: {fileID: 7200675097730160760, guid: 4ef4628f5f55fbd43b9fd014cc065b34, type: 3}
+      propertyPath: m_Size.z
+      value: 0.058293343
+      objectReference: {fileID: 0}
+    - target: {fileID: 7200675097730160760, guid: 4ef4628f5f55fbd43b9fd014cc065b34, type: 3}
+      propertyPath: m_Center.x
+      value: -0.008136528
+      objectReference: {fileID: 0}
+    - target: {fileID: 7200675097730160760, guid: 4ef4628f5f55fbd43b9fd014cc065b34, type: 3}
+      propertyPath: m_Center.y
+      value: 0.03446244
+      objectReference: {fileID: 0}
+    - target: {fileID: 7200675097730160760, guid: 4ef4628f5f55fbd43b9fd014cc065b34, type: 3}
+      propertyPath: m_Center.z
+      value: 0.002434969
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -98407,7 +98443,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6922697606367191593, guid: 1c1b96555739802468e69a1ebcb9c6bb, type: 3}
       propertyPath: m_LocalPosition.x
-      value: 46.69
+      value: 15.05
       objectReference: {fileID: 0}
     - target: {fileID: 6922697606367191593, guid: 1c1b96555739802468e69a1ebcb9c6bb, type: 3}
       propertyPath: m_LocalPosition.y
@@ -98419,7 +98455,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6922697606367191593, guid: 1c1b96555739802468e69a1ebcb9c6bb, type: 3}
       propertyPath: m_LocalRotation.w
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 6922697606367191593, guid: 1c1b96555739802468e69a1ebcb9c6bb, type: 3}
       propertyPath: m_LocalRotation.x
@@ -98427,7 +98463,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6922697606367191593, guid: 1c1b96555739802468e69a1ebcb9c6bb, type: 3}
       propertyPath: m_LocalRotation.y
-      value: 0
+      value: -1
       objectReference: {fileID: 0}
     - target: {fileID: 6922697606367191593, guid: 1c1b96555739802468e69a1ebcb9c6bb, type: 3}
       propertyPath: m_LocalRotation.z
@@ -98439,7 +98475,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6922697606367191593, guid: 1c1b96555739802468e69a1ebcb9c6bb, type: 3}
       propertyPath: m_LocalEulerAnglesHint.y
-      value: 0
+      value: -180
       objectReference: {fileID: 0}
     - target: {fileID: 6922697606367191593, guid: 1c1b96555739802468e69a1ebcb9c6bb, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
@@ -180707,6 +180743,10 @@ PrefabInstance:
       value: SM_Unhyun_Norak_Wall_A001 (9)
       objectReference: {fileID: 0}
     - target: {fileID: 2950925047642088122, guid: 070d3a14ddad8b54d87e56664828228b, type: 3}
+      propertyPath: m_Layer
+      value: 10
+      objectReference: {fileID: 0}
+    - target: {fileID: 2950925047642088122, guid: 070d3a14ddad8b54d87e56664828228b, type: 3}
       propertyPath: m_IsActive
       value: 1
       objectReference: {fileID: 0}
@@ -189137,6 +189177,10 @@ PrefabInstance:
     - target: {fileID: 2950925047642088122, guid: 070d3a14ddad8b54d87e56664828228b, type: 3}
       propertyPath: m_Name
       value: SM_Unhyun_Norak_Wall_A001 (2)
+      objectReference: {fileID: 0}
+    - target: {fileID: 2950925047642088122, guid: 070d3a14ddad8b54d87e56664828228b, type: 3}
+      propertyPath: m_Layer
+      value: 10
       objectReference: {fileID: 0}
     - target: {fileID: 2950925047642088122, guid: 070d3a14ddad8b54d87e56664828228b, type: 3}
       propertyPath: m_IsActive
