@@ -30,5 +30,6 @@ public class GameManager : MonoBehaviour
     public void KillPlayer()
     {
         Debug.Log("플레이어 죽음");
+
     }
 }
