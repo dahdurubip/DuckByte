@@ -23,6 +23,7 @@ public class MonsterAI : MonoBehaviour
     private Coroutine panicCoroutine;               // 배회 코루틴
 
     public Animator anim;
+    [SerializeField] AudioSource idleSound;
 
 
 
@@ -205,7 +206,7 @@ public class MonsterAI : MonoBehaviour
     private IEnumerator LookAroundCoroutine()
     {
         NMA.isStopped = true;
-
+        idleSound.Play();
         //float timer = 0f;
         //float duration = 2f;
 
@@ -308,6 +309,7 @@ public class MonsterAI : MonoBehaviour
                     if (!isSuspicious) // (!isSuspicious && suspicionCoroutine == null) 수정할지 고민
                     {
                         NMA.isStopped = true;
+                        idleSound.Play();
                         isSuspicious = true;
                         suspicionCoroutine = StartCoroutine(HandleSuspicion());
                     }

@@ -1,3 +1,4 @@
+using Unity.Mathematics;
 using UnityEngine;
 
 public class Jiockdo : MonoBehaviour, IInteractable
@@ -10,16 +11,17 @@ public class Jiockdo : MonoBehaviour, IInteractable
     [SerializeField] private GameObject JiockdoArt;
 
     [Header("first door")]
-    [SerializeField] private GameObject fDoor1;
-    [SerializeField] private GameObject fDoor2;
+    [SerializeField] private Collider D1;
+
     [Header("second door")]
-    [SerializeField] private GameObject sDoor1;
-    [SerializeField] private GameObject sDoor2;
+    [SerializeField] private Collider D2;
+
     [Header("third door")]
-    [SerializeField] private GameObject tDoor1;
-    [SerializeField] private GameObject tDoor2;
+    [SerializeField] private Collider D3;
+
     [Header("fourth door")]
-    [SerializeField] private GameObject FDoor1;
+    [SerializeField] private Collider D4;
+
 
 
     //[SerializeField] private GameObject SCDoorLock;
@@ -52,13 +54,10 @@ public class Jiockdo : MonoBehaviour, IInteractable
         // 문들 나타나는 대사
         dialogueManager.PlayDialogue("clearToJiockdo");
         // 숨겨진 문과 상호작용 할 수 있게됨
-        fDoor1.layer = LayerMask.NameToLayer("Interactable");
-        fDoor2.layer = LayerMask.NameToLayer("Interactable");
-        sDoor1.layer = LayerMask.NameToLayer("Interactable");
-        sDoor2.layer = LayerMask.NameToLayer("Interactable");
-        tDoor1.layer = LayerMask.NameToLayer("Interactable");
-        tDoor2.layer = LayerMask.NameToLayer("Interactable");
-        FDoor1.layer = LayerMask.NameToLayer("Interactable");
+        D1.enabled = true;
+        D2.enabled = true;
+        D3.enabled = true;
+        D4.enabled = true;
 
     }
 }
