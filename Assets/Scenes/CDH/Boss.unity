@@ -27211,13 +27211,42 @@ PrefabInstance:
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
-    m_AddedComponents: []
+    m_AddedComponents:
+    - targetCorrespondingSourceObject: {fileID: 6378780800265378637, guid: b6d086c987d655545915694b130d9372, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 711794514}
   m_SourcePrefab: {fileID: 100100000, guid: b6d086c987d655545915694b130d9372, type: 3}
 --- !u!4 &711794512 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 7531943908707186503, guid: b6d086c987d655545915694b130d9372, type: 3}
   m_PrefabInstance: {fileID: 711794511}
   m_PrefabAsset: {fileID: 0}
+--- !u!1 &711794513 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 6378780800265378637, guid: b6d086c987d655545915694b130d9372, type: 3}
+  m_PrefabInstance: {fileID: 711794511}
+  m_PrefabAsset: {fileID: 0}
+--- !u!65 &711794514
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 711794513}
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_IsTrigger: 0
+  m_ProvidesContacts: 0
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Size: {x: 1.2929744, y: 2.14293, z: 0.55968165}
+  m_Center: {x: -0.000001937151, y: 1.071168, z: 0}
 --- !u!1001 &716102406
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -186130,6 +186159,10 @@ PrefabInstance:
       value: SM_Unhyun_Iro_Door_R001 (2)
       objectReference: {fileID: 0}
     - target: {fileID: 2191704333793756147, guid: 8ca6b6286de77824c8b190026ae090a2, type: 3}
+      propertyPath: m_Layer
+      value: 8
+      objectReference: {fileID: 0}
+    - target: {fileID: 2191704333793756147, guid: 8ca6b6286de77824c8b190026ae090a2, type: 3}
       propertyPath: m_IsActive
       value: 1
       objectReference: {fileID: 0}
@@ -186600,6 +186633,10 @@ PrefabInstance:
     - target: {fileID: 1300571351623122976, guid: ce1afee88d861d045abf2936b808fd4a, type: 3}
       propertyPath: m_Name
       value: SM_Unhyun_Iro_Door_D001 (22)
+      objectReference: {fileID: 0}
+    - target: {fileID: 1300571351623122976, guid: ce1afee88d861d045abf2936b808fd4a, type: 3}
+      propertyPath: m_Layer
+      value: 10
       objectReference: {fileID: 0}
     - target: {fileID: 1300571351623122976, guid: ce1afee88d861d045abf2936b808fd4a, type: 3}
       propertyPath: m_IsActive
@@ -193818,6 +193855,10 @@ PrefabInstance:
       value: SM_Unhyun_Iro_Door_C001
       objectReference: {fileID: 0}
     - target: {fileID: 1520409608555251144, guid: 25038f3e7275a22408fa0207850e91da, type: 3}
+      propertyPath: m_Layer
+      value: 10
+      objectReference: {fileID: 0}
+    - target: {fileID: 1520409608555251144, guid: 25038f3e7275a22408fa0207850e91da, type: 3}
       propertyPath: m_IsActive
       value: 1
       objectReference: {fileID: 0}
@@ -194030,6 +194071,10 @@ PrefabInstance:
     - target: {fileID: 8620909731958886105, guid: 3f8cbf5cac290474da416e11d8cd8c0a, type: 3}
       propertyPath: m_Name
       value: SM_Unhyun_Iro_Door_X001
+      objectReference: {fileID: 0}
+    - target: {fileID: 8620909731958886105, guid: 3f8cbf5cac290474da416e11d8cd8c0a, type: 3}
+      propertyPath: m_Layer
+      value: 10
       objectReference: {fileID: 0}
     - target: {fileID: 8620909731958886105, guid: 3f8cbf5cac290474da416e11d8cd8c0a, type: 3}
       propertyPath: m_IsActive
@@ -194862,6 +194907,10 @@ PrefabInstance:
     - target: {fileID: 7858677464889317686, guid: fd1ab852255bbf24688165363be3d616, type: 3}
       propertyPath: m_Name
       value: SM_Unhyun_Iro_Door_W001
+      objectReference: {fileID: 0}
+    - target: {fileID: 7858677464889317686, guid: fd1ab852255bbf24688165363be3d616, type: 3}
+      propertyPath: m_Layer
+      value: 8
       objectReference: {fileID: 0}
     - target: {fileID: 7858677464889317686, guid: fd1ab852255bbf24688165363be3d616, type: 3}
       propertyPath: m_IsActive
@@ -196308,6 +196357,10 @@ PrefabInstance:
       value: SM_Unhyun_Iro_Door_D001 (33)
       objectReference: {fileID: 0}
     - target: {fileID: 1300571351623122976, guid: ce1afee88d861d045abf2936b808fd4a, type: 3}
+      propertyPath: m_Layer
+      value: 10
+      objectReference: {fileID: 0}
+    - target: {fileID: 1300571351623122976, guid: ce1afee88d861d045abf2936b808fd4a, type: 3}
       propertyPath: m_IsActive
       value: 1
       objectReference: {fileID: 0}
@@ -197596,6 +197649,10 @@ PrefabInstance:
       value: SM_Unhyun_Iro_Door_D001 (25)
       objectReference: {fileID: 0}
     - target: {fileID: 1300571351623122976, guid: ce1afee88d861d045abf2936b808fd4a, type: 3}
+      propertyPath: m_Layer
+      value: 10
+      objectReference: {fileID: 0}
+    - target: {fileID: 1300571351623122976, guid: ce1afee88d861d045abf2936b808fd4a, type: 3}
       propertyPath: m_IsActive
       value: 1
       objectReference: {fileID: 0}
@@ -198829,6 +198886,10 @@ PrefabInstance:
     - target: {fileID: 1520409608555251144, guid: 25038f3e7275a22408fa0207850e91da, type: 3}
       propertyPath: m_Name
       value: SM_Unhyun_Iro_Door_C001
+      objectReference: {fileID: 0}
+    - target: {fileID: 1520409608555251144, guid: 25038f3e7275a22408fa0207850e91da, type: 3}
+      propertyPath: m_Layer
+      value: 10
       objectReference: {fileID: 0}
     - target: {fileID: 1520409608555251144, guid: 25038f3e7275a22408fa0207850e91da, type: 3}
       propertyPath: m_IsActive
@@ -201207,6 +201268,10 @@ PrefabInstance:
       value: SM_Unhyun_Iro_Door_D001 (21)
       objectReference: {fileID: 0}
     - target: {fileID: 1300571351623122976, guid: ce1afee88d861d045abf2936b808fd4a, type: 3}
+      propertyPath: m_Layer
+      value: 10
+      objectReference: {fileID: 0}
+    - target: {fileID: 1300571351623122976, guid: ce1afee88d861d045abf2936b808fd4a, type: 3}
       propertyPath: m_IsActive
       value: 1
       objectReference: {fileID: 0}
@@ -201830,6 +201895,10 @@ PrefabInstance:
     - target: {fileID: 1300571351623122976, guid: ce1afee88d861d045abf2936b808fd4a, type: 3}
       propertyPath: m_Name
       value: SM_Unhyun_Iro_Door_D001 (32)
+      objectReference: {fileID: 0}
+    - target: {fileID: 1300571351623122976, guid: ce1afee88d861d045abf2936b808fd4a, type: 3}
+      propertyPath: m_Layer
+      value: 10
       objectReference: {fileID: 0}
     - target: {fileID: 1300571351623122976, guid: ce1afee88d861d045abf2936b808fd4a, type: 3}
       propertyPath: m_IsActive
@@ -203702,6 +203771,10 @@ PrefabInstance:
     - target: {fileID: 7730636235679423260, guid: 0e353dd300a17594cbeb9858771bfc19, type: 3}
       propertyPath: m_Name
       value: SM_Unhyun_Iro_Wall_A001 (25)
+      objectReference: {fileID: 0}
+    - target: {fileID: 7730636235679423260, guid: 0e353dd300a17594cbeb9858771bfc19, type: 3}
+      propertyPath: m_Layer
+      value: 10
       objectReference: {fileID: 0}
     - target: {fileID: 7730636235679423260, guid: 0e353dd300a17594cbeb9858771bfc19, type: 3}
       propertyPath: m_IsActive
@@ -209257,6 +209330,10 @@ PrefabInstance:
     - target: {fileID: 1300571351623122976, guid: ce1afee88d861d045abf2936b808fd4a, type: 3}
       propertyPath: m_Name
       value: SM_Unhyun_Iro_Door_D001 (37)
+      objectReference: {fileID: 0}
+    - target: {fileID: 1300571351623122976, guid: ce1afee88d861d045abf2936b808fd4a, type: 3}
+      propertyPath: m_Layer
+      value: 10
       objectReference: {fileID: 0}
     - target: {fileID: 1300571351623122976, guid: ce1afee88d861d045abf2936b808fd4a, type: 3}
       propertyPath: m_IsActive
@@ -217595,6 +217672,10 @@ PrefabInstance:
       value: SM_Unhyun_Iro_Wall_A001 (6)
       objectReference: {fileID: 0}
     - target: {fileID: 7730636235679423260, guid: 0e353dd300a17594cbeb9858771bfc19, type: 3}
+      propertyPath: m_Layer
+      value: 10
+      objectReference: {fileID: 0}
+    - target: {fileID: 7730636235679423260, guid: 0e353dd300a17594cbeb9858771bfc19, type: 3}
       propertyPath: m_IsActive
       value: 1
       objectReference: {fileID: 0}
@@ -219549,6 +219630,10 @@ PrefabInstance:
       value: SM_Unhyun_Iro_Door_C001
       objectReference: {fileID: 0}
     - target: {fileID: 1520409608555251144, guid: 25038f3e7275a22408fa0207850e91da, type: 3}
+      propertyPath: m_Layer
+      value: 8
+      objectReference: {fileID: 0}
+    - target: {fileID: 1520409608555251144, guid: 25038f3e7275a22408fa0207850e91da, type: 3}
       propertyPath: m_IsActive
       value: 1
       objectReference: {fileID: 0}
@@ -221031,6 +221116,10 @@ PrefabInstance:
     - target: {fileID: 1520409608555251144, guid: 25038f3e7275a22408fa0207850e91da, type: 3}
       propertyPath: m_Name
       value: SM_Unhyun_Iro_Door_C001
+      objectReference: {fileID: 0}
+    - target: {fileID: 1520409608555251144, guid: 25038f3e7275a22408fa0207850e91da, type: 3}
+      propertyPath: m_Layer
+      value: 10
       objectReference: {fileID: 0}
     - target: {fileID: 1520409608555251144, guid: 25038f3e7275a22408fa0207850e91da, type: 3}
       propertyPath: m_IsActive
@@ -223639,6 +223728,10 @@ PrefabInstance:
       value: SM_Unhyun_Iro_Door_R001 (5)
       objectReference: {fileID: 0}
     - target: {fileID: 2191704333793756147, guid: 8ca6b6286de77824c8b190026ae090a2, type: 3}
+      propertyPath: m_Layer
+      value: 8
+      objectReference: {fileID: 0}
+    - target: {fileID: 2191704333793756147, guid: 8ca6b6286de77824c8b190026ae090a2, type: 3}
       propertyPath: m_IsActive
       value: 1
       objectReference: {fileID: 0}
@@ -225042,6 +225135,10 @@ PrefabInstance:
       value: SM_Unhyun_Iro_Door_C001
       objectReference: {fileID: 0}
     - target: {fileID: 1520409608555251144, guid: 25038f3e7275a22408fa0207850e91da, type: 3}
+      propertyPath: m_Layer
+      value: 10
+      objectReference: {fileID: 0}
+    - target: {fileID: 1520409608555251144, guid: 25038f3e7275a22408fa0207850e91da, type: 3}
       propertyPath: m_IsActive
       value: 1
       objectReference: {fileID: 0}
@@ -225993,6 +226090,10 @@ PrefabInstance:
     - target: {fileID: 5978278169195968851, guid: 8faeace868a3d80499bb05a213766d17, type: 3}
       propertyPath: m_Name
       value: SM_Unhyun_Iro_Door_Q001 (3)
+      objectReference: {fileID: 0}
+    - target: {fileID: 5978278169195968851, guid: 8faeace868a3d80499bb05a213766d17, type: 3}
+      propertyPath: m_Layer
+      value: 8
       objectReference: {fileID: 0}
     - target: {fileID: 5978278169195968851, guid: 8faeace868a3d80499bb05a213766d17, type: 3}
       propertyPath: m_IsActive
@@ -227216,6 +227317,10 @@ PrefabInstance:
     - target: {fileID: 1520409608555251144, guid: 25038f3e7275a22408fa0207850e91da, type: 3}
       propertyPath: m_Name
       value: SM_Unhyun_Iro_Door_C001
+      objectReference: {fileID: 0}
+    - target: {fileID: 1520409608555251144, guid: 25038f3e7275a22408fa0207850e91da, type: 3}
+      propertyPath: m_Layer
+      value: 10
       objectReference: {fileID: 0}
     - target: {fileID: 1520409608555251144, guid: 25038f3e7275a22408fa0207850e91da, type: 3}
       propertyPath: m_IsActive
@@ -232749,6 +232854,10 @@ PrefabInstance:
       value: SM_Unhyun_Iro_Door_C001
       objectReference: {fileID: 0}
     - target: {fileID: 1520409608555251144, guid: 25038f3e7275a22408fa0207850e91da, type: 3}
+      propertyPath: m_Layer
+      value: 10
+      objectReference: {fileID: 0}
+    - target: {fileID: 1520409608555251144, guid: 25038f3e7275a22408fa0207850e91da, type: 3}
       propertyPath: m_IsActive
       value: 1
       objectReference: {fileID: 0}
@@ -232908,6 +233017,10 @@ PrefabInstance:
       value: SM_Unhyun_Iro_Wall_A001 (10)
       objectReference: {fileID: 0}
     - target: {fileID: 7730636235679423260, guid: 0e353dd300a17594cbeb9858771bfc19, type: 3}
+      propertyPath: m_Layer
+      value: 10
+      objectReference: {fileID: 0}
+    - target: {fileID: 7730636235679423260, guid: 0e353dd300a17594cbeb9858771bfc19, type: 3}
       propertyPath: m_IsActive
       value: 1
       objectReference: {fileID: 0}
@@ -232948,8 +233061,8 @@ BoxCollider:
   m_ProvidesContacts: 0
   m_Enabled: 1
   serializedVersion: 3
-  m_Size: {x: 2.4477818, y: 2.5987258, z: 0.11789856}
-  m_Center: {x: -1.2238884, y: 1.299362, z: -0.058951568}
+  m_Size: {x: 0.5992201, y: 2.5987258, z: 0.11789856}
+  m_Center: {x: -0.29960766, y: 1.299362, z: -0.058951568}
 --- !u!1 &3668947704810319279
 GameObject:
   m_ObjectHideFlags: 0
@@ -241591,6 +241704,10 @@ PrefabInstance:
       value: SM_Unhyun_Iro_Door_D001 (20)
       objectReference: {fileID: 0}
     - target: {fileID: 1300571351623122976, guid: ce1afee88d861d045abf2936b808fd4a, type: 3}
+      propertyPath: m_Layer
+      value: 10
+      objectReference: {fileID: 0}
+    - target: {fileID: 1300571351623122976, guid: ce1afee88d861d045abf2936b808fd4a, type: 3}
       propertyPath: m_IsActive
       value: 1
       objectReference: {fileID: 0}
@@ -242537,6 +242654,10 @@ PrefabInstance:
     - target: {fileID: 1300571351623122976, guid: ce1afee88d861d045abf2936b808fd4a, type: 3}
       propertyPath: m_Name
       value: SM_Unhyun_Iro_Door_D001 (34)
+      objectReference: {fileID: 0}
+    - target: {fileID: 1300571351623122976, guid: ce1afee88d861d045abf2936b808fd4a, type: 3}
+      propertyPath: m_Layer
+      value: 10
       objectReference: {fileID: 0}
     - target: {fileID: 1300571351623122976, guid: ce1afee88d861d045abf2936b808fd4a, type: 3}
       propertyPath: m_IsActive
@@ -243640,6 +243761,10 @@ PrefabInstance:
     - target: {fileID: 7730636235679423260, guid: 0e353dd300a17594cbeb9858771bfc19, type: 3}
       propertyPath: m_Name
       value: SM_Unhyun_Iro_Wall_A001 (4)
+      objectReference: {fileID: 0}
+    - target: {fileID: 7730636235679423260, guid: 0e353dd300a17594cbeb9858771bfc19, type: 3}
+      propertyPath: m_Layer
+      value: 10
       objectReference: {fileID: 0}
     - target: {fileID: 7730636235679423260, guid: 0e353dd300a17594cbeb9858771bfc19, type: 3}
       propertyPath: m_IsActive
@@ -245901,6 +246026,10 @@ PrefabInstance:
       value: SM_Unhyun_Iro_Door_D001 (23)
       objectReference: {fileID: 0}
     - target: {fileID: 1300571351623122976, guid: ce1afee88d861d045abf2936b808fd4a, type: 3}
+      propertyPath: m_Layer
+      value: 10
+      objectReference: {fileID: 0}
+    - target: {fileID: 1300571351623122976, guid: ce1afee88d861d045abf2936b808fd4a, type: 3}
       propertyPath: m_IsActive
       value: 1
       objectReference: {fileID: 0}
@@ -247802,6 +247931,10 @@ PrefabInstance:
       value: SM_Unhyun_Iro_Wall_A001 (8)
       objectReference: {fileID: 0}
     - target: {fileID: 7730636235679423260, guid: 0e353dd300a17594cbeb9858771bfc19, type: 3}
+      propertyPath: m_Layer
+      value: 10
+      objectReference: {fileID: 0}
+    - target: {fileID: 7730636235679423260, guid: 0e353dd300a17594cbeb9858771bfc19, type: 3}
       propertyPath: m_IsActive
       value: 1
       objectReference: {fileID: 0}
@@ -248641,6 +248774,10 @@ PrefabInstance:
       value: SM_Unhyun_Iro_Wall_A001 (9)
       objectReference: {fileID: 0}
     - target: {fileID: 7730636235679423260, guid: 0e353dd300a17594cbeb9858771bfc19, type: 3}
+      propertyPath: m_Layer
+      value: 10
+      objectReference: {fileID: 0}
+    - target: {fileID: 7730636235679423260, guid: 0e353dd300a17594cbeb9858771bfc19, type: 3}
       propertyPath: m_IsActive
       value: 1
       objectReference: {fileID: 0}
@@ -248681,8 +248818,8 @@ BoxCollider:
   m_ProvidesContacts: 0
   m_Enabled: 1
   serializedVersion: 3
-  m_Size: {x: 2.4477818, y: 2.5987258, z: 0.11789856}
-  m_Center: {x: -1.22389, y: 1.299362, z: -0.058947753}
+  m_Size: {x: 3.2223845, y: 2.5987258, z: 0.11789856}
+  m_Center: {x: -0.8365886, y: 1.299362, z: -0.058947753}
 --- !u!1 &4981212136164279448
 GameObject:
   m_ObjectHideFlags: 0
@@ -252423,6 +252560,10 @@ PrefabInstance:
       value: SM_Unhyun_Iro_Door_D001 (36)
       objectReference: {fileID: 0}
     - target: {fileID: 1300571351623122976, guid: ce1afee88d861d045abf2936b808fd4a, type: 3}
+      propertyPath: m_Layer
+      value: 10
+      objectReference: {fileID: 0}
+    - target: {fileID: 1300571351623122976, guid: ce1afee88d861d045abf2936b808fd4a, type: 3}
       propertyPath: m_IsActive
       value: 1
       objectReference: {fileID: 0}
@@ -254214,6 +254355,10 @@ PrefabInstance:
       value: SM_Unhyun_Iro_Wall_A001 (27)
       objectReference: {fileID: 0}
     - target: {fileID: 7730636235679423260, guid: 0e353dd300a17594cbeb9858771bfc19, type: 3}
+      propertyPath: m_Layer
+      value: 10
+      objectReference: {fileID: 0}
+    - target: {fileID: 7730636235679423260, guid: 0e353dd300a17594cbeb9858771bfc19, type: 3}
       propertyPath: m_IsActive
       value: 1
       objectReference: {fileID: 0}
@@ -254254,8 +254399,8 @@ BoxCollider:
   m_ProvidesContacts: 0
   m_Enabled: 1
   serializedVersion: 3
-  m_Size: {x: 2.4477823, y: 2.5987258, z: 0.11789859}
-  m_Center: {x: -1.2238878, y: 1.299362, z: -0.058951583}
+  m_Size: {x: 3.161185, y: 2.5987258, z: 0.11789859}
+  m_Center: {x: -0.86718625, y: 1.299362, z: -0.058951583}
 --- !u!1 &5416945651190360564
 GameObject:
   m_ObjectHideFlags: 0
@@ -256050,6 +256195,10 @@ PrefabInstance:
       value: SM_Unhyun_Iro_Door_Q001
       objectReference: {fileID: 0}
     - target: {fileID: 5978278169195968851, guid: 8faeace868a3d80499bb05a213766d17, type: 3}
+      propertyPath: m_Layer
+      value: 8
+      objectReference: {fileID: 0}
+    - target: {fileID: 5978278169195968851, guid: 8faeace868a3d80499bb05a213766d17, type: 3}
       propertyPath: m_IsActive
       value: 1
       objectReference: {fileID: 0}
@@ -256610,6 +256759,10 @@ PrefabInstance:
     - target: {fileID: 7730636235679423260, guid: 0e353dd300a17594cbeb9858771bfc19, type: 3}
       propertyPath: m_Name
       value: SM_Unhyun_Iro_Wall_A001 (2)
+      objectReference: {fileID: 0}
+    - target: {fileID: 7730636235679423260, guid: 0e353dd300a17594cbeb9858771bfc19, type: 3}
+      propertyPath: m_Layer
+      value: 10
       objectReference: {fileID: 0}
     - target: {fileID: 7730636235679423260, guid: 0e353dd300a17594cbeb9858771bfc19, type: 3}
       propertyPath: m_IsActive
@@ -258401,6 +258554,10 @@ PrefabInstance:
     - target: {fileID: 1300571351623122976, guid: ce1afee88d861d045abf2936b808fd4a, type: 3}
       propertyPath: m_Name
       value: SM_Unhyun_Iro_Door_D001 (16)
+      objectReference: {fileID: 0}
+    - target: {fileID: 1300571351623122976, guid: ce1afee88d861d045abf2936b808fd4a, type: 3}
+      propertyPath: m_Layer
+      value: 8
       objectReference: {fileID: 0}
     - target: {fileID: 1300571351623122976, guid: ce1afee88d861d045abf2936b808fd4a, type: 3}
       propertyPath: m_IsActive
@@ -260503,6 +260660,10 @@ PrefabInstance:
       value: SM_Unhyun_Iro_Door_C001
       objectReference: {fileID: 0}
     - target: {fileID: 1520409608555251144, guid: 25038f3e7275a22408fa0207850e91da, type: 3}
+      propertyPath: m_Layer
+      value: 10
+      objectReference: {fileID: 0}
+    - target: {fileID: 1520409608555251144, guid: 25038f3e7275a22408fa0207850e91da, type: 3}
       propertyPath: m_IsActive
       value: 1
       objectReference: {fileID: 0}
@@ -261906,6 +262067,10 @@ PrefabInstance:
       value: SM_Unhyun_Iro_Door_D001 (38)
       objectReference: {fileID: 0}
     - target: {fileID: 1300571351623122976, guid: ce1afee88d861d045abf2936b808fd4a, type: 3}
+      propertyPath: m_Layer
+      value: 10
+      objectReference: {fileID: 0}
+    - target: {fileID: 1300571351623122976, guid: ce1afee88d861d045abf2936b808fd4a, type: 3}
       propertyPath: m_IsActive
       value: 1
       objectReference: {fileID: 0}
@@ -263166,6 +263331,10 @@ PrefabInstance:
     - target: {fileID: 1300571351623122976, guid: ce1afee88d861d045abf2936b808fd4a, type: 3}
       propertyPath: m_Name
       value: SM_Unhyun_Iro_Door_D001 (26)
+      objectReference: {fileID: 0}
+    - target: {fileID: 1300571351623122976, guid: ce1afee88d861d045abf2936b808fd4a, type: 3}
+      propertyPath: m_Layer
+      value: 10
       objectReference: {fileID: 0}
     - target: {fileID: 1300571351623122976, guid: ce1afee88d861d045abf2936b808fd4a, type: 3}
       propertyPath: m_IsActive
@@ -265211,6 +265380,10 @@ PrefabInstance:
       value: SM_Unhyun_Iro_Wall_A001 (23)
       objectReference: {fileID: 0}
     - target: {fileID: 7730636235679423260, guid: 0e353dd300a17594cbeb9858771bfc19, type: 3}
+      propertyPath: m_Layer
+      value: 10
+      objectReference: {fileID: 0}
+    - target: {fileID: 7730636235679423260, guid: 0e353dd300a17594cbeb9858771bfc19, type: 3}
       propertyPath: m_IsActive
       value: 1
       objectReference: {fileID: 0}
@@ -265444,6 +265617,10 @@ PrefabInstance:
     - target: {fileID: 7858677464889317686, guid: fd1ab852255bbf24688165363be3d616, type: 3}
       propertyPath: m_Name
       value: SM_Unhyun_Iro_Door_W001
+      objectReference: {fileID: 0}
+    - target: {fileID: 7858677464889317686, guid: fd1ab852255bbf24688165363be3d616, type: 3}
+      propertyPath: m_Layer
+      value: 8
       objectReference: {fileID: 0}
     - target: {fileID: 7858677464889317686, guid: fd1ab852255bbf24688165363be3d616, type: 3}
       propertyPath: m_IsActive
@@ -268296,6 +268473,10 @@ PrefabInstance:
       value: SM_Unhyun_Iro_Door_C001
       objectReference: {fileID: 0}
     - target: {fileID: 1520409608555251144, guid: 25038f3e7275a22408fa0207850e91da, type: 3}
+      propertyPath: m_Layer
+      value: 10
+      objectReference: {fileID: 0}
+    - target: {fileID: 1520409608555251144, guid: 25038f3e7275a22408fa0207850e91da, type: 3}
       propertyPath: m_IsActive
       value: 1
       objectReference: {fileID: 0}
@@ -270552,8 +270733,8 @@ BoxCollider:
   m_ProvidesContacts: 0
   m_Enabled: 1
   serializedVersion: 3
-  m_Size: {x: 2.4477823, y: 2.5987258, z: 0.11789859}
-  m_Center: {x: -1.2238892, y: 1.299362, z: -0.058951583}
+  m_Size: {x: 0.57418126, y: 2.514664, z: 0.11789859}
+  m_Center: {x: -0.28708854, y: 1.3413929, z: -0.058951583}
 --- !u!1 &6760487972980780629
 GameObject:
   m_ObjectHideFlags: 0
@@ -270864,6 +271045,10 @@ PrefabInstance:
     - target: {fileID: 1520409608555251144, guid: 25038f3e7275a22408fa0207850e91da, type: 3}
       propertyPath: m_Name
       value: SM_Unhyun_Iro_Door_C001
+      objectReference: {fileID: 0}
+    - target: {fileID: 1520409608555251144, guid: 25038f3e7275a22408fa0207850e91da, type: 3}
+      propertyPath: m_Layer
+      value: 10
       objectReference: {fileID: 0}
     - target: {fileID: 1520409608555251144, guid: 25038f3e7275a22408fa0207850e91da, type: 3}
       propertyPath: m_IsActive
@@ -275783,6 +275968,10 @@ PrefabInstance:
       value: SM_Unhyun_Iro_Door_C001
       objectReference: {fileID: 0}
     - target: {fileID: 1520409608555251144, guid: 25038f3e7275a22408fa0207850e91da, type: 3}
+      propertyPath: m_Layer
+      value: 10
+      objectReference: {fileID: 0}
+    - target: {fileID: 1520409608555251144, guid: 25038f3e7275a22408fa0207850e91da, type: 3}
       propertyPath: m_IsActive
       value: 1
       objectReference: {fileID: 0}
@@ -276925,6 +277114,10 @@ PrefabInstance:
     - target: {fileID: 1520409608555251144, guid: 25038f3e7275a22408fa0207850e91da, type: 3}
       propertyPath: m_Name
       value: SM_Unhyun_Iro_Door_C001
+      objectReference: {fileID: 0}
+    - target: {fileID: 1520409608555251144, guid: 25038f3e7275a22408fa0207850e91da, type: 3}
+      propertyPath: m_Layer
+      value: 10
       objectReference: {fileID: 0}
     - target: {fileID: 1520409608555251144, guid: 25038f3e7275a22408fa0207850e91da, type: 3}
       propertyPath: m_IsActive
@@ -281416,6 +281609,10 @@ PrefabInstance:
       value: SM_Unhyun_Iro_Door_D001 (24)
       objectReference: {fileID: 0}
     - target: {fileID: 1300571351623122976, guid: ce1afee88d861d045abf2936b808fd4a, type: 3}
+      propertyPath: m_Layer
+      value: 10
+      objectReference: {fileID: 0}
+    - target: {fileID: 1300571351623122976, guid: ce1afee88d861d045abf2936b808fd4a, type: 3}
       propertyPath: m_IsActive
       value: 1
       objectReference: {fileID: 0}
@@ -283862,6 +284059,10 @@ PrefabInstance:
     - target: {fileID: 1520409608555251144, guid: 25038f3e7275a22408fa0207850e91da, type: 3}
       propertyPath: m_Name
       value: SM_Unhyun_Iro_Door_C001
+      objectReference: {fileID: 0}
+    - target: {fileID: 1520409608555251144, guid: 25038f3e7275a22408fa0207850e91da, type: 3}
+      propertyPath: m_Layer
+      value: 10
       objectReference: {fileID: 0}
     - target: {fileID: 1520409608555251144, guid: 25038f3e7275a22408fa0207850e91da, type: 3}
       propertyPath: m_IsActive
@@ -289583,6 +289784,10 @@ PrefabInstance:
       value: SM_Unhyun_Iro_Door_X001
       objectReference: {fileID: 0}
     - target: {fileID: 8620909731958886105, guid: 3f8cbf5cac290474da416e11d8cd8c0a, type: 3}
+      propertyPath: m_Layer
+      value: 10
+      objectReference: {fileID: 0}
+    - target: {fileID: 8620909731958886105, guid: 3f8cbf5cac290474da416e11d8cd8c0a, type: 3}
       propertyPath: m_IsActive
       value: 1
       objectReference: {fileID: 0}
@@ -290294,6 +290499,10 @@ PrefabInstance:
       value: SM_Unhyun_Iro_Door_D001 (17)
       objectReference: {fileID: 0}
     - target: {fileID: 1300571351623122976, guid: ce1afee88d861d045abf2936b808fd4a, type: 3}
+      propertyPath: m_Layer
+      value: 10
+      objectReference: {fileID: 0}
+    - target: {fileID: 1300571351623122976, guid: ce1afee88d861d045abf2936b808fd4a, type: 3}
       propertyPath: m_IsActive
       value: 1
       objectReference: {fileID: 0}
@@ -290849,6 +291058,10 @@ PrefabInstance:
     - target: {fileID: 7730636235679423260, guid: 0e353dd300a17594cbeb9858771bfc19, type: 3}
       propertyPath: m_Name
       value: SM_Unhyun_Iro_Wall_A001 (5)
+      objectReference: {fileID: 0}
+    - target: {fileID: 7730636235679423260, guid: 0e353dd300a17594cbeb9858771bfc19, type: 3}
+      propertyPath: m_Layer
+      value: 10
       objectReference: {fileID: 0}
     - target: {fileID: 7730636235679423260, guid: 0e353dd300a17594cbeb9858771bfc19, type: 3}
       propertyPath: m_IsActive
@@ -293695,6 +293908,10 @@ PrefabInstance:
       value: SM_Unhyun_Iro_Door_D001 (18)
       objectReference: {fileID: 0}
     - target: {fileID: 1300571351623122976, guid: ce1afee88d861d045abf2936b808fd4a, type: 3}
+      propertyPath: m_Layer
+      value: 10
+      objectReference: {fileID: 0}
+    - target: {fileID: 1300571351623122976, guid: ce1afee88d861d045abf2936b808fd4a, type: 3}
       propertyPath: m_IsActive
       value: 1
       objectReference: {fileID: 0}
@@ -294044,6 +294261,10 @@ PrefabInstance:
     - target: {fileID: 1520409608555251144, guid: 25038f3e7275a22408fa0207850e91da, type: 3}
       propertyPath: m_Name
       value: SM_Unhyun_Iro_Door_C001
+      objectReference: {fileID: 0}
+    - target: {fileID: 1520409608555251144, guid: 25038f3e7275a22408fa0207850e91da, type: 3}
+      propertyPath: m_Layer
+      value: 10
       objectReference: {fileID: 0}
     - target: {fileID: 1520409608555251144, guid: 25038f3e7275a22408fa0207850e91da, type: 3}
       propertyPath: m_IsActive
@@ -296317,6 +296538,10 @@ PrefabInstance:
     - target: {fileID: 1520409608555251144, guid: 25038f3e7275a22408fa0207850e91da, type: 3}
       propertyPath: m_Name
       value: SM_Unhyun_Iro_Door_C001
+      objectReference: {fileID: 0}
+    - target: {fileID: 1520409608555251144, guid: 25038f3e7275a22408fa0207850e91da, type: 3}
+      propertyPath: m_Layer
+      value: 10
       objectReference: {fileID: 0}
     - target: {fileID: 1520409608555251144, guid: 25038f3e7275a22408fa0207850e91da, type: 3}
       propertyPath: m_IsActive
@@ -303677,6 +303902,10 @@ PrefabInstance:
     - target: {fileID: 1520409608555251144, guid: 25038f3e7275a22408fa0207850e91da, type: 3}
       propertyPath: m_Name
       value: SM_Unhyun_Iro_Door_C001
+      objectReference: {fileID: 0}
+    - target: {fileID: 1520409608555251144, guid: 25038f3e7275a22408fa0207850e91da, type: 3}
+      propertyPath: m_Layer
+      value: 10
       objectReference: {fileID: 0}
     - target: {fileID: 1520409608555251144, guid: 25038f3e7275a22408fa0207850e91da, type: 3}
       propertyPath: m_IsActive
