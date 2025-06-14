@@ -40,6 +40,8 @@ public class SCDoor : MonoBehaviour, IInteractable
         //풀리는 소리
         m1_AudioManager.instance.PlaySfx(m1_AudioManager.m1sfx.doorLock);
         Destroy(itemmanager.currentItem);
+        //Destroy(nearbyInteractable);
+
         // 풀린 자물쇠가 사라짐
         SCDoorLock.SetActive(false);
         // 문과 상호작용 할 수 있게됨
