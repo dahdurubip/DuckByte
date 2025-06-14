@@ -3731,6 +3731,68 @@ Transform:
   m_Children: []
   m_Father: {fileID: 1793667828}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &301298122
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 301298125}
+  - component: {fileID: 301298124}
+  - component: {fileID: 301298123}
+  m_Layer: 0
+  m_Name: DialogueManager
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &301298123
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 301298122}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 19d236a273b947548ba95a3641f9b2a3, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!114 &301298124
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 301298122}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 61d1b7e1b87b120419422449ff3decee, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  dialogueText: {fileID: 0}
+  dialoguePanel: {fileID: 0}
+  dialogueData: {fileID: 301298123}
+  isTyping: 0
+  isPlayingDialogue: 0
+--- !u!4 &301298125
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 301298122}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 39.42515, y: 1.8006836, z: 3.4199667}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &304328324 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 1484375368536152, guid: e7e1e60f2c5d63645b802e7792284f22, type: 3}
@@ -36753,7 +36815,7 @@ MonoBehaviour:
   panAngle: 15
   flashManager: {fileID: 143854699}
   obanggiUIManager: {fileID: 1369876337}
-  dialogueManager: {fileID: 0}
+  dialogueManager: {fileID: 301298124}
   EKeyUI: {fileID: 171768526922599334}
   noteUI: {fileID: 84883401}
   noteUIText: {fileID: 84883400}
@@ -38696,3 +38758,4 @@ SceneRoots:
   - {fileID: 1369876338}
   - {fileID: 276745210}
   - {fileID: 689957205}
+  - {fileID: 301298125}
