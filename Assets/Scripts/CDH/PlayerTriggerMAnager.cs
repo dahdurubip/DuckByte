@@ -6,6 +6,8 @@ public class PlayerTriggerMAnager : MonoBehaviour
     [SerializeField] private DialogueManager dialogueManager; // 대사 출력 담당
                                                               //[SerializeField] private DialogueData dialogueData;       // 대사 데이터 보관소
 
+   
+
     // private bool isPlayingDialogue = false;
 
     private void OnTriggerEnter(Collider other)
@@ -18,6 +20,8 @@ public class PlayerTriggerMAnager : MonoBehaviour
             //StartCoroutine(PlayDialogue("goToBossDoor"));
             dialogueManager.PlayDialogue("goToBossDoor");
         }
+        
+
     }
 
     //public void unBrokenJar()
