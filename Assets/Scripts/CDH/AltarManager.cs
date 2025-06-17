@@ -5,6 +5,13 @@ public class AltarManager : MonoBehaviour, IInteractable
     [Header("제단 상호작용 아이템")]
     public string requiredItemTag = "Piece";
     public BossPhaseManager bossPhaseManager;
+    public ParticleSystem altarEffect;
+
+
+    private void Awake()
+    {
+        altarEffect.Stop(true, ParticleSystemStopBehavior.StopEmittingAndClear);
+    }
 
     public void OnInteract(GameObject heldItem)
     {
@@ -15,6 +22,8 @@ public class AltarManager : MonoBehaviour, IInteractable
         if (heldItem.CompareTag(requiredItemTag))
         {
             PhaseClear();
+            altarEffect.Play(true); // 파티클 재생
+
         }
         else
         {
