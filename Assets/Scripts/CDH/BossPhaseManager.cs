@@ -35,6 +35,8 @@ public class BossPhaseManager : MonoBehaviour
     //public GameObject bossObject;
     public GameObject warningCirclePrefab;
     public GameObject shockwaveEffectPrefab;
+    [SerializeField] AudioSource warnningAudio;
+
 
 
 
@@ -141,6 +143,7 @@ public class BossPhaseManager : MonoBehaviour
             //Debug.Log("Phase1Attack 반복 시작");
             // 1. 경고 프리팹 생성 (시작할 때 플레이어 위치)
             GameObject warning = Instantiate(warningCirclePrefab, player.position, Quaternion.Euler(90, 0, 0));
+            warnningAudio.Play();
 
             float timer = 0f;
 
@@ -159,16 +162,34 @@ public class BossPhaseManager : MonoBehaviour
             // 3. 경고 제거
             Destroy(warning);
 
+            //// 4. 돌을 마지막 위치 위로부터 생성
+            //Instantiate(rockPrefab, dropPosition + Vector3.up * 5f, Quaternion.identity);
+            //yield return new WaitForSeconds(0.5f);
+            //Instantiate(rockPrefab, dropPosition + Vector3.up * 5f, Quaternion.identity);
+
             // 4. 돌을 마지막 위치 위로부터 생성
-            Instantiate(rockPrefab, dropPosition + Vector3.up * 5f, Quaternion.identity);
-            yield return new WaitForSeconds(2f);
-            Instantiate(rockPrefab, dropPosition + Vector3.up * 5f, Quaternion.identity);
+            GameObject rock1 = Instantiate(rockPrefab, dropPosition + Vector3.up * 5f, Quaternion.identity);
+            Rigidbody rb1 = rock1.GetComponent<Rigidbody>();
+            if (rb1 != null)
+            {
+                rb1.linearVelocity = Vector3.down * 20f; // 빠르게 낙하
+            }
+
+            yield return new WaitForSeconds(0.5f);
+
+            GameObject rock2 = Instantiate(rockPrefab, dropPosition + Vector3.up * 5f, Quaternion.identity);
+            Rigidbody rb2 = rock2.GetComponent<Rigidbody>();
+            if (rb2 != null)
+            {
+                rb2.linearVelocity = Vector3.down * 20f;
+            }
+
 
             //예측 드롭
             //Vector3 secondDrop = dropPosition + (player.forward * 2f);
             //Instantiate(rockPrefab, secondDrop + Vector3.up * 0.5f, Quaternion.identity);
 
-            yield return new WaitForSeconds(1.5f); // 다음 행동까지 약간 기다림
+            yield return new WaitForSeconds(1f); // 다음 행동까지 약간 기다림
         }
 
     }
