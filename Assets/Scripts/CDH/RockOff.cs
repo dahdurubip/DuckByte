@@ -12,6 +12,8 @@ public class RockOff : MonoBehaviour
 
     public BossPhaseManager bossPhaseManager;
     //[SerializeField] AudioSource rockAudio;
+    public AudioClip breakingClip;               // 돌 깨지는 소리
+    public GameObject soundPlayerPrefab;         // 사운드 재생용 프리팹
 
 
     //public bool IsRockOff { get; private set; }
@@ -28,6 +30,20 @@ public class RockOff : MonoBehaviour
 
             // 돌 깨지는 소리
             //rockAudio.Play();
+
+
+            GameObject soundObj = Instantiate(soundPlayerPrefab, contactPoint, Quaternion.identity);
+            AudioSource audio = soundObj.GetComponent<AudioSource>();
+            if (audio != null)
+            {
+                audio.clip = breakingClip;
+                audio.spatialBlend = 1f;
+                audio.minDistance = 1f;
+                audio.maxDistance = 15f;
+                audio.Play();
+                Destroy(soundObj, breakingClip.length);
+            }
+
 
             Quaternion rotation = Quaternion.LookRotation(Vector3.up);
 
@@ -57,6 +73,7 @@ public class RockOff : MonoBehaviour
 
         }
     }
+
 
     public void BurningGround(Vector3 position)
     {
