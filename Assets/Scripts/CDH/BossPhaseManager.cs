@@ -1,6 +1,8 @@
-using UnityEngine;
 using System.Collections;
 using System.Collections.Generic;
+using UnityEngine;
+using UnityEngine.Analytics;
+using UnityEngine.SceneManagement;
 
 public class BossPhaseManager : MonoBehaviour
 {
@@ -522,6 +524,7 @@ public class BossPhaseManager : MonoBehaviour
     void bossClear()
     {
         Debug.Log("보스전 클리어");
+        SceneManager.LoadScene("button");
     }
 
 }
