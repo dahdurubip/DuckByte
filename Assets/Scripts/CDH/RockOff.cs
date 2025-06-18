@@ -11,6 +11,8 @@ public class RockOff : MonoBehaviour
     public Vector3 contactPoint;
 
     public BossPhaseManager bossPhaseManager;
+    //[SerializeField] AudioSource rockAudio;
+
 
     //public bool IsRockOff { get; private set; }
 
@@ -23,6 +25,9 @@ public class RockOff : MonoBehaviour
 
             // 돌 제거
             Destroy(gameObject);
+
+            // 돌 깨지는 소리
+            //rockAudio.Play();
 
             Quaternion rotation = Quaternion.LookRotation(Vector3.up);
 

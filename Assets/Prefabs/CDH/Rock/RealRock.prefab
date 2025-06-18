@@ -150,7 +150,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   dustEffectPrefab: {fileID: 100002, guid: 99c73c92ac40473459640b165473206f, type: 3}
-  burningGroundPrefab: {fileID: 1411345634913452993, guid: bd3742eab8cf48e4f943ec7fff8211e9, type: 3}
   destroyDelay: 2
+  burningGroundPrefab: {fileID: 1411345634913452993, guid: bd3742eab8cf48e4f943ec7fff8211e9, type: 3}
   burnDuration: 3
+  contactPoint: {x: 0, y: 0, z: 0}
   bossPhaseManager: {fileID: 8845663296742057360, guid: 8ce166a015b60934899e0c1a79c09522, type: 3}
+  rockAudio: {fileID: 0}

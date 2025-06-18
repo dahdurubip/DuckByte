@@ -6,6 +6,8 @@ public class AltarManager : MonoBehaviour, IInteractable
     public string requiredItemTag = "Piece";
     public BossPhaseManager bossPhaseManager;
     public ParticleSystem altarEffect;
+    [SerializeField] AudioSource itemAudio;
+
 
 
     private void Awake()
@@ -23,7 +25,7 @@ public class AltarManager : MonoBehaviour, IInteractable
         {
             PhaseClear();
             altarEffect.Play(true); // 파티클 재생
-
+            itemAudio.Play();
         }
         else
         {
