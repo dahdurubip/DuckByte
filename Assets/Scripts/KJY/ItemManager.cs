@@ -388,20 +388,10 @@ public class ItemManager : MonoBehaviour
 
     public void DestroyCurrentItem()
     {
-        //손에 든 아이템이 있는지 먼저 확인합니다.
         if (currentItem == null) return;
 
-        //만약 아이템이 플래시라이트라면, 관련된 상태를 먼저 정리합니다.
-        if (currentItem.CompareTag("Flashlight"))
-        {
-            flashManager?.SetHeld(false);
-            //필요하다면 flashManager.TurnOff() 등을 호출할 수도 있습니다.
-        }
-
-        //게임 오브젝트를 파괴합니다.
         Destroy(currentItem);
 
-        //currentItem 변수를 null로 설정하여, 파괴된 아이템을 참조하지 않도록 합니다. (매우 중요)
         currentItem = null;
     }
 
