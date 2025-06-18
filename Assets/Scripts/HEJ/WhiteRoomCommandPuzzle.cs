@@ -93,69 +93,75 @@ public class WhiteRoomCommandPuzzle : MonoBehaviour
         for (int i = 0; i < sequence.Count; i++)
         {
             var (cmd, zone) = sequence[i];
-            Debug.Log($"[Step {i + 1}/{sequence.Count}] Command={cmd}, zone={zone}, doors[{zone}]={doors[zone]?.gameObject.name}");
 
-            // 효과음 (방향에 맞게)
+            // 1) 효과음 재생
             AudioClip clip = cmd == "Right" ? rightClip
                             : cmd == "Left" ? leftClip
                                              : stayClip;
             if (clip != null) audioSource.PlayOneShot(clip);
-            yield return new WaitForSeconds((clip?.length ?? 0f) + 0.3f);
+            yield return new WaitForSeconds((clip?.length ?? 0f) + 0.2f);
 
-            // 입력 초기화
-            yield return null; yield return null;
-            Input.ResetInputAxes();
+            // 2) **키 리셋** (잡힌 키가 없도록)
             yield return null;
+            while (Input.anyKey) yield return null;
 
+            // 3) **입력 판정**
             bool success = false;
-            float startT = Time.time, limit = inputDelay + gracePeriod;
+            float timer = 0f;
+            float timeout = inputDelay + (cmd == "Stay" ? 0f : gracePeriod);
 
-            while (Time.time - startT < limit)
+            while (timer < timeout)
             {
+                // 오른쪽 판정 (D 키 또는 → 화살표)
                 if (cmd == "Right" &&
-                    (Input.GetKeyDown(KeyCode.D) || Input.GetKey(KeyCode.D)))
+                   (Input.GetKeyDown(KeyCode.D) || Input.GetKeyDown(KeyCode.RightArrow)))
                 {
-                    Debug.Log("[Input] Right OK");
                     success = true;
                     break;
                 }
+
+                // 왼쪽 판정 (A 키 또는 ← 화살표)
                 if (cmd == "Left" &&
-                    (Input.GetKeyDown(KeyCode.A) || Input.GetKey(KeyCode.A)))
+                   (Input.GetKeyDown(KeyCode.A) || Input.GetKeyDown(KeyCode.LeftArrow)))
                 {
-                    Debug.Log("[Input] Left OK");
                     success = true;
                     break;
                 }
-                if (cmd == "Stay" && Input.anyKeyDown)
+
+                // 머무르기(Stay)는 **절대** A/D/←/→ 가 눌리지 않아야 성공
+                if (cmd == "Stay" &&
+                   (Input.GetKeyDown(KeyCode.A) || Input.GetKeyDown(KeyCode.D) ||
+                    Input.GetKeyDown(KeyCode.LeftArrow) || Input.GetKeyDown(KeyCode.RightArrow)))
                 {
-                    Debug.Log("[Input] Stay 실패: 키 입력됨");
                     success = false;
                     break;
                 }
+
+                timer += Time.deltaTime;
                 yield return null;
             }
-            if (cmd == "Stay" && !success)
+
+            // Stay 커맨드는 timeout까지 아무 키도 눌리지 않았다면 성공
+            if (cmd == "Stay" && timer >= inputDelay)
                 success = true;
 
-            Debug.Log($"Input check for {cmd}: success={success}");
+            Debug.Log($"[{i + 1}] {cmd} 판정 → {(success ? "OK" : "Fail")}");
+
             if (!success)
             {
                 yield return StartCoroutine(FailureRoutine());
                 yield break;
             }
 
-            // 모든 명령이든 맞으면 무조건 문 열기!
-            Debug.Log($"[Door] Opening index={zone}, name={doors[zone].gameObject.name}");
+            // 4) 문 열기 & 플레이어 도착 대기
             doors[zone].Open();
-
             yield return new WaitUntil(() =>
                 Vector3.Distance(player.position, doors[zone].transform.position)
                 <= arrivalThreshold
             );
-            yield return new WaitForSeconds(0.5f);
+            yield return new WaitForSeconds(0.3f);
         }
 
-        // 최종 성공: 아이템 스폰, 퍼즐 재시작 불가
         PuzzleComplete();
     }
 
