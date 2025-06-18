@@ -1,14 +1,16 @@
 using UnityEngine;
 
+
+
 public class buttonManager : MonoBehaviour
 {
-    // Start is called once before the first execution of Update after the MonoBehaviour is created
+
+    [SerializeField] private EndingDataSO endingDataSO;
     void Start()
     {
         
     }
 
-    // Update is called once per frame
     void Update()
     {
         
@@ -16,6 +18,19 @@ public class buttonManager : MonoBehaviour
 
     public void firstButton()
     {
-        Debug.Log("s");
+        Debug.Log("1");
+        endingDataSO.currentEnding = EndingType.Good;
+
+    }
+    public void secondButton()
+    {
+        Debug.Log("2");
+        endingDataSO.currentEnding = EndingType.Bad;
+    }
+    public void thirdButton()
+    {
+        Debug.Log("3");
+        endingDataSO.currentEnding = EndingType.True;
+
     }
 }
