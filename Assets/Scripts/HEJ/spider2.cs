@@ -2,146 +2,117 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.AI;
-using UnityEngine.Animations;
 
-public class spider2 : MonoBehaviour
+public class Spider2 : MonoBehaviour
 {
-    private WSBItemManager ItemManager;
 
-    public NavMeshAgent navMeshAgent;
-    public Transform[] waypoints; // 경로 배열 설정
-    public Transform target;      // 타겟 설정
+    public Transform[] waypoints;
+    private int _currentWaypoint = 0;
+    public float detectionRadius = 10f;
+    public float attackRange = 2f;
 
-    private Animator animator;
-    int m_CurrentWaypointIndex;   // 최근 경로 번호
-    private Transform searchTarget = null;
+    private NavMeshAgent _agent;
+    private Animator _anim;
+    private Transform _player;
 
-    public AudioClip[] Spidershout = null;
-    public AudioClip SpiderFoot;
+    private enum State { Patrol, Chase, Attack }
+    private State _state = State.Patrol;
 
     private void Awake()
     {
-        animator = GetComponent<Animator>();
-        // 태그로 플레이어 찾기
-        GameObject playerObj = GameObject.FindWithTag("Player");
-        if (playerObj != null)
-            target = playerObj.transform;
-        else
-            Debug.LogError("Player 태그 오브젝트를 찾을 수 없습니다.");
-
-        searchTarget = this.GetComponent<Transform>();
+        _agent = GetComponent<NavMeshAgent>();
+        _anim = GetComponent<Animator>();
+        _player = GameObject.FindWithTag("Player")?.transform;
+        if (_player == null)
+            Debug.LogError("Player 태그를 찾을 수 없습니다.");
     }
 
     private void Start()
     {
-        if (waypoints != null && waypoints.Length > 0 && navMeshAgent != null)
-        {
-            navMeshAgent.SetDestination(waypoints[0].position); // 거미 시작점
-            Debug.Log("check");
-        }
-        else
-        {
-            Debug.LogError("Waypoints 또는 navMeshAgent가 설정되지 않았습니다.");
-        }
+        GoToNextWaypoint();
     }
 
     private void Update()
     {
-        setDistance();
-    }
-
-    private void OnTriggerEnter(Collider other)
-    {
-        if (other.CompareTag("Player"))
+        switch (_state)
         {
-            GameObject playerObj = GameObject.FindWithTag("Player");
-            if (playerObj != null)
-                target = playerObj.transform;
-            else
-                Debug.LogError("Player 태그 오브젝트를 찾을 수 없습니다.");
+            case State.Patrol:
+                PatrolUpdate();
+                break;
+            case State.Chase:
+                ChaseUpdate();
+                break;
+            case State.Attack:
+                AttackUpdate();
+                break;
+        }
 
-            if (navMeshAgent != null && target != null && animator != null)
-            {
-                navMeshAgent.SetDestination(target.position);
-                animator.SetBool("isWalk", false);
-                animator.SetBool("isAttack", true);
-            }
+        float distToPlayer = Vector3.Distance(transform.position, _player.position);
+        if (distToPlayer <= detectionRadius && _state == State.Patrol)
+        {
+            _state = State.Chase;
+        }
+        // 플레이어가 범위 밖으로 나가면 다시 순찰 모드
+        else if (distToPlayer > detectionRadius && _state != State.Patrol)
+        {
+            _state = State.Patrol;
+            GoToNextWaypoint();
         }
     }
 
-    private void OnTriggerExit(Collider other)
+    private void PatrolUpdate()
     {
-        if (other.CompareTag("Player"))
+    
+        if (!_agent.pathPending && _agent.remainingDistance < 0.5f)
         {
-            target = null;
-            if (animator != null)
-            {
-                animator.SetBool("isWalk", true);
-                animator.SetBool("isAttack", false);
-            }
+            _currentWaypoint = (_currentWaypoint + 1) % waypoints.Length;
+            GoToNextWaypoint();
+        }
+
+  
+        _anim.SetBool("isWalk", true);
+        _anim.SetBool("isAttack", false);
+    }
+
+    private void ChaseUpdate()
+    {
+        // 플레이어 위치로 계속 이동
+        _agent.SetDestination(_player.position);
+
+
+        if (_agent.remainingDistance <= attackRange)
+        {
+            _state = State.Attack;
+        }
+        else
+        {
+            _anim.SetBool("isWalk", true);
+            _anim.SetBool("isAttack", false);
         }
     }
 
-    private void OnTriggerStay(Collider other)
+    private void AttackUpdate()
     {
-        if (other.CompareTag("Player"))
-        {
-            if (navMeshAgent != null && target != null && animator != null)
-            {
-                navMeshAgent.SetDestination(target.position);
-                animator.SetBool("isWalk", false);
-                animator.SetBool("isAttack", true);
-            }
-        }
+        // 멈춰서 공격 애니메이션
+        _agent.ResetPath();
+        _anim.SetBool("isWalk", false);
+        _anim.SetBool("isAttack", true);
+
+
     }
 
-    private void RunAway()
+    private void GoToNextWaypoint()
     {
-        target = null;
-        if (animator != null)
-        {
-            animator.SetBool("isWalk", true);
-            animator.SetBool("isAttack", false);
-        }
+        if (waypoints.Length == 0) return;
+        _agent.SetDestination(waypoints[_currentWaypoint].position);
     }
 
-    public void attack()
-    {
-        float damage = Random.Range(5f, 11f);
-        // PlayerController.Damage(damage);
-        // Debug.Log(PlayerController.CurHp);
-    }
 
-    private void setDistance()
+    private void OnDrawGizmosSelected()
     {
-        if (navMeshAgent != null && waypoints != null && waypoints.Length > 0)
-        {
-            if (navMeshAgent.remainingDistance < navMeshAgent.stoppingDistance)
-            {
-                m_CurrentWaypointIndex = (m_CurrentWaypointIndex + 1) % waypoints.Length;
-                navMeshAgent.SetDestination(waypoints[m_CurrentWaypointIndex].position);
-            }
-        }
-    }
-
-    private void Spiderfoot()
-    {
-        AudioSource audio = GetComponent<AudioSource>();
-        if (audio != null && SpiderFoot != null)
-        {
-            audio.Stop();
-            audio.PlayOneShot(SpiderFoot);
-        }
-    }
-
-    private void attackSound()
-    {
-        AudioSource audio = GetComponent<AudioSource>();
-        if (audio != null && Spidershout != null && Spidershout.Length > 0)
-        {
-            AudioClip Spider = Spidershout[0];
-            audio.Stop();
-            audio.PlayOneShot(Spider);
-        }
+        Gizmos.color = Color.yellow;
+        Gizmos.DrawWireSphere(transform.position, detectionRadius);
+        Gizmos.color = Color.red;
+        Gizmos.DrawWireSphere(transform.position, attackRange);
     }
 }
