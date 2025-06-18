@@ -36,6 +36,7 @@ public class BossPhaseManager : MonoBehaviour
     public GameObject warningCirclePrefab;
     public GameObject shockwaveEffectPrefab;
     [SerializeField] AudioSource warnningAudio;
+    [SerializeField] AudioSource bossHowlAudio;
 
 
 
@@ -319,6 +320,7 @@ public class BossPhaseManager : MonoBehaviour
             int i = 0;
             int attempts = 0;
 
+            warnningAudio.Play();
             while (i < spawnCount && attempts < maxAttempts)
             {
                 attempts++;
@@ -491,6 +493,8 @@ public class BossPhaseManager : MonoBehaviour
 
         // 페이즈 넘어가는 연출 시작
         Debug.Log("보스 : 으윽");
+        // 보스 그르릉 소리 추가
+        bossHowlAudio.Play();
 
         if (dialogueData.phaseDialogues.ContainsKey(nextPhase))
         {

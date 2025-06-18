@@ -27,6 +27,9 @@ public class PlayerMental : MonoBehaviour
 
     public PlayerMovement pm;
 
+    [SerializeField] AudioSource healAudio;
+
+
     void Start()
     {
         currentMental = maxMental;
@@ -52,6 +55,7 @@ public class PlayerMental : MonoBehaviour
 
         if (other.CompareTag("HealZone"))
         {
+            healAudio.Play();
             if (recoverCoroutine == null)
             {
                 isHealing = true;
@@ -71,6 +75,7 @@ public class PlayerMental : MonoBehaviour
 
         if (other.CompareTag("HealZone") && recoverCoroutine != null)
         {
+            healAudio.Stop();
             isHealing = false;
             StopCoroutine(recoverCoroutine);
             recoverCoroutine = null;
