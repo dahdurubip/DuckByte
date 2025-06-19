@@ -5,10 +5,14 @@ public class Creature2SceneManager : MonoBehaviour
 {
 
     [SerializeField] private ItemManager itemmanager;
+    [SerializeField] private DialogueManager dialogueManager;
+
 
     private void Start()
     {
         Creature2AudioManager.instance.PlaySfx(Creature2AudioManager.sfx.Phorror);
+        dialogueManager.PlayDialogue("inPrison");
+
     }
 
     private void OnTriggerEnter(Collider other)

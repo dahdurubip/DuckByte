@@ -20,7 +20,7 @@ public class ItemManager : MonoBehaviour
     [SerializeField] private ObanggiUIManager obanggiUIManager;
     [SerializeField] private DialogueManager dialogueManager;
 
-
+    [SerializeField] private GameObject howToUse;
 
     [Header("Key UI Settings")]
     [SerializeField] private GameObject EKeyUI;
@@ -83,6 +83,11 @@ public class ItemManager : MonoBehaviour
 
         if (Input.GetKeyDown(interactKey))
         {
+
+            if (UnityEngine.SceneManagement.SceneManager.GetActiveScene().name == "Creature2Map")
+            {
+                howToUse.SetActive(false);
+            }
             Debug.Log("mainItem" + MainItem);
             //E키를 누르면 무조건 끄는 것
             if (noteUI.activeSelf)
