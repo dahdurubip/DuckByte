@@ -9,6 +9,7 @@ public class Jiockdo : MonoBehaviour, IInteractable
     [SerializeField] private ItemManager itemmanager;
     [SerializeField] private DialogueManager dialogueManager;
     [SerializeField] private GameObject JiockdoArt;
+    [SerializeField] private GameObject circle;
 
     [Header("first door")]
     [SerializeField] private Collider D1;
@@ -49,6 +50,7 @@ public class Jiockdo : MonoBehaviour, IInteractable
         Destroy(itemmanager.currentItem);
         // 지옥도 그림 나타남
         JiockdoArt.SetActive(true);
+        circle.SetActive(false);
         // 풀린 자물쇠가 사라짐
         //SCDoorLock.SetActive(false);
         // 문들 나타나는 대사
