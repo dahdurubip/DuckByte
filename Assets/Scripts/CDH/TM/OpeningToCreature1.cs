@@ -18,7 +18,9 @@ public class OpeningToCreature1 : MonoBehaviour
     {
         if (director == timeline)
         {
-            SceneManager.LoadScene("Creature2Map"); // 전환할 씬 이름 입력
+            //SceneManager.LoadScene("Creature2Map"); // 전환할 씬 이름 입력
+            SceneLoad.LoadSceneWithLoading("Creature2Map");
+
         }
     }
 }

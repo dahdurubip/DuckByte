@@ -20,11 +20,11 @@ RenderSettings:
   m_FogDensity: 0.01
   m_LinearFogStart: 0
   m_LinearFogEnd: 300
-  m_AmbientSkyColor: {r: 0.6981132, g: 0.6157885, b: 0.6157885, a: 1}
+  m_AmbientSkyColor: {r: 0.38679248, g: 0.28644538, b: 0.28644538, a: 1}
   m_AmbientEquatorColor: {r: 0.114, g: 0.125, b: 0.133, a: 1}
   m_AmbientGroundColor: {r: 0.047, g: 0.043, b: 0.035, a: 1}
-  m_AmbientIntensity: 5.06
-  m_AmbientMode: 3
+  m_AmbientIntensity: 0
+  m_AmbientMode: 0
   m_SubtractiveShadowColor: {r: 0.42, g: 0.478, b: 0.627, a: 1}
   m_SkyboxMaterial: {fileID: 2100000, guid: 2039a0ad0a9d05549928b70362f54902, type: 2}
   m_HaloStrength: 0.5
@@ -35,7 +35,7 @@ RenderSettings:
   m_DefaultReflectionMode: 0
   m_DefaultReflectionResolution: 128
   m_ReflectionBounces: 1
-  m_ReflectionIntensity: 0.23
+  m_ReflectionIntensity: 0.1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 0}
   m_UseRadianceAmbientProbe: 0
@@ -2909,8 +2909,8 @@ Light:
   m_Enabled: 1
   serializedVersion: 11
   m_Type: 1
-  m_Color: {r: 0.4245283, g: 0.40894794, b: 0.36645603, a: 1}
-  m_Intensity: 1
+  m_Color: {r: 0.3773585, g: 0.25453898, b: 0.2987086, a: 1}
+  m_Intensity: 0.5
   m_Range: 10
   m_SpotAngle: 30
   m_InnerSpotAngle: 21.80208
@@ -9240,7 +9240,7 @@ AudioSource:
   m_audioClip: {fileID: 8300000, guid: 1b6165e55b8b9a54ca3a2fc5672f1f14, type: 3}
   m_Resource: {fileID: 8300000, guid: 1b6165e55b8b9a54ca3a2fc5672f1f14, type: 3}
   m_PlayOnAwake: 0
-  m_Volume: 1
+  m_Volume: 0.71
   m_Pitch: 1
   Loop: 1
   Mute: 0
@@ -19029,7 +19029,7 @@ ParticleSystem:
       serializedVersion: 2
       minMaxState: 0
       minColor: {r: 1, g: 1, b: 1, a: 1}
-      maxColor: {r: 0.98490566, g: 0.07990736, b: 0.07990736, a: 1}
+      maxColor: {r: 0.078431375, g: 0.27778384, b: 0.9843137, a: 1}
       maxGradient:
         serializedVersion: 2
         key0: {r: 1, g: 1, b: 1, a: 1}
@@ -23596,15 +23596,15 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 4464446492137689517, guid: 3792fa23fd4268e4e979f5d38c67f166, type: 3}
       propertyPath: m_LocalPosition.x
-      value: -7.94
+      value: -9.906
       objectReference: {fileID: 0}
     - target: {fileID: 4464446492137689517, guid: 3792fa23fd4268e4e979f5d38c67f166, type: 3}
       propertyPath: m_LocalPosition.y
-      value: -1.046
+      value: -1.459
       objectReference: {fileID: 0}
     - target: {fileID: 4464446492137689517, guid: 3792fa23fd4268e4e979f5d38c67f166, type: 3}
       propertyPath: m_LocalPosition.z
-      value: 0.468
+      value: -7.601
       objectReference: {fileID: 0}
     - target: {fileID: 4464446492137689517, guid: 3792fa23fd4268e4e979f5d38c67f166, type: 3}
       propertyPath: m_LocalRotation.w
@@ -41646,7 +41646,7 @@ Light:
   m_Enabled: 1
   serializedVersion: 11
   m_Type: 2
-  m_Color: {r: 0.3584906, g: 0.029085057, b: 0.029085057, a: 1}
+  m_Color: {r: 0.027450979, g: 0.13643754, b: 0.35686275, a: 1}
   m_Intensity: 3
   m_Range: 0.5
   m_SpotAngle: 30
@@ -46036,7 +46036,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 2806825484523080279, guid: b67b323cafcc915418b74490eba32673, type: 3}
       propertyPath: m_Enabled
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 2806825484523080279, guid: b67b323cafcc915418b74490eba32673, type: 3}
       propertyPath: m_Center.x
@@ -115477,6 +115477,7 @@ MonoBehaviour:
   itemmanager: {fileID: 1568374695}
   dialogueManager: {fileID: 1777336346}
   JiockdoArt: {fileID: 1408193827}
+  circle: {fileID: 1823730668}
   D1: {fileID: 1420871599}
   D2: {fileID: 2120673546}
   D3: {fileID: 910532047}
@@ -119248,6 +119249,7 @@ MonoBehaviour:
   itemmanager: {fileID: 0}
   dialogueManager: {fileID: 0}
   JiockdoArt: {fileID: 0}
+  circle: {fileID: 0}
   D1: {fileID: 0}
   D2: {fileID: 0}
   D3: {fileID: 0}
@@ -125354,7 +125356,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 8134580726298752235, guid: 36c611d3a84132d48a9ab288358e6b53, type: 3}
       propertyPath: m_IsActive
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 8910379279111876177, guid: 36c611d3a84132d48a9ab288358e6b53, type: 3}
       propertyPath: m_RootOrder
@@ -183709,7 +183711,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 7778296697042586666, guid: 6fab0a5d67d5d854d9164b3da1f8ae31, type: 3}
       propertyPath: m_IsActive
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -218805,7 +218807,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 2943833757197710179, guid: 12c5856438081484b9aa5252c8724b29, type: 3}
       propertyPath: m_IsActive
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []

@@ -18,7 +18,7 @@ public class GoToBoss : MonoBehaviour
     {
         if (director == timeline)
         {
-            SceneLoad.LoadSceneWithLoading("Boss1");
+            SceneLoad.LoadSceneWithLoading("Boss 1");
         }
     }
 }
