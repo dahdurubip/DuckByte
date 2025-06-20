@@ -71,7 +71,15 @@ public class Player : MonoBehaviour
         //여기서 사망 애니메이션, 게임 오버 처리 등 넣기
         animator.SetBool("die", true);
         //게임오버 화면 전환
-        creature2scenemanager.RestartScene();
+        if (UnityEngine.SceneManagement.SceneManager.GetActiveScene().name == "Creature2Map")
+        {
+            creature2scenemanager.RestartScene();
+        }
+        if (UnityEngine.SceneManagement.SceneManager.GetActiveScene().name == "Boss 1")
+        {
+            //보스씬 로드 
+        }
+
     }
 
     public void Heal(float amount)

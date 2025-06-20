@@ -64,6 +64,7 @@ public class CandleManager : MonoBehaviour
         //Debug.Log("¡§¥‰! ∆€¡Ò¿Ã «Æ∑»Ω¿¥œ¥Ÿ.");
         itemManager.DestroyCurrentItem();
         m1_AudioManager.instance.PlaySfx(m1_AudioManager.m1sfx.northRbigFire);
+        m1_AudioManager.instance.PlaySfx(m1_AudioManager.m1sfx.clearSound);
         blackNorth.SetActive(true);
         volumeBlack.SetActive(false);
         particle.Play();

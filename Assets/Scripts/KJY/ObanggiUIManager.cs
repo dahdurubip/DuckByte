@@ -209,6 +209,7 @@ public class ObanggiUIManager : MonoBehaviour
             //Debug.Log("정답! 문 열림");
             Lock.SetActive(false);
             DoorCollider.GetComponent<Collider>().enabled = true;
+            m1_AudioManager.instance.PlaySfx(m1_AudioManager.m1sfx.clearSound);
         }
     }
 
