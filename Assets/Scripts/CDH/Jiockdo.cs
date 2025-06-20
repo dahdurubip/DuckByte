@@ -47,7 +47,8 @@ public class Jiockdo : MonoBehaviour, IInteractable
     private void ClearJiockdo()
     {
         Debug.Log("불상을 바쳤습니다");
-        Destroy(itemmanager.currentItem);
+        //Destroy(itemmanager.currentItem);
+        itemmanager.DestroyCurrentItem(); //오브젝트 파괴하는 코드
         // 지옥도 그림 나타남
         JiockdoArt.SetActive(true);
         circle.SetActive(false);

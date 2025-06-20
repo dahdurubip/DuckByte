@@ -39,6 +39,7 @@ public class SCDoor : MonoBehaviour, IInteractable
         Debug.Log("자물쇠가 풀렸습니다");
         //Debug.Log("item : ");
         //Destroy(itemmanager.currentItem);
+        itemmanager.DestroyCurrentItem(); //오브젝트 파괴하는 코드
         //풀리는 소리
         m1_AudioManager.instance.PlaySfx(m1_AudioManager.m1sfx.doorLock);
         //Destroy(itemmanager.nearbyInteractable);
