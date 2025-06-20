@@ -9,6 +9,7 @@ public class WhiteRoomCommandPuzzle : MonoBehaviour
     public AudioClip rightClip;      // 오른쪽(D/→) 효과음
     public AudioClip leftClip;       // 왼쪽(A/←) 효과음
     public AudioClip stayClip;
+    public AudioClip clearClip;
     public AudioSource audioSource;
 
     [Header("Player Reset")]
@@ -192,15 +193,18 @@ public class WhiteRoomCommandPuzzle : MonoBehaviour
 
     private void PuzzleComplete()
     {
-        Debug.Log("Puzzle Complete! Spawning reward.");
 
-        if (rewardPrefab != null && rewardSpawnPoint != null)
+        if (rewardPrefab != null && rewardSpawnPoint != null) { 
+        
+            audioSource.PlayOneShot(clearClip);
             Instantiate(rewardPrefab,
-                        rewardSpawnPoint.position,
-                        rewardSpawnPoint.rotation);
-        else
-            Debug.LogWarning("RewardPrefab or RewardSpawnPoint not assigned.");
+                     rewardSpawnPoint.position,
+                     rewardSpawnPoint.rotation);
 
+        }
+     
+        else
+            Debug.Log("not");
         PuzzleStarted = true;
     }
 }
