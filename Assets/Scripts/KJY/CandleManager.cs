@@ -61,7 +61,7 @@ public class CandleManager : MonoBehaviour
 
     private void Correct()
     {
-        Debug.Log("¡§¥‰! ∆€¡Ò¿Ã «Æ∑»Ω¿¥œ¥Ÿ.");
+        //Debug.Log("¡§¥‰! ∆€¡Ò¿Ã «Æ∑»Ω¿¥œ¥Ÿ.");
         itemManager.DestroyCurrentItem();
         m1_AudioManager.instance.PlaySfx(m1_AudioManager.m1sfx.northRbigFire);
         blackNorth.SetActive(true);

@@ -47,13 +47,13 @@ public class Candle : MonoBehaviour, IInteractable
         }
         else
         {
-            Debug.Log("아닙니다.");
+            //Debug.Log("아닙니다.");
         }
     }
 
     private void OpenCandle()
     {
-        Debug.Log("켜졌습니다!");
+        //Debug.Log("켜졌습니다!");
         particle.Play();
         candlelight.enabled = true;
         //촛불 상태를 켜진 상태로 설정

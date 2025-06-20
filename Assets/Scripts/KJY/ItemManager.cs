@@ -151,8 +151,6 @@ public class ItemManager : MonoBehaviour
                         breaker.BreakJar();
                     }
                     return;
-
-
                 }
                 if (nearbyInteractable.CompareTag("UnBrokenJar"))
                 {
@@ -309,11 +307,11 @@ public class ItemManager : MonoBehaviour
             Vector3 toTarget = (col.transform.position - origin).normalized;
             if (Vector3.Angle(forward, toTarget) <= panAngle)
             {
-                //<<<-- 시야 확인 로직 추가 -->>>
+                //시야 확인
                 if (HasLineOfSight(col.gameObject))
                 {
                     nearbyInteractable = col.gameObject;
-                    break; //시야가 확보된 가장 가까운 대상을 찾았으므로 반복 종료
+                    break; 
                 }
             }
         }
@@ -408,8 +406,8 @@ public class ItemManager : MonoBehaviour
         Vector3 direction = (target.transform.position - startPoint).normalized;
         float distance = Vector3.Distance(startPoint, target.transform.position);
 
-        //카메라와 대상 사이에 obstacleLayer에 해당하는 장애물이 있는지 확인
-        //장애물이 감지되면 'true'가 되어, ! 연산자로 인해 false가 반환됩니다.
+        //카메라와 대상 사이에 장애물이 있는지 확인
+        //장애물이 감지되면 'true'가 되어, ! 연산자로 인해 false가 반환
         return !Physics.Raycast(startPoint, direction, distance, obstacleLayer);
     }
 

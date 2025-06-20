@@ -145,7 +145,7 @@ public class Creature2 : MonoBehaviour
             // 레이캐스트에 부딪힌 물체의 태그가 'Wall'이라면
             if (hit.collider.CompareTag("Wall"))
             {
-                Debug.Log("전방에 'Wall' 장애물 감지! 순찰 방향을 반대로 전환합니다.");
+                //Debug.Log("전방에 'Wall' 장애물 감지! 순찰 방향을 반대로 전환합니다.");
                 ReversePatrolDirection(); // 방향 전환 함수 호출
                 return; //이번 프레임의 나머지 순찰 로직은 건너뜁니다.
             }
@@ -287,7 +287,7 @@ public class Creature2 : MonoBehaviour
         if (distanceToPlayer <= attackRange)
         {
             if (player != null) player.TakeDamage(damage);
-            Debug.Log("Damage");
+            //Debug.Log("Damage");
             //Creature2Attack();
         }
 

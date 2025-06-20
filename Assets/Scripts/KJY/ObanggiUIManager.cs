@@ -136,7 +136,7 @@ public class ObanggiUIManager : MonoBehaviour
             colorButtons_West,
             colorButtons_North
 };
-        UpdateAllColorButtonActivationStates(); // 게임 시작 시 버튼 활성화 상태 초기 설정
+        UpdateAllColorButtonActivationStates(); //게임 시작 시 버튼 활성화 상태 초기 설정
     }
 
     private void SetupColorButtons(Button[] buttons, Image targetSlotImage, GameObject popupPanel)
@@ -148,7 +148,7 @@ public class ObanggiUIManager : MonoBehaviour
             buttons[i].onClick.AddListener(() =>
             {
                 Color selected = GetColorByIndex(idx);
-                Debug.Log($"버튼 {idx} 클릭됨 - 색상: {selected}");
+                //Debug.Log($"버튼 {idx} 클릭됨 - 색상: {selected}");
                 targetSlotImage.color = selected;
                 popupPanel.SetActive(false);
                 CheckAnswer();
@@ -176,7 +176,7 @@ public class ObanggiUIManager : MonoBehaviour
         {
             if (directionalButtons == null) continue;
 
-            // 각 버튼 배열의 길이는 4라고 가정 (red, blue, white, black 순서)
+            //각 버튼 배열의 길이는 4라고 가정 (red, blue, white, black 순서)
             if (directionalButtons.Length >= 1 && directionalButtons[0] != null) // 빨간색 버튼 (인덱스 0)
             {
                 directionalButtons[0].gameObject.SetActive(_redSouth);
@@ -194,7 +194,7 @@ public class ObanggiUIManager : MonoBehaviour
                 directionalButtons[3].gameObject.SetActive(_blackNorth);
             }
         }
-        Debug.Log("색상 버튼 활성화 상태 업데이트 완료.");
+        //Debug.Log("색상 버튼 활성화 상태 업데이트 완료.");
     }
 
 
@@ -206,7 +206,7 @@ public class ObanggiUIManager : MonoBehaviour
             slotImage_North.color == black)
         {
             //성공하는 효과음
-            Debug.Log("정답! 문 열림");
+            //Debug.Log("정답! 문 열림");
             Lock.SetActive(false);
             DoorCollider.GetComponent<Collider>().enabled = true;
         }

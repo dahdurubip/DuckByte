@@ -68,7 +68,7 @@ public class FlashManager : MonoBehaviour
             //만약 isHeld는 true인데 isOn이 false가 되면 creature2.flashOn도 false로 처리
             if (isHeld && !isOn && creature2 != null && creature2.flashOn)
             {
-                flashTimer = 0f; // 타이머 리셋
+                flashTimer = 0f;
                 creature2.flashOn = false;
             }
         }
@@ -85,13 +85,13 @@ public class FlashManager : MonoBehaviour
     {
         if (currentBattery <= 0f && !isOn)
         {
-            Debug.Log("배터리 없음");
+            //Debug.Log("배터리 없음");
             return;
         }
 
         isOn = !isOn;
         if (flashlightLight != null) flashlightLight.enabled = isOn;
-        Debug.Log("Flashlight isOn: " + isOn);
+        //Debug.Log("Flashlight isOn: " + isOn);
 
         if (!isOn) 
         {
@@ -133,7 +133,7 @@ public class FlashManager : MonoBehaviour
         {
             currentBattery = 0f;
             TurnOff();
-            Debug.Log("배터리 소진");
+            //Debug.Log("배터리 소진");
         }
 
         UpdateBatteryUI();
@@ -142,7 +142,7 @@ public class FlashManager : MonoBehaviour
     public void RefillBattery(float amount)
     {
         currentBattery = Mathf.Clamp(currentBattery + amount, 0, maxBattery);
-        Debug.Log("배터리 충전됨: " + currentBattery);
+        //Debug.Log("배터리 충전됨: " + currentBattery);
 
         UpdateBatteryUI();
     }
