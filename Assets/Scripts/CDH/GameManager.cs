@@ -30,6 +30,7 @@ public class GameManager : MonoBehaviour
     public void KillPlayer()
     {
         Debug.Log("플레이어 죽음");
+        SceneLoad.LoadSceneWithLoading("Creature1Map");
 
     }
 }
