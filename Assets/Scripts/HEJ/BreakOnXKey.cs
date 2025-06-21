@@ -102,6 +102,7 @@ public class BreakOnXKey : MonoBehaviour
         }
     }
 
+    // 만약 몇초안에 알깨는걸 실패했을 경우 패널티를 주고 싶다면 거미 나타나는 부분에 대신 다른거 넣기 (예를들어 슬로우모션 혹은 피감소 혹은 실패이펙트?)
     private IEnumerator BreakTimeoutCoroutine()
     {
         float elapsed = 0f;
@@ -116,8 +117,8 @@ public class BreakOnXKey : MonoBehaviour
         }
 
         // 타임아웃: 5초 내에 완전 분해 실패 ⇒ 거미 활성화
-        if (spiderObject != null)
-            spiderObject.SetActive(true);
+        //if (spiderObject != null)
+        //    spiderObject.SetActive(true);
     }
 
     private void ApplyBreakStage(int stage)
