@@ -69,7 +69,7 @@ public class SouthRoomPuzzleManager : MonoBehaviour
     {
         if (isSolved)
         {
-            Debug.Log("이미 정답을 맞췄습니다. 다시 입력할 수 없습니다.");
+           // Debug.Log("이미 정답을 맞췄습니다. 다시 입력할 수 없습니다.");
             return;
         }
 
@@ -96,15 +96,16 @@ public class SouthRoomPuzzleManager : MonoBehaviour
             string.Equals(attempt, correctName.Trim(), System.StringComparison.OrdinalIgnoreCase))
         {
             isSolved = true; // 정답 맞춤 기록
-
+            m1_AudioManager.instance.PlaySfx(m1_AudioManager.m1sfx.clearSound);
             if (itemPrefab != null && itemSpawnPoint != null)
                 Instantiate(itemPrefab, itemSpawnPoint.position, itemSpawnPoint.rotation);
 
             CancelInputUI();
+
         }
         else
         {
-            Debug.Log("오답입니다.");
+            //Debug.Log("오답입니다.");
         }
     }
 }

@@ -6,10 +6,10 @@ using System.Collections.Generic;
 public class WhiteRoomCommandPuzzle : MonoBehaviour
 {
     [Header("Audio Clips")]
-    public AudioClip rightClip;      // 오른쪽(D/→) 효과음
-    public AudioClip leftClip;       // 왼쪽(A/←) 효과음
-    public AudioClip stayClip;
-    public AudioClip clearClip;
+    public AudioClip rightClip;      // 오른쪽(D) 효과음
+    public AudioClip leftClip;       // 왼쪽(A) 효과음
+    public AudioClip stayClip;       // 머무르기(W) 효과음
+    public AudioClip clearClip;      // 클리어 효과음
     public AudioSource audioSource;
 
     [Header("Player Reset")]
@@ -57,13 +57,14 @@ public class WhiteRoomCommandPuzzle : MonoBehaviour
         puzzleStartZone = zoneIndex;
         GenerateSequence();
 
-        // 디버그: sequence의 zone과 실제 doors[zone] 이름을 보여줌
+        // 디버그 로그
         string seqLog = "";
         for (int i = 0; i < sequence.Count; i++)
         {
             seqLog += $"({sequence[i].command}, {sequence[i].zone}, {doors[sequence[i].zone]?.gameObject.name}) ";
         }
         Debug.Log($"BeginPuzzle: startZone={puzzleStartZone}, seq=[{seqLog}]");
+
         StartCoroutine(PuzzleRoutine());
     }
 
@@ -74,16 +75,15 @@ public class WhiteRoomCommandPuzzle : MonoBehaviour
         for (int i = 0; i < doors.Count; i++)
         {
             var valid = new List<string>();
-            if (curr < doors.Count - 1) valid.Add("Right");    // → or D
-            if (curr > 0) valid.Add("Left");     // ← or A
+            if (curr < doors.Count - 1) valid.Add("Right");
+            if (curr > 0) valid.Add("Left");
             valid.Add("Stay");
 
             string cmd = valid[Random.Range(0, valid.Count)];
-            sequence.Add((cmd, i)); // 반드시 i! (zone=0이면 Door1, zone=1이면 Door2...)
+            sequence.Add((cmd, i));
 
             if (cmd == "Right") curr++;
             else if (cmd == "Left") curr--;
-            // Stay는 curr 그대로
         }
     }
 
@@ -102,39 +102,32 @@ public class WhiteRoomCommandPuzzle : MonoBehaviour
             if (clip != null) audioSource.PlayOneShot(clip);
             yield return new WaitForSeconds((clip?.length ?? 0f) + 0.2f);
 
-            // 2) **키 리셋** (잡힌 키가 없도록)
-            yield return null;
-            while (Input.anyKey) yield return null;
-
-            // 3) **입력 판정**
+            // 2) 입력 대기 및 판정
             bool success = false;
+            bool inputReceived = false;
+            KeyCode pressed = KeyCode.None;
             float timer = 0f;
-            float timeout = inputDelay + (cmd == "Stay" ? 0f : gracePeriod);
+            float timeout = inputDelay + gracePeriod;
 
             while (timer < timeout)
             {
-                // 오른쪽 판정 (D 키 또는 → 화살표)
-                if (cmd == "Right" &&
-                   (Input.GetKeyDown(KeyCode.D) || Input.GetKeyDown(KeyCode.RightArrow)))
+                // 첫 GetKeyDown 이벤트만 잡기
+                if (Input.GetKeyDown(KeyCode.D))
                 {
-                    success = true;
+                    inputReceived = true;
+                    pressed = KeyCode.D;
                     break;
                 }
-
-                // 왼쪽 판정 (A 키 또는 ← 화살표)
-                if (cmd == "Left" &&
-                   (Input.GetKeyDown(KeyCode.A) || Input.GetKeyDown(KeyCode.LeftArrow)))
+                if (Input.GetKeyDown(KeyCode.A))
                 {
-                    success = true;
+                    inputReceived = true;
+                    pressed = KeyCode.A;
                     break;
                 }
-
-                // 머무르기(Stay)는 **절대** A/D/←/→ 가 눌리지 않아야 성공
-                if (cmd == "Stay" &&
-                   (Input.GetKeyDown(KeyCode.A) || Input.GetKeyDown(KeyCode.D) ||
-                    Input.GetKeyDown(KeyCode.LeftArrow) || Input.GetKeyDown(KeyCode.RightArrow)))
+                if (Input.GetKeyDown(KeyCode.W))
                 {
-                    success = false;
+                    inputReceived = true;
+                    pressed = KeyCode.W;
                     break;
                 }
 
@@ -142,11 +135,22 @@ public class WhiteRoomCommandPuzzle : MonoBehaviour
                 yield return null;
             }
 
-            // Stay 커맨드는 timeout까지 아무 키도 눌리지 않았다면 성공
-            if (cmd == "Stay" && timer >= inputDelay)
+            // Stay 는 “아무 키도 안 눌림” 상태를 허용
+            if (!inputReceived && cmd == "Stay")
+            {
                 success = true;
+            }
+            else if (inputReceived)
+            {
+                switch (cmd)
+                {
+                    case "Right": success = (pressed == KeyCode.D); break;
+                    case "Left": success = (pressed == KeyCode.A); break;
+                    case "Stay": success = (pressed == KeyCode.W); break;
+                }
+            }
 
-            Debug.Log($"[{i + 1}] {cmd} 판정 → {(success ? "OK" : "Fail")}");
+            Debug.Log($"[{i + 1}] 명령: {cmd} → {(success ? "성공" : "실패")}");
 
             if (!success)
             {
@@ -154,7 +158,7 @@ public class WhiteRoomCommandPuzzle : MonoBehaviour
                 yield break;
             }
 
-            // 4) 문 열기 & 플레이어 도착 대기
+            // 3) 문 열기 & 도착 대기
             doors[zone].Open();
             yield return new WaitUntil(() =>
                 Vector3.Distance(player.position, doors[zone].transform.position)
@@ -193,18 +197,15 @@ public class WhiteRoomCommandPuzzle : MonoBehaviour
 
     private void PuzzleComplete()
     {
-
-        if (rewardPrefab != null && rewardSpawnPoint != null) { 
-        
+        if (rewardPrefab != null && rewardSpawnPoint != null)
+        {
             audioSource.PlayOneShot(clearClip);
-            Instantiate(rewardPrefab,
-                     rewardSpawnPoint.position,
-                     rewardSpawnPoint.rotation);
-
+            Instantiate(rewardPrefab, rewardSpawnPoint.position, rewardSpawnPoint.rotation);
         }
-     
         else
-            Debug.Log("not");
+        {
+            Debug.LogWarning("보상 프리팹 또는 스폰 위치가 설정되지 않음.");
+        }
         PuzzleStarted = true;
     }
 }

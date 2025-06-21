@@ -143,6 +143,7 @@ public class EastRoomPuzzleManager : MonoBehaviour
             Instantiate(rewardPrefab,
                         rewardSpawnPoint.position,
                         rewardSpawnPoint.rotation);
+            m1_AudioManager.instance.PlaySfx(m1_AudioManager.m1sfx.clearSound);
         }
         else
         {
