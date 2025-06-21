@@ -54,7 +54,7 @@ public class RockOff : MonoBehaviour
             //IsRockOff = true;
             //Debug.Log("락오프 스크립트" + IsRockOff);
 
-            Debug.Log("락오프 스크립트" + bossPhaseManager.currentPhase);
+            //Debug.Log("락오프 스크립트" + bossPhaseManager.currentPhase);
 
             //if(bossPhaseManager.currentPhase == 2)
             //{
