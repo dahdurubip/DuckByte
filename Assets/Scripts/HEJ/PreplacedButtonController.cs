@@ -11,20 +11,32 @@ public class PreplacedButtonController : MonoBehaviour
 
     void Start()
     {
-
         int totalItems = PlayerPrefs.GetInt("MainItemCount", 0);
         int buttonCount = Mathf.CeilToInt(totalItems / (float)itemsPerButton);
+        int maxButtons = buttonObjects.Length;
 
-        for (int i = 0; i < buttonObjects.Length; i++)
+        for (int i = 0; i < maxButtons; i++)
         {
-            bool active = i < buttonCount;
-            buttonObjects[i].SetActive(active);
+            bool shouldActivate;
 
-            if (active)
+            if (totalItems <= 2)
+            {
+                // 2 이하일 때는 가운데(인덱스 1)만 꺼주고 나머지 버튼은 모두 켜기
+                shouldActivate = (i != 1);
+            }
+            else
+            {
+                // 3개 이상일 때는 itemsPerButton 기준으로 계산된 buttonCount 만큼 순서대로 켜기
+                shouldActivate = (i < buttonCount);
+            }
+
+            buttonObjects[i].SetActive(shouldActivate);
+
+            if (shouldActivate)
             {
                 var btn = buttonObjects[i].GetComponent<Button>();
                 btn.onClick.RemoveAllListeners();
-                int idx = i;
+                int idx = i; 
                 btn.onClick.AddListener(() => OnButtonClicked(idx));
             }
         }
