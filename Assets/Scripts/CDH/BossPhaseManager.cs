@@ -31,6 +31,8 @@ public class BossPhaseManager : MonoBehaviour
     [Header("스크립트")]
     [SerializeField] private DialogueManager dialogueManager; // 대사 출력 담당
     [SerializeField] private DialogueData dialogueData;       // 대사 데이터 보관소
+    [SerializeField] private EggGroupManager eggGroupManager;   // 거미알 아이템 드롭 알 선택
+
 
     [Header("프리팹")]
     public GameObject rockPrefab;
@@ -105,6 +107,35 @@ public class BossPhaseManager : MonoBehaviour
         currentPhase = phase;
         Debug.Log(currentPhase);
         //timer = 0;
+
+        //if (eggGroupManager != null)
+        //{
+        //    if (currentPhase == 1)
+        //        eggGroupManager.PickDropEgg(1); // 1페이즈용 알 중 랜덤 선택
+        //    else if (currentPhase == 2)
+        //        eggGroupManager.PickDropEgg(2); // 2페이즈용 알 중 랜덤 선택
+        //    else if (currentPhase == 3)
+        //        eggGroupManager.PickDropEgg(3); // 3페이즈용 알 중 랜덤 선택
+        //}
+
+        if (eggGroupManager != null)
+        {
+            if (currentPhase == 1)
+            {
+                eggGroupManager.PickDropEgg(1);   // 1페이즈용 알 중 랜덤 선택
+                eggGroupManager.SetActiveEggs(1); // 1페이즈 알만 켜기
+            }
+            else if (currentPhase == 2)
+            {
+                eggGroupManager.PickDropEgg(2);   // 2페이즈용 알 중 랜덤 선택
+                eggGroupManager.SetActiveEggs(2); // 2페이즈 알만 켜기
+            }
+            else if (currentPhase == 3)
+            {
+                eggGroupManager.PickDropEgg(3);   // 3페이즈용 알 중 랜덤 선택
+                eggGroupManager.SetActiveEggs(3); // 3페이즈 알만 켜기
+            }
+        }
 
         switch (currentPhase)
         {

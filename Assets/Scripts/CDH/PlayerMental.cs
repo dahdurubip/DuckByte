@@ -23,7 +23,7 @@ public class PlayerMental : MonoBehaviour
     private Coroutine recoverCoroutine;
     public bool isHealing { get; private set; }
     public bool isInSlowZone { get; private set; }
-    public bool IsReversingControl { get; private set; }
+    //public bool IsReversingControl { get; private set; }
 
     public PlayerMovement pm;
 
@@ -75,6 +75,7 @@ public class PlayerMental : MonoBehaviour
 
         if (other.CompareTag("HealZone") && recoverCoroutine != null)
         {
+            Debug.Log("ÈúÁ¸ µé¾î¿È");
             healAudio.Stop();
             isHealing = false;
             StopCoroutine(recoverCoroutine);

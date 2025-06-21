@@ -1,6 +1,7 @@
 using UnityEngine;
 using System.Collections;
 using System.Collections.Generic;
+using UnityEngine.UI;
 
 public class BreakOnXKey : MonoBehaviour
 {
@@ -26,8 +27,23 @@ public class BreakOnXKey : MonoBehaviour
     [Header("깨기 제한 시간")]
     [SerializeField] private float breakTimeout = 5f;
 
-    private const int totalStages = 3;
+    //**
+    private const int totalStages = 10;
     private int pressCount = 0;
+
+    [Header("드랍 아이템 설정")]
+    [SerializeField] private GameObject dropItemPrefab;
+    [SerializeField] private Slider breakProgressSlider;    // 알 깨는 수치 슬라이더
+    [Header("슬라이더 컨트롤")]
+    [SerializeField] private GameObject breakSliderObject;  // 슬라이더 껐다 켰다
+
+    [Header("알 페이즈 정보")]
+    [SerializeField] private int phase = 1; // 이 알이 몇 페이즈에 속하는지 (인스펙터에서 설정)
+
+    [Header("알 그룹 매니저")]
+    [SerializeField] private EggGroupManager eggGroupManager; // 매니저 직접 연결
+
+    //**
 
     private List<Transform> fragments = new List<Transform>();
     private int piecesPerStage;
@@ -48,6 +64,21 @@ public class BreakOnXKey : MonoBehaviour
         }
 
         piecesPerStage = Mathf.CeilToInt(fragments.Count / (float)totalStages);
+
+        // 알 깨는 슬라이더 초기화
+        if (breakProgressSlider != null)
+        {
+            breakProgressSlider.minValue = 0;
+            breakProgressSlider.maxValue = totalStages;
+            breakProgressSlider.value = 0;
+        }
+
+        if (eggGroupManager != null)
+            eggGroupManager.RegisterEgg(this, phase);
+        if (breakSliderObject != null)
+        {
+            breakSliderObject.SetActive(false); // 시작 시 숨김
+        }
     }
 
     void Update()
@@ -95,6 +126,9 @@ public class BreakOnXKey : MonoBehaviour
         {
             wholeEggs.SetActive(false);
             fragmentsParent.SetActive(true);
+
+            if (breakSliderObject != null)
+                breakSliderObject.SetActive(true); // 처음 깨면 보이게
         }
 
         int start = (stage - 1) * piecesPerStage;
@@ -113,6 +147,26 @@ public class BreakOnXKey : MonoBehaviour
                     explosionRadius
                 );
             }
+        }
+
+        if (breakProgressSlider != null)
+            breakProgressSlider.value = pressCount;
+
+        if (pressCount >= totalStages)
+        {
+            //if (dropItemPrefab != null)
+            //{
+            //    Instantiate(dropItemPrefab, transform.position + Vector3.up, Quaternion.identity);
+            //}
+
+            if (eggGroupManager != null && eggGroupManager.IsDropEgg(this, phase))
+            {
+                if (dropItemPrefab != null)
+                    Instantiate(dropItemPrefab, transform.position + Vector3.up, Quaternion.identity);
+            }
+
+            if (breakSliderObject != null)
+                breakSliderObject.SetActive(false); // 다 깨면 숨김
         }
     }
 }

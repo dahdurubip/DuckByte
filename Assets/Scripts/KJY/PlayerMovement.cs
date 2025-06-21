@@ -226,7 +226,7 @@ public class PlayerMovement : MonoBehaviour
 
         //PlayerMental 컴포넌트에 따른 입력 반전 처리 (주석 처리된 "내일 이거 해보깅~!" 관련)
         PlayerMental mental = GetComponent<PlayerMental>();
-        if (mental != null && mental.IsReversingControl)
+        if (mental != null && mental.isReversingControl)
         {
             vertical = -vertical;
             horizontal = -horizontal;

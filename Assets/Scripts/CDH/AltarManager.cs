@@ -7,6 +7,8 @@ public class AltarManager : MonoBehaviour, IInteractable
     public BossPhaseManager bossPhaseManager;
     public ParticleSystem altarEffect;
     [SerializeField] AudioSource itemAudio;
+    [SerializeField] private ItemManager itemmanager;
+
 
 
 
@@ -39,6 +41,10 @@ public class AltarManager : MonoBehaviour, IInteractable
         //if (animator != null)
         //animator.SetTrigger("Open");
         // TODO: 아이템 스폰, 소리 재생 등 추가
+
+        // 조각 아이템 없애기
+        //itemmanager.DestroyCurrentItem(); //오브젝트 파괴하는 코드
+
 
         int nextPhase = bossPhaseManager.currentPhase + 1;
         //bossPhaseManager.SetPhase(nextPhase);
