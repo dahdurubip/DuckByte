@@ -20,7 +20,7 @@ public class RockOff : MonoBehaviour
 
     private void OnCollisionEnter(Collision collision)
     {
-        if (collision.gameObject.CompareTag("Ground"))
+        if (collision.gameObject.CompareTag("Ground") || collision.gameObject.CompareTag("Player"))
         {
             // 충돌 지점
             contactPoint = collision.contacts[0].point;
@@ -61,7 +61,7 @@ public class RockOff : MonoBehaviour
             //BurningGround(contactPoint);
             //}
 
-            if (bossPhaseManager != null && bossPhaseManager.currentPhase == 2)
+            if (collision.gameObject.CompareTag("Ground") && bossPhaseManager != null && bossPhaseManager.currentPhase == 2)
             {
                 BurningGround(contactPoint);
             }

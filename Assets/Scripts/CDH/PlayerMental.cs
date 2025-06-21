@@ -1,6 +1,7 @@
 using UnityEngine;
 using UnityEngine.SceneManagement; // 죽었을 때 씬 리로드용
 using System.Collections;
+using UnityEngine.Audio;
 
 public class PlayerMental : MonoBehaviour
 {
@@ -26,13 +27,21 @@ public class PlayerMental : MonoBehaviour
     //public bool IsReversingControl { get; private set; }
 
     public PlayerMovement pm;
+    public ParticleSystem debuffEffect;
+    //[SerializeField] AudioSource debuffAudio;
 
-    [SerializeField] AudioSource healAudio;
+    public AudioClip heal; // 1번 구역 음악
+    public AudioClip debuff; // 2번 구역 음악
+
+    [SerializeField] AudioSource playAudio;
 
 
     void Start()
     {
         currentMental = maxMental;
+
+        debuffEffect.Stop(true, ParticleSystemStopBehavior.StopEmittingAndClear);
+
         //altar = GameObject.FindGameObjectWithTag("Altar")?.transform;
 
         //playerMovement = GetComponent<PlayerMovement>();
@@ -42,7 +51,7 @@ public class PlayerMental : MonoBehaviour
         //}
     }
 
-   
+
 
     private void OnTriggerEnter(Collider other)
     {
@@ -55,7 +64,11 @@ public class PlayerMental : MonoBehaviour
 
         if (other.CompareTag("HealZone"))
         {
-            healAudio.Play();
+            Debug.Log("힐존 들어옴");
+
+            //healAudio.Play();
+            playAudio.loop = true;
+            PlaySound(heal);
             if (recoverCoroutine == null)
             {
                 isHealing = true;
@@ -75,8 +88,9 @@ public class PlayerMental : MonoBehaviour
 
         if (other.CompareTag("HealZone") && recoverCoroutine != null)
         {
-            Debug.Log("힐존 들어옴");
-            healAudio.Stop();
+            Debug.Log("힐존 나감");
+            //healAudio.Stop();
+            playAudio.Stop();
             isHealing = false;
             StopCoroutine(recoverCoroutine);
             recoverCoroutine = null;
@@ -143,6 +157,12 @@ public class PlayerMental : MonoBehaviour
         currentMental -= amount;
         //Clamp를 통해서 값을 0~100사이로 유지
         currentMental = Mathf.Clamp(currentMental, 0, maxMental);
+        // 정신력 감소 파티클 재생 및 오디오 재생
+        debuffEffect.Play();
+        //debuffAudio.Play();
+        playAudio.loop = false;
+        PlaySound(debuff);
+
         Debug.Log("정신력 감소: " + currentMental);
     }
 
@@ -185,5 +205,14 @@ public class PlayerMental : MonoBehaviour
         Debug.Log("정신력 0 → 사망!");
         // 여기서 게임 오버 처리 (추후 체크포인트 만들어서 컷씬 끝난 후로 되돌릴 예정)
         SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
+    }
+
+    void PlaySound(AudioClip newClip)
+    {
+        //if (audioSource.clip == newClip && audioSource.isPlaying)
+        //    return; // 이미 재생 중이면 무시
+
+        playAudio.clip = newClip;
+        playAudio.Play();
     }
 }

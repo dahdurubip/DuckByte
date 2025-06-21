@@ -16,7 +16,7 @@ GameObject:
   - component: {fileID: 4456886297044779616}
   m_Layer: 0
   m_Name: RealRock
-  m_TagString: Untagged
+  m_TagString: Rock
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -154,6 +154,6 @@ MonoBehaviour:
   burningGroundPrefab: {fileID: 1411345634913452993, guid: bd3742eab8cf48e4f943ec7fff8211e9, type: 3}
   burnDuration: 3
   contactPoint: {x: 0, y: 0, z: 0}
-  bossPhaseManager: {fileID: 8845663296742057360, guid: 8ce166a015b60934899e0c1a79c09522, type: 3}
+  bossPhaseManager: {fileID: 0}
   breakingClip: {fileID: 8300000, guid: 4bd1feabe557a304c8daf5febf85399b, type: 3}
   soundPlayerPrefab: {fileID: 2224640282093247584, guid: ada2ee4b41fc892459a42fcc0ed10704, type: 3}

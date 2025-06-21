@@ -36,13 +36,13 @@ public class Player : MonoBehaviour
     {
         animator = GetComponent<Animator>();
         //체력 초기화 및 HP 바 초기화
-        CurrentHp = maxHp;  
+        CurrentHp = maxHp;
     }
 
     private void Update()
     {
         //Debug.Log("CurHP" + CurrentHp);
-       // Debug.Log("curHP" + currentHp);
+        // Debug.Log("curHP" + currentHp);
     }
 
     public void TakeDamage(float damage)
@@ -78,6 +78,7 @@ public class Player : MonoBehaviour
         if (UnityEngine.SceneManagement.SceneManager.GetActiveScene().name == "Boss 1")
         {
             //보스씬 로드 
+            SceneLoad.LoadSceneWithLoading("Boss 1");
         }
 
     }
@@ -86,4 +87,14 @@ public class Player : MonoBehaviour
     {
         CurrentHp += amount;
     }
+
+    //private void OnCollisionEnter(Collision collision)
+    //{
+    //    if (collision.gameObject.CompareTag("Rock"))
+    //    {
+    //        TakeDamage(5);
+    //        StartCoroutine(PlayerHitEffect());
+    //    }
+    //}
+
 }

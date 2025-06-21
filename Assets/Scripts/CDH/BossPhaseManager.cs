@@ -206,7 +206,7 @@ public class BossPhaseManager : MonoBehaviour
             Rigidbody rb1 = rock1.GetComponent<Rigidbody>();
             if (rb1 != null)
             {
-                rb1.linearVelocity = Vector3.down * 20f; // 빠르게 낙하
+                rb1.linearVelocity = Vector3.down * 10f; // 빠르게 낙하
             }
 
             yield return new WaitForSeconds(0.5f);
@@ -341,8 +341,21 @@ public class BossPhaseManager : MonoBehaviour
             List<GameObject> warnings = new List<GameObject>();
             List<Vector3> rockPositions = new List<Vector3>();
 
-            int spawnCount = Random.Range(7, 10);
+            //int spawnCount = Random.Range(5,7);
+            int spawnCount = 0;
             float minDistance = 4.0f;         // 돌 간 최소 거리
+
+            if (currentPhase == 2)
+            {
+                spawnCount = Random.Range(7, 10);
+                minDistance = 4.0f;
+            }
+            else if (currentPhase == 3)
+            {
+                spawnCount = Random.Range(5, 7);
+                minDistance = 3.5f; // 3페이즈에서 좀 더 좁게 떨어지도록 설정
+            }
+
             int maxAttempts = 50;             // 무한루프 방지 시도 제한
 
             // BoxCollider로부터 범위 계산
@@ -381,10 +394,10 @@ public class BossPhaseManager : MonoBehaviour
             }
 
             // 로그 추가 (디버깅용)
-            if (i < spawnCount)
-            {
-                Debug.LogWarning($"스폰 제한에 도달하여 {i}/{spawnCount}개만 생성됨");
-            }
+            //if (i < spawnCount)
+            //{
+            //    Debug.LogWarning($"스폰 제한에 도달하여 {i}/{spawnCount}개만 생성됨");
+            //}
 
             yield return new WaitForSeconds(1f);
 
@@ -405,76 +418,20 @@ public class BossPhaseManager : MonoBehaviour
 
     IEnumerator Phase3Attack()
     {
-        //// 보스(해당 스크립트가 붙은 오브젝트)의 현재 위치를 저장
-        //Vector3 center = transform.position;
-        //// 저장한 곳에 경고 프리팹을 생성
-        //GameObject warning = Instantiate(warningCirclePrefab, center, Quaternion.identity);
-        //// 경고 프리팹의 크기를 충격파 범위에 맞게 키움
-        //// shockwaveRadius * 2 : 충격파의 지 름에 해당하는 크기로 설정
-        //warning.transform.localScale = Vector3.one * shockwaveRadius * 2f;
-        //// 1초간 대기, 경고 시간이자 플레이어의 회피 유도 타이밍
-        //yield return new WaitForSeconds(1f);
-        //// 경고 프리팹 제거
-        //Destroy(warning);
-
-        //// 충격파 시각 이펙트(프리팹) 실행
-        //Instantiate(shockwaveEffectPrefab, center, Quaternion.identity);
-
-        //// 반지름(shockwaveRadius)만큼의 구를 만들어 범위 안의 오브젝트들 감지
-        //// 보스를 중심으로 피격 판정 범위 설정
-        //Collider[] hits = Physics.OverlapSphere(center, shockwaveRadius);
-
-        //// 감지된 오브젝트들 각각에 대해 반복검사
-        //foreach (var hit in hits)
-        //{
-        //    // 감지된 오브젝트의 Tag가 플레이어인지 확인
-        //    if (hit.CompareTag("Player"))
-        //    {
-        //        //// 플레이어가 PlayerMental스크립트를 가지고 있다면 저장
-        //        var mental = hit.GetComponent<PlayerMental>();
-        //        // 스크립트를 가지고 있는 경우 TakeMentalDamage함수를 통해 정신력 데미지를 부여
-        //        if (mental != null)
-        //        {
-        //            mental.TakeMentalDamage(shockwaveMentalDamage);
-        //        }
-        //    }
-        //}
-
-
-        //Instantiate(warningCirclePrefab, bossObject.transform.position, Quaternion.identity);
-        //yield return new WaitForSeconds(1f);
-
-        //// 충격파 발동
-        //Instantiate(shockwaveEffectPrefab, bossObject.transform.position, Quaternion.identity);
-
-        //Collider[] targets = Physics.OverlapSphere(bossObject.transform.position, shockwaveRadius);
-        //foreach (var target in targets)
-        //{
-        //    if (target.CompareTag("Player"))
-        //    {
-        //        target.GetComponent<PlayerMental>()?.TakeMentalDamage(shockwaveMentalDamage);
-        //    }
-        //}
-
-        //// 보스 사라짐
-        //bossObject.SetActive(false);
-        //yield return new WaitForSeconds(1f);
-
-        //// 보스 이동
-        //int randomIndex = Random.Range(0, rockSpawnPoints.Length);
-        //bossObject.transform.position = rockSpawnPoints[randomIndex].position;
-
-        //// 보스 다시 등장
-        //bossObject.SetActive(true);
-        //yield return new WaitForSeconds(1f);
 
         phase3Land.SetActive(true);
         phase2Land.SetActive(false);
 
-        if (phase2Coroutine == null)
-        {
-            phase2Coroutine = StartCoroutine(Phase2Attack());
-        }
+        // Phase2 코루틴 중지
+        //if (phase2Coroutine != null)
+        //{
+        //    StopCoroutine(phase2Coroutine);
+        //    phase2Coroutine = null;
+        //}
+        //if (phase2Coroutine == null)
+        //{
+        //    phase2Coroutine = StartCoroutine(Phase2Attack());
+        //}
 
         while (currentPhase == 3)
         {
