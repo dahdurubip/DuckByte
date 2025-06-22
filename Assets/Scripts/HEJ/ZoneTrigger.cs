@@ -1,25 +1,25 @@
-// ZoneTrigger.cs  (변경 없음)
 using UnityEngine;
 
+[RequireComponent(typeof(Collider))]
 public class ZoneTrigger : MonoBehaviour
 {
+    [Tooltip("0부터 시작하는 이 존의 인덱스")]
     public int zoneIndex;
+
+    [Tooltip("씬에 배치된 WhiteRoomCommandPuzzle 오브젝트 참조")]
     public WhiteRoomCommandPuzzle puzzleManager;
-    private Collider myCol;
 
     void Awake()
     {
-        myCol = GetComponent<Collider>();
-        if (myCol == null)
-            Debug.LogError("ZoneTrigger needs a Collider.");
-        if (puzzleManager == null)
-            Debug.LogError("ZoneTrigger: assign puzzleManager in Inspector.");
+        var col = GetComponent<Collider>();
     }
 
     void OnTriggerEnter(Collider other)
     {
-        if (!other.CompareTag("Player")) return;
-        if (!puzzleManager.PuzzleStarted)
-            puzzleManager.BeginPuzzle(zoneIndex);
+
+        if (!other.CompareTag("Player"))
+            return;
+
+        puzzleManager?.NotifyZoneReached(zoneIndex);
     }
 }

@@ -12,7 +12,7 @@ public class DoorController : MonoBehaviour
         if (doorMesh != null)
         {
             initialRotation = doorMesh.localEulerAngles;
-            Debug.Log($"[초기 회전값 저장] doorMesh: {doorMesh.name} → {initialRotation}");
+            //Debug.Log($"[초기 회전값 저장] doorMesh: {doorMesh.name} → {initialRotation}");
         }
     }
 
@@ -27,7 +27,7 @@ public class DoorController : MonoBehaviour
                 initialRotation.y + 100f,
                 initialRotation.z
             );
-            Debug.Log("[문 열림 처리] 회전 적용됨: " + doorMesh.name);
+           // Debug.Log("[문 열림 처리] 회전 적용됨: " + doorMesh.name);
         }
     }
 
@@ -37,11 +37,11 @@ public class DoorController : MonoBehaviour
         if (doorMesh != null)
         {
             doorMesh.localEulerAngles = initialRotation;
-            Debug.Log("[문 닫힘 처리] doorMesh 회전 초기화됨: " + doorMesh.name);
+            //Debug.Log("[문 닫힘 처리] doorMesh 회전 초기화됨: " + doorMesh.name);
         }
         else
         {
-            Debug.LogWarning("[문 닫기 실패] doorMesh가 비어 있음");
+           // Debug.LogWarning("[문 닫기 실패] doorMesh가 비어 있음");
         }
     }
 }
