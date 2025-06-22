@@ -2672,12 +2672,12 @@ BoxCollider:
     serializedVersion: 2
     m_Bits: 0
   m_LayerOverridePriority: 0
-  m_IsTrigger: 0
+  m_IsTrigger: 1
   m_ProvidesContacts: 0
   m_Enabled: 1
   serializedVersion: 3
-  m_Size: {x: 0.053981423, y: 0.046621323, z: 0.018523157}
-  m_Center: {x: 0.0007393145, y: -0.0019267508, z: 0.008896171}
+  m_Size: {x: 0.056305636, y: 0.046633944, z: 0.018523157}
+  m_Center: {x: -0.00042266928, y: -0.0019324351, z: 0.008895925}
 --- !u!1 &292929258
 GameObject:
   m_ObjectHideFlags: 0
@@ -12982,7 +12982,7 @@ BoxCollider:
     serializedVersion: 2
     m_Bits: 0
   m_LayerOverridePriority: 0
-  m_IsTrigger: 0
+  m_IsTrigger: 1
   m_ProvidesContacts: 0
   m_Enabled: 1
   serializedVersion: 3
@@ -13326,7 +13326,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 1233254671802239474, guid: d4b2ada4637a0984287e190d7d5e015a, type: 3}
       propertyPath: maxDistance
-      value: 1
+      value: 2
       objectReference: {fileID: 0}
     - target: {fileID: 1233254671802239474, guid: d4b2ada4637a0984287e190d7d5e015a, type: 3}
       propertyPath: minDistance
