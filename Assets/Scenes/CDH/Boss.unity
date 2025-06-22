@@ -35400,6 +35400,10 @@ PrefabInstance:
       propertyPath: m_Layer
       value: 8
       objectReference: {fileID: 0}
+    - target: {fileID: 8778139068119761599, guid: 0ffd378c26133c741b4dc0c230cf9027, type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -35407,31 +35411,12 @@ PrefabInstance:
     - targetCorrespondingSourceObject: {fileID: 8778139068119761599, guid: 0ffd378c26133c741b4dc0c230cf9027, type: 3}
       insertIndex: -1
       addedObject: {fileID: 961732523}
-    - targetCorrespondingSourceObject: {fileID: 8778139068119761599, guid: 0ffd378c26133c741b4dc0c230cf9027, type: 3}
-      insertIndex: -1
-      addedObject: {fileID: 961732522}
   m_SourcePrefab: {fileID: 100100000, guid: 0ffd378c26133c741b4dc0c230cf9027, type: 3}
 --- !u!1 &961732520 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 8778139068119761599, guid: 0ffd378c26133c741b4dc0c230cf9027, type: 3}
   m_PrefabInstance: {fileID: 961732519}
   m_PrefabAsset: {fileID: 0}
---- !u!114 &961732522
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 961732520}
-  m_Enabled: 0
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 0940d3f2712cb1644b83aef49a375c75, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  requiredItemTag: Piece
-  bossPhaseManager: {fileID: 1834749438}
-  altarEffect: {fileID: 0}
-  itemAudio: {fileID: 0}
 --- !u!136 &961732523
 CapsuleCollider:
   m_ObjectHideFlags: 0
@@ -35449,7 +35434,7 @@ CapsuleCollider:
   m_LayerOverridePriority: 0
   m_IsTrigger: 0
   m_ProvidesContacts: 0
-  m_Enabled: 1
+  m_Enabled: 0
   serializedVersion: 2
   m_Radius: 0.076181
   m_Height: 0.35
@@ -178160,17 +178145,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0b7a571497e483047ba4f99f78b52321, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
---- !u!114 &1834749438 stripped
-MonoBehaviour:
-  m_CorrespondingSourceObject: {fileID: 8845663296742057360, guid: 8ce166a015b60934899e0c1a79c09522, type: 3}
-  m_PrefabInstance: {fileID: 8275287873751203781}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 5d6003674d9ba66498074ae2434769d5, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!1001 &1835216646
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -259483,6 +259457,10 @@ PrefabInstance:
     - target: {fileID: 2856388831691665886, guid: aa019e8f511846e46b09d36139908157, type: 3}
       propertyPath: m_Name
       value: HS009
+      objectReference: {fileID: 0}
+    - target: {fileID: 6175829726167144918, guid: aa019e8f511846e46b09d36139908157, type: 3}
+      propertyPath: m_Enabled
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 8991524472919144028, guid: aa019e8f511846e46b09d36139908157, type: 3}
       propertyPath: EKeyUI
