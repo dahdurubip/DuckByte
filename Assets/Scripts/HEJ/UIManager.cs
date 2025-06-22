@@ -17,7 +17,8 @@ public class UIManager : MonoBehaviour
 
     public void GameStart()
     {
-        SceneManager.LoadScene("OP");
+        //SceneManager.LoadScene("OP");
+        SceneLoad.LoadSceneWithLoading("OP");
     } 
     public void GameEnd()
     {
