@@ -88,13 +88,13 @@ public class Player : MonoBehaviour
         CurrentHp += amount;
     }
 
-    private void OnCollisionEnter(Collision collision)
-    {
-        if (collision.gameObject.CompareTag("Rock"))
-        {
-            TakeDamage(5);
-            StartCoroutine(PlayerHitEffect());
-        }
-    }
+    //private void OnCollisionEnter(Collision collision)
+    //{
+    //    if (collision.gameObject.CompareTag("Rock"))
+    //    {
+    //        TakeDamage(5);
+    //        StartCoroutine(PlayerHitEffect());
+    //    }
+    //}
 
 }
