@@ -1,4 +1,5 @@
 using UnityEngine;
+using TMPro;              
 using UnityEngine.VFX;
 using System.Collections;
 using System.Collections.Generic;
@@ -6,65 +7,65 @@ using System.Collections.Generic;
 public class WhiteRoomCommandPuzzle : MonoBehaviour
 {
     [Header("Audio Clips")]
-    public AudioClip rightClip;      // 오른쪽(D) 효과음
-    public AudioClip leftClip;       // 왼쪽(A) 효과음
-    public AudioClip stayClip;       // 머무르기(W) 효과음
-    public AudioClip clearClip;      // 클리어 효과음
-    public AudioSource audioSource;
+    public AudioClip rightClip;      // ‘오른쪽’ 안내 음성
+    public AudioClip leftClip;       // ‘왼쪽’ 안내 음성
+    public AudioClip stayClip;       // ‘전진’ 안내 음성
+    public AudioClip clearClip;     
+    public AudioSource audioSource;  
 
     [Header("Player Reset")]
-    public Transform player;
-    public Transform playerStartPosition;
+    public Transform player;              
+    public Transform playerStartPosition;  
 
     [Header("VFX")]
-    public GameObject failFog;
+    public GameObject failFog;        
 
     [Header("Doors")]
-    public List<DoorController> doors;
+    public List<DoorController> doors;  
 
     [Header("Reward")]
-    public GameObject rewardPrefab;
-    public Transform rewardSpawnPoint;
+    public GameObject rewardPrefab;      
+    public Transform rewardSpawnPoint;  
 
     [Header("Timing")]
-    public float inputDelay = 2.0f;
-    public float gracePeriod = 0.5f;
-    public float arrivalThreshold = 2.0f;
+    public float inputDelay = 1.5f;   
+    public float gracePeriod = 0.2f;   
+
+    [Header("UI")]
+    public TextMeshProUGUI lastInputDisplay;  
 
     public bool PuzzleStarted { get; private set; } = false;
 
     private List<(string command, int zone)> sequence = new List<(string, int)>();
     private int puzzleStartZone = -1;
+    private bool zoneReached = false;
 
     void Awake()
     {
-        if (audioSource == null) audioSource = GetComponent<AudioSource>();
-        if (failFog != null) failFog.SetActive(false);
-        if (doors == null || doors.Count == 0)
-            Debug.LogWarning("Doors list is empty or not assigned.");
+        if (audioSource == null)
+            audioSource = GetComponent<AudioSource>();
+
+        if (failFog != null)
+            failFog.SetActive(false);
+
+        else
+            lastInputDisplay.gameObject.SetActive(false);
     }
 
-    public void BeginPuzzle(int zoneIndex)
+    // ZoneTrigger에서 호출: 퍼즐 시작 혹은 존 도달 알림
+    public void NotifyZoneReached(int zoneIndex)
     {
-        if (PuzzleStarted) return;
-        if (doors == null || zoneIndex < 0 || zoneIndex >= doors.Count)
-        {
-            Debug.LogError("BeginPuzzle: invalid zoneIndex or doors not set.");
-            return;
-        }
+        if (!PuzzleStarted)
+            BeginPuzzle(zoneIndex);
+        else
+            zoneReached = true;
+    }
 
+    private void BeginPuzzle(int zoneIndex)
+    {
         PuzzleStarted = true;
         puzzleStartZone = zoneIndex;
         GenerateSequence();
-
-        // 디버그 로그
-        string seqLog = "";
-        for (int i = 0; i < sequence.Count; i++)
-        {
-            seqLog += $"({sequence[i].command}, {sequence[i].zone}, {doors[sequence[i].zone]?.gameObject.name}) ";
-        }
-        Debug.Log($"BeginPuzzle: startZone={puzzleStartZone}, seq=[{seqLog}]");
-
         StartCoroutine(PuzzleRoutine());
     }
 
@@ -77,13 +78,14 @@ public class WhiteRoomCommandPuzzle : MonoBehaviour
             var valid = new List<string>();
             if (curr < doors.Count - 1) valid.Add("Right");
             if (curr > 0) valid.Add("Left");
-            valid.Add("Stay");
+            valid.Add("Forward");
 
             string cmd = valid[Random.Range(0, valid.Count)];
             sequence.Add((cmd, i));
 
             if (cmd == "Right") curr++;
             else if (cmd == "Left") curr--;
+            // Forward는 위치 변동 없음
         }
     }
 
@@ -91,66 +93,62 @@ public class WhiteRoomCommandPuzzle : MonoBehaviour
     {
         yield return new WaitForSeconds(1f);
 
-        for (int i = 0; i < sequence.Count; i++)
+        int count = sequence.Count;
+        for (int i = 0; i < count; i++)
         {
             var (cmd, zone) = sequence[i];
 
-            // 1) 효과음 재생
+            // 음성 재생
             AudioClip clip = cmd == "Right" ? rightClip
                             : cmd == "Left" ? leftClip
                                              : stayClip;
-            if (clip != null) audioSource.PlayOneShot(clip);
-            yield return new WaitForSeconds((clip?.length ?? 0f) + 0.2f);
+            if (clip != null)
+                audioSource.PlayOneShot(clip);
 
-            // 2) 입력 대기 및 판정
-            bool success = false;
-            bool inputReceived = false;
-            KeyCode pressed = KeyCode.None;
-            float timer = 0f;
-            float timeout = inputDelay + gracePeriod;
+            // 입력 대기 (clip.length + delay)
+            float waitUntil = Time.time + (clip?.length ?? 0f) + inputDelay;
+            KeyCode pressedKey = KeyCode.None;
+            string displayText = string.Empty;
 
-            while (timer < timeout)
+            while (Time.time < waitUntil)
             {
-                // 첫 GetKeyDown 이벤트만 잡기
                 if (Input.GetKeyDown(KeyCode.D))
                 {
-                    inputReceived = true;
-                    pressed = KeyCode.D;
+                    pressedKey = KeyCode.D;
+                    displayText = "오른쪽";
                     break;
                 }
                 if (Input.GetKeyDown(KeyCode.A))
                 {
-                    inputReceived = true;
-                    pressed = KeyCode.A;
+                    pressedKey = KeyCode.A;
+                    displayText = "왼쪽";
                     break;
                 }
                 if (Input.GetKeyDown(KeyCode.W))
                 {
-                    inputReceived = true;
-                    pressed = KeyCode.W;
+                    pressedKey = KeyCode.W;
+                    displayText = "전진";
                     break;
                 }
-
-                timer += Time.deltaTime;
                 yield return null;
             }
 
-            // Stay 는 “아무 키도 안 눌림” 상태를 허용
-            if (!inputReceived && cmd == "Stay")
-            {
-                success = true;
-            }
-            else if (inputReceived)
-            {
-                switch (cmd)
-                {
-                    case "Right": success = (pressed == KeyCode.D); break;
-                    case "Left": success = (pressed == KeyCode.A); break;
-                    case "Stay": success = (pressed == KeyCode.W); break;
-                }
-            }
+            if (pressedKey == KeyCode.None)
+                displayText = "입력 없음";
 
-            Debug.Log($"[{i + 1}] 명령: {cmd} → {(success ? "성공" : "실패")}");
+            // UI 표시: 굵게(성공) 또는 밑줄(실패)
+            bool success = (pressedKey == KeyCode.None)
+                        ? (cmd == "Forward")
+                        : ((cmd == "Right" && pressedKey == KeyCode.D)
+                           || (cmd == "Left" && pressedKey == KeyCode.A)
+                           || (cmd == "Forward" && pressedKey == KeyCode.W));
+
+            string styled = success ? $"<b>{displayText}</b>" : $"<u>{displayText}</u>";
+            lastInputDisplay.text = styled;
+            lastInputDisplay.gameObject.SetActive(true);
+
+            // 판정 전 짧은 여유
+            yield return new WaitForSeconds(gracePeriod);
 
             if (!success)
             {
@@ -158,45 +156,22 @@ public class WhiteRoomCommandPuzzle : MonoBehaviour
                 yield break;
             }
 
-            // 3) 문 열기 & 도착 대기
+            // 문 열기
             doors[zone].Open();
-            yield return new WaitUntil(() =>
-                Vector3.Distance(player.position, doors[zone].transform.position)
-                <= arrivalThreshold
-            );
-            yield return new WaitForSeconds(0.3f);
+
+            // 다음 스텝 전: 트리거 대기 (마지막 단계는 건너뜀)
+            if (i < count - 1)
+            {
+                zoneReached = false;
+                yield return new WaitUntil(() => zoneReached);
+                yield return new WaitForSeconds(0.3f);
+            }
+
+            // UI 숨김
+            lastInputDisplay.gameObject.SetActive(false);
         }
 
-        PuzzleComplete();
-    }
-
-
-    private IEnumerator FailureRoutine()
-    {
-        foreach (var d in doors) d.ResetDoor();
-
-        if (player != null && playerStartPosition != null)
-        {
-            var cc = player.GetComponent<CharacterController>();
-            if (cc != null) cc.enabled = false;
-            player.position = playerStartPosition.position;
-            player.rotation = playerStartPosition.rotation;
-            if (cc != null) cc.enabled = true;
-        }
-
-        if (failFog != null)
-        {
-            failFog.SetActive(true);
-            failFog.GetComponent<VisualEffect>()?.Play();
-        }
-        yield return new WaitForSeconds(2f);
-        if (failFog != null) failFog.SetActive(false);
-
-        PuzzleStarted = false;
-    }
-
-    private void PuzzleComplete()
-    {
+        // 클리어 처리: 보상 스폰 → 텍스트 숨김
         if (rewardPrefab != null && rewardSpawnPoint != null)
         {
             audioSource.PlayOneShot(clearClip);
@@ -204,8 +179,27 @@ public class WhiteRoomCommandPuzzle : MonoBehaviour
         }
         else
         {
-            Debug.LogWarning("보상 프리팹 또는 스폰 위치가 설정되지 않음.");
+           // Debug.LogWarning("Reward prefab or spawn point is not assigned.");
         }
-        PuzzleStarted = true;
+
+        lastInputDisplay.gameObject.SetActive(false);
+    }
+
+    private IEnumerator FailureRoutine()
+    {
+        lastInputDisplay?.gameObject.SetActive(false);
+        doors.ForEach(d => d.ResetDoor());
+        var cc = player.GetComponent<CharacterController>();
+        cc.enabled = false;
+        player.SetPositionAndRotation(
+            playerStartPosition.position,
+            playerStartPosition.rotation
+        );
+        cc.enabled = true;
+        failFog?.SetActive(true);
+        failFog?.GetComponent<VisualEffect>()?.Play();
+        yield return new WaitForSeconds(2f);
+        failFog?.SetActive(false);
+        PuzzleStarted = false;
     }
 }
