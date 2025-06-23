@@ -152,7 +152,7 @@ public class ItemManager : MonoBehaviour
 
                 if (nearbyInteractable.CompareTag("spiderEgg"))
                 {
-                    BreakOnXKey breakOnXKey = nearbyInteractable.GetComponent<BreakOnXKey>();
+                    BreakOnXKey breakOnXKey = nearbyInteractable.GetComponentInParent<BreakOnXKey>();
                     if (breakOnXKey != null)
                     {
                         breakOnXKey.ProcessEggBreak();
