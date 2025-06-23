@@ -13,8 +13,9 @@ public class ItemManager : MonoBehaviour
     [SerializeField] private LayerMask obstacleLayer;
     //전방 원뿔 반경
     [SerializeField] private float detectRange = 5f;
+    [SerializeField] private float detectionRadius = 0.5f;
     //전방 원뿔 절반 각도
-    [SerializeField] private float panAngle = 30f;
+    //[SerializeField] private float panAngle = 30f;
     //flash
     [SerializeField] private FlashManager flashManager;
     [SerializeField] private ObanggiUIManager obanggiUIManager;
@@ -31,12 +32,6 @@ public class ItemManager : MonoBehaviour
     [Header("Note UI Settings")]
     public TextMeshProUGUI noteUIText;
 
-    //particle
-    //[Header("Particle Settings")]
-    //[SerializeField] private ParticleSystem paperParticle;
-    //[SerializeField] private ParticleSystem bookParticle;
-    //[SerializeField] private ParticleSystem skelParticle;
-
     //메인 아이템
     public int MainItem = 0;
 
@@ -52,7 +47,8 @@ public class ItemManager : MonoBehaviour
     //애니메이션
     private Animator animator;
 
-
+    //SphereCast가 맞은 마지막 위치를 저장할 변수
+    private Vector3 lastHitPoint;
     // public PlayerTriggerMAnager PTM;
 
     private void Start()
@@ -66,8 +62,9 @@ public class ItemManager : MonoBehaviour
     {
 
         //1) 카메라 전방 원뿔 검사
-        DetectNearbyInteractable();
-        DetectNearbyPickable();
+        //DetectNearbyInteractable();
+        //DetectNearbyPickable();
+        DetectTargetInView();
 
         //2) UI 토글 & 위치 업데이트
         bool showUI = (nearbyInteractable != null) || (pickableTarget != null);
@@ -76,8 +73,8 @@ public class ItemManager : MonoBehaviour
 
         if (showUI)
         {
-            var target = nearbyInteractable != null ? nearbyInteractable : pickableTarget;
-            Vector3 worldPos = target.transform.position + Vector3.up * 0.3f;
+            // 저장된 마지막 충돌 지점을 UI 위치로 사용
+            Vector3 worldPos = lastHitPoint;
             EKeyUI.transform.position = mainCamera.WorldToScreenPoint(worldPos);
         }
 
@@ -152,6 +149,17 @@ public class ItemManager : MonoBehaviour
                     }
                     return;
                 }
+
+                if (nearbyInteractable.CompareTag("spiderEgg"))
+                {
+                    BreakOnXKey breakOnXKey = nearbyInteractable.GetComponent<BreakOnXKey>();
+                    if (breakOnXKey != null)
+                    {
+                        breakOnXKey.ProcessEggBreak();
+                    }
+                    return;
+                }
+
                 if (nearbyInteractable.CompareTag("UnBrokenJar"))
                 {
                     //PlayerTriggerMAnager PTM = GetComponent<PlayerTriggerMAnager>();
@@ -264,6 +272,72 @@ public class ItemManager : MonoBehaviour
 
     }
 
+
+    private void DetectTargetInView()
+    {
+        nearbyInteractable = null;
+        pickableTarget = null;
+
+        Ray ray = mainCamera.ScreenPointToRay(new Vector3(Screen.width / 2, Screen.height / 2));
+        RaycastHit hit;
+        LayerMask combinedLayer = interacterLayer | pickableLayer;
+
+        if (Physics.SphereCast(ray, detectionRadius, out hit, detectRange, combinedLayer))
+        {
+            lastHitPoint = hit.point;
+
+            GameObject hitObject = hit.collider.gameObject;
+            int hitLayer = hitObject.layer;
+
+            if ((pickableLayer.value & (1 << hitLayer)) != 0)
+            {
+                if (currentItem == null || (hitObject != currentItem && !hitObject.transform.IsChildOf(handTransform)))
+                {
+                    pickableTarget = hitObject;
+                }
+            }
+            else if ((interacterLayer.value & (1 << hitLayer)) != 0)
+            {
+                nearbyInteractable = hitObject;
+            }
+        }
+    }
+
+    //private void DetectTargetInView()
+    //{
+    //    // 매번 초기화
+    //    nearbyInteractable = null;
+    //    pickableTarget = null;
+
+    //    Ray ray = mainCamera.ScreenPointToRay(new Vector3(Screen.width / 2, Screen.height / 2));
+    //    RaycastHit hit;
+
+    //    // 상호작용 가능한 모든 레이어를 대상으로 Raycast 실행
+    //    LayerMask combinedLayer = interacterLayer | pickableLayer;
+
+    //    if (Physics.Raycast(ray, out hit, detectRange, combinedLayer))
+    //    {
+    //        GameObject hitObject = hit.collider.gameObject;
+    //        int hitLayer = hitObject.layer;
+
+    //        // 맞은 객체의 레이어가 pickableLayer에 속하는지 확인
+    //        if ((pickableLayer.value & (1 << hitLayer)) != 0)
+    //        {
+    //            // 손에 든 아이템은 감지에서 제외
+    //            if (currentItem == null || (hitObject != currentItem && !hitObject.transform.IsChildOf(handTransform)))
+    //            {
+    //                pickableTarget = hitObject;
+    //            }
+    //        }
+    //        // 맞은 객체의 레이어가 interacterLayer에 속하는지 확인
+    //        else if ((interacterLayer.value & (1 << hitLayer)) != 0)
+    //        {
+    //            nearbyInteractable = hitObject;
+    //        }
+    //    }
+    //}
+
+
     private bool HandleCreature2MapInteractions()
     {
         if (UnityEngine.SceneManagement.SceneManager.GetActiveScene().name != "Creature2Map")
@@ -290,64 +364,64 @@ public class ItemManager : MonoBehaviour
         }
     }
 
-    private void DetectNearbyInteractable()
-    {
-        nearbyInteractable = null;
-        Vector3 origin = mainCamera.transform.position;
-        Vector3 forward = mainCamera.transform.forward;
+    //private void DetectNearbyInteractable()
+    //{
+    //    nearbyInteractable = null;
+    //    Vector3 origin = mainCamera.transform.position;
+    //    Vector3 forward = mainCamera.transform.forward;
 
-        var hits = Physics.OverlapSphere(origin, detectRange, interacterLayer, QueryTriggerInteraction.Collide);
-        System.Array.Sort(hits, (a, b) =>
-            Vector3.Distance(origin, a.transform.position)
-            .CompareTo(Vector3.Distance(origin, b.transform.position))
-        );
+    //    var hits = Physics.OverlapSphere(origin, detectRange, interacterLayer, QueryTriggerInteraction.Collide);
+    //    System.Array.Sort(hits, (a, b) =>
+    //        Vector3.Distance(origin, a.transform.position)
+    //        .CompareTo(Vector3.Distance(origin, b.transform.position))
+    //    );
 
-        foreach (var col in hits)
-        {
-            Vector3 toTarget = (col.transform.position - origin).normalized;
-            if (Vector3.Angle(forward, toTarget) <= panAngle)
-            {
-                //시야 확인
-                if (HasLineOfSight(col.gameObject))
-                {
-                    nearbyInteractable = col.gameObject;
-                    break; 
-                }
-            }
-        }
-    }
+    //    foreach (var col in hits)
+    //    {
+    //        Vector3 toTarget = (col.transform.position - origin).normalized;
+    //        if (Vector3.Angle(forward, toTarget) <= panAngle)
+    //        {
+    //            //시야 확인
+    //            if (HasLineOfSight(col.gameObject))
+    //            {
+    //                nearbyInteractable = col.gameObject;
+    //                break; 
+    //            }
+    //        }
+    //    }
+    //}
 
-    private void DetectNearbyPickable()
-    {
-        pickableTarget = null;
-        Vector3 origin = mainCamera.transform.position;
-        Vector3 forward = mainCamera.transform.forward;
+    //private void DetectNearbyPickable()
+    //{
+    //    pickableTarget = null;
+    //    Vector3 origin = mainCamera.transform.position;
+    //    Vector3 forward = mainCamera.transform.forward;
 
-        var hits = Physics.OverlapSphere(origin, detectRange, pickableLayer, QueryTriggerInteraction.Collide);
-        System.Array.Sort(hits, (a, b) =>
-            Vector3.Distance(origin, a.transform.position)
-            .CompareTo(Vector3.Distance(origin, b.transform.position))
-        );
+    //    var hits = Physics.OverlapSphere(origin, detectRange, pickableLayer, QueryTriggerInteraction.Collide);
+    //    System.Array.Sort(hits, (a, b) =>
+    //        Vector3.Distance(origin, a.transform.position)
+    //        .CompareTo(Vector3.Distance(origin, b.transform.position))
+    //    );
 
-        foreach (var col in hits)
-        {
-            //손에 든 아이템은 제외
-            var obj = col.gameObject;
-            if (currentItem != null &&
-                (obj == currentItem || obj.transform.IsChildOf(handTransform)))
-                continue;
+    //    foreach (var col in hits)
+    //    {
+    //        //손에 든 아이템은 제외
+    //        var obj = col.gameObject;
+    //        if (currentItem != null &&
+    //            (obj == currentItem || obj.transform.IsChildOf(handTransform)))
+    //            continue;
 
-            Vector3 toTarget = (col.transform.position - origin).normalized;
-            if (Vector3.Angle(forward, toTarget) <= panAngle)
-            {
-                if (HasLineOfSight(obj))
-                {
-                    pickableTarget = obj;
-                    break; 
-                }
-            }
-        }
-    }
+    //        Vector3 toTarget = (col.transform.position - origin).normalized;
+    //        if (Vector3.Angle(forward, toTarget) <= panAngle)
+    //        {
+    //            if (HasLineOfSight(obj))
+    //            {
+    //                pickableTarget = obj;
+    //                break; 
+    //            }
+    //        }
+    //    }
+    //}
 
     private void PickupItem(GameObject item)
     {
@@ -398,52 +472,119 @@ public class ItemManager : MonoBehaviour
         currentItem = null;
     }
 
+    //private void OnDrawGizmosSelected()
+    //{
+    //    // mainCamera가 할당되지 않았으면 Gizmo를 그리지 않음
+    //    if (mainCamera == null)
+    //    {
+    //        // Start에서 할당되므로, 에디터에서 즉시 보려면 직접 할당하거나 이 라인을 주석 처리
+    //        mainCamera = Camera.main;
+    //        if (mainCamera == null) return;
+    //    }
 
-    private bool HasLineOfSight(GameObject target)
-    {
-        //레이캐스트 시작점(카메라 위치)과 방향, 거리 계산
-        Vector3 startPoint = mainCamera.transform.position;
-        Vector3 direction = (target.transform.position - startPoint).normalized;
-        float distance = Vector3.Distance(startPoint, target.transform.position);
+    //    Ray ray = mainCamera.ScreenPointToRay(new Vector3(Screen.width / 2, Screen.height / 2));
+    //    RaycastHit hit;
+    //    LayerMask combinedLayer = interacterLayer | pickableLayer;
 
-        //카메라와 대상 사이에 장애물이 있는지 확인
-        //장애물이 감지되면 'true'가 되어, ! 연산자로 인해 false가 반환
-        return !Physics.Raycast(startPoint, direction, distance, obstacleLayer);
-    }
+    //    // Gizmos는 에디터에서만 작동하므로 Physics.Raycast를 여기서 한 번 더 호출해도 게임 성능에 영향을 주지 않음
+    //    if (Physics.Raycast(ray, out hit, detectRange, combinedLayer))
+    //    {
+    //        // Raycast가 무언가에 맞았을 경우: 녹색 선과 구체로 표시
+    //        Gizmos.color = Color.green;
+    //        Gizmos.DrawLine(ray.origin, hit.point);
+    //        Gizmos.DrawWireSphere(hit.point, 0.15f); // 맞은 지점에 작은 구체 그리기
+    //    }
+    //    else
+    //    {
+    //        // Raycast가 아무것에도 맞지 않았을 경우: 빨간색 선으로 최대 사거리 표시
+    //        Gizmos.color = Color.red;
+    //        Gizmos.DrawRay(ray.origin, ray.direction * detectRange);
+    //    }
+    //}
+
 
     private void OnDrawGizmosSelected()
     {
-        if (!Application.isPlaying || mainCamera == null)
-            return;
-
-        Vector3 origin = mainCamera.transform.position;
-        Vector3 forward = mainCamera.transform.forward;
-        float halfAngle = panAngle;
-
-        //팬 가장자리 두 선
-        Quaternion leftRot = Quaternion.AngleAxis(-halfAngle, Vector3.up);
-        Quaternion rightRot = Quaternion.AngleAxis(+halfAngle, Vector3.up);
-        Vector3 leftDir = leftRot * forward;
-        Vector3 rightDir = rightRot * forward;
-
-        Gizmos.color = Color.cyan;
-        Gizmos.DrawLine(origin, origin + leftDir * detectRange);
-        Gizmos.DrawLine(origin, origin + rightDir * detectRange);
-
-        //원뿔 면(호) 시각화
-        int segments = 20;
-        Vector3 prevPoint = origin + (Quaternion.AngleAxis(-halfAngle, Vector3.up) * forward) * detectRange;
-        for (int i = 1; i <= segments; i++)
+        if (mainCamera == null)
         {
-            float angle = -halfAngle + (2f * halfAngle) * (i / (float)segments);
-            Vector3 dir = Quaternion.AngleAxis(angle, Vector3.up) * forward;
-            Vector3 nextP = origin + dir * detectRange;
-
-            Gizmos.DrawLine(prevPoint, nextP);
-            prevPoint = nextP;
+            mainCamera = Camera.main;
+            if (mainCamera == null) return;
         }
 
+        Ray ray = mainCamera.ScreenPointToRay(new Vector3(Screen.width / 2, Screen.height / 2));
+        RaycastHit hit;
+        LayerMask combinedLayer = interacterLayer | pickableLayer;
+
+        if (Physics.SphereCast(ray, detectionRadius, out hit, detectRange, combinedLayer))
+        {
+            // 맞았을 때: 녹색으로 표시
+            Gizmos.color = Color.green;
+            // 시작 지점의 구 그리기
+            Gizmos.DrawWireSphere(ray.origin, detectionRadius);
+            // 광선 경로 그리기
+            Gizmos.DrawLine(ray.origin, hit.point);
+            // 맞은 지점의 구 그리기
+            Gizmos.DrawWireSphere(hit.point, detectionRadius);
+        }
+        else
+        {
+            // 맞지 않았을 때: 빨간색으로 표시
+            Gizmos.color = Color.red;
+            Vector3 endPoint = ray.origin + ray.direction * detectRange;
+            // 시작 지점의 구 그리기
+            Gizmos.DrawWireSphere(ray.origin, detectionRadius);
+            // 광선 경로 그리기
+            Gizmos.DrawLine(ray.origin, endPoint);
+            // 최대 사거리 지점의 구 그리기
+            Gizmos.DrawWireSphere(endPoint, detectionRadius);
+        }
     }
+
+    //private bool HasLineOfSight(GameObject target)
+    //{
+    //    //레이캐스트 시작점(카메라 위치)과 방향, 거리 계산
+    //    Vector3 startPoint = mainCamera.transform.position;
+    //    Vector3 direction = (target.transform.position - startPoint).normalized;
+    //    float distance = Vector3.Distance(startPoint, target.transform.position);
+
+    //    //카메라와 대상 사이에 장애물이 있는지 확인
+    //    //장애물이 감지되면 'true'가 되어, ! 연산자로 인해 false가 반환
+    //    return !Physics.Raycast(startPoint, direction, distance, obstacleLayer);
+    //}
+
+    //private void OnDrawGizmosSelected()
+    //{
+    //    if (!Application.isPlaying || mainCamera == null)
+    //        return;
+
+    //    Vector3 origin = mainCamera.transform.position;
+    //    Vector3 forward = mainCamera.transform.forward;
+    //    float halfAngle = panAngle;
+
+    //    //팬 가장자리 두 선
+    //    Quaternion leftRot = Quaternion.AngleAxis(-halfAngle, Vector3.up);
+    //    Quaternion rightRot = Quaternion.AngleAxis(+halfAngle, Vector3.up);
+    //    Vector3 leftDir = leftRot * forward;
+    //    Vector3 rightDir = rightRot * forward;
+
+    //    Gizmos.color = Color.cyan;
+    //    Gizmos.DrawLine(origin, origin + leftDir * detectRange);
+    //    Gizmos.DrawLine(origin, origin + rightDir * detectRange);
+
+    //    //원뿔 면(호) 시각화
+    //    int segments = 20;
+    //    Vector3 prevPoint = origin + (Quaternion.AngleAxis(-halfAngle, Vector3.up) * forward) * detectRange;
+    //    for (int i = 1; i <= segments; i++)
+    //    {
+    //        float angle = -halfAngle + (2f * halfAngle) * (i / (float)segments);
+    //        Vector3 dir = Quaternion.AngleAxis(angle, Vector3.up) * forward;
+    //        Vector3 nextP = origin + dir * detectRange;
+
+    //        Gizmos.DrawLine(prevPoint, nextP);
+    //        prevPoint = nextP;
+    //    }
+
+    //}
 
 
 }

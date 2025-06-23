@@ -81,26 +81,48 @@ public class BreakOnXKey : MonoBehaviour
         }
     }
 
-    void Update()
+    //private void Update()
+    //{
+    //    // 플레이어가 가까이 오면
+    //    if (Vector3.Distance(player.position, transform.position) <= breakDistance)
+    //    {
+    //        // 타이머가 아직 안 돌고, 알이 완전히 깨지기 전이면 타이머 시작
+    //        if (!timerStarted && pressCount < totalStages)
+    //        {
+    //            timerStarted = true;
+    //            StartCoroutine(BreakTimeoutCoroutine());
+    //        }
+
+    //        // X 누르면 분해 단계 진행
+    //        if (Input.GetKeyDown(KeyCode.E) && pressCount < totalStages)
+    //        {
+    //            pressCount++;
+    //            ApplyBreakStage(pressCount);
+    //        }
+    //    }
+    //}
+
+    public void ProcessEggBreak()
     {
-        // 플레이어가 가까이 오면
+        // 플레이어가 부술 수 있는 거리 내에 있는지 확인
         if (Vector3.Distance(player.position, transform.position) <= breakDistance)
         {
-            // 타이머가 아직 안 돌고, 알이 완전히 깨지기 전이면 타이머 시작
+            // 타이머가 아직 시작되지 않았고, 알이 완전히 깨지지 않았다면 타이머 시작
             if (!timerStarted && pressCount < totalStages)
             {
                 timerStarted = true;
                 StartCoroutine(BreakTimeoutCoroutine());
             }
 
-            // X 누르면 분해 단계 진행
-            if (Input.GetKeyDown(KeyCode.X) && pressCount < totalStages)
+            // 알이 아직 완전히 깨지지 않았다면 분해 단계 진행
+            if (pressCount < totalStages)
             {
                 pressCount++;
                 ApplyBreakStage(pressCount);
             }
         }
     }
+
 
     // 만약 몇초안에 알깨는걸 실패했을 경우 패널티를 주고 싶다면 거미 나타나는 부분에 대신 다른거 넣기 (예를들어 슬로우모션 혹은 피감소 혹은 실패이펙트?)
     private IEnumerator BreakTimeoutCoroutine()
