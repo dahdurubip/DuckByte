@@ -36410,6 +36410,10 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 5303515198016143138, guid: 0db069390ec53934ab6966f174ab2b82, type: 3}
     - target: {fileID: 4374159682218857942, guid: cb1ac4694897eb142844f8e0d4e93a8f, type: 3}
+      propertyPath: m_Layer
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4374159682218857942, guid: cb1ac4694897eb142844f8e0d4e93a8f, type: 3}
       propertyPath: m_IsActive
       value: 1
       objectReference: {fileID: 0}
@@ -36437,10 +36441,18 @@ PrefabInstance:
       propertyPath: m_Center.z
       value: -7.66944
       objectReference: {fileID: 0}
+    - target: {fileID: 5792227973372546737, guid: cb1ac4694897eb142844f8e0d4e93a8f, type: 3}
+      propertyPath: m_Layer
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 5800990587918089945, guid: cb1ac4694897eb142844f8e0d4e93a8f, type: 3}
       propertyPath: 'm_Materials.Array.data[0]'
       value: 
       objectReference: {fileID: 5303515198016143138, guid: 0db069390ec53934ab6966f174ab2b82, type: 3}
+    - target: {fileID: 6068263737258476647, guid: cb1ac4694897eb142844f8e0d4e93a8f, type: 3}
+      propertyPath: m_Layer
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 6223013422596945082, guid: cb1ac4694897eb142844f8e0d4e93a8f, type: 3}
       propertyPath: m_LocalScale.x
       value: 1.82
@@ -36461,6 +36473,10 @@ PrefabInstance:
       propertyPath: 'm_Materials.Array.data[0]'
       value: 
       objectReference: {fileID: 5303515198016143138, guid: 0db069390ec53934ab6966f174ab2b82, type: 3}
+    - target: {fileID: 6707906106033745408, guid: cb1ac4694897eb142844f8e0d4e93a8f, type: 3}
+      propertyPath: m_Layer
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 6880687808904519389, guid: cb1ac4694897eb142844f8e0d4e93a8f, type: 3}
       propertyPath: m_LocalScale.x
       value: 1.82
@@ -180722,7 +180738,6 @@ MonoBehaviour:
   rewardSpawnPoint: {fileID: 2030701465}
   inputDelay: 2
   gracePeriod: 0.2
-  arrivalThreshold: 2
   lastInputDisplay: {fileID: 1030527992}
 --- !u!82 &1935059148
 AudioSource:
@@ -196344,7 +196359,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 7858677464889317686, guid: fd1ab852255bbf24688165363be3d616, type: 3}
       propertyPath: m_Layer
-      value: 8
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 7858677464889317686, guid: fd1ab852255bbf24688165363be3d616, type: 3}
       propertyPath: m_IsActive
@@ -255094,7 +255109,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 7858677464889317686, guid: fd1ab852255bbf24688165363be3d616, type: 3}
       propertyPath: m_Layer
-      value: 8
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 7858677464889317686, guid: fd1ab852255bbf24688165363be3d616, type: 3}
       propertyPath: m_IsActive

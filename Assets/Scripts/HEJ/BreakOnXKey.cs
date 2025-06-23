@@ -94,7 +94,7 @@ public class BreakOnXKey : MonoBehaviour
     //        }
 
     //        // X 누르면 분해 단계 진행
-    //        if (Input.GetKeyDown(KeyCode.E) && pressCount < totalStages)
+    //        if (Input.GetKeyDown(KeyCode.X) && pressCount < totalStages)
     //        {
     //            pressCount++;
     //            ApplyBreakStage(pressCount);
@@ -123,6 +123,21 @@ public class BreakOnXKey : MonoBehaviour
         }
     }
 
+    private void OnDrawGizmos()
+    {
+        if (player == null)
+            return;
+
+        // 구의 색상 설정
+        Gizmos.color = Color.red;
+
+        // 부술 수 있는 최대 거리만큼 구를 그림 (알 중심 기준)
+        Gizmos.DrawWireSphere(transform.position, breakDistance);
+
+        // 플레이어와 알을 잇는 선도 함께 그림
+        Gizmos.color = Color.yellow;
+        Gizmos.DrawLine(transform.position, player.position);
+    }
 
     // 만약 몇초안에 알깨는걸 실패했을 경우 패널티를 주고 싶다면 거미 나타나는 부분에 대신 다른거 넣기 (예를들어 슬로우모션 혹은 피감소 혹은 실패이펙트?)
     private IEnumerator BreakTimeoutCoroutine()
