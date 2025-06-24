@@ -511,35 +511,33 @@ public class ItemManager : MonoBehaviour
             if (mainCamera == null) return;
         }
 
-        Ray ray = mainCamera.ScreenPointToRay(new Vector3(Screen.width / 2, Screen.height / 2));
+        // [FIXED] Scene 뷰와 Game 뷰의 불일치 문제를 해결하기 위해
+        // ScreenPointToRay 대신 카메라의 실제 월드 트랜스폼을 사용합니다.
+        Vector3 rayOrigin = mainCamera.transform.position;
+        Vector3 rayDirection = mainCamera.transform.forward;
+
         RaycastHit hit;
         LayerMask combinedLayer = interacterLayer | pickableLayer;
 
-        if (Physics.SphereCast(ray, detectionRadius, out hit, detectRange, combinedLayer))
+        // 수정된 시작점과 방향으로 SphereCast를 실행합니다.
+        if (Physics.SphereCast(rayOrigin, detectionRadius, rayDirection, out hit, detectRange, combinedLayer))
         {
             // 맞았을 때: 녹색으로 표시
             Gizmos.color = Color.green;
-            // 시작 지점의 구 그리기
-            Gizmos.DrawWireSphere(ray.origin, detectionRadius);
-            // 광선 경로 그리기
-            Gizmos.DrawLine(ray.origin, hit.point);
-            // 맞은 지점의 구 그리기
+            Gizmos.DrawWireSphere(rayOrigin, detectionRadius);
+            Gizmos.DrawLine(rayOrigin, hit.point);
             Gizmos.DrawWireSphere(hit.point, detectionRadius);
         }
         else
         {
             // 맞지 않았을 때: 빨간색으로 표시
             Gizmos.color = Color.red;
-            Vector3 endPoint = ray.origin + ray.direction * detectRange;
-            // 시작 지점의 구 그리기
-            Gizmos.DrawWireSphere(ray.origin, detectionRadius);
-            // 광선 경로 그리기
-            Gizmos.DrawLine(ray.origin, endPoint);
-            // 최대 사거리 지점의 구 그리기
+            Vector3 endPoint = rayOrigin + rayDirection * detectRange;
+            Gizmos.DrawWireSphere(rayOrigin, detectionRadius);
+            Gizmos.DrawLine(rayOrigin, endPoint);
             Gizmos.DrawWireSphere(endPoint, detectionRadius);
         }
     }
-
     //private bool HasLineOfSight(GameObject target)
     //{
     //    //레이캐스트 시작점(카메라 위치)과 방향, 거리 계산
