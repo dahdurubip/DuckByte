@@ -9,6 +9,7 @@ public class PlayerMovement : MonoBehaviour
     private Camera cam;
     private CharacterController characterController;
     private CapsuleCollider capsuleCollider;
+    private PlayerMental mental;
 
     [Header("Player Default Settings")]
     //걷기 속도
@@ -63,9 +64,9 @@ public class PlayerMovement : MonoBehaviour
     private float maxStamina;
     //스태미나 표시 UI
     [SerializeField] TMP_Text stamina_UI;
-    [SerializeField] private float staminaConsumeRate = 1f; //<<< 초당 소모량
+    [SerializeField] private float staminaConsumeRate = 10f; //<<< 초당 소모량
     [SerializeField] private float staminaRegenRate = 3f;  //<<< 초당 회복량
-
+    [SerializeField] private float exhaustionDuration = 3f;
 
     [Header("AudioClip")]
     [SerializeField] private AudioClip walkClip;
@@ -73,13 +74,18 @@ public class PlayerMovement : MonoBehaviour
     [SerializeField] private AudioClip breatheClip;
     [SerializeField] private AudioClip crouchingWalkClip;
 
-    private AudioSource audioSource;
+    [Header("Audio Sources")]
+    [SerializeField] private AudioSource footstepAudioSource; // 발소리용 AudioSource
+    [SerializeField] private AudioSource sfxAudioSource;      // 효과음용 AudioSource (숨소리 등)
+
     //플레이어 이동 가능 여부
     private bool isMovable = true;
     //회전 시 사용되는 속도
     private float rotationVelocity;
     //회전 부드러움 정도
-    public float rotationSmoothTime = 0.1f; 
+    public float rotationSmoothTime = 0.1f;
+    private bool isExhausted = false;
+
     public bool IsMoving { get; private set; } 
     public GameManager GM;
 
@@ -90,14 +96,22 @@ public class PlayerMovement : MonoBehaviour
         animator = GetComponent<Animator>();
         characterController = GetComponent<CharacterController>();
         capsuleCollider = GetComponent<CapsuleCollider>();
-        audioSource = GetComponent<AudioSource>();        
+        mental = GetComponent<PlayerMental>();
     }
 
     private void Start()
     {
-        audioSource.Stop();
-        audioSource.loop = true;
-
+        //발소리 오디오 소스 설정
+        if (footstepAudioSource != null)
+        {
+            footstepAudioSource.Stop();
+            footstepAudioSource.loop = true;
+        }
+        //효과음 오디오 소스 설정 (루프 해제)
+        if (sfxAudioSource != null)
+        {
+            sfxAudioSource.loop = false;
+        }
         //CharacterController 원래 값 저장
         originalHeight = characterController.height;
         originalCenter = characterController.center;
@@ -153,28 +167,31 @@ public class PlayerMovement : MonoBehaviour
     //스태미나 관리 및 달리기 상태 결정
     private void HandleStaminaAndRunState()
     {
-        bool wantsToRun = Input.GetKey(KeyCode.LeftShift); //플레이어가 달리기를 원하는지 입력 감지
-        this.run = false; //기본적으로는 달리지 않는 상태로 시작
+        //이미 탈진 상태이거나 움직일 수 없는 상태이면 아무것도 하지 않음
+        if (isExhausted || !isMovable) return;
 
-        if (wantsToRun && !isCrouching) //앉아있지 않고 달리기를 원할 때
+        bool wantsToRun = Input.GetKey(KeyCode.LeftShift);
+        this.run = false;
+
+        if (wantsToRun && !isCrouching)
         {
-            if (currentStamina > 0) //스태미나가 남아있다면
+            if (currentStamina > 0)
             {
-                this.run = true; //달리도록 설정
+                this.run = true;
                 float previousStamina = currentStamina;
-                currentStamina -= staminaConsumeRate; //스태미나 소모 (Time.deltaTime 곱해서 초당 소모량으로 변경 가능)
+                //Time.deltaTime을 곱해 초당 소모량으로 변경
+                currentStamina -= staminaConsumeRate * Time.deltaTime;
                 if (currentStamina < 0) currentStamina = 0;
 
-                ////스태미나가 방금 0이 되었다면 "breathe" 애니메이션 재생
+                //스태미나가 방금 0이 되었다면 탈진 코루틴 시작
                 if (previousStamina > 0 && currentStamina == 0)
                 {
-                    audioSource.PlayOneShot(breatheClip);
+                    StartCoroutine(ExhaustionCoroutine());
                 }
             }
-            else //달리기를 원하지만 스태미나가 없다면
+            else
             {
-                this.run = false; // 달릴 수 없음
-                moveDirection = Vector3.zero; // 스태미나가 0일 때 이동 자체를 막음
+                this.run = false;
             }
         }
     }
@@ -182,15 +199,39 @@ public class PlayerMovement : MonoBehaviour
     //스태미나 회복 처리
     private void HandleStaminaRegeneration()
     {
-        //달리고 있지 않고, 앉아있지 않을 때 스태미나 회복
-        if (!this.run && !isCrouching)
+        //달리고 있지 않고, 앉아있지 않으며, 탈진 상태가 아닐 때만 회복
+        if (!this.run && !isCrouching && !isExhausted)
         {
             if (currentStamina < maxStamina)
             {
-                currentStamina += staminaRegenRate * Time.deltaTime; //스태미나 회복 (Time.deltaTime 곱해서 초당 회복량으로 변경 가능)
+                currentStamina += staminaRegenRate * Time.deltaTime;
                 if (currentStamina > maxStamina) currentStamina = maxStamina;
             }
         }
+    }
+
+    private IEnumerator ExhaustionCoroutine()
+    {
+        // 1. 탈진 상태 시작
+        isExhausted = true;
+        isMovable = false; // 움직임 비활성화
+        this.run = false;
+
+        // 이동 애니메이션 정지
+        animator.SetFloat("Blend", 0f);
+
+        // 2. 숨소리 재생
+        if (sfxAudioSource != null)
+        {
+            sfxAudioSource.PlayOneShot(breatheClip);
+        }
+
+        // 3. 3초 동안 대기
+        yield return new WaitForSeconds(exhaustionDuration);
+
+        // 4. 탈진 상태 해제
+        isMovable = true;  // 움직임 다시 활성화
+        isExhausted = false;
     }
 
 
@@ -225,7 +266,6 @@ public class PlayerMovement : MonoBehaviour
         //    vertical = 0;
 
         //PlayerMental 컴포넌트에 따른 입력 반전 처리 (주석 처리된 "내일 이거 해보깅~!" 관련)
-        PlayerMental mental = GetComponent<PlayerMental>();
         if (mental != null && mental.isReversingControl)
         {
             vertical = -vertical;
@@ -234,6 +274,13 @@ public class PlayerMovement : MonoBehaviour
 
         //입력 방향 벡터 계산 (카메라 기준 아님)
         Vector3 inputDirection = new Vector3(horizontal, 0f, vertical).normalized;
+
+        if (currentStamina <= 0 && run)
+        {
+            //스태미나가 0 이하라면 이동 입력을 무시 (달리기 시도 중일 때만)
+            inputDirection = Vector3.zero;
+        }
+
 
         //카메라 방향 기준으로 이동 방향 벡터 변환
         Vector3 camForward = Vector3.Scale(cam.transform.forward, new Vector3(1, 0, 1)).normalized;
@@ -270,10 +317,7 @@ public class PlayerMovement : MonoBehaviour
             animatorSpeedPercent = (this.run && !isCrouching) ? 1f : 0.5f;
         }
 
-        if (!this.run || currentStamina > 0) //스태미나가 0일 때는 애니메이션을 멈추지 않게 설정
-        {
-            animator.SetFloat("Blend", animatorSpeedPercent * inputDirection.magnitude, 0.1f, Time.deltaTime);
-        }
+        animator.SetFloat("Blend", animatorSpeedPercent * inputDirection.magnitude, 0.1f, Time.deltaTime);
         animator.SetBool("isCrouching", isCrouching);
     }
 
@@ -302,11 +346,12 @@ public class PlayerMovement : MonoBehaviour
 
     private void HandleAudio()
     {
-        if (IsMoving) //플레이어가 움직이고 있을 때
-        {
-            AudioClip targetClip = null; // 현재 상태에 맞는 클립을 담을 변수
+        if (footstepAudioSource == null) return;
 
-            //상태에 따라 목표 클립(targetClip)을 정합니다.
+        if (IsMoving)
+        {
+            AudioClip targetClip = null;
+
             if (isCrouching)
             {
                 targetClip = crouchingWalkClip;
@@ -320,24 +365,21 @@ public class PlayerMovement : MonoBehaviour
                 targetClip = walkClip;
             }
 
-            //1. 현재 재생 클립이 목표 클립과 다를 경우 -> 클립을 교체하고 재생
-            if (audioSource.clip != targetClip)
+            if (footstepAudioSource.clip != targetClip)
             {
-                audioSource.clip = targetClip;
-                audioSource.Play();
+                footstepAudioSource.clip = targetClip;
+                footstepAudioSource.Play();
             }
-            //2. (가장 중요) 클립은 맞는데, 어떤 이유로든 소리가 멈췄을 경우 -> 다시 재생
-            else if (!audioSource.isPlaying)
+            else if (!footstepAudioSource.isPlaying)
             {
-                audioSource.Play();
+                footstepAudioSource.Play();
             }
         }
-        else //플레이어가 멈췄을 때
+        else
         {
-            //재생중인 모든 발소리를 멈춤
-            if (audioSource.isPlaying)
+            if (footstepAudioSource.isPlaying)
             {
-                audioSource.Stop();
+                footstepAudioSource.Stop();
             }
         }
     }
