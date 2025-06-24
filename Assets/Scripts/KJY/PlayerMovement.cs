@@ -64,7 +64,7 @@ public class PlayerMovement : MonoBehaviour
     //스태미나 표시 UI
     [SerializeField] TMP_Text stamina_UI;
     [SerializeField] private float staminaConsumeRate = 1f; //<<< 초당 소모량
-    [SerializeField] private float staminaRegenRate = 5f;  //<<< 초당 회복량
+    [SerializeField] private float staminaRegenRate = 3f;  //<<< 초당 회복량
 
 
     [Header("AudioClip")]

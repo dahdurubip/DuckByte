@@ -516,7 +516,8 @@ public class BossPhaseManager : MonoBehaviour
     void bossClear()
     {
         Debug.Log("보스전 클리어");
-        SceneManager.LoadScene("button");
+        //SceneManager.LoadScene("button");
+        SceneLoad.LoadSceneWithLoading("button");
     }
 
 }
