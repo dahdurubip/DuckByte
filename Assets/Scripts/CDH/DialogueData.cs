@@ -20,6 +20,6 @@ public class DialogueData : MonoBehaviour
         { "interactUnBrokenJar", new string[] { "큰일이다 깨지지않고 소리만 났어", "깨지는 것과 무슨 차이지..?"} },
         { "interactSCDoor", new string[] { "이런.. 잠겨있다", "주변을 조사해보자" } },
         { "interactWell", new string[] { "분명 아까 이곳으로 떨어졌지..?", "무언가 날 덮쳤는데..", "지금은 아무것도 없네.. 뭐였을까..." } },
-        { "inPrison", new string[] { "이제 네 차례다","차가운 쇠사슬이 살갗을 파고드는 고통을,숨이 막히는 절망의 순간 순간을 직접 체험해 보아라…" } }
+        { "inPrison", new string[] { "이제 네 차례다","차가운 쇠사슬이 살갗을 파고드는 고통을","숨이 막히는 절망의 순간 순간을 직접 체험해 보아라…" } }
     };
 }
