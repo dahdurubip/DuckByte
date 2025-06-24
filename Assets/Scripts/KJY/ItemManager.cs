@@ -150,6 +150,16 @@ public class ItemManager : MonoBehaviour
                     return;
                 }
 
+                if (nearbyInteractable.CompareTag("Door"))
+                {
+                    Door door = nearbyInteractable.GetComponent<Door>();
+                    if (door != null)
+                    {
+                        door.TheDorrControl();
+                    }
+                    return;
+                }
+
                 if (nearbyInteractable.CompareTag("spiderEgg"))
                 {
                     BreakOnXKey breakOnXKey = nearbyInteractable.GetComponentInParent<BreakOnXKey>();
@@ -200,40 +210,43 @@ public class ItemManager : MonoBehaviour
                     Destroy(nearbyInteractable);
                     return;
                 }
-
-                if (nearbyInteractable.CompareTag("Obanggi"))
+                if (UnityEngine.SceneManagement.SceneManager.GetActiveScene().name == "Boss")
                 {
-                    obanggiUIManager.mainUIPanel.SetActive(true);
-                    return;
+                    if (nearbyInteractable.CompareTag("Obanggi"))
+                    {
+                        obanggiUIManager.mainUIPanel.SetActive(true);
+                        return;
+                    }
+
+                    if (nearbyInteractable.CompareTag("ObanggiEast"))
+                    {
+                        obanggiUIManager.blueEast = true;
+                        Destroy(nearbyInteractable);
+                        return;
+                    }
+
+                    if (nearbyInteractable.CompareTag("ObanggiWest"))
+                    {
+                        obanggiUIManager.whiteWest = true;
+                        Destroy(nearbyInteractable);
+                        return;
+                    }
+
+                    if (nearbyInteractable.CompareTag("ObanggiSouth"))
+                    {
+                        obanggiUIManager.redSouth = true;
+                        Destroy(nearbyInteractable);
+                        return;
+                    }
+
+                    if (nearbyInteractable.CompareTag("ObanggiNorth"))
+                    {
+                        obanggiUIManager.blackNorth = true;
+                        Destroy(nearbyInteractable);
+                        return;
+                    }
                 }
 
-                if (nearbyInteractable.CompareTag("ObanggiEast"))
-                {
-                    obanggiUIManager.blueEast = true;
-                    Destroy(nearbyInteractable);
-                    return;
-                }
-
-                if (nearbyInteractable.CompareTag("ObanggiWest"))
-                {
-                    obanggiUIManager.whiteWest = true;
-                    Destroy(nearbyInteractable);
-                    return;
-                }
-
-                if (nearbyInteractable.CompareTag("ObanggiSouth"))
-                {
-                    obanggiUIManager.redSouth = true;
-                    Destroy(nearbyInteractable);
-                    return;
-                }
-
-                if (nearbyInteractable.CompareTag("ObanggiNorth"))
-                {
-                    obanggiUIManager.blackNorth = true;
-                    Destroy(nearbyInteractable);
-                    return;
-                }
 
 
             }
