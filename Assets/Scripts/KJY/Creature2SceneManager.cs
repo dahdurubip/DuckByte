@@ -10,7 +10,7 @@ public class Creature2SceneManager : MonoBehaviour
 
     private void Start()
     {
-        Creature2AudioManager.instance.PlaySfx(Creature2AudioManager.sfx.Phorror);
+        //Creature2AudioManager.instance.PlaySfx(Creature2AudioManager.sfx.Phorror);
         dialogueManager.PlayDialogue("inPrison");
 
     }

@@ -18,7 +18,7 @@ public class Creature2AudioManager : MonoBehaviour
     int channelIndex;
 
     //들어갈 효과음들 인스펙터 순서대로 이름정리
-    public enum sfx { PbabyCry, Pwall, Phorror, PwaterDrop, PhorrorEffect }
+    public enum sfx { PbabyCry, Pwall, PwaterDrop, PhorrorEffect }
 
     // SFX 중복 재생 방지
     private Dictionary<sfx, float> sfxLastPlayTime = new Dictionary<sfx, float>();
@@ -36,10 +36,15 @@ public class Creature2AudioManager : MonoBehaviour
         GameObject bgmObject = new GameObject("BgmPlayer");
         bgmObject.transform.parent = transform;
         bgmPlayer = bgmObject.AddComponent<AudioSource>();
-        bgmPlayer.playOnAwake = false;
+        bgmPlayer.playOnAwake = true;
         bgmPlayer.loop = true;
         bgmPlayer.volume = bgmVolume;
         bgmPlayer.clip = bgmClip;
+
+        if (bgmClip != null)
+        {
+            bgmPlayer.Play();
+        }
 
 
         // SFX 채널 초기화
