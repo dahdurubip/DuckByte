@@ -38284,6 +38284,59 @@ MeshCollider:
   m_Convex: 1
   m_CookingOptions: 30
   m_Mesh: {fileID: 3274503126698457843, guid: 31692f2afc87a0f49879663505e88b9b, type: 3}
+--- !u!1 &1151656178
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1151656180}
+  - component: {fileID: 1151656179}
+  m_Layer: 10
+  m_Name: GameObject
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!65 &1151656179
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1151656178}
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_IsTrigger: 1
+  m_ProvidesContacts: 0
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Size: {x: 2.85, y: 4.02, z: 1}
+  m_Center: {x: 0, y: 0, z: 0}
+--- !u!4 &1151656180
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1151656178}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0.000000021855694, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: -2.8883247, y: 0.7789993, z: 14.483043}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1157797636 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 4778145331393723787, guid: c203c3cdb55b7ca4ab6c83b61fc8f4bd, type: 3}
@@ -126510,6 +126563,10 @@ PrefabInstance:
       value: SM_Unhyun_Noan_W_Haenggak_Wall_E001
       objectReference: {fileID: 0}
     - target: {fileID: 8134580726298752235, guid: 36c611d3a84132d48a9ab288358e6b53, type: 3}
+      propertyPath: m_Layer
+      value: 10
+      objectReference: {fileID: 0}
+    - target: {fileID: 8134580726298752235, guid: 36c611d3a84132d48a9ab288358e6b53, type: 3}
       propertyPath: m_IsActive
       value: 1
       objectReference: {fileID: 0}
@@ -132141,6 +132198,10 @@ PrefabInstance:
     - target: {fileID: 4184009687127125871, guid: ece0bfdd47d119549bfa1da259c62313, type: 3}
       propertyPath: m_Name
       value: SM_Unhyun_Noan_W_Haenggak_Pillar_A001 (4)
+      objectReference: {fileID: 0}
+    - target: {fileID: 4184009687127125871, guid: ece0bfdd47d119549bfa1da259c62313, type: 3}
+      propertyPath: m_Layer
+      value: 10
       objectReference: {fileID: 0}
     - target: {fileID: 4184009687127125871, guid: ece0bfdd47d119549bfa1da259c62313, type: 3}
       propertyPath: m_IsActive
@@ -252355,6 +252416,7 @@ SceneRoots:
   - {fileID: 7605841094655377746}
   - {fileID: 365468693}
   - {fileID: 1687358601}
+  - {fileID: 1151656180}
   - {fileID: 1734485219}
   - {fileID: 585993416}
   - {fileID: 97371920}
