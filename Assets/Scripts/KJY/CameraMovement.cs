@@ -109,8 +109,8 @@ public class CameraMovement : MonoBehaviour
             if (Mathf.Abs(mouseXInput) > noMouseInputThreshold || Mathf.Abs(mouseYInput) > noMouseInputThreshold)
             {
                 //마우스로 회전
-                rotX += -mouseYInput * sensitivity * Time.deltaTime;
-                rotY += mouseXInput * sensitivity * Time.deltaTime;
+                rotX += -mouseYInput * sensitivity;// * Time.deltaTime;
+                rotY += mouseXInput * sensitivity;// * Time.deltaTime;
                 rotX = Mathf.Clamp(rotX, -clampAngle, clampAngle);
 
                 //마우스 회전중 리셋 & 중지
