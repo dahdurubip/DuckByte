@@ -42,11 +42,15 @@ public class m1_AudioManager : MonoBehaviour
         GameObject bgmObject = new GameObject("BgmPlayer");
         bgmObject.transform.parent = transform;
         bgmPlayer = bgmObject.AddComponent<AudioSource>();
-        bgmPlayer.playOnAwake = false;
+        bgmPlayer.playOnAwake = true;
         bgmPlayer.loop = true;
         bgmPlayer.volume = bgmVolume;
         bgmPlayer.clip = bgmClip;
 
+        if (bgmClip != null)
+        {
+            bgmPlayer.Play();
+        }
 
         // SFX 채널 초기화
         GameObject sfxObject = new GameObject("sfxPlayer");
