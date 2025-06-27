@@ -357,6 +357,18 @@ public class ItemManager : MonoBehaviour
         }
     }
 
+    private void SetLayerRecursively(GameObject obj, int newLayer)
+    {
+        if (obj == null) return;
+
+        obj.layer = newLayer;
+
+        foreach (Transform child in obj.transform)
+        {
+            if (child == null) continue;
+            SetLayerRecursively(child.gameObject, newLayer);
+        }
+    }
 
     private void PickupItem(GameObject item)
     {
@@ -377,6 +389,8 @@ public class ItemManager : MonoBehaviour
         item.transform.SetParent(handTransform);
         item.transform.localPosition = Vector3.zero;
         item.transform.localRotation = Quaternion.identity;
+
+        SetLayerRecursively(currentItem, LayerMask.NameToLayer("HeldItem"));
     }
 
     public void DropCurrentItem()
@@ -396,6 +410,10 @@ public class ItemManager : MonoBehaviour
             rb.isKinematic = false;
             rb.AddForce(transform.forward * 2f, ForceMode.Impulse);
         }
+
+        int originalLayer = LayerMask.NameToLayer("Item");
+        SetLayerRecursively(item, originalLayer);
+
         currentItem = null;
     }
 
