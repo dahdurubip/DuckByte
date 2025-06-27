@@ -1,7 +1,7 @@
 using UnityEngine;
 using System.Collections;
 
-public class Creature2Clone : MonoBehaviour
+public class Creature2Clone2 : MonoBehaviour
 {
 
     [Header("Scripts Settings")]
@@ -10,7 +10,6 @@ public class Creature2Clone : MonoBehaviour
     [SerializeField] private CameraMovement camShake;
 
     [Header("Default Settings")]
-    [SerializeField] private int damege;
     [SerializeField] private float moveSpeed = 3.5f;
     [SerializeField] private float attackRange = 6f;
     [SerializeField] private float rotationSpeed = 720f;
@@ -23,46 +22,25 @@ public class Creature2Clone : MonoBehaviour
     private AudioSource audioSource;
 
 
-    private void Awake()
+    private void Start()
     {
         animator = GetComponent<Animator>();
         audioSource = GetComponent<AudioSource>();
     }
 
-    // --- [추가] 기능 1: 눈알 등 특정 위치에 소환될 때 사용하는 함수 ---
-    public void InitializeAtPosition(Vector3 eyePos, Transform player)
+    public void Initialize(Transform player)
     {
         playerTransform = player;
 
-        // Y축 높이만 플레이어와 동일하게 맞춰줍니다.
-        Vector3 finalPosition = eyePos;
-        finalPosition.y = player.position.y;
-        transform.position = finalPosition;
-
-        // 생성되자마자 플레이어를 바라보도록 방향 설정
-        LookAtPlayer();
-    }
-
-    // --- 기능 2: 플레이어 정면에 소환될 때 사용하는 함수 ---
-    public void InitializeInFrontOfPlayer(Transform player)
-    {
-        playerTransform = player;
-
-        // 플레이어의 위치와 바라보는 방향을 기준으로 스폰 위치 계산
         Vector3 spawnPosition = playerTransform.position + playerTransform.forward * spawnDistance;
-        spawnPosition.y = playerTransform.position.y;
-        transform.position = spawnPosition;
 
-        // 생성되자마자 플레이어를 바라보도록 방향 설정
-        LookAtPlayer();
-    }
+        spawnPosition.y = playerTransform.position.y; // Y축 위치를 플레이어와 동일하게 설정
 
-    // 공통 기능: 플레이어를 즉시 바라보게 하는 함수
-    private void LookAtPlayer()
-    {
-        if (playerTransform == null) return;
+        transform.position = spawnPosition; 
+
         Vector3 directionToPlayer = (playerTransform.position - transform.position).normalized;
-        directionToPlayer.y = 0;
+        // Y축을 0으로 설정하여 수평 방향만
+        directionToPlayer.y = 0; 
         transform.rotation = Quaternion.LookRotation(directionToPlayer);
     }
 
@@ -120,7 +98,7 @@ public class Creature2Clone : MonoBehaviour
     {
         if (player == null) return;
 
-        player.TakeDamage(damege);
+        player.TakeDamage(30);
         //Debug.Log("때리는중");
         player.StartCoroutine(player.PlayerHitEffect());
 

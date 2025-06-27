@@ -8,13 +8,15 @@ public class Creature2Manager : MonoBehaviour
 
     [Header("Creature2 Settings")]
     [SerializeField] private Creature2 creature2;
-    [SerializeField] private Transform player;
 
     [Header("Clone Settings")]
-    [SerializeField] private GameObject creature2Clone;
+    [SerializeField] private GameObject eyeDetectionCloneObject;
+    [SerializeField] private GameObject flashlightCloneObject;
     [SerializeField] private Transform playerTransform;
     [SerializeField] private float activeDuration = 2f;
-    [SerializeField] private Creature2Clone creature2Script;
+
+    private Creature2Clone eyeDetectionClone;
+    private Creature2Clone flashlightClone;
 
     //마지막 눈의 위치
     private Vector3 lastEyePos;
@@ -28,14 +30,17 @@ public class Creature2Manager : MonoBehaviour
     //벽 이동여부 체크
     public bool wallmove = false;
 
-    //타이머를 클래스 멤버로 선언, 아직 없음
-    private float lightTimer = 0f;
-    public bool TheLight = false;
+    //크론2 활성화 여부
+    private bool isLightCloneActive = false;
 
 
     private void Awake()
     {
-        creature2Clone.SetActive(false);
+        eyeDetectionClone = eyeDetectionCloneObject.GetComponent<Creature2Clone>();
+        flashlightClone = flashlightCloneObject.GetComponent<Creature2Clone>();
+
+        eyeDetectionCloneObject.SetActive(false);
+        flashlightCloneObject.SetActive(false);
     }
 
     //Update에서는 wallmove 관련만 처리 (그 외 타이밍은 OnPlayerDetected나 WhenTheLightOn에서 별도로 처리)
@@ -45,6 +50,24 @@ public class Creature2Manager : MonoBehaviour
         {
             wallpos.MoveThewall(detectionCount);
             wallmove = false;
+        }
+
+        if(creature2.flashOn)
+        {
+            if (!isLightCloneActive)
+            {
+                WhenTheLightOn();
+            }
+
+        }
+        else
+        {
+            if (isLightCloneActive) 
+            {
+                flashlightCloneObject.SetActive(false);
+                isLightCloneActive = false;
+            }
+
         }
 
     }
@@ -59,43 +82,35 @@ public class Creature2Manager : MonoBehaviour
             detectionCount = 9;
         }
         lastEyePos = eyePos;
-        ActivateClone();
+        ActivateEyeClone();
     }
 
-    private void ActivateClone()
+    private void ActivateEyeClone()
     {
         //순간이동 시작
-        isTeleporting = true;     
-        creature2Clone.SetActive(true);
-        //눈알 위치/방향과 플레이어 전달
-        creature2Script.Initialize(lastEyePos, playerTransform);
+        isTeleporting = true;
+        eyeDetectionCloneObject.SetActive(true);
+        //눈 발견 클론 초기화
+        eyeDetectionClone.InitializeAtPosition(lastEyePos, playerTransform);
         StartCoroutine(DeactivateAfterDelay());
     }
 
     private IEnumerator DeactivateAfterDelay()
     {
         yield return new WaitForSeconds(activeDuration);
-        creature2Clone.SetActive(false);
+        eyeDetectionCloneObject.SetActive(false);
         //순간이동 종료 -> 재호출 허용
-        isTeleporting = false;        
+        isTeleporting = false;
     }
 
-    //지금은 없음
-    //외부 이벤트에서 호출: 손전등이 켜진 상태를 지속할 때
-    public void WhenTheLightOn()
+    //손전등이 켜진 상태를 지속할 때
+    private  void WhenTheLightOn()
     {
-        if (TheLight)
-        {
-            lightTimer += Time.deltaTime;
-            if (lightTimer >= 3f)
-            {
-                //CommandTeleport();
-            }
-        }
-        else
-        {
-            lightTimer = 0f;
-        }
+
+        flashlightCloneObject.SetActive(true);
+        isLightCloneActive = true;
+        //손전등 클론 초기화
+        flashlightClone.InitializeInFrontOfPlayer(playerTransform);
     }
 
 
