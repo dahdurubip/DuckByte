@@ -48,7 +48,16 @@ public class AltarManager : MonoBehaviour, IInteractable
 
         int nextPhase = bossPhaseManager.currentPhase + 1;
         //bossPhaseManager.SetPhase(nextPhase);
-        bossPhaseManager.triggerPhaseTransition(nextPhase);
+        if (nextPhase == 4)
+        {
+            // 마지막 페이즈 도달 시 따로 처리
+            bossPhaseManager.SetPhase(nextPhase);
+        }
+        else
+        {
+            bossPhaseManager.triggerPhaseTransition(nextPhase);
+        }
+
     }
 
 }

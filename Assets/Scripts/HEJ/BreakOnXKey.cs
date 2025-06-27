@@ -51,6 +51,9 @@ public class BreakOnXKey : MonoBehaviour
     // 타이머 한 번만 시작하도록
     private bool timerStarted = false;
 
+    // 레이어 바꿀 오브젝트
+    [SerializeField] private GameObject brokenEgg;
+
     void Start()
     {
         fragmentsParent.SetActive(false);
@@ -205,6 +208,9 @@ public class BreakOnXKey : MonoBehaviour
 
             if (breakSliderObject != null)
                 breakSliderObject.SetActive(false); // 다 깨면 숨김
+
+            // 레이어 바꿈
+            brokenEgg.layer = LayerMask.NameToLayer("Default"); // 원하는 레이어 이름으로 변경
         }
     }
 }
