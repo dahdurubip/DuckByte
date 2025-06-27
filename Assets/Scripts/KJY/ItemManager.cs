@@ -85,6 +85,12 @@ public class ItemManager : MonoBehaviour
             {
                 howToUse.SetActive(false);
             }
+
+            if (UnityEngine.SceneManagement.SceneManager.GetActiveScene().name == "Boss 1")
+            {
+                MainItem = PlayerPrefs.GetInt("MainItemValue3", 0);
+            }
+
             Debug.Log("mainItem" + MainItem);
             //E키를 누르면 무조건 끄는 것
             if (noteUI.activeSelf)
