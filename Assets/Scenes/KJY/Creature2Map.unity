@@ -3465,8 +3465,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 56ca027935cc11f46a033817174250f6, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  bgmClip: {fileID: 0}
-  bgmVolume: 0
+  bgmClip: {fileID: 8300000, guid: 709d5e107bcccc34b9a021f16e7c20d8, type: 3}
+  bgmVolume: 0.5
   sfxClip:
   - {fileID: 8300000, guid: c0fbc536880bcf648b6edb74c9e2d07e, type: 3}
   - {fileID: 8300000, guid: 1ba711cf9b4e09a45af7bbd58d418882, type: 3}
@@ -10211,15 +10211,15 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 4134040935007016, guid: e7e1e60f2c5d63645b802e7792284f22, type: 3}
       propertyPath: m_LocalPosition.x
-      value: -6.174
+      value: 11.99
       objectReference: {fileID: 0}
     - target: {fileID: 4134040935007016, guid: e7e1e60f2c5d63645b802e7792284f22, type: 3}
       propertyPath: m_LocalPosition.y
-      value: 4.71
+      value: 5.81
       objectReference: {fileID: 0}
     - target: {fileID: 4134040935007016, guid: e7e1e60f2c5d63645b802e7792284f22, type: 3}
       propertyPath: m_LocalPosition.z
-      value: -44.38
+      value: -5.74
       objectReference: {fileID: 0}
     - target: {fileID: 4134040935007016, guid: e7e1e60f2c5d63645b802e7792284f22, type: 3}
       propertyPath: m_LocalRotation.w
@@ -12434,7 +12434,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 4134040935007016, guid: e7e1e60f2c5d63645b802e7792284f22, type: 3}
       propertyPath: m_LocalPosition.z
-      value: -15.23
+      value: 14.22
       objectReference: {fileID: 0}
     - target: {fileID: 4134040935007016, guid: e7e1e60f2c5d63645b802e7792284f22, type: 3}
       propertyPath: m_LocalRotation.w
@@ -13023,7 +13023,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!65 &692342423
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -15522,7 +15522,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 4134040935007016, guid: e7e1e60f2c5d63645b802e7792284f22, type: 3}
       propertyPath: m_LocalPosition.z
-      value: 14.22
+      value: -15.23
       objectReference: {fileID: 0}
     - target: {fileID: 4134040935007016, guid: e7e1e60f2c5d63645b802e7792284f22, type: 3}
       propertyPath: m_LocalRotation.w
@@ -18089,15 +18089,15 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 4134040935007016, guid: e7e1e60f2c5d63645b802e7792284f22, type: 3}
       propertyPath: m_LocalPosition.x
-      value: 11.99
+      value: -6.174
       objectReference: {fileID: 0}
     - target: {fileID: 4134040935007016, guid: e7e1e60f2c5d63645b802e7792284f22, type: 3}
       propertyPath: m_LocalPosition.y
-      value: 5.81
+      value: 4.71
       objectReference: {fileID: 0}
     - target: {fileID: 4134040935007016, guid: e7e1e60f2c5d63645b802e7792284f22, type: 3}
       propertyPath: m_LocalPosition.z
-      value: -5.74
+      value: -44.38
       objectReference: {fileID: 0}
     - target: {fileID: 4134040935007016, guid: e7e1e60f2c5d63645b802e7792284f22, type: 3}
       propertyPath: m_LocalRotation.w
@@ -25695,7 +25695,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   FirstWall: {fileID: 1976619210}
-  SecondWall: {fileID: 64513088}
+  SecondWall: {fileID: 813400674}
   moveDistance: 13
   moveSpeed: 3
 --- !u!54 &1606227562
@@ -32146,6 +32146,10 @@ PrefabInstance:
     - target: {fileID: 100006, guid: 10fdea72289652342a72853a1b9dc9a8, type: 3}
       propertyPath: m_Name
       value: EyeAdvanced_LOD (1)
+      objectReference: {fileID: 0}
+    - target: {fileID: 100006, guid: 10fdea72289652342a72853a1b9dc9a8, type: 3}
+      propertyPath: m_IsActive
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 400006, guid: 10fdea72289652342a72853a1b9dc9a8, type: 3}
       propertyPath: m_LocalPosition.x

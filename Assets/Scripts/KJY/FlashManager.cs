@@ -27,10 +27,14 @@ public class FlashManager : MonoBehaviour
 
     [Header("Creature2 Settings")]
     [SerializeField] private Creature2 creature2;
+    //직접 조준 감지 거리
+    [SerializeField] private float flashlightRange = 30f;
+    //직접 조준 감지 각도
+    [SerializeField] private float flashlightAngle = 30f; 
 
     private bool isOn = false;
     private bool isHeld = false;
-    private float flashTimer = 0f;
+    private float flashOnDurationTimer = 0f;
 
 
     private void Awake()
@@ -54,31 +58,69 @@ public class FlashManager : MonoBehaviour
             DrainBattery();
 
             //timer
-            flashTimer += Time.deltaTime;
-            if (flashTimer >= 5f)
+            flashOnDurationTimer += Time.deltaTime;
+            if (flashOnDurationTimer >= 5f)
             {
-                //creature2 추적활성화
+                //5초가 지나면 무조건 추적
                 if (creature2 != null) creature2.flashOn = true;
             }
+
+            //직접 비추면 즉시 추격
+            CheckIfLightHitsCreatureDirectly();
+
         }
         else
         {
             flashUI.SetActive(false);
+            //손전등이 꺼지면 모든 관련 상태를 리셋합니다.
+            ResetAllFlashStates();
+        }
+    }
 
-            //만약 isHeld는 true인데 isOn이 false가 되면 creature2.flashOn도 false로 처리
-            if (isHeld && !isOn && creature2 != null && creature2.flashOn)
+    // 빛이 크리처에 직접 닿았는지 확인하고, 닿았다면 즉시 추적을 시작시키는 함수
+    private void CheckIfLightHitsCreatureDirectly()
+    {
+        if (creature2 == null) return;
+
+        // 이미 flashOn이 활성화 되었다면, 더 확인할 필요가 없습니다.
+        if (creature2.flashOn) return;
+
+        Vector3 directionToCreature = creature2.transform.position - cameraTransform.position;
+        Debug.DrawRay(cameraTransform.position, cameraTransform.forward *flashlightRange, Color.red);
+
+
+        if (directionToCreature.magnitude < flashlightRange && Vector3.Angle(cameraTransform.forward, directionToCreature) < flashlightAngle / 2)
+        {
+            RaycastHit hit;
+            if (Physics.Raycast(cameraTransform.position, directionToCreature.normalized, out hit, flashlightRange))
             {
-                flashTimer = 0f;
-                creature2.flashOn = false;
+                if (hit.collider.gameObject == creature2.gameObject)
+                {
+                    Debug.DrawRay(cameraTransform.position, directionToCreature.normalized * hit.distance, Color.red);
+
+                    // 직접 비추는 데 성공! 즉시 추적 스위치를 켭니다.
+                    creature2.flashOn = true;
+                }
             }
         }
+    }
 
+    // 모든 타이머와 추적 상태를 리셋하는 함수
+    private void ResetAllFlashStates()
+    {
+        flashOnDurationTimer = 0f;
+        if (creature2 != null && creature2.flashOn)
+        {
+            creature2.flashOn = false;
+        }
     }
 
     private void LateUpdate()
     {
-
-        transform.rotation = cameraTransform.rotation;
+        if (cameraTransform != null)
+        {
+            transform.rotation = cameraTransform.rotation;
+        }
     }
 
     public void Toggle()
@@ -95,8 +137,7 @@ public class FlashManager : MonoBehaviour
 
         if (!isOn)
         {
-            flashTimer = 0f;
-            if (creature2 != null) creature2.flashOn = false;
+            ResetAllFlashStates();
         }
     }
 
@@ -116,13 +157,16 @@ public class FlashManager : MonoBehaviour
         isOn = false;
         if (flashlightLight != null) flashlightLight.enabled = false;
 
-        flashTimer = 0f;
-        if (creature2 != null) creature2.flashOn = false;
+        ResetAllFlashStates();
     }
 
     public void SetHeld(bool held)
     {
         isHeld = held;
+        if (!held)
+        {
+            ResetAllFlashStates();
+        }
     }
 
     private void DrainBattery()
