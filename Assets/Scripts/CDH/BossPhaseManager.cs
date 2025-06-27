@@ -41,6 +41,9 @@ public class BossPhaseManager : MonoBehaviour
     public GameObject shockwaveEffectPrefab;
     [SerializeField] AudioSource warnningAudio;
     [SerializeField] AudioSource bossHowlAudio;
+    [SerializeField] GameObject bossTMCamera;
+    [SerializeField] GameObject bossTM;
+
 
 
 
@@ -482,7 +485,7 @@ public class BossPhaseManager : MonoBehaviour
         yield return new WaitForSeconds(0.5f);
 
         // 페이즈 넘어가는 연출 시작
-        Debug.Log("보스 : 으윽");
+        //Debug.Log("보스 : 으윽");
         // 보스 그르릉 소리 추가
         bossHowlAudio.Play();
 
@@ -507,7 +510,7 @@ public class BossPhaseManager : MonoBehaviour
         //}
 
         // 연출 시간
-        yield return new WaitForSeconds(2f);
+        //yield return new WaitForSeconds(2f);
 
         isPaused = false;
         SetPhase(nextPhase);
@@ -517,7 +520,10 @@ public class BossPhaseManager : MonoBehaviour
     {
         Debug.Log("보스전 클리어");
         //SceneManager.LoadScene("button");
-        SceneLoad.LoadSceneWithLoading("button");
+        //SceneLoad.LoadSceneWithLoading("button");
+        bossTMCamera.SetActive(true);
+        bossTM.SetActive(true);
+
     }
 
 }
