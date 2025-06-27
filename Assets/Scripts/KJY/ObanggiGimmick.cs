@@ -164,7 +164,7 @@ public class ObanggiGimmick : MonoBehaviour
             directionalUIs[2].slotImage.color == red &&
             directionalUIs[3].slotImage.color == black)
         {
-            Debug.Log("Á¤´ä! ¹® ¿­¸²");
+            Debug.Log("ì •ë‹µ! ë¬¸ ì—´ë¦¼");
             if (Lock != null)
             {
                 Lock.SetActive(false);

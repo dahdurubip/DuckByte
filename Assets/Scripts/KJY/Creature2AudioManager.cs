@@ -17,10 +17,10 @@ public class Creature2AudioManager : MonoBehaviour
     AudioSource[] sfxPlayers;
     int channelIndex;
 
-    //µé¾î°¥ È¿°úÀ½µé ÀÎ½ºÆåÅÍ ¼ø¼­´ë·Î ÀÌ¸§Á¤¸®
+    //ë“¤ì–´ê°ˆ íš¨ê³¼ìŒë“¤ ì¸ìŠ¤í™í„° ìˆœì„œëŒ€ë¡œ ì´ë¦„ì •ë¦¬
     public enum sfx { PbabyCry, Pwall, PwaterDrop, PhorrorEffect }
 
-    // SFX Áßº¹ Àç»ı ¹æÁö
+    // SFX ì¤‘ë³µ ì¬ìƒ ë°©ì§€
     private Dictionary<sfx, float> sfxLastPlayTime = new Dictionary<sfx, float>();
     public float sfxCooldown = 0.1f;
 
@@ -47,7 +47,7 @@ public class Creature2AudioManager : MonoBehaviour
         }
 
 
-        // SFX Ã¤³Î ÃÊ±âÈ­
+        // SFX ì±„ë„ ì´ˆê¸°í™”
         GameObject sfxObject = new GameObject("sfxPlayer");
         sfxObject.transform.parent = transform;
         sfxPlayers = new AudioSource[channels];
@@ -59,7 +59,7 @@ public class Creature2AudioManager : MonoBehaviour
             sfxPlayers[index].loop = false;
         }
 
-        // SFX ÄğÅ¸ÀÓ ÃÊ±âÈ­
+        // SFX ì¿¨íƒ€ì„ ì´ˆê¸°í™”
         foreach (sfx s in System.Enum.GetValues(typeof(sfx)))
         {
             sfxLastPlayTime[s] = -999f;
@@ -67,12 +67,12 @@ public class Creature2AudioManager : MonoBehaviour
     }
 
 
-    //»ç¿ëÇÏ´Â ¹æ¹ı
-    //¿Àµğ¿À ³ª¿Í¾ßÇÏ´Â °÷¿¡°¡¼­
-    //AudioManager.instance.PlaySfx(AudioManager.Sfx.ÀÌ¶§ ¹Ì¸® ÁöÁ¤ÇØ µĞ enum È¿°úÀ½ ÀÌ¸§À» ÀÔ·Â);
+    //ì‚¬ìš©í•˜ëŠ” ë°©ë²•
+    //ì˜¤ë””ì˜¤ ë‚˜ì™€ì•¼í•˜ëŠ” ê³³ì—ê°€ì„œ
+    //AudioManager.instance.PlaySfx(AudioManager.Sfx.ì´ë•Œ ë¯¸ë¦¬ ì§€ì •í•´ ë‘” enum íš¨ê³¼ìŒ ì´ë¦„ì„ ì…ë ¥);
     public void PlaySfx(sfx sfx)
     {
-        // ÄğÅ¸ÀÓ °Ë»ç
+        // ì¿¨íƒ€ì„ ê²€ì‚¬
         if (Time.time - sfxLastPlayTime[sfx] < sfxCooldown)
             return;
 
@@ -80,7 +80,7 @@ public class Creature2AudioManager : MonoBehaviour
 
         for (int index = 0; index < sfxPlayers.Length; ++index)
         {
-            int loopIndex = (index + channelIndex) % sfxPlayers.Length;/*¸Ç ¸¶Áö¸·¿¡ ½ÇÇàÀ»Çß´ø ÇÃ·¹ÀÌ¾îÀÇ ÀÎµ¦½º*/
+            int loopIndex = (index + channelIndex) % sfxPlayers.Length;/*ë§¨ ë§ˆì§€ë§‰ì— ì‹¤í–‰ì„í–ˆë˜ í”Œë ˆì´ì–´ì˜ ì¸ë±ìŠ¤*/
             if (sfxPlayers[loopIndex].isPlaying)
             {
                 channelIndex = loopIndex;
@@ -88,8 +88,8 @@ public class Creature2AudioManager : MonoBehaviour
                 sfxPlayers[loopIndex].Play();
                 played = true;
                 break;
-                //°°Àº ÀÌ¸§ÀÇ È¿°úÀ½ÀÌ ¿©·¯°³ Á¸Àç ÇÒ ½Ã ·£´ıÀ¸·Î ¼Ò¸®¸¦ Àç»ı  ½ÃÅ°°í ½ÍÀ»¶§
-                //¸¸¾à ¿©·¯°³ ÀÖ´Â°Ô ¿©·¯°³ ÀÖÀ»¶§ ½ºÀ§Ä¡ ¹®À¸·Î ³ª´²ÁÖ¸é µÈ´Ù.
+                //ê°™ì€ ì´ë¦„ì˜ íš¨ê³¼ìŒì´ ì—¬ëŸ¬ê°œ ì¡´ì¬ í•  ì‹œ ëœë¤ìœ¼ë¡œ ì†Œë¦¬ë¥¼ ì¬ìƒ  ì‹œí‚¤ê³  ì‹¶ì„ë•Œ
+                //ë§Œì•½ ì—¬ëŸ¬ê°œ ìˆëŠ”ê²Œ ì—¬ëŸ¬ê°œ ìˆì„ë•Œ ìŠ¤ìœ„ì¹˜ ë¬¸ìœ¼ë¡œ ë‚˜ëˆ ì£¼ë©´ ëœë‹¤.
                 //int ranIndex = 0;
                 //if(sfx == sfx.Hit || sfx == sfx.Melee)
                 //{
@@ -98,7 +98,7 @@ public class Creature2AudioManager : MonoBehaviour
             }
         }
 
-        // ¸ğµç Ã¤³ÎÀÌ »ç¿ë ÁßÀÏ °æ¿ì, °¡Àå ¿À·¡µÈ Ã¤³Î °­Á¦ Àç»ç¿ë (È¿°úÀ½ ´©¶ô ¹æÁö)
+        // ëª¨ë“  ì±„ë„ì´ ì‚¬ìš© ì¤‘ì¼ ê²½ìš°, ê°€ì¥ ì˜¤ë˜ëœ ì±„ë„ ê°•ì œ ì¬ì‚¬ìš© (íš¨ê³¼ìŒ ëˆ„ë½ ë°©ì§€)
         if (!played)
         {
             channelIndex = (channelIndex + 1) % sfxPlayers.Length;
@@ -108,28 +108,28 @@ public class Creature2AudioManager : MonoBehaviour
 
         sfxLastPlayTime[sfx] = Time.time;
 
-        // channel ÇÏ³ª¸¸ ¾µ¶§
+        // channel í•˜ë‚˜ë§Œ ì“¸ë•Œ
         //sfxPlayers[0].clip = sfxClip[(int)sfx];
         //sfxPlayers[0].Play();
     }
 
     public void Play3DSfx(sfx sfx, Vector3 position, float volume, float minDistance, float maxDistance)
     {
-        // ÀÓ½Ã ¿Àµğ¿À ¼Ò½º ¿ÀºêÁ§Æ® »ı¼º
+        // ì„ì‹œ ì˜¤ë””ì˜¤ ì†ŒìŠ¤ ì˜¤ë¸Œì íŠ¸ ìƒì„±
         GameObject tempSfxObject = new GameObject("Temp3DSfx");
         tempSfxObject.transform.position = position;
         AudioSource tempAudio = tempSfxObject.AddComponent<AudioSource>();
 
         tempAudio.clip = sfxClip[(int)sfx];
         tempAudio.volume = volume;
-        tempAudio.spatialBlend = 1f;             // 3D È¿°úÀ½À¸·Î ¼³Á¤ (0:2D, 1:3D)
-        tempAudio.minDistance = minDistance;      // ÃÖ¼Ò °Å¸®
-        tempAudio.maxDistance = maxDistance;      // ÃÖ´ë °Å¸®
-        tempAudio.rolloffMode = AudioRolloffMode.Logarithmic; // °¨¼è ¸ğµå
+        tempAudio.spatialBlend = 1f;             // 3D íš¨ê³¼ìŒìœ¼ë¡œ ì„¤ì • (0:2D, 1:3D)
+        tempAudio.minDistance = minDistance;      // ìµœì†Œ ê±°ë¦¬
+        tempAudio.maxDistance = maxDistance;      // ìµœëŒ€ ê±°ë¦¬
+        tempAudio.rolloffMode = AudioRolloffMode.Logarithmic; // ê°ì‡  ëª¨ë“œ
 
         tempAudio.Play();
 
-        // AudioClip ±æÀÌ + ¾à°£ÀÇ ¹öÆÛ ÈÄ¿¡ ÀÓ½Ã ¿ÀºêÁ§Æ® Á¦°Å
+        // AudioClip ê¸¸ì´ + ì•½ê°„ì˜ ë²„í¼ í›„ì— ì„ì‹œ ì˜¤ë¸Œì íŠ¸ ì œê±°
         Destroy(tempSfxObject, tempAudio.clip.length + 0.5f);
     }
 }

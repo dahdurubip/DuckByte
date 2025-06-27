@@ -20,7 +20,7 @@ RenderSettings:
   m_FogDensity: 0.01
   m_LinearFogStart: 0
   m_LinearFogEnd: 300
-  m_AmbientSkyColor: {r: 0.16226411, g: 0.15032391, b: 0.15032391, a: 1}
+  m_AmbientSkyColor: {r: 0.122641504, g: 0.122063, b: 0.122063, a: 1}
   m_AmbientEquatorColor: {r: 0.114, g: 0.125, b: 0.133, a: 1}
   m_AmbientGroundColor: {r: 0.047, g: 0.043, b: 0.035, a: 1}
   m_AmbientIntensity: 0
@@ -131,6 +131,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: P_Brick_Fence_03b (24)
       objectReference: {fileID: 0}
+    - target: {fileID: 1538815344984830, guid: b87d6ca0773b9c045934dc8695f8b668, type: 3}
+      propertyPath: m_Layer
+      value: 10
+      objectReference: {fileID: 0}
     - target: {fileID: 4900118775726102, guid: b87d6ca0773b9c045934dc8695f8b668, type: 3}
       propertyPath: m_LocalScale.x
       value: 2
@@ -212,6 +216,10 @@ PrefabInstance:
     - target: {fileID: 1156717333973732, guid: 1cdf58ba2fcee8d488a8bba0d44831f2, type: 3}
       propertyPath: m_Name
       value: P_Brick_Fence_03 (6)
+      objectReference: {fileID: 0}
+    - target: {fileID: 1156717333973732, guid: 1cdf58ba2fcee8d488a8bba0d44831f2, type: 3}
+      propertyPath: m_Layer
+      value: 10
       objectReference: {fileID: 0}
     - target: {fileID: 4846889021609408, guid: 1cdf58ba2fcee8d488a8bba0d44831f2, type: 3}
       propertyPath: m_LocalPosition.x
@@ -407,6 +415,10 @@ PrefabInstance:
     - target: {fileID: 1538815344984830, guid: b87d6ca0773b9c045934dc8695f8b668, type: 3}
       propertyPath: m_Name
       value: P_Brick_Fence_03b (17)
+      objectReference: {fileID: 0}
+    - target: {fileID: 1538815344984830, guid: b87d6ca0773b9c045934dc8695f8b668, type: 3}
+      propertyPath: m_Layer
+      value: 10
       objectReference: {fileID: 0}
     - target: {fileID: 4900118775726102, guid: b87d6ca0773b9c045934dc8695f8b668, type: 3}
       propertyPath: m_LocalScale.x
@@ -928,7 +940,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 1030972921, guid: abc00000000010555817081341017141, type: 3}
       propertyPath: m_LocalPosition.y
-      value: 1.3736901
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 1030972921, guid: abc00000000010555817081341017141, type: 3}
       propertyPath: m_LocalPosition.z
@@ -1279,6 +1291,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: P_Brick_Fence_03 (2)
       objectReference: {fileID: 0}
+    - target: {fileID: 1156717333973732, guid: 1cdf58ba2fcee8d488a8bba0d44831f2, type: 3}
+      propertyPath: m_Layer
+      value: 10
+      objectReference: {fileID: 0}
     - target: {fileID: 4846889021609408, guid: 1cdf58ba2fcee8d488a8bba0d44831f2, type: 3}
       propertyPath: m_LocalScale.x
       value: 0.025
@@ -1376,6 +1392,10 @@ PrefabInstance:
     - target: {fileID: 1538815344984830, guid: b87d6ca0773b9c045934dc8695f8b668, type: 3}
       propertyPath: m_Name
       value: P_Brick_Fence_03b (15)
+      objectReference: {fileID: 0}
+    - target: {fileID: 1538815344984830, guid: b87d6ca0773b9c045934dc8695f8b668, type: 3}
+      propertyPath: m_Layer
+      value: 10
       objectReference: {fileID: 0}
     - target: {fileID: 4900118775726102, guid: b87d6ca0773b9c045934dc8695f8b668, type: 3}
       propertyPath: m_LocalScale.x
@@ -1710,7 +1730,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   noteText: "\uC5EC\uAE30 \uB204\uAD6C \uC5C6\uC5B4\uC694??? \uC788\uC73C\uBA74 \uB0A0
-    \uC880 \uC0B4\uB824\uC918...\r\n\uC5EC\uAE30\uB294 \uACF3\uACF3\uC5D0 \uB208\uC774
+    \uC880 \n\uC0B4\uB824\uC918...\r\n\uC5EC\uAE30\uB294 \uACF3\uACF3\uC5D0 \uB208\uC774
     \uAC00\uB4DD \uBC30\uCE58 \uB418\uC5B4 \uC788\uACE0 \uAC78\uB9AC\uBA74 \uAD34\uBB3C\uC774
     \uB098\uD0C0\uB098\uACE0 \uC788\uC5B4.. \uBE5B\uC5D0 \uC608\uBBFC\uD574\uC11C
     \uC5B4\uB460\uC18D\uC73C\uB85C \uB2E4\uB140\uC57C \uD574..."
@@ -1970,6 +1990,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: P_Brick_Fence_03b (31)
       objectReference: {fileID: 0}
+    - target: {fileID: 1538815344984830, guid: b87d6ca0773b9c045934dc8695f8b668, type: 3}
+      propertyPath: m_Layer
+      value: 10
+      objectReference: {fileID: 0}
     - target: {fileID: 4900118775726102, guid: b87d6ca0773b9c045934dc8695f8b668, type: 3}
       propertyPath: m_LocalScale.x
       value: 1.8
@@ -2054,6 +2078,10 @@ PrefabInstance:
     - target: {fileID: 1538815344984830, guid: b87d6ca0773b9c045934dc8695f8b668, type: 3}
       propertyPath: m_Name
       value: P_Brick_Fence_03b (3)
+      objectReference: {fileID: 0}
+    - target: {fileID: 1538815344984830, guid: b87d6ca0773b9c045934dc8695f8b668, type: 3}
+      propertyPath: m_Layer
+      value: 10
       objectReference: {fileID: 0}
     - target: {fileID: 4900118775726102, guid: b87d6ca0773b9c045934dc8695f8b668, type: 3}
       propertyPath: m_LocalScale.x
@@ -2169,6 +2197,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: P_Brick_Fence_03b (36)
       objectReference: {fileID: 0}
+    - target: {fileID: 1538815344984830, guid: b87d6ca0773b9c045934dc8695f8b668, type: 3}
+      propertyPath: m_Layer
+      value: 10
+      objectReference: {fileID: 0}
     - target: {fileID: 4900118775726102, guid: b87d6ca0773b9c045934dc8695f8b668, type: 3}
       propertyPath: m_LocalScale.x
       value: 1.8
@@ -2250,6 +2282,10 @@ PrefabInstance:
     - target: {fileID: 1538815344984830, guid: b87d6ca0773b9c045934dc8695f8b668, type: 3}
       propertyPath: m_Name
       value: P_Brick_Fence_03b (15)
+      objectReference: {fileID: 0}
+    - target: {fileID: 1538815344984830, guid: b87d6ca0773b9c045934dc8695f8b668, type: 3}
+      propertyPath: m_Layer
+      value: 10
       objectReference: {fileID: 0}
     - target: {fileID: 4900118775726102, guid: b87d6ca0773b9c045934dc8695f8b668, type: 3}
       propertyPath: m_LocalScale.x
@@ -2419,6 +2455,10 @@ PrefabInstance:
     - target: {fileID: 1538815344984830, guid: b87d6ca0773b9c045934dc8695f8b668, type: 3}
       propertyPath: m_Name
       value: P_Brick_Fence_03b (21)
+      objectReference: {fileID: 0}
+    - target: {fileID: 1538815344984830, guid: b87d6ca0773b9c045934dc8695f8b668, type: 3}
+      propertyPath: m_Layer
+      value: 10
       objectReference: {fileID: 0}
     - target: {fileID: 4900118775726102, guid: b87d6ca0773b9c045934dc8695f8b668, type: 3}
       propertyPath: m_LocalScale.x
@@ -2654,6 +2694,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: P_Brick_Fence_03b (7)
       objectReference: {fileID: 0}
+    - target: {fileID: 1538815344984830, guid: b87d6ca0773b9c045934dc8695f8b668, type: 3}
+      propertyPath: m_Layer
+      value: 10
+      objectReference: {fileID: 0}
     - target: {fileID: 4900118775726102, guid: b87d6ca0773b9c045934dc8695f8b668, type: 3}
       propertyPath: m_LocalScale.x
       value: 0.025
@@ -2850,6 +2894,10 @@ PrefabInstance:
     - target: {fileID: 1538815344984830, guid: b87d6ca0773b9c045934dc8695f8b668, type: 3}
       propertyPath: m_Name
       value: P_Brick_Fence_03b (10)
+      objectReference: {fileID: 0}
+    - target: {fileID: 1538815344984830, guid: b87d6ca0773b9c045934dc8695f8b668, type: 3}
+      propertyPath: m_Layer
+      value: 10
       objectReference: {fileID: 0}
     - target: {fileID: 4900118775726102, guid: b87d6ca0773b9c045934dc8695f8b668, type: 3}
       propertyPath: m_LocalScale.x
@@ -3073,6 +3121,10 @@ PrefabInstance:
     - target: {fileID: 1156717333973732, guid: 1cdf58ba2fcee8d488a8bba0d44831f2, type: 3}
       propertyPath: m_Name
       value: P_Brick_Fence_03 (6)
+      objectReference: {fileID: 0}
+    - target: {fileID: 1156717333973732, guid: 1cdf58ba2fcee8d488a8bba0d44831f2, type: 3}
+      propertyPath: m_Layer
+      value: 10
       objectReference: {fileID: 0}
     - target: {fileID: 4846889021609408, guid: 1cdf58ba2fcee8d488a8bba0d44831f2, type: 3}
       propertyPath: m_LocalScale.x
@@ -3452,7 +3504,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 1030973405, guid: abc00000000016366520824606571212, type: 3}
       propertyPath: m_LocalPosition.y
-      value: 1.3736887
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 1030973405, guid: abc00000000016366520824606571212, type: 3}
       propertyPath: m_LocalPosition.z
@@ -4459,6 +4511,10 @@ PrefabInstance:
     - target: {fileID: 1538815344984830, guid: b87d6ca0773b9c045934dc8695f8b668, type: 3}
       propertyPath: m_Name
       value: P_Brick_Fence_03b (15)
+      objectReference: {fileID: 0}
+    - target: {fileID: 1538815344984830, guid: b87d6ca0773b9c045934dc8695f8b668, type: 3}
+      propertyPath: m_Layer
+      value: 10
       objectReference: {fileID: 0}
     - target: {fileID: 4900118775726102, guid: b87d6ca0773b9c045934dc8695f8b668, type: 3}
       propertyPath: m_LocalScale.x
@@ -9446,6 +9502,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: P_Brick_Fence_03b (8)
       objectReference: {fileID: 0}
+    - target: {fileID: 1538815344984830, guid: b87d6ca0773b9c045934dc8695f8b668, type: 3}
+      propertyPath: m_Layer
+      value: 10
+      objectReference: {fileID: 0}
     - target: {fileID: 4900118775726102, guid: b87d6ca0773b9c045934dc8695f8b668, type: 3}
       propertyPath: m_LocalScale.x
       value: 0.025
@@ -10729,6 +10789,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: P_Brick_Fence_03b (19)
       objectReference: {fileID: 0}
+    - target: {fileID: 1538815344984830, guid: b87d6ca0773b9c045934dc8695f8b668, type: 3}
+      propertyPath: m_Layer
+      value: 10
+      objectReference: {fileID: 0}
     - target: {fileID: 4900118775726102, guid: b87d6ca0773b9c045934dc8695f8b668, type: 3}
       propertyPath: m_LocalScale.x
       value: 2
@@ -10879,6 +10943,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: P_Brick_Fence_03b (17)
       objectReference: {fileID: 0}
+    - target: {fileID: 1538815344984830, guid: b87d6ca0773b9c045934dc8695f8b668, type: 3}
+      propertyPath: m_Layer
+      value: 10
+      objectReference: {fileID: 0}
     - target: {fileID: 4900118775726102, guid: b87d6ca0773b9c045934dc8695f8b668, type: 3}
       propertyPath: m_LocalScale.x
       value: 2
@@ -10960,6 +11028,10 @@ PrefabInstance:
     - target: {fileID: 1538815344984830, guid: b87d6ca0773b9c045934dc8695f8b668, type: 3}
       propertyPath: m_Name
       value: P_Brick_Fence_03b (25)
+      objectReference: {fileID: 0}
+    - target: {fileID: 1538815344984830, guid: b87d6ca0773b9c045934dc8695f8b668, type: 3}
+      propertyPath: m_Layer
+      value: 10
       objectReference: {fileID: 0}
     - target: {fileID: 4900118775726102, guid: b87d6ca0773b9c045934dc8695f8b668, type: 3}
       propertyPath: m_LocalScale.x
@@ -11124,6 +11196,10 @@ PrefabInstance:
     - target: {fileID: 1538815344984830, guid: b87d6ca0773b9c045934dc8695f8b668, type: 3}
       propertyPath: m_Name
       value: P_Brick_Fence_03b (11)
+      objectReference: {fileID: 0}
+    - target: {fileID: 1538815344984830, guid: b87d6ca0773b9c045934dc8695f8b668, type: 3}
+      propertyPath: m_Layer
+      value: 10
       objectReference: {fileID: 0}
     - target: {fileID: 4900118775726102, guid: b87d6ca0773b9c045934dc8695f8b668, type: 3}
       propertyPath: m_LocalPosition.x
@@ -12106,6 +12182,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: wall
       objectReference: {fileID: 0}
+    - target: {fileID: 1538815344984830, guid: b87d6ca0773b9c045934dc8695f8b668, type: 3}
+      propertyPath: m_Layer
+      value: 10
+      objectReference: {fileID: 0}
     - target: {fileID: 4900118775726102, guid: b87d6ca0773b9c045934dc8695f8b668, type: 3}
       propertyPath: m_LocalScale.x
       value: 1.8000009
@@ -12720,6 +12800,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: P_Brick_Fence_03b (27)
       objectReference: {fileID: 0}
+    - target: {fileID: 1538815344984830, guid: b87d6ca0773b9c045934dc8695f8b668, type: 3}
+      propertyPath: m_Layer
+      value: 10
+      objectReference: {fileID: 0}
     - target: {fileID: 4900118775726102, guid: b87d6ca0773b9c045934dc8695f8b668, type: 3}
       propertyPath: m_LocalScale.x
       value: 2
@@ -13118,6 +13202,10 @@ PrefabInstance:
     - target: {fileID: 1538815344984830, guid: b87d6ca0773b9c045934dc8695f8b668, type: 3}
       propertyPath: m_Name
       value: P_Brick_Fence_03b (9)
+      objectReference: {fileID: 0}
+    - target: {fileID: 1538815344984830, guid: b87d6ca0773b9c045934dc8695f8b668, type: 3}
+      propertyPath: m_Layer
+      value: 10
       objectReference: {fileID: 0}
     - target: {fileID: 4900118775726102, guid: b87d6ca0773b9c045934dc8695f8b668, type: 3}
       propertyPath: m_LocalScale.x
@@ -13593,6 +13681,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: P_Brick_Fence_03b (20)
       objectReference: {fileID: 0}
+    - target: {fileID: 1538815344984830, guid: b87d6ca0773b9c045934dc8695f8b668, type: 3}
+      propertyPath: m_Layer
+      value: 10
+      objectReference: {fileID: 0}
     - target: {fileID: 4900118775726102, guid: b87d6ca0773b9c045934dc8695f8b668, type: 3}
       propertyPath: m_LocalScale.x
       value: 2
@@ -13911,6 +14003,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: P_Brick_Fence_03b (22)
       objectReference: {fileID: 0}
+    - target: {fileID: 1538815344984830, guid: b87d6ca0773b9c045934dc8695f8b668, type: 3}
+      propertyPath: m_Layer
+      value: 10
+      objectReference: {fileID: 0}
     - target: {fileID: 4900118775726102, guid: b87d6ca0773b9c045934dc8695f8b668, type: 3}
       propertyPath: m_LocalScale.x
       value: 2
@@ -13992,6 +14088,10 @@ PrefabInstance:
     - target: {fileID: 1538815344984830, guid: b87d6ca0773b9c045934dc8695f8b668, type: 3}
       propertyPath: m_Name
       value: P_Brick_Fence_03b (33)
+      objectReference: {fileID: 0}
+    - target: {fileID: 1538815344984830, guid: b87d6ca0773b9c045934dc8695f8b668, type: 3}
+      propertyPath: m_Layer
+      value: 10
       objectReference: {fileID: 0}
     - target: {fileID: 4900118775726102, guid: b87d6ca0773b9c045934dc8695f8b668, type: 3}
       propertyPath: m_LocalScale.x
@@ -14194,6 +14294,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: P_Brick_Fence_03b (29)
       objectReference: {fileID: 0}
+    - target: {fileID: 1538815344984830, guid: b87d6ca0773b9c045934dc8695f8b668, type: 3}
+      propertyPath: m_Layer
+      value: 10
+      objectReference: {fileID: 0}
     - target: {fileID: 4900118775726102, guid: b87d6ca0773b9c045934dc8695f8b668, type: 3}
       propertyPath: m_LocalScale.x
       value: 2
@@ -14307,6 +14411,10 @@ PrefabInstance:
     - target: {fileID: 1538815344984830, guid: b87d6ca0773b9c045934dc8695f8b668, type: 3}
       propertyPath: m_Name
       value: P_Brick_Fence_03b (14)
+      objectReference: {fileID: 0}
+    - target: {fileID: 1538815344984830, guid: b87d6ca0773b9c045934dc8695f8b668, type: 3}
+      propertyPath: m_Layer
+      value: 10
       objectReference: {fileID: 0}
     - target: {fileID: 4900118775726102, guid: b87d6ca0773b9c045934dc8695f8b668, type: 3}
       propertyPath: m_LocalScale.x
@@ -14596,7 +14704,7 @@ MonoBehaviour:
   m_OverrideVoxelSize: 0
   m_VoxelSize: 0.06666667
   m_MinRegionArea: 2
-  m_NavMeshData: {fileID: 23800000, guid: 45ad8abf6bea78d429e7c73a34c18b5b, type: 2}
+  m_NavMeshData: {fileID: 23800000, guid: 2139e08db469d44449e5f606e5052a26, type: 2}
   m_BuildHeightMesh: 0
 --- !u!1 &883751654
 GameObject:
@@ -14931,6 +15039,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: P_Brick_Fence_03b (13)
       objectReference: {fileID: 0}
+    - target: {fileID: 1538815344984830, guid: b87d6ca0773b9c045934dc8695f8b668, type: 3}
+      propertyPath: m_Layer
+      value: 10
+      objectReference: {fileID: 0}
     - target: {fileID: 4900118775726102, guid: b87d6ca0773b9c045934dc8695f8b668, type: 3}
       propertyPath: m_LocalScale.x
       value: 2
@@ -15065,6 +15177,10 @@ PrefabInstance:
     - target: {fileID: 1538815344984830, guid: b87d6ca0773b9c045934dc8695f8b668, type: 3}
       propertyPath: m_Name
       value: P_Brick_Fence_03b (27)
+      objectReference: {fileID: 0}
+    - target: {fileID: 1538815344984830, guid: b87d6ca0773b9c045934dc8695f8b668, type: 3}
+      propertyPath: m_Layer
+      value: 10
       objectReference: {fileID: 0}
     - target: {fileID: 1699559904580314, guid: b87d6ca0773b9c045934dc8695f8b668, type: 3}
       propertyPath: m_Layer
@@ -15391,6 +15507,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: P_Brick_Fence_03 (7)
       objectReference: {fileID: 0}
+    - target: {fileID: 1156717333973732, guid: 1cdf58ba2fcee8d488a8bba0d44831f2, type: 3}
+      propertyPath: m_Layer
+      value: 10
+      objectReference: {fileID: 0}
     - target: {fileID: 4846889021609408, guid: 1cdf58ba2fcee8d488a8bba0d44831f2, type: 3}
       propertyPath: m_LocalScale.x
       value: 2
@@ -15640,6 +15760,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: P_Brick_Fence_03b (1)
       objectReference: {fileID: 0}
+    - target: {fileID: 1538815344984830, guid: b87d6ca0773b9c045934dc8695f8b668, type: 3}
+      propertyPath: m_Layer
+      value: 10
+      objectReference: {fileID: 0}
     - target: {fileID: 4900118775726102, guid: b87d6ca0773b9c045934dc8695f8b668, type: 3}
       propertyPath: m_LocalScale.x
       value: 0.025
@@ -15721,6 +15845,10 @@ PrefabInstance:
     - target: {fileID: 1538815344984830, guid: b87d6ca0773b9c045934dc8695f8b668, type: 3}
       propertyPath: m_Name
       value: P_Brick_Fence_03b (35)
+      objectReference: {fileID: 0}
+    - target: {fileID: 1538815344984830, guid: b87d6ca0773b9c045934dc8695f8b668, type: 3}
+      propertyPath: m_Layer
+      value: 10
       objectReference: {fileID: 0}
     - target: {fileID: 4900118775726102, guid: b87d6ca0773b9c045934dc8695f8b668, type: 3}
       propertyPath: m_LocalScale.x
@@ -16046,6 +16174,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: P_Brick_Fence_03b (10)
       objectReference: {fileID: 0}
+    - target: {fileID: 1538815344984830, guid: b87d6ca0773b9c045934dc8695f8b668, type: 3}
+      propertyPath: m_Layer
+      value: 10
+      objectReference: {fileID: 0}
     - target: {fileID: 4900118775726102, guid: b87d6ca0773b9c045934dc8695f8b668, type: 3}
       propertyPath: m_LocalScale.x
       value: 2
@@ -16159,6 +16291,10 @@ PrefabInstance:
     - target: {fileID: 1538815344984830, guid: b87d6ca0773b9c045934dc8695f8b668, type: 3}
       propertyPath: m_Name
       value: P_Brick_Fence_03b (20)
+      objectReference: {fileID: 0}
+    - target: {fileID: 1538815344984830, guid: b87d6ca0773b9c045934dc8695f8b668, type: 3}
+      propertyPath: m_Layer
+      value: 10
       objectReference: {fileID: 0}
     - target: {fileID: 4900118775726102, guid: b87d6ca0773b9c045934dc8695f8b668, type: 3}
       propertyPath: m_LocalScale.x
@@ -16448,6 +16584,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: P_Brick_Fence_03b (23)
       objectReference: {fileID: 0}
+    - target: {fileID: 1538815344984830, guid: b87d6ca0773b9c045934dc8695f8b668, type: 3}
+      propertyPath: m_Layer
+      value: 10
+      objectReference: {fileID: 0}
     - target: {fileID: 4900118775726102, guid: b87d6ca0773b9c045934dc8695f8b668, type: 3}
       propertyPath: m_LocalScale.x
       value: 2
@@ -16529,6 +16669,10 @@ PrefabInstance:
     - target: {fileID: 1538815344984830, guid: b87d6ca0773b9c045934dc8695f8b668, type: 3}
       propertyPath: m_Name
       value: P_Brick_Fence_03b (18)
+      objectReference: {fileID: 0}
+    - target: {fileID: 1538815344984830, guid: b87d6ca0773b9c045934dc8695f8b668, type: 3}
+      propertyPath: m_Layer
+      value: 10
       objectReference: {fileID: 0}
     - target: {fileID: 4900118775726102, guid: b87d6ca0773b9c045934dc8695f8b668, type: 3}
       propertyPath: m_LocalScale.x
@@ -17022,6 +17166,10 @@ PrefabInstance:
     - target: {fileID: 1538815344984830, guid: b87d6ca0773b9c045934dc8695f8b668, type: 3}
       propertyPath: m_Name
       value: P_Brick_Fence_03b (14)
+      objectReference: {fileID: 0}
+    - target: {fileID: 1538815344984830, guid: b87d6ca0773b9c045934dc8695f8b668, type: 3}
+      propertyPath: m_Layer
+      value: 10
       objectReference: {fileID: 0}
     - target: {fileID: 4900118775726102, guid: b87d6ca0773b9c045934dc8695f8b668, type: 3}
       propertyPath: m_LocalScale.x
@@ -18039,6 +18187,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: P_Brick_Fence_03b (26)
       objectReference: {fileID: 0}
+    - target: {fileID: 1538815344984830, guid: b87d6ca0773b9c045934dc8695f8b668, type: 3}
+      propertyPath: m_Layer
+      value: 10
+      objectReference: {fileID: 0}
     - target: {fileID: 4900118775726102, guid: b87d6ca0773b9c045934dc8695f8b668, type: 3}
       propertyPath: m_LocalScale.x
       value: 2
@@ -18202,6 +18354,10 @@ PrefabInstance:
     - target: {fileID: 1538815344984830, guid: b87d6ca0773b9c045934dc8695f8b668, type: 3}
       propertyPath: m_Name
       value: P_Brick_Fence_03b (16)
+      objectReference: {fileID: 0}
+    - target: {fileID: 1538815344984830, guid: b87d6ca0773b9c045934dc8695f8b668, type: 3}
+      propertyPath: m_Layer
+      value: 10
       objectReference: {fileID: 0}
     - target: {fileID: 4900118775726102, guid: b87d6ca0773b9c045934dc8695f8b668, type: 3}
       propertyPath: m_LocalScale.x
@@ -18464,7 +18620,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 1030973405, guid: abc00000000016366520824606571212, type: 3}
       propertyPath: m_LocalPosition.y
-      value: 1.2237062
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 1030973405, guid: abc00000000016366520824606571212, type: 3}
       propertyPath: m_LocalPosition.z
@@ -18500,6 +18656,10 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 1030973405, guid: abc00000000016366520824606571212, type: 3}
       propertyPath: m_ConstrainProportionsScale
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 1030973407, guid: abc00000000016366520824606571212, type: 3}
+      propertyPath: m_Enabled
       value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
@@ -18553,7 +18713,7 @@ NavMeshObstacle:
   m_Enabled: 1
   serializedVersion: 3
   m_Shape: 1
-  m_Extents: {x: 0.5, y: 0.2, z: 1}
+  m_Extents: {x: 0.5, y: 0.05, z: 1}
   m_MoveThreshold: 0.1
   m_Carve: 0
   m_CarveOnlyStationary: 1
@@ -19163,6 +19323,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: wall5-2
       objectReference: {fileID: 0}
+    - target: {fileID: 1538815344984830, guid: b87d6ca0773b9c045934dc8695f8b668, type: 3}
+      propertyPath: m_Layer
+      value: 10
+      objectReference: {fileID: 0}
     - target: {fileID: 1699559904580314, guid: b87d6ca0773b9c045934dc8695f8b668, type: 3}
       propertyPath: m_TagString
       value: Wall
@@ -19274,6 +19438,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: P_Brick_Fence_03b (18)
       objectReference: {fileID: 0}
+    - target: {fileID: 1538815344984830, guid: b87d6ca0773b9c045934dc8695f8b668, type: 3}
+      propertyPath: m_Layer
+      value: 10
+      objectReference: {fileID: 0}
     - target: {fileID: 1699559904580314, guid: b87d6ca0773b9c045934dc8695f8b668, type: 3}
       propertyPath: m_Layer
       value: 0
@@ -19359,6 +19527,10 @@ PrefabInstance:
     - target: {fileID: 1538815344984830, guid: b87d6ca0773b9c045934dc8695f8b668, type: 3}
       propertyPath: m_Name
       value: P_Brick_Fence_03b (10)
+      objectReference: {fileID: 0}
+    - target: {fileID: 1538815344984830, guid: b87d6ca0773b9c045934dc8695f8b668, type: 3}
+      propertyPath: m_Layer
+      value: 10
       objectReference: {fileID: 0}
     - target: {fileID: 4900118775726102, guid: b87d6ca0773b9c045934dc8695f8b668, type: 3}
       propertyPath: m_LocalScale.x
@@ -19606,6 +19778,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: P_Brick_Fence_03b (14)
       objectReference: {fileID: 0}
+    - target: {fileID: 1538815344984830, guid: b87d6ca0773b9c045934dc8695f8b668, type: 3}
+      propertyPath: m_Layer
+      value: 10
+      objectReference: {fileID: 0}
     - target: {fileID: 4900118775726102, guid: b87d6ca0773b9c045934dc8695f8b668, type: 3}
       propertyPath: m_LocalScale.x
       value: 2
@@ -19724,6 +19900,10 @@ PrefabInstance:
     - target: {fileID: 1156717333973732, guid: 1cdf58ba2fcee8d488a8bba0d44831f2, type: 3}
       propertyPath: m_Name
       value: P_Brick_Fence_03 (1)
+      objectReference: {fileID: 0}
+    - target: {fileID: 1156717333973732, guid: 1cdf58ba2fcee8d488a8bba0d44831f2, type: 3}
+      propertyPath: m_Layer
+      value: 10
       objectReference: {fileID: 0}
     - target: {fileID: 4846889021609408, guid: 1cdf58ba2fcee8d488a8bba0d44831f2, type: 3}
       propertyPath: m_LocalScale.x
@@ -19844,6 +20024,10 @@ PrefabInstance:
     - target: {fileID: 1538815344984830, guid: b87d6ca0773b9c045934dc8695f8b668, type: 3}
       propertyPath: m_Name
       value: P_Brick_Fence_03b (4)
+      objectReference: {fileID: 0}
+    - target: {fileID: 1538815344984830, guid: b87d6ca0773b9c045934dc8695f8b668, type: 3}
+      propertyPath: m_Layer
+      value: 10
       objectReference: {fileID: 0}
     - target: {fileID: 4900118775726102, guid: b87d6ca0773b9c045934dc8695f8b668, type: 3}
       propertyPath: m_LocalScale.x
@@ -20207,6 +20391,10 @@ PrefabInstance:
     - target: {fileID: 1538815344984830, guid: b87d6ca0773b9c045934dc8695f8b668, type: 3}
       propertyPath: m_Name
       value: P_Brick_Fence_03b (25)
+      objectReference: {fileID: 0}
+    - target: {fileID: 1538815344984830, guid: b87d6ca0773b9c045934dc8695f8b668, type: 3}
+      propertyPath: m_Layer
+      value: 10
       objectReference: {fileID: 0}
     - target: {fileID: 4900118775726102, guid: b87d6ca0773b9c045934dc8695f8b668, type: 3}
       propertyPath: m_LocalScale.x
@@ -20838,6 +21026,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: P_Brick_Fence_03b (21)
       objectReference: {fileID: 0}
+    - target: {fileID: 1538815344984830, guid: b87d6ca0773b9c045934dc8695f8b668, type: 3}
+      propertyPath: m_Layer
+      value: 10
+      objectReference: {fileID: 0}
     - target: {fileID: 1699559904580314, guid: b87d6ca0773b9c045934dc8695f8b668, type: 3}
       propertyPath: m_Layer
       value: 0
@@ -20923,6 +21115,10 @@ PrefabInstance:
     - target: {fileID: 1538815344984830, guid: b87d6ca0773b9c045934dc8695f8b668, type: 3}
       propertyPath: m_Name
       value: P_Brick_Fence_03b (34)
+      objectReference: {fileID: 0}
+    - target: {fileID: 1538815344984830, guid: b87d6ca0773b9c045934dc8695f8b668, type: 3}
+      propertyPath: m_Layer
+      value: 10
       objectReference: {fileID: 0}
     - target: {fileID: 4900118775726102, guid: b87d6ca0773b9c045934dc8695f8b668, type: 3}
       propertyPath: m_LocalScale.x
@@ -21204,6 +21400,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: P_Brick_Fence_03 (4)
       objectReference: {fileID: 0}
+    - target: {fileID: 1156717333973732, guid: 1cdf58ba2fcee8d488a8bba0d44831f2, type: 3}
+      propertyPath: m_Layer
+      value: 10
+      objectReference: {fileID: 0}
     - target: {fileID: 4846889021609408, guid: 1cdf58ba2fcee8d488a8bba0d44831f2, type: 3}
       propertyPath: m_LocalScale.x
       value: 2
@@ -21365,6 +21565,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: P_Brick_Fence_03b (22)
       objectReference: {fileID: 0}
+    - target: {fileID: 1538815344984830, guid: b87d6ca0773b9c045934dc8695f8b668, type: 3}
+      propertyPath: m_Layer
+      value: 10
+      objectReference: {fileID: 0}
     - target: {fileID: 4900118775726102, guid: b87d6ca0773b9c045934dc8695f8b668, type: 3}
       propertyPath: m_LocalScale.x
       value: 2
@@ -21446,6 +21650,10 @@ PrefabInstance:
     - target: {fileID: 1538815344984830, guid: b87d6ca0773b9c045934dc8695f8b668, type: 3}
       propertyPath: m_Name
       value: P_Brick_Fence_03b (26)
+      objectReference: {fileID: 0}
+    - target: {fileID: 1538815344984830, guid: b87d6ca0773b9c045934dc8695f8b668, type: 3}
+      propertyPath: m_Layer
+      value: 10
       objectReference: {fileID: 0}
     - target: {fileID: 1699559904580314, guid: b87d6ca0773b9c045934dc8695f8b668, type: 3}
       propertyPath: m_Layer
@@ -21533,6 +21741,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: P_Brick_Fence_03 (4)
       objectReference: {fileID: 0}
+    - target: {fileID: 1156717333973732, guid: 1cdf58ba2fcee8d488a8bba0d44831f2, type: 3}
+      propertyPath: m_Layer
+      value: 10
+      objectReference: {fileID: 0}
     - target: {fileID: 4846889021609408, guid: 1cdf58ba2fcee8d488a8bba0d44831f2, type: 3}
       propertyPath: m_LocalScale.x
       value: 2
@@ -21611,6 +21823,10 @@ PrefabInstance:
     - target: {fileID: 1538815344984830, guid: b87d6ca0773b9c045934dc8695f8b668, type: 3}
       propertyPath: m_Name
       value: wall5-1
+      objectReference: {fileID: 0}
+    - target: {fileID: 1538815344984830, guid: b87d6ca0773b9c045934dc8695f8b668, type: 3}
+      propertyPath: m_Layer
+      value: 10
       objectReference: {fileID: 0}
     - target: {fileID: 1699559904580314, guid: b87d6ca0773b9c045934dc8695f8b668, type: 3}
       propertyPath: m_Layer
@@ -22065,6 +22281,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: P_Brick_Fence_03b (25)
       objectReference: {fileID: 0}
+    - target: {fileID: 1538815344984830, guid: b87d6ca0773b9c045934dc8695f8b668, type: 3}
+      propertyPath: m_Layer
+      value: 10
+      objectReference: {fileID: 0}
     - target: {fileID: 4900118775726102, guid: b87d6ca0773b9c045934dc8695f8b668, type: 3}
       propertyPath: m_LocalScale.x
       value: 2
@@ -22147,6 +22367,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: P_Brick_Fence_03b (19)
       objectReference: {fileID: 0}
+    - target: {fileID: 1538815344984830, guid: b87d6ca0773b9c045934dc8695f8b668, type: 3}
+      propertyPath: m_Layer
+      value: 10
+      objectReference: {fileID: 0}
     - target: {fileID: 4900118775726102, guid: b87d6ca0773b9c045934dc8695f8b668, type: 3}
       propertyPath: m_LocalScale.x
       value: 2
@@ -22228,6 +22452,10 @@ PrefabInstance:
     - target: {fileID: 1156717333973732, guid: 1cdf58ba2fcee8d488a8bba0d44831f2, type: 3}
       propertyPath: m_Name
       value: P_Brick_Fence_03
+      objectReference: {fileID: 0}
+    - target: {fileID: 1156717333973732, guid: 1cdf58ba2fcee8d488a8bba0d44831f2, type: 3}
+      propertyPath: m_Layer
+      value: 10
       objectReference: {fileID: 0}
     - target: {fileID: 4846889021609408, guid: 1cdf58ba2fcee8d488a8bba0d44831f2, type: 3}
       propertyPath: m_LocalScale.x
@@ -22802,6 +23030,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: P_Brick_Fence_03b (34)
       objectReference: {fileID: 0}
+    - target: {fileID: 1538815344984830, guid: b87d6ca0773b9c045934dc8695f8b668, type: 3}
+      propertyPath: m_Layer
+      value: 10
+      objectReference: {fileID: 0}
     - target: {fileID: 1699559904580314, guid: b87d6ca0773b9c045934dc8695f8b668, type: 3}
       propertyPath: m_Layer
       value: 0
@@ -22930,6 +23162,10 @@ PrefabInstance:
     - target: {fileID: 1538815344984830, guid: b87d6ca0773b9c045934dc8695f8b668, type: 3}
       propertyPath: m_Name
       value: P_Brick_Fence_03b (17)
+      objectReference: {fileID: 0}
+    - target: {fileID: 1538815344984830, guid: b87d6ca0773b9c045934dc8695f8b668, type: 3}
+      propertyPath: m_Layer
+      value: 10
       objectReference: {fileID: 0}
     - target: {fileID: 4900118775726102, guid: b87d6ca0773b9c045934dc8695f8b668, type: 3}
       propertyPath: m_LocalScale.x
@@ -23381,6 +23617,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: P_Brick_Fence_03b (23)
       objectReference: {fileID: 0}
+    - target: {fileID: 1538815344984830, guid: b87d6ca0773b9c045934dc8695f8b668, type: 3}
+      propertyPath: m_Layer
+      value: 10
+      objectReference: {fileID: 0}
     - target: {fileID: 4900118775726102, guid: b87d6ca0773b9c045934dc8695f8b668, type: 3}
       propertyPath: m_LocalScale.x
       value: 2
@@ -23811,6 +24051,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: P_Brick_Fence_03b (13)
       objectReference: {fileID: 0}
+    - target: {fileID: 1538815344984830, guid: b87d6ca0773b9c045934dc8695f8b668, type: 3}
+      propertyPath: m_Layer
+      value: 10
+      objectReference: {fileID: 0}
     - target: {fileID: 4900118775726102, guid: b87d6ca0773b9c045934dc8695f8b668, type: 3}
       propertyPath: m_LocalScale.x
       value: 2
@@ -23913,6 +24157,10 @@ PrefabInstance:
     - target: {fileID: 1538815344984830, guid: b87d6ca0773b9c045934dc8695f8b668, type: 3}
       propertyPath: m_Name
       value: P_Brick_Fence_03b
+      objectReference: {fileID: 0}
+    - target: {fileID: 1538815344984830, guid: b87d6ca0773b9c045934dc8695f8b668, type: 3}
+      propertyPath: m_Layer
+      value: 10
       objectReference: {fileID: 0}
     - target: {fileID: 4900118775726102, guid: b87d6ca0773b9c045934dc8695f8b668, type: 3}
       propertyPath: m_LocalScale.x
@@ -24945,6 +25193,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: wall3-1&7-2
       objectReference: {fileID: 0}
+    - target: {fileID: 1538815344984830, guid: b87d6ca0773b9c045934dc8695f8b668, type: 3}
+      propertyPath: m_Layer
+      value: 10
+      objectReference: {fileID: 0}
     - target: {fileID: 1699559904580314, guid: b87d6ca0773b9c045934dc8695f8b668, type: 3}
       propertyPath: m_TagString
       value: Wall
@@ -25056,6 +25308,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: P_Brick_Fence_03b (16)
       objectReference: {fileID: 0}
+    - target: {fileID: 1538815344984830, guid: b87d6ca0773b9c045934dc8695f8b668, type: 3}
+      propertyPath: m_Layer
+      value: 10
+      objectReference: {fileID: 0}
     - target: {fileID: 4900118775726102, guid: b87d6ca0773b9c045934dc8695f8b668, type: 3}
       propertyPath: m_LocalScale.x
       value: 2
@@ -25138,6 +25394,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: P_Brick_Fence_03 (4)
       objectReference: {fileID: 0}
+    - target: {fileID: 1156717333973732, guid: 1cdf58ba2fcee8d488a8bba0d44831f2, type: 3}
+      propertyPath: m_Layer
+      value: 10
+      objectReference: {fileID: 0}
     - target: {fileID: 4846889021609408, guid: 1cdf58ba2fcee8d488a8bba0d44831f2, type: 3}
       propertyPath: m_LocalScale.x
       value: 2
@@ -25216,6 +25476,10 @@ PrefabInstance:
     - target: {fileID: 1538815344984830, guid: b87d6ca0773b9c045934dc8695f8b668, type: 3}
       propertyPath: m_Name
       value: P_Brick_Fence_03b (2)
+      objectReference: {fileID: 0}
+    - target: {fileID: 1538815344984830, guid: b87d6ca0773b9c045934dc8695f8b668, type: 3}
+      propertyPath: m_Layer
+      value: 10
       objectReference: {fileID: 0}
     - target: {fileID: 4900118775726102, guid: b87d6ca0773b9c045934dc8695f8b668, type: 3}
       propertyPath: m_LocalScale.x
@@ -25397,6 +25661,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: P_Brick_Fence_03b (16)
       objectReference: {fileID: 0}
+    - target: {fileID: 1538815344984830, guid: b87d6ca0773b9c045934dc8695f8b668, type: 3}
+      propertyPath: m_Layer
+      value: 10
+      objectReference: {fileID: 0}
     - target: {fileID: 4900118775726102, guid: b87d6ca0773b9c045934dc8695f8b668, type: 3}
       propertyPath: m_LocalScale.x
       value: 2
@@ -25478,6 +25746,10 @@ PrefabInstance:
     - target: {fileID: 1538815344984830, guid: b87d6ca0773b9c045934dc8695f8b668, type: 3}
       propertyPath: m_Name
       value: P_Brick_Fence_03b (23)
+      objectReference: {fileID: 0}
+    - target: {fileID: 1538815344984830, guid: b87d6ca0773b9c045934dc8695f8b668, type: 3}
+      propertyPath: m_Layer
+      value: 10
       objectReference: {fileID: 0}
     - target: {fileID: 1699559904580314, guid: b87d6ca0773b9c045934dc8695f8b668, type: 3}
       propertyPath: m_Layer
@@ -25564,6 +25836,10 @@ PrefabInstance:
     - target: {fileID: 1156717333973732, guid: 1cdf58ba2fcee8d488a8bba0d44831f2, type: 3}
       propertyPath: m_Name
       value: P_Brick_Fence_03 (6)
+      objectReference: {fileID: 0}
+    - target: {fileID: 1156717333973732, guid: 1cdf58ba2fcee8d488a8bba0d44831f2, type: 3}
+      propertyPath: m_Layer
+      value: 10
       objectReference: {fileID: 0}
     - target: {fileID: 4846889021609408, guid: 1cdf58ba2fcee8d488a8bba0d44831f2, type: 3}
       propertyPath: m_LocalScale.x
@@ -25735,6 +26011,10 @@ PrefabInstance:
     - target: {fileID: 1538815344984830, guid: b87d6ca0773b9c045934dc8695f8b668, type: 3}
       propertyPath: m_Name
       value: P_Brick_Fence_03b (5)
+      objectReference: {fileID: 0}
+    - target: {fileID: 1538815344984830, guid: b87d6ca0773b9c045934dc8695f8b668, type: 3}
+      propertyPath: m_Layer
+      value: 10
       objectReference: {fileID: 0}
     - target: {fileID: 4900118775726102, guid: b87d6ca0773b9c045934dc8695f8b668, type: 3}
       propertyPath: m_LocalScale.x
@@ -26289,6 +26569,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: P_Brick_Fence_03b (12)
       objectReference: {fileID: 0}
+    - target: {fileID: 1538815344984830, guid: b87d6ca0773b9c045934dc8695f8b668, type: 3}
+      propertyPath: m_Layer
+      value: 10
+      objectReference: {fileID: 0}
     - target: {fileID: 4900118775726102, guid: b87d6ca0773b9c045934dc8695f8b668, type: 3}
       propertyPath: m_LocalScale.x
       value: 2
@@ -26370,6 +26654,10 @@ PrefabInstance:
     - target: {fileID: 1538815344984830, guid: b87d6ca0773b9c045934dc8695f8b668, type: 3}
       propertyPath: m_Name
       value: P_Brick_Fence_03b (20)
+      objectReference: {fileID: 0}
+    - target: {fileID: 1538815344984830, guid: b87d6ca0773b9c045934dc8695f8b668, type: 3}
+      propertyPath: m_Layer
+      value: 10
       objectReference: {fileID: 0}
     - target: {fileID: 4900118775726102, guid: b87d6ca0773b9c045934dc8695f8b668, type: 3}
       propertyPath: m_LocalPosition.x
@@ -26671,6 +26959,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: P_Brick_Fence_03b (26)
       objectReference: {fileID: 0}
+    - target: {fileID: 1538815344984830, guid: b87d6ca0773b9c045934dc8695f8b668, type: 3}
+      propertyPath: m_Layer
+      value: 10
+      objectReference: {fileID: 0}
     - target: {fileID: 4900118775726102, guid: b87d6ca0773b9c045934dc8695f8b668, type: 3}
       propertyPath: m_LocalScale.x
       value: 2
@@ -26752,6 +27044,10 @@ PrefabInstance:
     - target: {fileID: 1538815344984830, guid: b87d6ca0773b9c045934dc8695f8b668, type: 3}
       propertyPath: m_Name
       value: P_Brick_Fence_03b (19)
+      objectReference: {fileID: 0}
+    - target: {fileID: 1538815344984830, guid: b87d6ca0773b9c045934dc8695f8b668, type: 3}
+      propertyPath: m_Layer
+      value: 10
       objectReference: {fileID: 0}
     - target: {fileID: 4900118775726102, guid: b87d6ca0773b9c045934dc8695f8b668, type: 3}
       propertyPath: m_LocalScale.x
@@ -27694,6 +27990,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: P_Brick_Fence_03b (31)
       objectReference: {fileID: 0}
+    - target: {fileID: 1538815344984830, guid: b87d6ca0773b9c045934dc8695f8b668, type: 3}
+      propertyPath: m_Layer
+      value: 10
+      objectReference: {fileID: 0}
     - target: {fileID: 4900118775726102, guid: b87d6ca0773b9c045934dc8695f8b668, type: 3}
       propertyPath: m_LocalScale.x
       value: 2
@@ -28229,6 +28529,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: P_Brick_Fence_03b (27)
       objectReference: {fileID: 0}
+    - target: {fileID: 1538815344984830, guid: b87d6ca0773b9c045934dc8695f8b668, type: 3}
+      propertyPath: m_Layer
+      value: 10
+      objectReference: {fileID: 0}
     - target: {fileID: 4900118775726102, guid: b87d6ca0773b9c045934dc8695f8b668, type: 3}
       propertyPath: m_LocalScale.x
       value: 2
@@ -28374,6 +28678,10 @@ PrefabInstance:
     - target: {fileID: 1156717333973732, guid: 1cdf58ba2fcee8d488a8bba0d44831f2, type: 3}
       propertyPath: m_Name
       value: P_Brick_Fence_03 (7)
+      objectReference: {fileID: 0}
+    - target: {fileID: 1156717333973732, guid: 1cdf58ba2fcee8d488a8bba0d44831f2, type: 3}
+      propertyPath: m_Layer
+      value: 10
       objectReference: {fileID: 0}
     - target: {fileID: 4846889021609408, guid: 1cdf58ba2fcee8d488a8bba0d44831f2, type: 3}
       propertyPath: m_LocalScale.x
@@ -28554,6 +28862,10 @@ PrefabInstance:
     - target: {fileID: 1538815344984830, guid: b87d6ca0773b9c045934dc8695f8b668, type: 3}
       propertyPath: m_Name
       value: P_Brick_Fence_03b (24)
+      objectReference: {fileID: 0}
+    - target: {fileID: 1538815344984830, guid: b87d6ca0773b9c045934dc8695f8b668, type: 3}
+      propertyPath: m_Layer
+      value: 10
       objectReference: {fileID: 0}
     - target: {fileID: 1699559904580314, guid: b87d6ca0773b9c045934dc8695f8b668, type: 3}
       propertyPath: m_Layer
@@ -28751,6 +29063,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: wall2-1&3-2
       objectReference: {fileID: 0}
+    - target: {fileID: 1538815344984830, guid: b87d6ca0773b9c045934dc8695f8b668, type: 3}
+      propertyPath: m_Layer
+      value: 10
+      objectReference: {fileID: 0}
     - target: {fileID: 1699559904580314, guid: b87d6ca0773b9c045934dc8695f8b668, type: 3}
       propertyPath: m_Layer
       value: 10
@@ -28870,6 +29186,10 @@ PrefabInstance:
     - target: {fileID: 1538815344984830, guid: b87d6ca0773b9c045934dc8695f8b668, type: 3}
       propertyPath: m_Name
       value: P_Brick_Fence_03b (36)
+      objectReference: {fileID: 0}
+    - target: {fileID: 1538815344984830, guid: b87d6ca0773b9c045934dc8695f8b668, type: 3}
+      propertyPath: m_Layer
+      value: 10
       objectReference: {fileID: 0}
     - target: {fileID: 4900118775726102, guid: b87d6ca0773b9c045934dc8695f8b668, type: 3}
       propertyPath: m_LocalScale.x
@@ -29069,6 +29389,10 @@ PrefabInstance:
     - target: {fileID: 1156717333973732, guid: 1cdf58ba2fcee8d488a8bba0d44831f2, type: 3}
       propertyPath: m_Name
       value: P_Brick_Fence_03 (7)
+      objectReference: {fileID: 0}
+    - target: {fileID: 1156717333973732, guid: 1cdf58ba2fcee8d488a8bba0d44831f2, type: 3}
+      propertyPath: m_Layer
+      value: 10
       objectReference: {fileID: 0}
     - target: {fileID: 4846889021609408, guid: 1cdf58ba2fcee8d488a8bba0d44831f2, type: 3}
       propertyPath: m_LocalScale.x
@@ -29386,6 +29710,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: P_Brick_Fence_03b (6)
       objectReference: {fileID: 0}
+    - target: {fileID: 1538815344984830, guid: b87d6ca0773b9c045934dc8695f8b668, type: 3}
+      propertyPath: m_Layer
+      value: 10
+      objectReference: {fileID: 0}
     - target: {fileID: 4900118775726102, guid: b87d6ca0773b9c045934dc8695f8b668, type: 3}
       propertyPath: m_LocalScale.x
       value: 0.025
@@ -29528,6 +29856,10 @@ PrefabInstance:
     - target: {fileID: 1538815344984830, guid: b87d6ca0773b9c045934dc8695f8b668, type: 3}
       propertyPath: m_Name
       value: P_Brick_Fence_03b (18)
+      objectReference: {fileID: 0}
+    - target: {fileID: 1538815344984830, guid: b87d6ca0773b9c045934dc8695f8b668, type: 3}
+      propertyPath: m_Layer
+      value: 10
       objectReference: {fileID: 0}
     - target: {fileID: 4900118775726102, guid: b87d6ca0773b9c045934dc8695f8b668, type: 3}
       propertyPath: m_LocalScale.x
@@ -29732,6 +30064,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: P_Brick_Fence_03b (35)
       objectReference: {fileID: 0}
+    - target: {fileID: 1538815344984830, guid: b87d6ca0773b9c045934dc8695f8b668, type: 3}
+      propertyPath: m_Layer
+      value: 10
+      objectReference: {fileID: 0}
     - target: {fileID: 4900118775726102, guid: b87d6ca0773b9c045934dc8695f8b668, type: 3}
       propertyPath: m_LocalScale.x
       value: 1.8
@@ -29924,6 +30260,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: P_Brick_Fence_03b (29)
       objectReference: {fileID: 0}
+    - target: {fileID: 1538815344984830, guid: b87d6ca0773b9c045934dc8695f8b668, type: 3}
+      propertyPath: m_Layer
+      value: 10
+      objectReference: {fileID: 0}
     - target: {fileID: 4900118775726102, guid: b87d6ca0773b9c045934dc8695f8b668, type: 3}
       propertyPath: m_LocalScale.x
       value: 2
@@ -30068,7 +30408,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 1030973097, guid: abc00000000002077850200073275196, type: 3}
       propertyPath: m_LocalPosition.y
-      value: 1.4095863
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 1030973097, guid: abc00000000002077850200073275196, type: 3}
       propertyPath: m_LocalPosition.z
@@ -30276,6 +30616,10 @@ PrefabInstance:
     - target: {fileID: 1156717333973732, guid: 1cdf58ba2fcee8d488a8bba0d44831f2, type: 3}
       propertyPath: m_Name
       value: P_Brick_Fence_03 (3)
+      objectReference: {fileID: 0}
+    - target: {fileID: 1156717333973732, guid: 1cdf58ba2fcee8d488a8bba0d44831f2, type: 3}
+      propertyPath: m_Layer
+      value: 10
       objectReference: {fileID: 0}
     - target: {fileID: 4846889021609408, guid: 1cdf58ba2fcee8d488a8bba0d44831f2, type: 3}
       propertyPath: m_LocalScale.x
@@ -30553,6 +30897,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: P_Brick_Fence_03b (22)
       objectReference: {fileID: 0}
+    - target: {fileID: 1538815344984830, guid: b87d6ca0773b9c045934dc8695f8b668, type: 3}
+      propertyPath: m_Layer
+      value: 10
+      objectReference: {fileID: 0}
     - target: {fileID: 4900118775726102, guid: b87d6ca0773b9c045934dc8695f8b668, type: 3}
       propertyPath: m_LocalScale.x
       value: 2
@@ -30634,6 +30982,10 @@ PrefabInstance:
     - target: {fileID: 1538815344984830, guid: b87d6ca0773b9c045934dc8695f8b668, type: 3}
       propertyPath: m_Name
       value: P_Brick_Fence_03b (13)
+      objectReference: {fileID: 0}
+    - target: {fileID: 1538815344984830, guid: b87d6ca0773b9c045934dc8695f8b668, type: 3}
+      propertyPath: m_Layer
+      value: 10
       objectReference: {fileID: 0}
     - target: {fileID: 4900118775726102, guid: b87d6ca0773b9c045934dc8695f8b668, type: 3}
       propertyPath: m_LocalScale.x
@@ -30981,6 +31333,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: wall1-1&4-2
       objectReference: {fileID: 0}
+    - target: {fileID: 1538815344984830, guid: b87d6ca0773b9c045934dc8695f8b668, type: 3}
+      propertyPath: m_Layer
+      value: 10
+      objectReference: {fileID: 0}
     - target: {fileID: 1699559904580314, guid: b87d6ca0773b9c045934dc8695f8b668, type: 3}
       propertyPath: m_Layer
       value: 10
@@ -31105,6 +31461,10 @@ PrefabInstance:
     - target: {fileID: 1538815344984830, guid: b87d6ca0773b9c045934dc8695f8b668, type: 3}
       propertyPath: m_Name
       value: P_Brick_Fence_03b (24)
+      objectReference: {fileID: 0}
+    - target: {fileID: 1538815344984830, guid: b87d6ca0773b9c045934dc8695f8b668, type: 3}
+      propertyPath: m_Layer
+      value: 10
       objectReference: {fileID: 0}
     - target: {fileID: 4900118775726102, guid: b87d6ca0773b9c045934dc8695f8b668, type: 3}
       propertyPath: m_LocalScale.x
@@ -31320,6 +31680,10 @@ PrefabInstance:
     - target: {fileID: 1538815344984830, guid: b87d6ca0773b9c045934dc8695f8b668, type: 3}
       propertyPath: m_Name
       value: P_Brick_Fence_03b (21)
+      objectReference: {fileID: 0}
+    - target: {fileID: 1538815344984830, guid: b87d6ca0773b9c045934dc8695f8b668, type: 3}
+      propertyPath: m_Layer
+      value: 10
       objectReference: {fileID: 0}
     - target: {fileID: 4900118775726102, guid: b87d6ca0773b9c045934dc8695f8b668, type: 3}
       propertyPath: m_LocalScale.x
@@ -37369,6 +37733,10 @@ PrefabInstance:
       value: 0.3
       objectReference: {fileID: 0}
     - target: {fileID: 1233254671802239474, guid: d4b2ada4637a0984287e190d7d5e015a, type: 3}
+      propertyPath: sensitivity
+      value: 70
+      objectReference: {fileID: 0}
+    - target: {fileID: 1233254671802239474, guid: d4b2ada4637a0984287e190d7d5e015a, type: 3}
       propertyPath: objectTofollow
       value: 
       objectReference: {fileID: 6330891841116228124}
@@ -37498,7 +37866,7 @@ MonoBehaviour:
   itemmanager: {fileID: 7170638557801259634}
   player: {fileID: 4618186853662613040}
   camShake: {fileID: 1805503452}
-  moveSpeed: 3.5
+  moveSpeed: 7
   attackRange: 5
   rotationSpeed: 720
   shutClip: {fileID: 8300000, guid: 3218c1887e0fe3848bae2299ceaec642, type: 3}

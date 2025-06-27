@@ -18,41 +18,41 @@ public class Creature2 : MonoBehaviour
     [SerializeField] private NavMeshAgent navMeshAgent;
 
     [Header("Movement Speeds")]
-    [SerializeField] private float patrolSpeed = 3.5f; 
-    [SerializeField] private float pursuitSpeed = 10.0f; 
+    [SerializeField] private float patrolSpeed = 3.5f;
+    [SerializeField] private float pursuitSpeed = 10.0f;
 
-    //Å©¸®Ã³ »óÅÂ
+    //í¬ë¦¬ì²˜ ìƒíƒœ
     [Header("Combat Stats")]
     [SerializeField] private float idleTime = 1f;
     [SerializeField] private float attackRange = 5f;
-    [SerializeField] private float detectionRange = 10f; 
+    [SerializeField] private float detectionRange = 10f;
     [SerializeField] private float damage = 10f;
 
     [Header("Raycast Settings")]
-    [SerializeField] private float raycastDistance = 2.0f; // ·¹ÀÌÄ³½ºÆ® °¨Áö °Å¸®
+    [SerializeField] private float raycastDistance = 2.0f; // ë ˆì´ìºìŠ¤íŠ¸ ê°ì§€ ê±°ë¦¬
 
     private enum CreatureState { Patrol, Pursuit, Attack, Idle };
     private CreatureState currentState;
 
     private bool isAttacking;
     private int currentPatrolIndex = 0;
-    private bool patrollingForward = true; 
+    private bool patrollingForward = true;
     private float idleTimer = 0f;
     private bool isReversingCooldown = false;
 
-    //Å©¸®Ã³ ¾Ö´Ï¸ŞÀÌ¼Ç
+    //í¬ë¦¬ì²˜ ì• ë‹ˆë©”ì´ì…˜
     private Animator animator;
     private AudioSource audioSource;
 
-    //flashTimer È°¼ºÈ­ ¿©ºÎ
+    //flashTimer í™œì„±í™” ì—¬ë¶€
     public bool flashOn;
 
 
     private void Awake()
-    {        
+    {
         navMeshAgent = GetComponent<NavMeshAgent>();
         animator = GetComponent<Animator>();
-        audioSource= GetComponent<AudioSource>();
+        audioSource = GetComponent<AudioSource>();
     }
 
     private void Start()
@@ -70,7 +70,7 @@ public class Creature2 : MonoBehaviour
 
         if (isAttacking)
         {
-            //¸¸¾à¿¡ °ø°İÁßÀÌ¸é °Ç³Ê¶Ù±â
+            //ë§Œì•½ì— ê³µê²©ì¤‘ì´ë©´ ê±´ë„ˆë›°ê¸°
         }
         else if (flashOn)
         {
@@ -83,7 +83,7 @@ public class Creature2 : MonoBehaviour
                 currentState = CreatureState.Pursuit;
             }
         }
-        else 
+        else
         {
             if (distanceToPlayer <= attackRange)
             {
@@ -124,7 +124,7 @@ public class Creature2 : MonoBehaviour
 
     private void Creature2Patrol()
     {
-        //·çÆ¾´ë·Î °É¾î°¡Áö¸¸ ¸¸¾à¿¡ ¾Õ¿¡ ¸·ÇôÀÖÀ¸¸é ¹İ´ë·Î Ã¹¹øÂ° ÁöÁ¡À¸·Î µ¹¾Æ°¡±â
+        //ë£¨í‹´ëŒ€ë¡œ ê±¸ì–´ê°€ì§€ë§Œ ë§Œì•½ì— ì•ì— ë§‰í˜€ìˆìœ¼ë©´ ë°˜ëŒ€ë¡œ ì²«ë²ˆì§¸ ì§€ì ìœ¼ë¡œ ëŒì•„ê°€ê¸°
 
         navMeshAgent.speed = patrolSpeed;
 
@@ -134,24 +134,24 @@ public class Creature2 : MonoBehaviour
             return;
         }
 
-        // [ÇÙ½É ·ÎÁ÷ Ãß°¡] Àü¹æ¿¡ 'Wall' ÅÂ±×¸¦ °¡Áø Àå¾Ö¹°ÀÌ ÀÖ´ÂÁö È®ÀÎ
+        // [í•µì‹¬ ë¡œì§ ì¶”ê°€] ì „ë°©ì— 'Wall' íƒœê·¸ë¥¼ ê°€ì§„ ì¥ì• ë¬¼ì´ ìˆëŠ”ì§€ í™•ì¸
         RaycastHit hit;
-        Vector3 raycastOrigin = transform.position + Vector3.up * 0.5f; // ·¹ÀÌ ½ÃÀÛ À§Ä¡¸¦ »ìÂ¦ À§·Î Á¶Á¤
-        Vector3 direction = transform.forward; // AI°¡ ¹Ù¶óº¸´Â Á¤¸é ¹æÇâ
+        Vector3 raycastOrigin = transform.position + Vector3.up * 0.5f; // ë ˆì´ ì‹œì‘ ìœ„ì¹˜ë¥¼ ì‚´ì§ ìœ„ë¡œ ì¡°ì •
+        Vector3 direction = transform.forward; // AIê°€ ë°”ë¼ë³´ëŠ” ì •ë©´ ë°©í–¥
 
-        // isReversingCooldownÀº ÀÌÀü¿¡ Ãß°¡Çß´ø '¹«ÇÑ ¹İº¹ ¹æÁö' ÇÃ·¡±×ÀÔ´Ï´Ù. ±×´ë·Î »ç¿ëÇÕ´Ï´Ù.
+        // isReversingCooldownì€ ì´ì „ì— ì¶”ê°€í–ˆë˜ 'ë¬´í•œ ë°˜ë³µ ë°©ì§€' í”Œë˜ê·¸ì…ë‹ˆë‹¤. ê·¸ëŒ€ë¡œ ì‚¬ìš©í•©ë‹ˆë‹¤.
         if (!isReversingCooldown && Physics.Raycast(raycastOrigin, direction, out hit, raycastDistance))
         {
-            // ·¹ÀÌÄ³½ºÆ®¿¡ ºÎµúÈù ¹°Ã¼ÀÇ ÅÂ±×°¡ 'Wall'ÀÌ¶ó¸é
+            // ë ˆì´ìºìŠ¤íŠ¸ì— ë¶€ë”ªíŒ ë¬¼ì²´ì˜ íƒœê·¸ê°€ 'Wall'ì´ë¼ë©´
             if (hit.collider.CompareTag("Wall"))
             {
-                //Debug.Log("Àü¹æ¿¡ 'Wall' Àå¾Ö¹° °¨Áö! ¼øÂû ¹æÇâÀ» ¹İ´ë·Î ÀüÈ¯ÇÕ´Ï´Ù.");
-                ReversePatrolDirection(); // ¹æÇâ ÀüÈ¯ ÇÔ¼ö È£Ãâ
-                return; //ÀÌ¹ø ÇÁ·¹ÀÓÀÇ ³ª¸ÓÁö ¼øÂû ·ÎÁ÷Àº °Ç³Ê¶İ´Ï´Ù.
+                //Debug.Log("ì „ë°©ì— 'Wall' ì¥ì• ë¬¼ ê°ì§€! ìˆœì°° ë°©í–¥ì„ ë°˜ëŒ€ë¡œ ì „í™˜í•©ë‹ˆë‹¤.");
+                ReversePatrolDirection(); // ë°©í–¥ ì „í™˜ í•¨ìˆ˜ í˜¸ì¶œ
+                return; //ì´ë²ˆ í”„ë ˆì„ì˜ ë‚˜ë¨¸ì§€ ìˆœì°° ë¡œì§ì€ ê±´ë„ˆëœë‹ˆë‹¤.
             }
         }
 
-        //µğ¹ö±ë¿ë: ¿¡µğÅÍ¿¡¼­ ·¹ÀÌÄ³½ºÆ®¸¦ ½Ã°¢ÀûÀ¸·Î È®ÀÎ
+        //ë””ë²„ê¹…ìš©: ì—ë””í„°ì—ì„œ ë ˆì´ìºìŠ¤íŠ¸ë¥¼ ì‹œê°ì ìœ¼ë¡œ í™•ì¸
         Debug.DrawRay(raycastOrigin, direction * raycastDistance, Color.red);
 
 
@@ -168,14 +168,14 @@ public class Creature2 : MonoBehaviour
             audioSource.Play();
         }
 
-        //waypoint ¾øÀ» °æ¿ì
+        //waypoint ì—†ì„ ê²½ìš°
         if (currentPatrolIndex < 0 || currentPatrolIndex >= wayPoint.Length || wayPoint[currentPatrolIndex] == null)
         {
             Debug.LogWarning("Creature2: Invalid waypoint or index. Resetting patrol index.");
             currentPatrolIndex = 0;
             if (wayPoint.Length == 0 || wayPoint[currentPatrolIndex] == null)
             {
-                if (currentState != CreatureState.Idle) currentState = CreatureState.Idle; 
+                if (currentState != CreatureState.Idle) currentState = CreatureState.Idle;
                 return;
             }
         }
@@ -183,28 +183,28 @@ public class Creature2 : MonoBehaviour
 
         navMeshAgent.destination = wayPoint[currentPatrolIndex].position;
 
-        //¼øÂû ÁöÁ¡¿¡ µµÂøÇßÀ» ¶§ Idle»óÅÂ·Î ÀüÇÑ
+        //ìˆœì°° ì§€ì ì— ë„ì°©í–ˆì„ ë•Œ Idleìƒíƒœë¡œ ì „í•œ
         if (!navMeshAgent.pathPending && navMeshAgent.remainingDistance < 0.5f)
         {
-            currentState = CreatureState.Idle; 
+            currentState = CreatureState.Idle;
             idleTimer = 0f;
         }
     }
 
     private void ReversePatrolDirection()
     {
-        //¹æÇâÀ» µÚÁı½À´Ï´Ù.
+        //ë°©í–¥ì„ ë’¤ì§‘ìŠµë‹ˆë‹¤.
         patrollingForward = !patrollingForward;
-        //´ÙÀ½ ¿şÀÌÆ÷ÀÎÆ®¸¦ °è»êÇÕ´Ï´Ù.
+        //ë‹¤ìŒ ì›¨ì´í¬ì¸íŠ¸ë¥¼ ê³„ì‚°í•©ë‹ˆë‹¤.
         TheNextWayPoint();
-        //ÂªÀº ÄğÅ¸ÀÓÀ» ½ÃÀÛÇÏ¿© ¹«ÇÑÁ¤ ¹æÇâÀ» ¹Ù²Ù´Â °ÍÀ» ¹æÁöÇÕ´Ï´Ù.
+        //ì§§ì€ ì¿¨íƒ€ì„ì„ ì‹œì‘í•˜ì—¬ ë¬´í•œì • ë°©í–¥ì„ ë°”ê¾¸ëŠ” ê²ƒì„ ë°©ì§€í•©ë‹ˆë‹¤.
         StartCoroutine(ReverseCooldown());
     }
 
     private IEnumerator ReverseCooldown()
     {
         isReversingCooldown = true;
-        yield return new WaitForSeconds(1.0f); //1ÃÊ µ¿¾ÈÀº ´Ù½Ã ¹æÇâÀ» ¹Ù²ÙÁö ¾Ê½À´Ï´Ù.
+        yield return new WaitForSeconds(1.0f); //1ì´ˆ ë™ì•ˆì€ ë‹¤ì‹œ ë°©í–¥ì„ ë°”ê¾¸ì§€ ì•ŠìŠµë‹ˆë‹¤.
         isReversingCooldown = false;
     }
 
@@ -277,7 +277,7 @@ public class Creature2 : MonoBehaviour
         navMeshAgent.isStopped = false;
 
         if (player == null)
-        { 
+        {
             currentState = CreatureState.Patrol;
             return;
         }
@@ -295,26 +295,26 @@ public class Creature2 : MonoBehaviour
         {
             if (distanceToPlayer <= attackRange)
             {
-                Creature2Attack(); 
+                Creature2Attack();
             }
             else
             {
-                currentState = CreatureState.Pursuit; 
+                currentState = CreatureState.Pursuit;
             }
         }
-        else 
+        else
         {
             if (distanceToPlayer <= attackRange)
             {
-                Creature2Attack(); 
+                Creature2Attack();
             }
             else if (distanceToPlayer <= detectionRange)
             {
-                currentState = CreatureState.Pursuit; 
+                currentState = CreatureState.Pursuit;
             }
             else
             {
-                currentState = CreatureState.Patrol; 
+                currentState = CreatureState.Patrol;
             }
         }
 
@@ -334,7 +334,7 @@ public class Creature2 : MonoBehaviour
         navMeshAgent.speed = pursuitSpeed;
 
         if (player == null)
-        { 
+        {
             currentState = CreatureState.Patrol;
             return;
         }
@@ -370,8 +370,8 @@ public class Creature2 : MonoBehaviour
         idleTimer += Time.deltaTime;
         if (idleTimer >= idleTime)
         {
-            idleTimer = 0f; 
-            TheNextWayPoint(); 
+            idleTimer = 0f;
+            TheNextWayPoint();
         }
 
     }

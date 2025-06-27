@@ -16,29 +16,29 @@ public class CameraMovement : MonoBehaviour
     [SerializeField] private float clampAngle = 70f;
 
     [Header("Camera Collision & Zoom")]
-    //½ÇÁ¦ Ä«¸Ş¶ó GameObject
+    //ì‹¤ì œ ì¹´ë©”ë¼ GameObject
     [SerializeField] private GameObject realCam;
-    //Ä«¸Ş¶ó Transform
+    //ì¹´ë©”ë¼ Transform
     [SerializeField] private Transform realCamera;
-    //Ä«¸Ş¶ó ·ÎÄÃ ¹æÇâ
+    //ì¹´ë©”ë¼ ë¡œì»¬ ë°©í–¥
     [SerializeField] private Vector3 dirNormalized;
-    //¿ùµå °ø°£ ¸ñÇ¥ÁöÁ¡ (»ç¿ë ¾È ÇÔ)
+    //ì›”ë“œ ê³µê°„ ëª©í‘œì§€ì  (ì‚¬ìš© ì•ˆ í•¨)
     //[SerializeField] private Vector3 finalDir;                
     [SerializeField] private float minDistance;
     [SerializeField] private float maxDistance;
-    //Ãæµ¹ º¸Á¤ °Å¸®
-    [SerializeField] private float currentCollisionDistance; // Ãæµ¹ ½Ã °è»êµÈ ÃÖÁ¾ Ä«¸Ş¶ó °Å¸®
-    //º¸°£ ¼Óµµ
+    //ì¶©ëŒ ë³´ì • ê±°ë¦¬
+    [SerializeField] private float currentCollisionDistance; // ì¶©ëŒ ì‹œ ê³„ì‚°ëœ ìµœì¢… ì¹´ë©”ë¼ ê±°ë¦¬
+    //ë³´ê°„ ì†ë„
     [SerializeField] private float smoothness = 10f;
-    [SerializeField] private float collisionOffset = 0.2f; // Ãæµ¹ ½Ã Ä«¸Ş¶ó°¡ º®¿¡¼­ »ìÂ¦ ¶³¾îÁö°Ô ÇÏ´Â °ª
-    [SerializeField] private LayerMask collisionLayer; // Ä«¸Ş¶ó Ãæµ¹À» °¨ÁöÇÒ ·¹ÀÌ¾î ¸¶½ºÅ©
+    [SerializeField] private float collisionOffset = 0.2f; // ì¶©ëŒ ì‹œ ì¹´ë©”ë¼ê°€ ë²½ì—ì„œ ì‚´ì§ ë–¨ì–´ì§€ê²Œ í•˜ëŠ” ê°’
+    [SerializeField] private LayerMask collisionLayer; // ì¹´ë©”ë¼ ì¶©ëŒì„ ê°ì§€í•  ë ˆì´ì–´ ë§ˆìŠ¤í¬
 
-    // SphereCast¿¡ »ç¿ëÇÒ Ä«¸Ş¶ó ±¸Ã¼ ¹İ°æ
+    // SphereCastì— ì‚¬ìš©í•  ì¹´ë©”ë¼ êµ¬ì²´ ë°˜ê²½
     [SerializeField] private float cameraRadius = 0.2f;
 
     [Header("Auto-Alignment Settings")]
     [SerializeField] private float noMouseInputThreshold = 0.01f;
-    //¸¶¿ì½º ÀÔ·Â ¾øÀ» ½Ã ÀÚµ¿ Á¤·Ä ½ÃÀÛ ½Ã°£
+    //ë§ˆìš°ìŠ¤ ì…ë ¥ ì—†ì„ ì‹œ ìë™ ì •ë ¬ ì‹œì‘ ì‹œê°„
     [SerializeField] private float timeBeforeAutoAlign = 1.0f;
     [SerializeField] private float autoAlignSpeed = 3f;
     [SerializeField] private float defaultAutoAlignRotX = 10f;
@@ -46,7 +46,7 @@ public class CameraMovement : MonoBehaviour
 
     private float timeSinceLastMouseInput = 0f;
     private bool isAutoAligning = false;
-    //½Ã¾ß °íÁ¤ Åä±Û
+    //ì‹œì•¼ ê³ ì • í† ê¸€
     private bool isViewLocked = false;
     private float rotX;
     private float rotY;
@@ -68,11 +68,11 @@ public class CameraMovement : MonoBehaviour
 
         if (realCamera != null)
         {
-            // realCameraÀÇ ÃÊ±â ·ÎÄÃ À§Ä¡¸¦ ±âÁØÀ¸·Î dirNormalized ¼³Á¤
+            // realCameraì˜ ì´ˆê¸° ë¡œì»¬ ìœ„ì¹˜ë¥¼ ê¸°ì¤€ìœ¼ë¡œ dirNormalized ì„¤ì •
             dirNormalized = realCamera.localPosition.normalized;
-            // ÃÊ±â Ä«¸Ş¶ó °Å¸®¸¦ currentCollisionDistance¿¡ ÀúÀå
+            // ì´ˆê¸° ì¹´ë©”ë¼ ê±°ë¦¬ë¥¼ currentCollisionDistanceì— ì €ì¥
             currentCollisionDistance = Vector3.Distance(transform.position, realCamera.position);
-            // originalCamLocalY ¼³Á¤ (realCameraÀÇ ÃÊ±â ·ÎÄÃ y°ªÀ» »ç¿ë)
+            // originalCamLocalY ì„¤ì • (realCameraì˜ ì´ˆê¸° ë¡œì»¬ yê°’ì„ ì‚¬ìš©)
             //originalCamLocalY = realCamera.localPosition.y;
         }
         else
@@ -80,13 +80,13 @@ public class CameraMovement : MonoBehaviour
             Debug.LogError("Camera Wrong");
         }
 
-        // ÃÊ±â currentCollisionDistance¸¦ maxDistance·Î ¼³Á¤
+        // ì´ˆê¸° currentCollisionDistanceë¥¼ maxDistanceë¡œ ì„¤ì •
         currentCollisionDistance = maxDistance;
     }
 
     private void Update()
     {
-        //QÅ°·Î ½Ã¾ß °íÁ¤/ÇØÁ¦ Åä±Û
+        //Qí‚¤ë¡œ ì‹œì•¼ ê³ ì •/í•´ì œ í† ê¸€
         if (Input.GetKeyDown(KeyCode.Q))
         {
             isViewLocked = !isViewLocked;
@@ -99,31 +99,31 @@ public class CameraMovement : MonoBehaviour
 
         string currentSceneName = SceneManager.GetActiveScene().name;
 
-        //½Ã¾ß°¡ Àá±âÁö ¾Ê¾ÒÀ» ¶§¸¸ ¸¶¿ì½º·Î È¸Àü
+        //ì‹œì•¼ê°€ ì ê¸°ì§€ ì•Šì•˜ì„ ë•Œë§Œ ë§ˆìš°ìŠ¤ë¡œ íšŒì „
         if (!isViewLocked)
         {
             float mouseXInput = Input.GetAxis("Mouse X");
             float mouseYInput = Input.GetAxis("Mouse Y");
 
-            //¸¶¿ì½º ÀÔ·Â °¨Áö
+            //ë§ˆìš°ìŠ¤ ì…ë ¥ ê°ì§€
             if (Mathf.Abs(mouseXInput) > noMouseInputThreshold || Mathf.Abs(mouseYInput) > noMouseInputThreshold)
             {
-                //¸¶¿ì½º·Î È¸Àü
+                //ë§ˆìš°ìŠ¤ë¡œ íšŒì „
                 rotX += -mouseYInput * sensitivity;// * Time.deltaTime;
                 rotY += mouseXInput * sensitivity;// * Time.deltaTime;
                 rotX = Mathf.Clamp(rotX, -clampAngle, clampAngle);
 
-                //¸¶¿ì½º È¸ÀüÁß ¸®¼Â & ÁßÁö
+                //ë§ˆìš°ìŠ¤ íšŒì „ì¤‘ ë¦¬ì…‹ & ì¤‘ì§€
                 timeSinceLastMouseInput = 0f;
                 isAutoAligning = false;
             }
             else
             {
-                //¸¶¿ì½º ºñÈ°¼º½Ã Å¸ÀÌ¸Ó
+                //ë§ˆìš°ìŠ¤ ë¹„í™œì„±ì‹œ íƒ€ì´ë¨¸
                 timeSinceLastMouseInput += Time.deltaTime;
             }
 
-            if (currentSceneName == autoAlignSceneName) // <--- Ãß°¡µÈ Á¶°Ç
+            if (currentSceneName == autoAlignSceneName) // <--- ì¶”ê°€ëœ ì¡°ê±´
             {
                 if (playerMovement != null && !playerMovement.IsMoving)
                 {
@@ -138,10 +138,10 @@ public class CameraMovement : MonoBehaviour
                     timeSinceLastMouseInput = 0f;
                 }
             }
-            else // ÀÚµ¿ Á¤·ÄÀ» »ç¿ëÇÏÁö ¾Ê´Â ¾ÀÀÏ °æ¿ì
+            else // ìë™ ì •ë ¬ì„ ì‚¬ìš©í•˜ì§€ ì•ŠëŠ” ì”¬ì¼ ê²½ìš°
             {
-                isAutoAligning = false; // ÀÚµ¿ Á¤·Ä °­Á¦ ºñÈ°¼ºÈ­
-                // timeSinceLastMouseInput = 0f; // ÀÌ ¾À¿¡¼­´Â Å¸ÀÌ¸Óµµ ¸®¼ÂÇÒ ¼ö ÀÖÀ½ (¼±ÅÃ »çÇ×)
+                isAutoAligning = false; // ìë™ ì •ë ¬ ê°•ì œ ë¹„í™œì„±í™”
+                // timeSinceLastMouseInput = 0f; // ì´ ì”¬ì—ì„œëŠ” íƒ€ì´ë¨¸ë„ ë¦¬ì…‹í•  ìˆ˜ ìˆìŒ (ì„ íƒ ì‚¬í•­)
             }
 
             if (isAutoAligning)
@@ -157,7 +157,7 @@ public class CameraMovement : MonoBehaviour
                     rotY = targetRotY;
                     rotX = targetRotX;
                     isAutoAligning = false;
-                    //Á¤·Ä ÈÄ ´Ù½Ã ¸®¼Â
+                    //ì •ë ¬ í›„ ë‹¤ì‹œ ë¦¬ì…‹
                     timeSinceLastMouseInput = 0f;
                 }
             }
@@ -171,40 +171,40 @@ public class CameraMovement : MonoBehaviour
     {
         if (objectTofollow == null || realCamera == null || playerMovement == null) return;
 
-        // Ä«¸Ş¶ó ÇÇº¿À» ÇÃ·¹ÀÌ¾î À§Ä¡¿¡ °íÁ¤
+        // ì¹´ë©”ë¼ í”¼ë´‡ì„ í”Œë ˆì´ì–´ ìœ„ì¹˜ì— ê³ ì •
         transform.position = objectTofollow.position;
 
-        // Ä«¸Ş¶óÀÇ ¸ñÇ¥ ¿ùµå À§Ä¡ °è»ê (ÃÖ´ë °Å¸® ±âÁØ)
+        // ì¹´ë©”ë¼ì˜ ëª©í‘œ ì›”ë“œ ìœ„ì¹˜ ê³„ì‚° (ìµœëŒ€ ê±°ë¦¬ ê¸°ì¤€)
         Vector3 desiredCameraWorldPos = transform.position + transform.rotation * (dirNormalized * maxDistance);
 
         RaycastHit hit;
-        // SphereCast¸¦ »ç¿ëÇÏ¿© Ãæµ¹ °¨Áö
-        // ÇÃ·¹ÀÌ¾îÀÇ À§Ä¡¿¡¼­ ¸ñÇ¥ Ä«¸Ş¶ó À§Ä¡±îÁö cameraRadius Å©±âÀÇ ±¸Ã¼¸¦ ¹ß»ç
+        // SphereCastë¥¼ ì‚¬ìš©í•˜ì—¬ ì¶©ëŒ ê°ì§€
+        // í”Œë ˆì´ì–´ì˜ ìœ„ì¹˜ì—ì„œ ëª©í‘œ ì¹´ë©”ë¼ ìœ„ì¹˜ê¹Œì§€ cameraRadius í¬ê¸°ì˜ êµ¬ì²´ë¥¼ ë°œì‚¬
         if (Physics.SphereCast(transform.position, cameraRadius, (desiredCameraWorldPos - transform.position).normalized, out hit, maxDistance, collisionLayer))
         {
-            // Ãæµ¹ÀÌ °¨ÁöµÇ¸é Ãæµ¹ ÁöÁ¡¿¡¼­ »ìÂ¦ µÚ·Î ¹°·¯³­ °Å¸®¸¦ ¸ñÇ¥ °Å¸®·Î ¼³Á¤
+            // ì¶©ëŒì´ ê°ì§€ë˜ë©´ ì¶©ëŒ ì§€ì ì—ì„œ ì‚´ì§ ë’¤ë¡œ ë¬¼ëŸ¬ë‚œ ê±°ë¦¬ë¥¼ ëª©í‘œ ê±°ë¦¬ë¡œ ì„¤ì •
             currentCollisionDistance = Mathf.Clamp(hit.distance - collisionOffset, minDistance, maxDistance);
         }
         else
         {
-            // Ãæµ¹ÀÌ ¾øÀ¸¸é ÃÖ´ë °Å¸®·Î ¼³Á¤
+            // ì¶©ëŒì´ ì—†ìœ¼ë©´ ìµœëŒ€ ê±°ë¦¬ë¡œ ì„¤ì •
             currentCollisionDistance = maxDistance;
         }
 
-        // ÃÖÁ¾ Ä«¸Ş¶óÀÇ ·ÎÄÃ À§Ä¡ °è»ê (yÃàÀº µû·Î Ã³¸®)
+        // ìµœì¢… ì¹´ë©”ë¼ì˜ ë¡œì»¬ ìœ„ì¹˜ ê³„ì‚° (yì¶•ì€ ë”°ë¡œ ì²˜ë¦¬)
         Vector3 targetLocalPos = dirNormalized * currentCollisionDistance;
 
-        // ÇÃ·¹ÀÌ¾î »óÅÂ¿¡ µû¸¥ Ä«¸Ş¶ó Y À§Ä¡ Á¶Á¤
+        // í”Œë ˆì´ì–´ ìƒíƒœì— ë”°ë¥¸ ì¹´ë©”ë¼ Y ìœ„ì¹˜ ì¡°ì •
         if (playerMovement != null && playerMovement.playerCrouch)
         {
-            targetLocalPos.y = originalCamLocalY * 0.3f; // ¿õÅ©¸± ¶§ Y À§Ä¡ Á¶Á¤
+            targetLocalPos.y = originalCamLocalY * 0.3f; // ì›…í¬ë¦´ ë•Œ Y ìœ„ì¹˜ ì¡°ì •
         }
         else
         {
-            targetLocalPos.y = originalCamLocalY; // Æò»ó½Ã Y À§Ä¡ À¯Áö
+            targetLocalPos.y = originalCamLocalY; // í‰ìƒì‹œ Y ìœ„ì¹˜ ìœ ì§€
         }
 
-        // realCameraÀÇ ·ÎÄÃ À§Ä¡¸¦ ºÎµå·´°Ô ¸ñÇ¥ À§Ä¡·Î ÀÌµ¿
+        // realCameraì˜ ë¡œì»¬ ìœ„ì¹˜ë¥¼ ë¶€ë“œëŸ½ê²Œ ëª©í‘œ ìœ„ì¹˜ë¡œ ì´ë™
         realCamera.localPosition = Vector3.Lerp(
             realCamera.localPosition,
             targetLocalPos,
@@ -212,7 +212,7 @@ public class CameraMovement : MonoBehaviour
         );
     }
 
-    //Ä«¸Ş¶ó Èçµé±â ÄÚ·çÆ¾
+    //ì¹´ë©”ë¼ í”ë“¤ê¸° ì½”ë£¨í‹´
     public IEnumerator Shake(float duration, float magnitude)
     {
         if (realCam == null) yield break;
@@ -235,7 +235,7 @@ public class CameraMovement : MonoBehaviour
             yield return null;
         }
 
-        //¿ø·¡ À§Ä¡ º¹±¸
+        //ì›ë˜ ìœ„ì¹˜ ë³µêµ¬
         realCam.transform.localPosition = originalPos;
     }
 }

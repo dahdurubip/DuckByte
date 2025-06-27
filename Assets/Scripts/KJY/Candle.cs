@@ -3,11 +3,11 @@ using UnityEngine;
 public class Candle : MonoBehaviour, IInteractable
 {
     [Header("Key Settings")]
-    //ÅÂ±×
-    [SerializeField] private string KeyTag = "Fire";   
+    //íƒœê·¸
+    [SerializeField] private string KeyTag = "Fire";
     [SerializeField] private ParticleSystem particle;
     private Light candlelight;
-    //¿­¸®´Â ¾Ö´Ï¸ŞÀÌÅÍ
+    //ì—´ë¦¬ëŠ” ì• ë‹ˆë©”ì´í„°
     //[SerializeField] private Animator animator; 
 
     private CandleManager manager;
@@ -35,7 +35,7 @@ public class Candle : MonoBehaviour, IInteractable
 
     public void OnInteract(GameObject heldItem)
     {
-        //ÀÌ¹Ì ÄÑÁø ÃĞºÒÀº ¹«½Ã
+        //ì´ë¯¸ ì¼œì§„ ì´›ë¶ˆì€ ë¬´ì‹œ
         if (isLit) return;
 
         if (heldItem == null) return;
@@ -47,19 +47,19 @@ public class Candle : MonoBehaviour, IInteractable
         }
         else
         {
-            //Debug.Log("¾Æ´Õ´Ï´Ù.");
+            //Debug.Log("ì•„ë‹™ë‹ˆë‹¤.");
         }
     }
 
     private void OpenCandle()
     {
-        //Debug.Log("ÄÑÁ³½À´Ï´Ù!");
+        //Debug.Log("ì¼œì¡ŒìŠµë‹ˆë‹¤!");
         particle.Play();
         candlelight.enabled = true;
-        //ÃĞºÒ »óÅÂ¸¦ ÄÑÁø »óÅÂ·Î ¼³Á¤
-        isLit = true;  
+        //ì´›ë¶ˆ ìƒíƒœë¥¼ ì¼œì§„ ìƒíƒœë¡œ ì„¤ì •
+        isLit = true;
 
-        //¸Å´ÏÀú¿¡°Ô ÀÌ ÃĞºÒÀÌ ÄÑÁ³À½À» ¾Ë¸²
+        //ë§¤ë‹ˆì €ì—ê²Œ ì´ ì´›ë¶ˆì´ ì¼œì¡ŒìŒì„ ì•Œë¦¼
         manager.OnCandleLit(myIndex);
     }
 

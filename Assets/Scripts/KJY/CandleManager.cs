@@ -9,7 +9,7 @@ public class CandleManager : MonoBehaviour
     public List<Candle> candles = new List<Candle>();
 
     [Header("correctAnswer")]
-    public List<int> correctIndices = new List<int> { 0, 1, 2, 3, 4, 5, 6, 7};
+    public List<int> correctIndices = new List<int> { 0, 1, 2, 3, 4, 5, 6, 7 };
 
     [Header("particle")]
     [SerializeField] private ParticleSystem particle;
@@ -24,8 +24,8 @@ public class CandleManager : MonoBehaviour
     [SerializeField] private GameObject volumeBlack;
 
     [SerializeField] private ItemManager itemManager;
-   
-    //ÇöÀç±îÁö ÄÑÁø ÃĞºÒ ÀÎµ¦½º¸¦ ¼ø¼­´ë·Î ÀúÀå
+
+    //í˜„ì¬ê¹Œì§€ ì¼œì§„ ì´›ë¶ˆ ì¸ë±ìŠ¤ë¥¼ ìˆœì„œëŒ€ë¡œ ì €ì¥
     private List<int> litIndices = new List<int>();
 
 
@@ -39,19 +39,19 @@ public class CandleManager : MonoBehaviour
         }
     }
 
-    //CandleÀÌ ÄÑÁ³À» ¶§ È£ÃâµË´Ï´Ù.
+    //Candleì´ ì¼œì¡Œì„ ë•Œ í˜¸ì¶œë©ë‹ˆë‹¤.
     public void OnCandleLit(int index)
     {
-        //Áßº¹ ¹æÁö: ÀÌ¹Ì ±â·ÏµÈ ÀÎµ¦½º´Â ¹«½Ã
+        //ì¤‘ë³µ ë°©ì§€: ì´ë¯¸ ê¸°ë¡ëœ ì¸ë±ìŠ¤ëŠ” ë¬´ì‹œ
         if (litIndices.Contains(index)) return;
 
-        //»õ·Î ÄÑÁø ÃĞºÒ ÀÎµ¦½º Ãß°¡
+        //ìƒˆë¡œ ì¼œì§„ ì´›ë¶ˆ ì¸ë±ìŠ¤ ì¶”ê°€
         litIndices.Add(index);
 
-        //Á¤´ä °³¼ö¿Í ÀÏÄ¡ÇÒ ¶§¸¸ ÆÇÁ¤
+        //ì •ë‹µ ê°œìˆ˜ì™€ ì¼ì¹˜í•  ë•Œë§Œ íŒì •
         if (litIndices.Count == correctIndices.Count)
         {
-            //¼ø¼­¿Í °ªÀÌ ¸ğµÎ ÀÏÄ¡ÇÏ¸é ¼º°ø, ¾Æ´Ï¸é ¿À´ä
+            //ìˆœì„œì™€ ê°’ì´ ëª¨ë‘ ì¼ì¹˜í•˜ë©´ ì„±ê³µ, ì•„ë‹ˆë©´ ì˜¤ë‹µ
             if (litIndices.SequenceEqual(correctIndices))
                 Correct();
             else
@@ -61,7 +61,7 @@ public class CandleManager : MonoBehaviour
 
     private void Correct()
     {
-        //Debug.Log("Á¤´ä! ÆÛÁñÀÌ Ç®·È½À´Ï´Ù.");
+        //Debug.Log("ì •ë‹µ! í¼ì¦ì´ í’€ë ¸ìŠµë‹ˆë‹¤.");
         itemManager.DestroyCurrentItem();
         m1_AudioManager.instance.PlaySfx(m1_AudioManager.m1sfx.northRbigFire);
         m1_AudioManager.instance.PlaySfx(m1_AudioManager.m1sfx.clearSound);
@@ -73,13 +73,13 @@ public class CandleManager : MonoBehaviour
 
     private void Wrong()
     {
-        Debug.Log("´Ù½Ã ½Ãµµ ÇÊ¿ä");
+        Debug.Log("ë‹¤ì‹œ ì‹œë„ í•„ìš”");
         m1_AudioManager.instance.PlaySfx(m1_AudioManager.m1sfx.northRwomanCry);
-        //¸ğµç ÃĞºÒ ÃÊ±âÈ­
+        //ëª¨ë“  ì´›ë¶ˆ ì´ˆê¸°í™”
         foreach (var candle in candles)
             candle.ResetCandle();
 
-        //ÀÔ·Â ±â·Ï ÃÊ±âÈ­
+        //ì…ë ¥ ê¸°ë¡ ì´ˆê¸°í™”
         litIndices.Clear();
     }
 }

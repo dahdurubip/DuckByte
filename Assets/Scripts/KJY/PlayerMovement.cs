@@ -12,60 +12,60 @@ public class PlayerMovement : MonoBehaviour
     private PlayerMental mental;
 
     [Header("Player Default Settings")]
-    //°È±â ¼Óµµ
+    //ê±·ê¸° ì†ë„
     public float speed = 5f;
-    //ÇöÀç ÇÁ·¹ÀÓÀÇ ÃÖÁ¾ ¼Óµµ
+    //í˜„ì¬ í”„ë ˆì„ì˜ ìµœì¢… ì†ë„
     public float finalSpeed;
-    //ÇöÀç ´Ş¸®±â »óÅÂÀÎÁö ¿©ºÎ (InputMovement¿¡¼­ »ç¿ë)
+    //í˜„ì¬ ë‹¬ë¦¬ê¸° ìƒíƒœì¸ì§€ ì—¬ë¶€ (InputMovementì—ì„œ ì‚¬ìš©)
     public bool run;
-    //´Ş¸®±â ¼Óµµ
+    //ë‹¬ë¦¬ê¸° ì†ë„
     [SerializeField] private float runSpeed = 10f;
-    //¾É±â ¼Óµµ
+    //ì•‰ê¸° ì†ë„
     [SerializeField] private float crouchSpeed = 2.5f;
-    //Ä«¸Ş¶ó È¸Àü Åä±Û ¿©ºÎ
+    //ì¹´ë©”ë¼ íšŒì „ í† ê¸€ ì—¬ë¶€
     [SerializeField] private bool toggleCameraRotation;
-    //¾É±â »óÅÂ ¿©ºÎ
-    [SerializeField] private bool isCrouching; 
+    //ì•‰ê¸° ìƒíƒœ ì—¬ë¶€
+    [SerializeField] private bool isCrouching;
 
     [Header("Crouch Settings")]
-    //¾É¾ÒÀ» ¶§ CharacterController ³ôÀÌ
+    //ì•‰ì•˜ì„ ë•Œ CharacterController ë†’ì´
     [SerializeField] private float crouchHeight = 1f;
-    //¾É¾ÒÀ» ¶§ CharacterController Áß½É Y°ª
+    //ì•‰ì•˜ì„ ë•Œ CharacterController ì¤‘ì‹¬ Yê°’
     [SerializeField] private float crouchCenterY = 0.7f;
-    //¾É¾ÒÀ» ¶§ CapsuleCollider ³ôÀÌ
+    //ì•‰ì•˜ì„ ë•Œ CapsuleCollider ë†’ì´
     [SerializeField] private float crouchCapHeight = 1f;
-    //¾É¾ÒÀ» ¶§ CapsuleCollider Áß½É Y°ª
-    [SerializeField] private float crouchCapCenterY = 0.5f; 
+    //ì•‰ì•˜ì„ ë•Œ CapsuleCollider ì¤‘ì‹¬ Yê°’
+    [SerializeField] private float crouchCapCenterY = 0.5f;
     public bool playerCrouch;
-    //¾É±â Áö¼Ó ½Ã°£ Å¸ÀÌ¸Ó
+    //ì•‰ê¸° ì§€ì† ì‹œê°„ íƒ€ì´ë¨¸
     private float crouchTimer = 0f;
 
     [Header("Physics Settings")]
-    //Áß·Â °ª
+    //ì¤‘ë ¥ ê°’
     [SerializeField] private float gravity = -10f;
-    //¼öÁ÷ ¼Óµµ
-    private float verticalVelocity = 0f; 
+    //ìˆ˜ì§ ì†ë„
+    private float verticalVelocity = 0f;
 
-    //Character/Capsule Collider ¿ø·¡ °ª ÀúÀå¿ë º¯¼ö
+    //Character/Capsule Collider ì›ë˜ ê°’ ì €ì¥ìš© ë³€ìˆ˜
     private float originalHeight;
     private Vector3 originalCenter;
     private float originalCapHeight;
     private Vector3 originalCapCenter;
 
-    //ÃÖÁ¾ ÀÌµ¿ ¹æÇâ
-    private Vector3 moveDirection; 
+    //ìµœì¢… ì´ë™ ë°©í–¥
+    private Vector3 moveDirection;
 
     [Header("Stamina Settings")]
-    //ÃÊ±â ½ºÅÂ¹Ì³ª
+    //ì´ˆê¸° ìŠ¤íƒœë¯¸ë‚˜
     [SerializeField] private float initialStamina = 100f;
-    //ÇöÀç ½ºÅÂ¹Ì³ª
+    //í˜„ì¬ ìŠ¤íƒœë¯¸ë‚˜
     private float currentStamina;
-    //ÃÖ´ë ½ºÅÂ¹Ì³ª
+    //ìµœëŒ€ ìŠ¤íƒœë¯¸ë‚˜
     private float maxStamina;
-    //½ºÅÂ¹Ì³ª Ç¥½Ã UI
+    //ìŠ¤íƒœë¯¸ë‚˜ í‘œì‹œ UI
     [SerializeField] TMP_Text stamina_UI;
-    [SerializeField] private float staminaConsumeRate = 10f; //<<< ÃÊ´ç ¼Ò¸ğ·®
-    [SerializeField] private float staminaRegenRate = 3f;  //<<< ÃÊ´ç È¸º¹·®
+    [SerializeField] private float staminaConsumeRate = 10f; //<<< ì´ˆë‹¹ ì†Œëª¨ëŸ‰
+    [SerializeField] private float staminaRegenRate = 3f;  //<<< ì´ˆë‹¹ íšŒë³µëŸ‰
     [SerializeField] private float exhaustionDuration = 3f;
 
     [Header("AudioClip")]
@@ -75,18 +75,18 @@ public class PlayerMovement : MonoBehaviour
     [SerializeField] private AudioClip crouchingWalkClip;
 
     [Header("Audio Sources")]
-    [SerializeField] private AudioSource footstepAudioSource; // ¹ß¼Ò¸®¿ë AudioSource
-    [SerializeField] private AudioSource sfxAudioSource;      // È¿°úÀ½¿ë AudioSource (¼û¼Ò¸® µî)
+    [SerializeField] private AudioSource footstepAudioSource; // ë°œì†Œë¦¬ìš© AudioSource
+    [SerializeField] private AudioSource sfxAudioSource;      // íš¨ê³¼ìŒìš© AudioSource (ìˆ¨ì†Œë¦¬ ë“±)
 
-    //ÇÃ·¹ÀÌ¾î ÀÌµ¿ °¡´É ¿©ºÎ
+    //í”Œë ˆì´ì–´ ì´ë™ ê°€ëŠ¥ ì—¬ë¶€
     private bool isMovable = true;
-    //È¸Àü ½Ã »ç¿ëµÇ´Â ¼Óµµ
+    //íšŒì „ ì‹œ ì‚¬ìš©ë˜ëŠ” ì†ë„
     private float rotationVelocity;
-    //È¸Àü ºÎµå·¯¿ò Á¤µµ
+    //íšŒì „ ë¶€ë“œëŸ¬ì›€ ì •ë„
     public float rotationSmoothTime = 0.1f;
     private bool isExhausted = false;
 
-    public bool IsMoving { get; private set; } 
+    public bool IsMoving { get; private set; }
     public GameManager GM;
 
 
@@ -101,32 +101,32 @@ public class PlayerMovement : MonoBehaviour
 
     private void Start()
     {
-        //¹ß¼Ò¸® ¿Àµğ¿À ¼Ò½º ¼³Á¤
+        //ë°œì†Œë¦¬ ì˜¤ë””ì˜¤ ì†ŒìŠ¤ ì„¤ì •
         if (footstepAudioSource != null)
         {
             footstepAudioSource.Stop();
             footstepAudioSource.loop = true;
         }
-        //È¿°úÀ½ ¿Àµğ¿À ¼Ò½º ¼³Á¤ (·çÇÁ ÇØÁ¦)
+        //íš¨ê³¼ìŒ ì˜¤ë””ì˜¤ ì†ŒìŠ¤ ì„¤ì • (ë£¨í”„ í•´ì œ)
         if (sfxAudioSource != null)
         {
             sfxAudioSource.loop = false;
         }
-        //CharacterController ¿ø·¡ °ª ÀúÀå
+        //CharacterController ì›ë˜ ê°’ ì €ì¥
         originalHeight = characterController.height;
         originalCenter = characterController.center;
-        //CapsuleCollider ¿ø·¡ °ª ÀúÀå
+        //CapsuleCollider ì›ë˜ ê°’ ì €ì¥
         originalCapHeight = capsuleCollider.height;
         originalCapCenter = capsuleCollider.center;
 
-        //½ºÅÂ¹Ì³ª ÃÊ±âÈ­
+        //ìŠ¤íƒœë¯¸ë‚˜ ì´ˆê¸°í™”
         currentStamina = initialStamina;
         maxStamina = initialStamina;
         UpdateStaminaUI();
 
-        //CharacterController ¼³Á¤
-        characterController.stepOffset = 0.7f; //³ÑÀ» ¼ö ÀÖ´Â ÅÎÀÇ ÃÖ´ë ³ôÀÌ
-        characterController.slopeLimit = 50f;  //¿À¸¦ ¼ö ÀÖ´Â ÃÖ´ë °æ»ç °¢µµ
+        //CharacterController ì„¤ì •
+        characterController.stepOffset = 0.7f; //ë„˜ì„ ìˆ˜ ìˆëŠ” í„±ì˜ ìµœëŒ€ ë†’ì´
+        characterController.slopeLimit = 50f;  //ì˜¤ë¥¼ ìˆ˜ ìˆëŠ” ìµœëŒ€ ê²½ì‚¬ ê°ë„
     }
 
     private void Update()
@@ -134,40 +134,40 @@ public class PlayerMovement : MonoBehaviour
         HandleGravity();
         HandleCameraToggle();
 
-        if (isMovable) //ÇÃ·¹ÀÌ¾î°¡ ¿òÁ÷ÀÏ ¼ö ÀÖ´Â »óÅÂÀÏ ¶§¸¸ ¾Æ·¡ ·ÎÁ÷ Ã³¸®
+        if (isMovable) //í”Œë ˆì´ì–´ê°€ ì›€ì§ì¼ ìˆ˜ ìˆëŠ” ìƒíƒœì¼ ë•Œë§Œ ì•„ë˜ ë¡œì§ ì²˜ë¦¬
         {
-            HandleStaminaAndRunState(); //½ºÅÂ¹Ì³ª °ü¸® ¹× ´Ş¸®±â »óÅÂ °áÁ¤
-            InputMovement(); //½ÇÁ¦ ÀÌµ¿ Ã³¸®
-            HandleStaminaRegeneration(); //½ºÅÂ¹Ì³ª È¸º¹ Ã³¸®
-            UpdateStaminaUI(); //½ºÅÂ¹Ì³ª UI ¾÷µ¥ÀÌÆ®
+            HandleStaminaAndRunState(); //ìŠ¤íƒœë¯¸ë‚˜ ê´€ë¦¬ ë° ë‹¬ë¦¬ê¸° ìƒíƒœ ê²°ì •
+            InputMovement(); //ì‹¤ì œ ì´ë™ ì²˜ë¦¬
+            HandleStaminaRegeneration(); //ìŠ¤íƒœë¯¸ë‚˜ íšŒë³µ ì²˜ë¦¬
+            UpdateStaminaUI(); //ìŠ¤íƒœë¯¸ë‚˜ UI ì—…ë°ì´íŠ¸
         }
 
         HandleCrouch();
         HandleAudio();
     }
 
-    //Áß·Â Ã³¸®
+    //ì¤‘ë ¥ ì²˜ë¦¬
     private void HandleGravity()
     {
         bool isGrounded = characterController.isGrounded;
         if (isGrounded && verticalVelocity < 0)
         {
-            //Áö¸é¿¡ ÀÖÀ» ¶§ ¾à°£ÀÇ ÇÏ°­·ÂÀ» À¯ÁöÇÏ¿© CharacterController°¡ Æ¢´Â °ÍÀ» ¹æÁö
+            //ì§€ë©´ì— ìˆì„ ë•Œ ì•½ê°„ì˜ í•˜ê°•ë ¥ì„ ìœ ì§€í•˜ì—¬ CharacterControllerê°€ íŠ€ëŠ” ê²ƒì„ ë°©ì§€
             verticalVelocity = -2f;
         }
-        verticalVelocity += gravity * Time.deltaTime; // ¸Å ÇÁ·¹ÀÓ Áß·Â Àû¿ë
+        verticalVelocity += gravity * Time.deltaTime; // ë§¤ í”„ë ˆì„ ì¤‘ë ¥ ì ìš©
     }
 
-    //Ä«¸Ş¶ó È¸Àü Åä±Û Ã³¸®
+    //ì¹´ë©”ë¼ íšŒì „ í† ê¸€ ì²˜ë¦¬
     private void HandleCameraToggle()
     {
         toggleCameraRotation = Input.GetKey(KeyCode.LeftAlt);
     }
 
-    //½ºÅÂ¹Ì³ª °ü¸® ¹× ´Ş¸®±â »óÅÂ °áÁ¤
+    //ìŠ¤íƒœë¯¸ë‚˜ ê´€ë¦¬ ë° ë‹¬ë¦¬ê¸° ìƒíƒœ ê²°ì •
     private void HandleStaminaAndRunState()
     {
-        //ÀÌ¹Ì Å»Áø »óÅÂÀÌ°Å³ª ¿òÁ÷ÀÏ ¼ö ¾ø´Â »óÅÂÀÌ¸é ¾Æ¹«°Íµµ ÇÏÁö ¾ÊÀ½
+        //ì´ë¯¸ íƒˆì§„ ìƒíƒœì´ê±°ë‚˜ ì›€ì§ì¼ ìˆ˜ ì—†ëŠ” ìƒíƒœì´ë©´ ì•„ë¬´ê²ƒë„ í•˜ì§€ ì•ŠìŒ
         if (isExhausted || !isMovable) return;
 
         bool wantsToRun = Input.GetKey(KeyCode.LeftShift);
@@ -179,11 +179,11 @@ public class PlayerMovement : MonoBehaviour
             {
                 this.run = true;
                 float previousStamina = currentStamina;
-                //Time.deltaTimeÀ» °öÇØ ÃÊ´ç ¼Ò¸ğ·®À¸·Î º¯°æ
+                //Time.deltaTimeì„ ê³±í•´ ì´ˆë‹¹ ì†Œëª¨ëŸ‰ìœ¼ë¡œ ë³€ê²½
                 currentStamina -= staminaConsumeRate * Time.deltaTime;
                 if (currentStamina < 0) currentStamina = 0;
 
-                //½ºÅÂ¹Ì³ª°¡ ¹æ±İ 0ÀÌ µÇ¾ú´Ù¸é Å»Áø ÄÚ·çÆ¾ ½ÃÀÛ
+                //ìŠ¤íƒœë¯¸ë‚˜ê°€ ë°©ê¸ˆ 0ì´ ë˜ì—ˆë‹¤ë©´ íƒˆì§„ ì½”ë£¨í‹´ ì‹œì‘
                 if (previousStamina > 0 && currentStamina == 0)
                 {
                     StartCoroutine(ExhaustionCoroutine());
@@ -196,10 +196,10 @@ public class PlayerMovement : MonoBehaviour
         }
     }
 
-    //½ºÅÂ¹Ì³ª È¸º¹ Ã³¸®
+    //ìŠ¤íƒœë¯¸ë‚˜ íšŒë³µ ì²˜ë¦¬
     private void HandleStaminaRegeneration()
     {
-        //´Ş¸®°í ÀÖÁö ¾Ê°í, ¾É¾ÆÀÖÁö ¾ÊÀ¸¸ç, Å»Áø »óÅÂ°¡ ¾Æ´Ò ¶§¸¸ È¸º¹
+        //ë‹¬ë¦¬ê³  ìˆì§€ ì•Šê³ , ì•‰ì•„ìˆì§€ ì•Šìœ¼ë©°, íƒˆì§„ ìƒíƒœê°€ ì•„ë‹ ë•Œë§Œ íšŒë³µ
         if (!this.run && !isCrouching && !isExhausted)
         {
             if (currentStamina < maxStamina)
@@ -212,33 +212,33 @@ public class PlayerMovement : MonoBehaviour
 
     private IEnumerator ExhaustionCoroutine()
     {
-        // 1. Å»Áø »óÅÂ ½ÃÀÛ
+        // 1. íƒˆì§„ ìƒíƒœ ì‹œì‘
         isExhausted = true;
-        isMovable = false; // ¿òÁ÷ÀÓ ºñÈ°¼ºÈ­
+        isMovable = false; // ì›€ì§ì„ ë¹„í™œì„±í™”
         this.run = false;
 
-        // ÀÌµ¿ ¾Ö´Ï¸ŞÀÌ¼Ç Á¤Áö
+        // ì´ë™ ì• ë‹ˆë©”ì´ì…˜ ì •ì§€
         animator.SetFloat("Blend", 0f);
 
-        // 2. ¼û¼Ò¸® Àç»ı
+        // 2. ìˆ¨ì†Œë¦¬ ì¬ìƒ
         if (sfxAudioSource != null)
         {
             sfxAudioSource.PlayOneShot(breatheClip);
         }
 
-        // 3. 3ÃÊ µ¿¾È ´ë±â
+        // 3. 3ì´ˆ ë™ì•ˆ ëŒ€ê¸°
         yield return new WaitForSeconds(exhaustionDuration);
 
-        // 4. Å»Áø »óÅÂ ÇØÁ¦
-        isMovable = true;  // ¿òÁ÷ÀÓ ´Ù½Ã È°¼ºÈ­
+        // 4. íƒˆì§„ ìƒíƒœ í•´ì œ
+        isMovable = true;  // ì›€ì§ì„ ë‹¤ì‹œ í™œì„±í™”
         isExhausted = false;
     }
 
 
-    //ÇÃ·¹ÀÌ¾î ÀÔ·Â ¹× ÀÌµ¿ Ã³¸®
+    //í”Œë ˆì´ì–´ ì…ë ¥ ë° ì´ë™ ì²˜ë¦¬
     private void InputMovement()
     {
-        //¾É±â »óÅÂ¿¡ µû¸¥ ¼Óµµ ¹× Äİ¶óÀÌ´õ Å©±â Á¶Àı
+        //ì•‰ê¸° ìƒíƒœì— ë”°ë¥¸ ì†ë„ ë° ì½œë¼ì´ë” í¬ê¸° ì¡°ì ˆ
         if (isCrouching)
         {
             finalSpeed = crouchSpeed;
@@ -249,7 +249,7 @@ public class PlayerMovement : MonoBehaviour
         }
         else
         {
-            //this.runÀº HandleStaminaAndRunState()¿¡¼­ ½ºÅÂ¹Ì³ª¸¦ °í·ÁÇÏ¿© °áÁ¤µÈ °ª
+            //this.runì€ HandleStaminaAndRunState()ì—ì„œ ìŠ¤íƒœë¯¸ë‚˜ë¥¼ ê³ ë ¤í•˜ì—¬ ê²°ì •ëœ ê°’
             finalSpeed = (this.run) ? runSpeed : speed;
             characterController.height = originalHeight;
             capsuleCollider.height = originalCapHeight;
@@ -257,52 +257,52 @@ public class PlayerMovement : MonoBehaviour
             capsuleCollider.center = originalCapCenter;
         }
 
-        //ÀÔ·Â °ª ¹Ş±â
+        //ì…ë ¥ ê°’ ë°›ê¸°
         float horizontal = Input.GetAxisRaw("Horizontal");
         float vertical = Input.GetAxisRaw("Vertical");
 
-        //µÚ·Î ÀÌµ¿ ¹æÁö (ÇÊ¿ä¿¡ µû¶ó À¯Áö ¶Ç´Â Á¦°Å)
+        //ë’¤ë¡œ ì´ë™ ë°©ì§€ (í•„ìš”ì— ë”°ë¼ ìœ ì§€ ë˜ëŠ” ì œê±°)
         //if (vertical < 0)
         //    vertical = 0;
 
-        //PlayerMental ÄÄÆ÷³ÍÆ®¿¡ µû¸¥ ÀÔ·Â ¹İÀü Ã³¸® (ÁÖ¼® Ã³¸®µÈ "³»ÀÏ ÀÌ°Å ÇØº¸±ë~!" °ü·Ã)
+        //PlayerMental ì»´í¬ë„ŒíŠ¸ì— ë”°ë¥¸ ì…ë ¥ ë°˜ì „ ì²˜ë¦¬ (ì£¼ì„ ì²˜ë¦¬ëœ "ë‚´ì¼ ì´ê±° í•´ë³´ê¹…~!" ê´€ë ¨)
         if (mental != null && mental.isReversingControl)
         {
             vertical = -vertical;
             horizontal = -horizontal;
         }
 
-        //ÀÔ·Â ¹æÇâ º¤ÅÍ °è»ê (Ä«¸Ş¶ó ±âÁØ ¾Æ´Ô)
+        //ì…ë ¥ ë°©í–¥ ë²¡í„° ê³„ì‚° (ì¹´ë©”ë¼ ê¸°ì¤€ ì•„ë‹˜)
         Vector3 inputDirection = new Vector3(horizontal, 0f, vertical).normalized;
 
         if (currentStamina <= 0 && run)
         {
-            //½ºÅÂ¹Ì³ª°¡ 0 ÀÌÇÏ¶ó¸é ÀÌµ¿ ÀÔ·ÂÀ» ¹«½Ã (´Ş¸®±â ½Ãµµ ÁßÀÏ ¶§¸¸)
+            //ìŠ¤íƒœë¯¸ë‚˜ê°€ 0 ì´í•˜ë¼ë©´ ì´ë™ ì…ë ¥ì„ ë¬´ì‹œ (ë‹¬ë¦¬ê¸° ì‹œë„ ì¤‘ì¼ ë•Œë§Œ)
             inputDirection = Vector3.zero;
         }
 
 
-        //Ä«¸Ş¶ó ¹æÇâ ±âÁØÀ¸·Î ÀÌµ¿ ¹æÇâ º¤ÅÍ º¯È¯
+        //ì¹´ë©”ë¼ ë°©í–¥ ê¸°ì¤€ìœ¼ë¡œ ì´ë™ ë°©í–¥ ë²¡í„° ë³€í™˜
         Vector3 camForward = Vector3.Scale(cam.transform.forward, new Vector3(1, 0, 1)).normalized;
         Vector3 camRight = cam.transform.right;
-        //moveDirectionÀº ¼öÆò ÀÌµ¿¸¸À» ³ªÅ¸³¿
+        //moveDirectionì€ ìˆ˜í‰ ì´ë™ë§Œì„ ë‚˜íƒ€ëƒ„
         moveDirection = (camForward * inputDirection.z + camRight * inputDirection.x).normalized;
 
-        //ÃÖÁ¾ ÀÌµ¿ º¤ÅÍ °è»ê (¼öÆò ÀÌµ¿ + ¼öÁ÷ ¼Óµµ(Áß·Â))
+        //ìµœì¢… ì´ë™ ë²¡í„° ê³„ì‚° (ìˆ˜í‰ ì´ë™ + ìˆ˜ì§ ì†ë„(ì¤‘ë ¥))
         Vector3 finalMoveVector = moveDirection * finalSpeed;
-        finalMoveVector.y = verticalVelocity; // Áß·Â Àû¿ë
+        finalMoveVector.y = verticalVelocity; // ì¤‘ë ¥ ì ìš©
 
-        //CharacterController¸¦ »ç¿ëÇÏ¿© ÀÌµ¿
+        //CharacterControllerë¥¼ ì‚¬ìš©í•˜ì—¬ ì´ë™
         characterController.Move(finalMoveVector * Time.deltaTime);
 
-        //½ÇÁ¦ ¿òÁ÷ÀÓ ¿©ºÎ ÆÇ´Ü (XZ Æò¸é ±âÁØ)
+        //ì‹¤ì œ ì›€ì§ì„ ì—¬ë¶€ íŒë‹¨ (XZ í‰ë©´ ê¸°ì¤€)
         IsMoving = new Vector3(characterController.velocity.x, 0, characterController.velocity.z).magnitude > 0.1f;
 
-        //ÇÃ·¹ÀÌ¾î È¸Àü Ã³¸®
+        //í”Œë ˆì´ì–´ íšŒì „ ì²˜ë¦¬
         if (IsMoving && !toggleCameraRotation)
         {
-            //ÀÔ·Â ¹æÇâÀ» ±âÁØÀ¸·Î ¸ñÇ¥ È¸Àü °ª °è»ê
-            if (inputDirection.sqrMagnitude > 0.01f) //ÀÔ·ÂÀÌ ÀÖÀ» ¶§¸¸ È¸Àü
+            //ì…ë ¥ ë°©í–¥ì„ ê¸°ì¤€ìœ¼ë¡œ ëª©í‘œ íšŒì „ ê°’ ê³„ì‚°
+            if (inputDirection.sqrMagnitude > 0.01f) //ì…ë ¥ì´ ìˆì„ ë•Œë§Œ íšŒì „
             {
                 float targetRotation = Mathf.Atan2(inputDirection.x, inputDirection.z) * Mathf.Rad2Deg + cam.transform.eulerAngles.y;
                 float rotation = Mathf.SmoothDampAngle(transform.eulerAngles.y, targetRotation, ref rotationVelocity, rotationSmoothTime);
@@ -321,17 +321,17 @@ public class PlayerMovement : MonoBehaviour
         animator.SetBool("isCrouching", isCrouching);
     }
 
-    //¾É±â Ã³¸®
+    //ì•‰ê¸° ì²˜ë¦¬
     private void HandleCrouch()
     {
         if (Input.GetKeyDown(KeyCode.C))
         {
             isCrouching = !isCrouching;
-            playerCrouch = isCrouching; //playerCrouch¸¦ isCrouching°ú µ¿±âÈ­
-            crouchTimer = 0f; //¾É±â/ÀÏ¾î¼­±â ½Ã Å¸ÀÌ¸Ó ÃÊ±âÈ­
+            playerCrouch = isCrouching; //playerCrouchë¥¼ isCrouchingê³¼ ë™ê¸°í™”
+            crouchTimer = 0f; //ì•‰ê¸°/ì¼ì–´ì„œê¸° ì‹œ íƒ€ì´ë¨¸ ì´ˆê¸°í™”
         }
 
-        //¾É±â »óÅÂÀÏ ¶§ Å¸ÀÌ¸Ó ·ÎÁ÷ (7ÃÊ ÈÄ °­Á¦ ±â»ó)
+        //ì•‰ê¸° ìƒíƒœì¼ ë•Œ íƒ€ì´ë¨¸ ë¡œì§ (7ì´ˆ í›„ ê°•ì œ ê¸°ìƒ)
         if (isCrouching)
         {
             crouchTimer += Time.deltaTime;
@@ -384,17 +384,17 @@ public class PlayerMovement : MonoBehaviour
         }
     }
 
-    //½ºÅÂ¹Ì³ª UI ¾÷µ¥ÀÌÆ®
+    //ìŠ¤íƒœë¯¸ë‚˜ UI ì—…ë°ì´íŠ¸
     private void UpdateStaminaUI()
     {
-        if (stamina_UI != null) // UI ¿ä¼Ò°¡ ÇÒ´çµÇ¾ú´ÂÁö È®ÀÎ
+        if (stamina_UI != null) // UI ìš”ì†Œê°€ í• ë‹¹ë˜ì—ˆëŠ”ì§€ í™•ì¸
         {
             stamina_UI.text = ((int)(currentStamina / maxStamina * 100f)).ToString() + "%";
             //stamina_UI.text = ((int)currentStamina).ToString() + " / " + ((int)maxStamina).ToString();
         }
         else
         {
-            // Debug.LogWarning("Stamina UI is not assigned."); // ÇÊ¿ä½Ã °æ°í ·Î±×
+            // Debug.LogWarning("Stamina UI is not assigned."); // í•„ìš”ì‹œ ê²½ê³  ë¡œê·¸
         }
     }
 

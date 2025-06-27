@@ -16,19 +16,19 @@ public class HpBar : MonoBehaviour
         maxWidth = yellowRectTr.sizeDelta.x;
         maxHeight = yellowRectTr.sizeDelta.y;
 
-        // ¾ŞÄ¿¿Í ÇÇ¹şÀ» ¿ŞÂÊÀ¸·Î ¼³Á¤
-        yellowRectTr.pivot = new Vector2(0f, 0.5f);  // ¿ŞÂÊ Áß¾Ó ±âÁØ
-        yellowRectTr.anchorMin = new Vector2(0f, 0.5f);  // ¿ŞÂÊ ±âÁØ
-        yellowRectTr.anchorMax = new Vector2(0f, 0.5f);  // ¿ŞÂÊ ±âÁØ
+        // ì•µì»¤ì™€ í”¼ë²—ì„ ì™¼ìª½ìœ¼ë¡œ ì„¤ì •
+        yellowRectTr.pivot = new Vector2(0f, 0.5f);  // ì™¼ìª½ ì¤‘ì•™ ê¸°ì¤€
+        yellowRectTr.anchorMin = new Vector2(0f, 0.5f);  // ì™¼ìª½ ê¸°ì¤€
+        yellowRectTr.anchorMax = new Vector2(0f, 0.5f);  // ì™¼ìª½ ê¸°ì¤€
 
-        // redImgµµ °°Àº ¹æ½ÄÀ¸·Î ¼³Á¤
-        redImgTr.pivot = new Vector2(0f, 0.5f);  // ¿ŞÂÊ Áß¾Ó ±âÁØ
-        redImgTr.anchorMin = new Vector2(0f, 0.5f);  // ¿ŞÂÊ ±âÁØ
+        // redImgë„ ê°™ì€ ë°©ì‹ìœ¼ë¡œ ì„¤ì •
+        redImgTr.pivot = new Vector2(0f, 0.5f);  // ì™¼ìª½ ì¤‘ì•™ ê¸°ì¤€
+        redImgTr.anchorMin = new Vector2(0f, 0.5f);  // ì™¼ìª½ ê¸°ì¤€
         redImgTr.anchorMax = new Vector2(0f, 0.5f);
 
-        transparentTr.pivot = new Vector2(0f, 0.5f);  // ¿ŞÂÊ Áß¾Ó ±âÁØ
-        transparentTr.anchorMin = new Vector2(0f, 0.5f);  // ¿ŞÂÊ ±âÁØ
-        transparentTr.anchorMax = new Vector2(0f, 0.5f);  // ¿ŞÂÊ ±âÁØ
+        transparentTr.pivot = new Vector2(0f, 0.5f);  // ì™¼ìª½ ì¤‘ì•™ ê¸°ì¤€
+        transparentTr.anchorMin = new Vector2(0f, 0.5f);  // ì™¼ìª½ ê¸°ì¤€
+        transparentTr.anchorMax = new Vector2(0f, 0.5f);  // ì™¼ìª½ ê¸°ì¤€
     }
 
 

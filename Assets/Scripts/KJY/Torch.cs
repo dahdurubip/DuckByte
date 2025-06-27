@@ -62,7 +62,7 @@ public class Torch : MonoBehaviour, IInteractable
             yield return null;
         }
 
-        //À§Ä¡ º¸Á¤
+        //ìœ„ì¹˜ ë³´ì •
         FirstWall.transform.position = firstWallTargetPos;
         SecondWall.transform.position = secondWallTargetPos;
         isMoving = false;

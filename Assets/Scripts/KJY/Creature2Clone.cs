@@ -50,7 +50,7 @@ public class Creature2Clone : MonoBehaviour
         }
         else
         {
-            //°ø°İ
+            //ê³µê²©
             if (!isAttacking)
             {
                 Attack();
@@ -61,19 +61,19 @@ public class Creature2Clone : MonoBehaviour
 
     private void Chase()
     {
-        //ÃßÀû
+        //ì¶”ì 
         Vector3 dir = (playerTransform.position - transform.position);
         dir.y = 0;
         dir.Normalize();
 
-        //È¸Àü
+        //íšŒì „
         Quaternion lookRot = Quaternion.LookRotation(dir);
         transform.rotation = Quaternion.RotateTowards(transform.rotation, lookRot, rotationSpeed * Time.deltaTime);
 
-        //ÀÌµ¿
+        //ì´ë™
         transform.position += dir * moveSpeed * Time.deltaTime;
 
-        //¾Ö´Ï¸ŞÀÌ¼Ç
+        //ì• ë‹ˆë©”ì´ì…˜
         animator.SetBool("run", true);
         animator.ResetTrigger("attack");
         isAttacking = false;
@@ -93,10 +93,10 @@ public class Creature2Clone : MonoBehaviour
         if (player == null) return;
 
         player.TakeDamage(5);
-        //Debug.Log("¶§¸®´ÂÁß");
+        //Debug.Log("ë•Œë¦¬ëŠ”ì¤‘");
         player.StartCoroutine(player.PlayerHitEffect());
 
-        //¼Õ¿¡ ¾ÆÀÌÅÛ ÀÖÀ¸¸é È£Ãâ
+        //ì†ì— ì•„ì´í…œ ìˆìœ¼ë©´ í˜¸ì¶œ
         if (itemmanager.currentItem != null && !itemmanager.currentItem.CompareTag("Flashlight"))
         {
             itemmanager.DropCurrentItem();

@@ -23,7 +23,7 @@ public class Door : MonoBehaviour
 
     //private void Update()
     //{
-    //    //ÇÃ·¹ÀÌ¾î°¡ °¡±îÀÌ ÀÖÀ» ¶§¸¸ ÀÛµ¿
+    //    //í”Œë ˆì´ì–´ê°€ ê°€ê¹Œì´ ìˆì„ ë•Œë§Œ ì‘ë™
     //    if (!isPlayerNearby) return;
 
     //    if (Input.GetKeyDown(KeyCode.E))

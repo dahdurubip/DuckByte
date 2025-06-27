@@ -5,16 +5,16 @@ using UnityEngine.SceneManagement;
 public class ItemManager : MonoBehaviour
 {
     [Header("Hand & Pickup Settings")]
-    //¼Õ À§Ä¡
+    //ì† ìœ„ì¹˜
     [SerializeField] private Transform handTransform;
-    //·¹ÀÌ¾î¼³Á¤
+    //ë ˆì´ì–´ì„¤ì •
     [SerializeField] private LayerMask interacterLayer;
     [SerializeField] private LayerMask pickableLayer;
     [SerializeField] private LayerMask obstacleLayer;
-    //Àü¹æ ¿ø»Ô ¹İ°æ
+    //ì „ë°© ì›ë¿” ë°˜ê²½
     [SerializeField] private float detectRange = 5f;
     [SerializeField] private float detectionRadius = 0.5f;
-    //Àü¹æ ¿ø»Ô Àı¹İ °¢µµ
+    //ì „ë°© ì›ë¿” ì ˆë°˜ ê°ë„
     //[SerializeField] private float panAngle = 30f;
     //flash
     [SerializeField] private FlashManager flashManager;
@@ -32,22 +32,22 @@ public class ItemManager : MonoBehaviour
     [Header("Note UI Settings")]
     public TextMeshProUGUI noteUIText;
 
-    //¸ŞÀÎ ¾ÆÀÌÅÛ
+    //ë©”ì¸ ì•„ì´í…œ
     public int MainItem = 0;
 
-    //»óÈ£ÀÛ¿ë Å°
+    //ìƒí˜¸ì‘ìš© í‚¤
     private KeyCode interactKey = KeyCode.E;
     private Camera mainCamera;
-    //¼Õ¿¡ µç ¾ÆÀÌÅÛ
+    //ì†ì— ë“  ì•„ì´í…œ
     public GameObject currentItem;
-    //ÇöÀç ±ÙÃ³ ´ë»ó
+    //í˜„ì¬ ê·¼ì²˜ ëŒ€ìƒ
     private GameObject nearbyInteractable;
-    //ÇÈ¾÷ ´ë»ó
+    //í”½ì—… ëŒ€ìƒ
     private GameObject pickableTarget;
-    //¾Ö´Ï¸ŞÀÌ¼Ç
+    //ì• ë‹ˆë©”ì´ì…˜
     private Animator animator;
 
-    //SphereCast°¡ ¸ÂÀº ¸¶Áö¸· À§Ä¡¸¦ ÀúÀåÇÒ º¯¼ö
+    //SphereCastê°€ ë§ì€ ë§ˆì§€ë§‰ ìœ„ì¹˜ë¥¼ ì €ì¥í•  ë³€ìˆ˜
     private Vector3 lastHitPoint;
     // public PlayerTriggerMAnager PTM;
 
@@ -61,19 +61,19 @@ public class ItemManager : MonoBehaviour
     private void Update()
     {
 
-        //1) Ä«¸Ş¶ó Àü¹æ ¿ø»Ô °Ë»ç
+        //1) ì¹´ë©”ë¼ ì „ë°© ì›ë¿” ê²€ì‚¬
         //DetectNearbyInteractable();
         //DetectNearbyPickable();
         DetectTargetInView();
 
-        //2) UI Åä±Û & À§Ä¡ ¾÷µ¥ÀÌÆ®
+        //2) UI í† ê¸€ & ìœ„ì¹˜ ì—…ë°ì´íŠ¸
         bool showUI = (nearbyInteractable != null) || (pickableTarget != null);
         if (EKeyUI.activeSelf != showUI)
             EKeyUI.SetActive(showUI);
 
         if (showUI)
         {
-            // ÀúÀåµÈ ¸¶Áö¸· Ãæµ¹ ÁöÁ¡À» UI À§Ä¡·Î »ç¿ë
+            // ì €ì¥ëœ ë§ˆì§€ë§‰ ì¶©ëŒ ì§€ì ì„ UI ìœ„ì¹˜ë¡œ ì‚¬ìš©
             Vector3 worldPos = lastHitPoint;
             EKeyUI.transform.position = mainCamera.WorldToScreenPoint(worldPos);
         }
@@ -86,14 +86,14 @@ public class ItemManager : MonoBehaviour
                 howToUse.SetActive(false);
             }
             Debug.Log("mainItem" + MainItem);
-            //EÅ°¸¦ ´©¸£¸é ¹«Á¶°Ç ²ô´Â °Í
+            //Eí‚¤ë¥¼ ëˆ„ë¥´ë©´ ë¬´ì¡°ê±´ ë„ëŠ” ê²ƒ
             if (noteUI.activeSelf)
             {
                 noteUI.SetActive(false);
                 return;
             }
 
-            //ÀĞ±â ±â¹Í (Paper/Book/Skel)
+            //ì½ê¸° ê¸°ë¯¹ (Paper/Book/Skel)
             if (nearbyInteractable != null)
             {
                 //Debug.Log("Pick");
@@ -101,9 +101,9 @@ public class ItemManager : MonoBehaviour
 
                 HandleCreature2MapInteractions();
 
-                //ÂÊÁöµéÀº ÀüºÎ noteÅÂ±×
-                //°¢ ÂÊÁö¸¶´Ù noteText½ºÅ©¸³Æ® ´Ş°í ÇØ´çÇÏ´Â ³»¿ëÀº °¢°¢ ¼öÁ¤
-                //»óÈ£ÀÛ¿ë µÈ ÂÊÁöÀÇ ÄÄÆ÷³ÍÆ® ¼Ó Text¸¦ °¡Á®¿Í¼­ ±ÛÀÚ¸¦ ¶ç¿ò
+                //ìª½ì§€ë“¤ì€ ì „ë¶€ noteíƒœê·¸
+                //ê° ìª½ì§€ë§ˆë‹¤ noteTextìŠ¤í¬ë¦½íŠ¸ ë‹¬ê³  í•´ë‹¹í•˜ëŠ” ë‚´ìš©ì€ ê°ê° ìˆ˜ì •
+                //ìƒí˜¸ì‘ìš© ëœ ìª½ì§€ì˜ ì»´í¬ë„ŒíŠ¸ ì† Textë¥¼ ê°€ì ¸ì™€ì„œ ê¸€ìë¥¼ ë„ì›€
                 if (nearbyInteractable.CompareTag("Note"))
                 {
                     NoteText content = nearbyInteractable.GetComponent<NoteText>();
@@ -117,7 +117,7 @@ public class ItemManager : MonoBehaviour
                     return;
                 }
 
-                // Å©¸®Ã³2¸Ê¿¡¼­ ¼®»ó ºÒÄÑ±â ÇÒ ¶§ ÇÊ¿äÇÑ ÅÂ±×
+                // í¬ë¦¬ì²˜2ë§µì—ì„œ ì„ìƒ ë¶ˆì¼œê¸° í•  ë•Œ í•„ìš”í•œ íƒœê·¸
                 if (nearbyInteractable.CompareTag("Statue"))
                 {
                     Statue statue = nearbyInteractable.GetComponent<Statue>();
@@ -139,7 +139,7 @@ public class ItemManager : MonoBehaviour
                     return;
                 }
 
-                //Àåµ¶´ë
+                //ì¥ë…ëŒ€
                 if (nearbyInteractable.CompareTag("Jar"))
                 {
                     Jar breaker = nearbyInteractable.GetComponent<Jar>();
@@ -173,10 +173,10 @@ public class ItemManager : MonoBehaviour
                 if (nearbyInteractable.CompareTag("UnBrokenJar"))
                 {
                     //PlayerTriggerMAnager PTM = GetComponent<PlayerTriggerMAnager>();
-                    //Debug.Log("Èì");
+                    //Debug.Log("í ");
                     //if (PTM != null)
                     //{
-                    //Debug.Log("Èì2");
+                    //Debug.Log("í 2");
                     //    PTM.unBrokenJar();
                     //}
 
@@ -199,7 +199,7 @@ public class ItemManager : MonoBehaviour
                 }
 
 
-                //¸ŞÀÎ ¾ÆÀÌÅÛÀÌ¸é
+                //ë©”ì¸ ì•„ì´í…œì´ë©´
                 if (nearbyInteractable.CompareTag("MainItem"))
                 {
                     if (UnityEngine.SceneManagement.SceneManager.GetActiveScene().name == "Creature2Map")
@@ -251,23 +251,23 @@ public class ItemManager : MonoBehaviour
 
             }
 
-            //ÇÈ¾÷
+            //í”½ì—…
             if (pickableTarget != null)
             {
 
                 Vector3 directionToTarget = pickableTarget.transform.position - transform.position;
                 float verticalOffset = directionToTarget.y;
 
-                if(pickableTarget.tag == "Flashlight")
+                if (pickableTarget.tag == "Flashlight")
                 {
                     flashManager.flashUIParticleSystem.Stop();
                 }
 
-                if (verticalOffset < 0.5f) //¹Ù´Ú¿¡ ÀÖÀ» °æ¿ì
+                if (verticalOffset < 0.5f) //ë°”ë‹¥ì— ìˆì„ ê²½ìš°
                 {
                     animator.SetTrigger("pickSit");
                 }
-                else //¾Õ¿¡ ÀÖÀ» °æ¿ì
+                else //ì•ì— ìˆì„ ê²½ìš°
                 {
                     animator.SetTrigger("pickStand");
                 }
@@ -275,7 +275,7 @@ public class ItemManager : MonoBehaviour
                 return;
 
             }
-            //ÈÄ·¹½¬ On/Off Àü¿ë Ã³¸®
+            //í›„ë ˆì‰¬ On/Off ì „ìš© ì²˜ë¦¬
             if (currentItem != null && currentItem.CompareTag("Flashlight"))
             {
                 flashManager?.Toggle();
@@ -303,7 +303,7 @@ public class ItemManager : MonoBehaviour
 
             if (!Physics.Raycast(ray.origin, directionToTarget.normalized, distanceToTarget, obstacleLayer))
             {
-                // 3. Àå¾Ö¹°ÀÌ ¾ø´Â °æ¿ì¿¡¸¸ »óÈ£ÀÛ¿ë ´ë»óÀ» ¼³Á¤ÇÕ´Ï´Ù.
+                // 3. ì¥ì• ë¬¼ì´ ì—†ëŠ” ê²½ìš°ì—ë§Œ ìƒí˜¸ì‘ìš© ëŒ€ìƒì„ ì„¤ì •í•©ë‹ˆë‹¤.
                 lastHitPoint = hit.point;
                 GameObject hitObject = hit.collider.gameObject;
                 int hitLayer = hitObject.layer;
@@ -379,7 +379,7 @@ public class ItemManager : MonoBehaviour
 
         if (currentItem.CompareTag("Flashlight"))
         {
-            flashManager?.SetHeld(false); 
+            flashManager?.SetHeld(false);
         }
 
         var item = currentItem;
@@ -411,18 +411,18 @@ public class ItemManager : MonoBehaviour
             if (mainCamera == null) return;
         }
 
-        // [FIXED] Scene ºä¿Í Game ºäÀÇ ºÒÀÏÄ¡ ¹®Á¦¸¦ ÇØ°áÇÏ±â À§ÇØ
-        // ScreenPointToRay ´ë½Å Ä«¸Ş¶óÀÇ ½ÇÁ¦ ¿ùµå Æ®·£½ºÆûÀ» »ç¿ëÇÕ´Ï´Ù.
+        // [FIXED] Scene ë·°ì™€ Game ë·°ì˜ ë¶ˆì¼ì¹˜ ë¬¸ì œë¥¼ í•´ê²°í•˜ê¸° ìœ„í•´
+        // ScreenPointToRay ëŒ€ì‹  ì¹´ë©”ë¼ì˜ ì‹¤ì œ ì›”ë“œ íŠ¸ëœìŠ¤í¼ì„ ì‚¬ìš©í•©ë‹ˆë‹¤.
         Vector3 rayOrigin = mainCamera.transform.position;
         Vector3 rayDirection = mainCamera.transform.forward;
 
         RaycastHit hit;
         LayerMask combinedLayer = interacterLayer | pickableLayer;
 
-        // ¼öÁ¤µÈ ½ÃÀÛÁ¡°ú ¹æÇâÀ¸·Î SphereCast¸¦ ½ÇÇàÇÕ´Ï´Ù.
+        // ìˆ˜ì •ëœ ì‹œì‘ì ê³¼ ë°©í–¥ìœ¼ë¡œ SphereCastë¥¼ ì‹¤í–‰í•©ë‹ˆë‹¤.
         if (Physics.SphereCast(rayOrigin, detectionRadius, rayDirection, out hit, detectRange, combinedLayer))
         {
-            // ¸Â¾ÒÀ» ¶§: ³ì»öÀ¸·Î Ç¥½Ã
+            // ë§ì•˜ì„ ë•Œ: ë…¹ìƒ‰ìœ¼ë¡œ í‘œì‹œ
             Gizmos.color = Color.green;
             Gizmos.DrawWireSphere(rayOrigin, detectionRadius);
             Gizmos.DrawLine(rayOrigin, hit.point);
@@ -430,7 +430,7 @@ public class ItemManager : MonoBehaviour
         }
         else
         {
-            // ¸ÂÁö ¾Ê¾ÒÀ» ¶§: »¡°£»öÀ¸·Î Ç¥½Ã
+            // ë§ì§€ ì•Šì•˜ì„ ë•Œ: ë¹¨ê°„ìƒ‰ìœ¼ë¡œ í‘œì‹œ
             Gizmos.color = Color.red;
             Vector3 endPoint = rayOrigin + rayDirection * detectRange;
             Gizmos.DrawWireSphere(rayOrigin, detectionRadius);
@@ -440,13 +440,13 @@ public class ItemManager : MonoBehaviour
     }
     //private bool HasLineOfSight(GameObject target)
     //{
-    //    //·¹ÀÌÄ³½ºÆ® ½ÃÀÛÁ¡(Ä«¸Ş¶ó À§Ä¡)°ú ¹æÇâ, °Å¸® °è»ê
+    //    //ë ˆì´ìºìŠ¤íŠ¸ ì‹œì‘ì (ì¹´ë©”ë¼ ìœ„ì¹˜)ê³¼ ë°©í–¥, ê±°ë¦¬ ê³„ì‚°
     //    Vector3 startPoint = mainCamera.transform.position;
     //    Vector3 direction = (target.transform.position - startPoint).normalized;
     //    float distance = Vector3.Distance(startPoint, target.transform.position);
 
-    //    //Ä«¸Ş¶ó¿Í ´ë»ó »çÀÌ¿¡ Àå¾Ö¹°ÀÌ ÀÖ´ÂÁö È®ÀÎ
-    //    //Àå¾Ö¹°ÀÌ °¨ÁöµÇ¸é 'true'°¡ µÇ¾î, ! ¿¬»êÀÚ·Î ÀÎÇØ false°¡ ¹İÈ¯
+    //    //ì¹´ë©”ë¼ì™€ ëŒ€ìƒ ì‚¬ì´ì— ì¥ì• ë¬¼ì´ ìˆëŠ”ì§€ í™•ì¸
+    //    //ì¥ì• ë¬¼ì´ ê°ì§€ë˜ë©´ 'true'ê°€ ë˜ì–´, ! ì—°ì‚°ìë¡œ ì¸í•´ falseê°€ ë°˜í™˜
     //    return !Physics.Raycast(startPoint, direction, distance, obstacleLayer);
     //}
 

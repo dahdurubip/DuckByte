@@ -10,14 +10,14 @@ public class FlashManager : MonoBehaviour
     [SerializeField] private Transform cameraTransform;
 
     [Header("Battery Settings")]
-    //¹èÅÍ¸® ±âº» Àü·®
+    //ë°°í„°ë¦¬ ê¸°ë³¸ ì „ëŸ‰
     [SerializeField] private float maxBattery = 1000f;
     [SerializeField] private float currentBattery = 1000f;
-    //ÃÊ´ç ¹èÅÍ¸® °¨¼Ò·®
-    [SerializeField] private float batteryDrainRate = 5f; 
+    //ì´ˆë‹¹ ë°°í„°ë¦¬ ê°ì†ŒëŸ‰
+    [SerializeField] private float batteryDrainRate = 5f;
 
     [Header("Battery UI")]
-    [SerializeField] private Image batteryUI; 
+    [SerializeField] private Image batteryUI;
 
     [Header("Flash UI Settings")]
     [SerializeField] private GameObject flashUI;
@@ -41,7 +41,7 @@ public class FlashManager : MonoBehaviour
             cameraTransform = Camera.main.transform;
         }
 
-        if (flashUI != null)  flashUI.SetActive(false);
+        if (flashUI != null) flashUI.SetActive(false);
         if (flashlightLight != null) flashlightLight.enabled = false;
         UpdateBatteryUI();
     }
@@ -57,7 +57,7 @@ public class FlashManager : MonoBehaviour
             flashTimer += Time.deltaTime;
             if (flashTimer >= 5f)
             {
-                //creature2 ÃßÀûÈ°¼ºÈ­
+                //creature2 ì¶”ì í™œì„±í™”
                 if (creature2 != null) creature2.flashOn = true;
             }
         }
@@ -65,7 +65,7 @@ public class FlashManager : MonoBehaviour
         {
             flashUI.SetActive(false);
 
-            //¸¸¾à isHeld´Â trueÀÎµ¥ isOnÀÌ false°¡ µÇ¸é creature2.flashOnµµ false·Î Ã³¸®
+            //ë§Œì•½ isHeldëŠ” trueì¸ë° isOnì´ falseê°€ ë˜ë©´ creature2.flashOnë„ falseë¡œ ì²˜ë¦¬
             if (isHeld && !isOn && creature2 != null && creature2.flashOn)
             {
                 flashTimer = 0f;
@@ -85,7 +85,7 @@ public class FlashManager : MonoBehaviour
     {
         if (currentBattery <= 0f && !isOn)
         {
-            //Debug.Log("¹èÅÍ¸® ¾øÀ½");
+            //Debug.Log("ë°°í„°ë¦¬ ì—†ìŒ");
             return;
         }
 
@@ -93,7 +93,7 @@ public class FlashManager : MonoBehaviour
         if (flashlightLight != null) flashlightLight.enabled = isOn;
         //Debug.Log("Flashlight isOn: " + isOn);
 
-        if (!isOn) 
+        if (!isOn)
         {
             flashTimer = 0f;
             if (creature2 != null) creature2.flashOn = false;
@@ -133,7 +133,7 @@ public class FlashManager : MonoBehaviour
         {
             currentBattery = 0f;
             TurnOff();
-            //Debug.Log("¹èÅÍ¸® ¼ÒÁø");
+            //Debug.Log("ë°°í„°ë¦¬ ì†Œì§„");
         }
 
         UpdateBatteryUI();
@@ -142,7 +142,7 @@ public class FlashManager : MonoBehaviour
     public void RefillBattery(float amount)
     {
         currentBattery = Mathf.Clamp(currentBattery + amount, 0, maxBattery);
-        //Debug.Log("¹èÅÍ¸® ÃæÀüµÊ: " + currentBattery);
+        //Debug.Log("ë°°í„°ë¦¬ ì¶©ì „ë¨: " + currentBattery);
 
         UpdateBatteryUI();
     }
@@ -151,7 +151,7 @@ public class FlashManager : MonoBehaviour
     {
         if (batteryUI != null)
         {
-            batteryUI.fillAmount = currentBattery / maxBattery; 
+            batteryUI.fillAmount = currentBattery / maxBattery;
         }
     }
 

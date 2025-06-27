@@ -2,8 +2,8 @@ using UnityEngine;
 
 public interface IInteractable
 {
-    /// <param name="heldItem">ÇÃ·¹ÀÌ¾î°¡ ÇöÀç ¼Õ¿¡ µç ¾ÆÀÌÅÛ</param>
-    // ¾ÆÀÌÅÛ 
+    /// <param name="heldItem">í”Œë ˆì´ì–´ê°€ í˜„ì¬ ì†ì— ë“  ì•„ì´í…œ</param>
+    // ì•„ì´í…œ 
     void OnInteract(GameObject heldItem);
 }
 
