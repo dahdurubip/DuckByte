@@ -69,7 +69,7 @@ public class SouthRoomPuzzleManager : MonoBehaviour
     {
         if (isSolved)
         {
-           // Debug.Log("이미 정답을 맞췄습니다. 다시 입력할 수 없습니다.");
+            // Debug.Log("이미 정답을 맞췄습니다. 다시 입력할 수 없습니다.");
             return;
         }
 
