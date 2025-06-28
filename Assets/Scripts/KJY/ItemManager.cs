@@ -176,6 +176,16 @@ public class ItemManager : MonoBehaviour
                     return;
                 }
 
+                if (nearbyInteractable.CompareTag("Wall"))
+                {
+                    BrokenWall brokenWall = nearbyInteractable.GetComponentInParent<BrokenWall>();
+                    if (brokenWall != null)
+                    {
+                        brokenWall.BreakOnce();
+                    }
+                    return;
+                }
+
                 if (nearbyInteractable.CompareTag("UnBrokenJar"))
                 {
                     //PlayerTriggerMAnager PTM = GetComponent<PlayerTriggerMAnager>();

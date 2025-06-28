@@ -29,7 +29,8 @@ public class Jar : MonoBehaviour
         m1_AudioManager.instance.PlaySfx(m1_AudioManager.m1sfx.brokenJar);
 
         // 해당 위치로 몬스터 쫓아옴
-        Vector3 soundPosition = transform.position + transform.forward * 2f;
-        GM.EmitSound(soundPosition);  // GameManager에 이벤트 전달
+        //Vector3 soundPosition = transform.position + transform.forward * 2f;
+        //GM.EmitSound(soundPosition);  // GameManager에 이벤트 전달
+        GM.EmitSound(transform.position);  // GameManager에 이벤트 전달
     }
 }
