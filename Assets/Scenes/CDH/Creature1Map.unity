@@ -23,7 +23,7 @@ RenderSettings:
   m_AmbientSkyColor: {r: 0.38679248, g: 0.28644538, b: 0.28644538, a: 1}
   m_AmbientEquatorColor: {r: 0.114, g: 0.125, b: 0.133, a: 1}
   m_AmbientGroundColor: {r: 0.047, g: 0.043, b: 0.035, a: 1}
-  m_AmbientIntensity: 1.43
+  m_AmbientIntensity: 1
   m_AmbientMode: 0
   m_SubtractiveShadowColor: {r: 0.42, g: 0.478, b: 0.627, a: 1}
   m_SkyboxMaterial: {fileID: 2100000, guid: 2039a0ad0a9d05549928b70362f54902, type: 2}
@@ -35,7 +35,7 @@ RenderSettings:
   m_DefaultReflectionMode: 0
   m_DefaultReflectionResolution: 128
   m_ReflectionBounces: 1
-  m_ReflectionIntensity: 0.1
+  m_ReflectionIntensity: 0.5
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 0}
   m_UseRadianceAmbientProbe: 0
@@ -28623,6 +28623,77 @@ MeshCollider:
   m_Convex: 1
   m_CookingOptions: 30
   m_Mesh: {fileID: -6964168652225200207, guid: 0ef01c149448977428ae5664d595fc28, type: 3}
+--- !u!1 &844838815
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 844838816}
+  - component: {fileID: 844838818}
+  - component: {fileID: 844838817}
+  m_Layer: 0
+  m_Name: SCVolume
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &844838816
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 844838815}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 33.54065, y: -16.661898, z: -0.028102875}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 1734485219}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &844838817
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 844838815}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 172515602e62fb746b5d573b38a5fe58, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_IsGlobal: 0
+  priority: 0
+  blendDistance: 0.3
+  weight: 1
+  sharedProfile: {fileID: 11400000, guid: 9a24f746e11df7449b1b7b48ac9fe7ab, type: 2}
+--- !u!65 &844838818
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 844838815}
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_IsTrigger: 1
+  m_ProvidesContacts: 0
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Size: {x: 5.1361723, y: 2.7333505, z: 2.502246}
+  m_Center: {x: -0.31078005, y: -0.86667526, z: 0.39253664}
 --- !u!1 &846761395
 GameObject:
   m_ObjectHideFlags: 0
@@ -34518,6 +34589,10 @@ PrefabInstance:
     - target: {fileID: 1840075779854636, guid: d03ac8239a200d94f9c8e954396e63fa, type: 3}
       propertyPath: m_Name
       value: well
+      objectReference: {fileID: 0}
+    - target: {fileID: 1840075779854636, guid: d03ac8239a200d94f9c8e954396e63fa, type: 3}
+      propertyPath: m_Layer
+      value: 8
       objectReference: {fileID: 0}
     - target: {fileID: 1840075779854636, guid: d03ac8239a200d94f9c8e954396e63fa, type: 3}
       propertyPath: m_TagString
@@ -43532,7 +43607,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!114 &1343110779
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -55016,6 +55091,7 @@ Transform:
   - {fileID: 9153106601859029163}
   - {fileID: 410337601207857170}
   - {fileID: 6338329862517438784}
+  - {fileID: 844838816}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1734657670
@@ -237610,7 +237686,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 45877cebf0dd83f49850cf80ca27b471, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  noteText: "\uC7A5\uB3C5\uB300\uC5D0 \uC228\uACA8\uC838\uC788\uB2E4\uB294 \uADF8\uB9BC"
+  noteText: "\uC544\uBB34\uB798\uB3C4 \uC5F4\uC1E0\uB97C \uC5B4\uB518\uAC00 \uC228\uACA8
+    \uB193\uC740 \uAC83 \uAC19\uB2E4..\n\uC6B0\uBB3C \uADFC\uCC98\uC5D0 \uC788\uB294
+    \uC7A5\uB3C5\uB300\uC5D0\uC11C \uBC18\uC9DD\uC774\uB294 \uBB34\uC5B8\uAC08 \uBCF8
+    \uAC83 \uAC19\uC740\uB370...\n\uC774\uB7F0..! \uC5EC\uAE30\uC788\uB294 \uAD34\uBB3C\uC740
+    \uB208\uC740 \uBCF4\uC774\uC9C0\uC54A\uC9C0\uB9CC \uADC0\uAC00 \uBC1D\uC740 \uAC83
+    \uAC19\uB2E4..\n\uC870\uC2EC\uD574\uC11C \uC6C0\uC9C1\uC774\uC790...."
 --- !u!54 &8105909102342226641
 Rigidbody:
   m_ObjectHideFlags: 0
