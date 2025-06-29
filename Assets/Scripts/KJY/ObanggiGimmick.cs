@@ -143,7 +143,7 @@ public class ObanggiGimmick : MonoBehaviour
             case 2: return white;
             case 3: return black;
             default:
-                Debug.LogWarning($"Invalid color index: {index}. Returning Color.clear.");
+                //Debug.LogWarning($"Invalid color index: {index}. Returning Color.clear.");
                 return Color.clear;
         }
     }
@@ -164,7 +164,7 @@ public class ObanggiGimmick : MonoBehaviour
             directionalUIs[2].slotImage.color == red &&
             directionalUIs[3].slotImage.color == black)
         {
-            Debug.Log("정답! 문 열림");
+            //Debug.Log("정답! 문 열림");
             if (Lock != null)
             {
                 Lock.SetActive(false);
