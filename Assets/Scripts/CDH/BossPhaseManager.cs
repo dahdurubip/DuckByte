@@ -6,36 +6,36 @@ using UnityEngine.SceneManagement;
 
 public class BossPhaseManager : MonoBehaviour
 {
-    [Header("±âº» ¼³Á¤")]
+    [Header("ê¸°ë³¸ ì„¤ì •")]
     public float phaseInterval = 3f;
     public float shockwaveRadius = 5f;
     public int shockwaveMentalDamage = 20;
     public int currentPhase = 1;
-    public float followDuration = 1f; // °æ°í µû¶ó´Ù´Ï´Â ½Ã°£
-    public float followSpeed = 5f;    // µû¶ó´Ù´Ï´Â ºÎµå·¯¿ò ¼Óµµ
+    public float followDuration = 1f; // ê²½ê³  ë”°ë¼ë‹¤ë‹ˆëŠ” ì‹œê°„
+    public float followSpeed = 5f;    // ë”°ë¼ë‹¤ë‹ˆëŠ” ë¶€ë“œëŸ¬ì›€ ì†ë„
     private bool isPaused = false;
 
-    [Header("£± ÆäÀÌÁî")]
-    public Transform player;          // µû¶ó´Ù´Ò ÇÃ·¹ÀÌ¾î
+    [Header("ï¼‘ í˜ì´ì¦ˆ")]
+    public Transform player;          // ë”°ë¼ë‹¤ë‹ í”Œë ˆì´ì–´
 
-    [Header("2 ÆäÀÌÁî")]
-    public GameObject burningGroundPrefab; // ºÒ¹Ù´Ú ÇÁ¸®ÆÕ
-    public float burnDuration = 3f;        // ºÒ¹Ù´Ú Á¦°Å ½Ã°£
+    [Header("2 í˜ì´ì¦ˆ")]
+    public GameObject burningGroundPrefab; // ë¶ˆë°”ë‹¥ í”„ë¦¬íŒ¹
+    public float burnDuration = 3f;        // ë¶ˆë°”ë‹¥ ì œê±° ì‹œê°„
     public GameObject randomArea;
 
-    [Header("3 ÆäÀÌÁî")]
+    [Header("3 í˜ì´ì¦ˆ")]
     public GameObject phase3Land;
     public GameObject phase2Land;
     public GameObject mentalImage;
     private Coroutine phase2Coroutine;
 
-    [Header("½ºÅ©¸³Æ®")]
-    [SerializeField] private DialogueManager dialogueManager; // ´ë»ç Ãâ·Â ´ã´ç
-    [SerializeField] private DialogueData dialogueData;       // ´ë»ç µ¥ÀÌÅÍ º¸°ü¼Ò
-    [SerializeField] private EggGroupManager eggGroupManager;   // °Å¹Ì¾Ë ¾ÆÀÌÅÛ µå·Ó ¾Ë ¼±ÅÃ
+    [Header("ìŠ¤í¬ë¦½íŠ¸")]
+    [SerializeField] private DialogueManager dialogueManager; // ëŒ€ì‚¬ ì¶œë ¥ ë‹´ë‹¹
+    [SerializeField] private DialogueData dialogueData;       // ëŒ€ì‚¬ ë°ì´í„° ë³´ê´€ì†Œ
+    [SerializeField] private EggGroupManager eggGroupManager;   // ê±°ë¯¸ì•Œ ì•„ì´í…œ ë“œë¡­ ì•Œ ì„ íƒ
 
 
-    [Header("ÇÁ¸®ÆÕ")]
+    [Header("í”„ë¦¬íŒ¹")]
     public GameObject rockPrefab;
     //public GameObject bossObject;
     public GameObject warningCirclePrefab;
@@ -51,23 +51,23 @@ public class BossPhaseManager : MonoBehaviour
 
     //public Transform[] rockSpawnPoints;
 
-    // ¿øÇÏ´Â ¼öÄ¡·Î Á¶Á¤
+    // ì›í•˜ëŠ” ìˆ˜ì¹˜ë¡œ ì¡°ì •
     //public int spawnCount = 4; 
     //private float timer;
 
-    //public Transform altar;              // Á¦´Ü À§Ä¡
-    //public float altarSafeRadius = 3f;   // Á¦´Ü º¸È£ ¹üÀ§
+    //public Transform altar;              // ì œë‹¨ ìœ„ì¹˜
+    //public float altarSafeRadius = 3f;   // ì œë‹¨ ë³´í˜¸ ë²”ìœ„
 
 
-    //// º¸½º 2ÆäÀÌÁî
-    //[SerializeField] GameObject burningGroundPrefab; // ºÒÅ¸´Â ¹Ù´Ú ÇÁ¸®ÆÕ
-    //[SerializeField] float groundRadius = 2f;        // µ¥¹ÌÁö ¹üÀ§ ¹İÁö¸§
-    //[SerializeField] float burnDuration = 3f;        // ¸î ÃÊ µ¿¾È À¯ÁöÇÒÁö
+    //// ë³´ìŠ¤ 2í˜ì´ì¦ˆ
+    //[SerializeField] GameObject burningGroundPrefab; // ë¶ˆíƒ€ëŠ” ë°”ë‹¥ í”„ë¦¬íŒ¹
+    //[SerializeField] float groundRadius = 2f;        // ë°ë¯¸ì§€ ë²”ìœ„ ë°˜ì§€ë¦„
+    //[SerializeField] float burnDuration = 3f;        // ëª‡ ì´ˆ ë™ì•ˆ ìœ ì§€í• ì§€
 
 
     void Start()
     {
-        Debug.Log(currentPhase);
+        //Debug.Log(currentPhase);
         SetPhase(currentPhase);
     }
 
@@ -79,7 +79,7 @@ public class BossPhaseManager : MonoBehaviour
     //    if (timer >= phaseInterval)
     //    {
     //        timer = 0;
-    //        Debug.Log("ÄÚ·çÆ¾ ½ÃÀÛ Á¶°Ç ¸¸Á·");
+    //        Debug.Log("ì½”ë£¨í‹´ ì‹œì‘ ì¡°ê±´ ë§Œì¡±");
 
     //        switch (currentPhase)
     //        {
@@ -106,38 +106,38 @@ public class BossPhaseManager : MonoBehaviour
 
     public void SetPhase(int phase)
     {
-        //if (phase <= currentPhase) return; // ÀÌ¹Ì ÁøÇàÇÑ ´Ü°è¸é ¹«½Ã
+        //if (phase <= currentPhase) return; // ì´ë¯¸ ì§„í–‰í•œ ë‹¨ê³„ë©´ ë¬´ì‹œ
 
         currentPhase = phase;
-        Debug.Log(currentPhase);
+        //Debug.Log(currentPhase);
         //timer = 0;
 
         //if (eggGroupManager != null)
         //{
         //    if (currentPhase == 1)
-        //        eggGroupManager.PickDropEgg(1); // 1ÆäÀÌÁî¿ë ¾Ë Áß ·£´ı ¼±ÅÃ
+        //        eggGroupManager.PickDropEgg(1); // 1í˜ì´ì¦ˆìš© ì•Œ ì¤‘ ëœë¤ ì„ íƒ
         //    else if (currentPhase == 2)
-        //        eggGroupManager.PickDropEgg(2); // 2ÆäÀÌÁî¿ë ¾Ë Áß ·£´ı ¼±ÅÃ
+        //        eggGroupManager.PickDropEgg(2); // 2í˜ì´ì¦ˆìš© ì•Œ ì¤‘ ëœë¤ ì„ íƒ
         //    else if (currentPhase == 3)
-        //        eggGroupManager.PickDropEgg(3); // 3ÆäÀÌÁî¿ë ¾Ë Áß ·£´ı ¼±ÅÃ
+        //        eggGroupManager.PickDropEgg(3); // 3í˜ì´ì¦ˆìš© ì•Œ ì¤‘ ëœë¤ ì„ íƒ
         //}
 
         if (eggGroupManager != null)
         {
             if (currentPhase == 1)
             {
-                eggGroupManager.PickDropEgg(1);   // 1ÆäÀÌÁî¿ë ¾Ë Áß ·£´ı ¼±ÅÃ
-                eggGroupManager.SetActiveEggs(1); // 1ÆäÀÌÁî ¾Ë¸¸ ÄÑ±â
+                eggGroupManager.PickDropEgg(1);   // 1í˜ì´ì¦ˆìš© ì•Œ ì¤‘ ëœë¤ ì„ íƒ
+                eggGroupManager.SetActiveEggs(1); // 1í˜ì´ì¦ˆ ì•Œë§Œ ì¼œê¸°
             }
             else if (currentPhase == 2)
             {
-                eggGroupManager.PickDropEgg(2);   // 2ÆäÀÌÁî¿ë ¾Ë Áß ·£´ı ¼±ÅÃ
-                eggGroupManager.SetActiveEggs(2); // 2ÆäÀÌÁî ¾Ë¸¸ ÄÑ±â
+                eggGroupManager.PickDropEgg(2);   // 2í˜ì´ì¦ˆìš© ì•Œ ì¤‘ ëœë¤ ì„ íƒ
+                eggGroupManager.SetActiveEggs(2); // 2í˜ì´ì¦ˆ ì•Œë§Œ ì¼œê¸°
             }
             else if (currentPhase == 3)
             {
-                eggGroupManager.PickDropEgg(3);   // 3ÆäÀÌÁî¿ë ¾Ë Áß ·£´ı ¼±ÅÃ
-                eggGroupManager.SetActiveEggs(3); // 3ÆäÀÌÁî ¾Ë¸¸ ÄÑ±â
+                eggGroupManager.PickDropEgg(3);   // 3í˜ì´ì¦ˆìš© ì•Œ ì¤‘ ëœë¤ ì„ íƒ
+                eggGroupManager.SetActiveEggs(3); // 3í˜ì´ì¦ˆ ì•Œë§Œ ì¼œê¸°
             }
         }
 
@@ -163,7 +163,7 @@ public class BossPhaseManager : MonoBehaviour
 
     //IEnumerator Phase1Attack()
     //{
-    //    Debug.Log("1ÆäÀÌÁî ½ÃÀÛ");
+    //    Debug.Log("1í˜ì´ì¦ˆ ì‹œì‘");
     //    Transform targetPoint = rockSpawnPoints[Random.Range(0, rockSpawnPoints.Length)];
     //    GameObject warning = Instantiate(warningCirclePrefab, targetPoint.position, Quaternion.identity);
     //    yield return new WaitForSeconds(1f);
@@ -173,13 +173,13 @@ public class BossPhaseManager : MonoBehaviour
 
     IEnumerator Phase1Attack()
     {
-        Debug.Log("Phase1Attack ½ÃÀÛ");
+        //Debug.Log("Phase1Attack ì‹œì‘");
         while (currentPhase == 1)
         {
             if (isPaused) { yield return null; continue; }
 
-            //Debug.Log("Phase1Attack ¹İº¹ ½ÃÀÛ");
-            // 1. °æ°í ÇÁ¸®ÆÕ »ı¼º (½ÃÀÛÇÒ ¶§ ÇÃ·¹ÀÌ¾î À§Ä¡)
+            //Debug.Log("Phase1Attack ë°˜ë³µ ì‹œì‘");
+            // 1. ê²½ê³  í”„ë¦¬íŒ¹ ìƒì„± (ì‹œì‘í•  ë•Œ í”Œë ˆì´ì–´ ìœ„ì¹˜)
             GameObject warning = Instantiate(warningCirclePrefab, player.position, Quaternion.Euler(90, 0, 0));
             warnningAudio.Play();
 
@@ -187,30 +187,30 @@ public class BossPhaseManager : MonoBehaviour
 
             while (timer < followDuration)
             {
-                // °æ°í ÇÁ¸®ÆÕÀÌ ÇÃ·¹ÀÌ¾î µû¶ó´Ù´Ï°Ô
+                // ê²½ê³  í”„ë¦¬íŒ¹ì´ í”Œë ˆì´ì–´ ë”°ë¼ë‹¤ë‹ˆê²Œ
                 warning.transform.position = player.position;
 
                 timer += Time.deltaTime;
                 yield return null;
             }
 
-            // 2. ¸¶Áö¸· ÇÃ·¹ÀÌ¾î À§Ä¡ ÀúÀå
+            // 2. ë§ˆì§€ë§‰ í”Œë ˆì´ì–´ ìœ„ì¹˜ ì €ì¥
             Vector3 dropPosition = player.position;
 
-            // 3. °æ°í Á¦°Å
+            // 3. ê²½ê³  ì œê±°
             Destroy(warning);
 
-            //// 4. µ¹À» ¸¶Áö¸· À§Ä¡ À§·ÎºÎÅÍ »ı¼º
+            //// 4. ëŒì„ ë§ˆì§€ë§‰ ìœ„ì¹˜ ìœ„ë¡œë¶€í„° ìƒì„±
             //Instantiate(rockPrefab, dropPosition + Vector3.up * 5f, Quaternion.identity);
             //yield return new WaitForSeconds(0.5f);
             //Instantiate(rockPrefab, dropPosition + Vector3.up * 5f, Quaternion.identity);
 
-            // 4. µ¹À» ¸¶Áö¸· À§Ä¡ À§·ÎºÎÅÍ »ı¼º
+            // 4. ëŒì„ ë§ˆì§€ë§‰ ìœ„ì¹˜ ìœ„ë¡œë¶€í„° ìƒì„±
             GameObject rock1 = Instantiate(rockPrefab, dropPosition + Vector3.up * 5f, Quaternion.identity);
             Rigidbody rb1 = rock1.GetComponent<Rigidbody>();
             if (rb1 != null)
             {
-                rb1.linearVelocity = Vector3.down * 10f; // ºü¸£°Ô ³«ÇÏ
+                rb1.linearVelocity = Vector3.down * 10f; // ë¹ ë¥´ê²Œ ë‚™í•˜
             }
 
             yield return new WaitForSeconds(0.5f);
@@ -223,11 +223,11 @@ public class BossPhaseManager : MonoBehaviour
             }
 
 
-            //¿¹Ãø µå·Ó
+            //ì˜ˆì¸¡ ë“œë¡­
             //Vector3 secondDrop = dropPosition + (player.forward * 2f);
             //Instantiate(rockPrefab, secondDrop + Vector3.up * 0.5f, Quaternion.identity);
 
-            yield return new WaitForSeconds(1f); // ´ÙÀ½ Çàµ¿±îÁö ¾à°£ ±â´Ù¸²
+            yield return new WaitForSeconds(1f); // ë‹¤ìŒ í–‰ë™ê¹Œì§€ ì•½ê°„ ê¸°ë‹¤ë¦¼
         }
 
     }
@@ -240,18 +240,18 @@ public class BossPhaseManager : MonoBehaviour
     //        if (isPaused) { yield return null; continue; }
 
     //        RockOff rockScript = rockPrefab.GetComponent<RockOff>();
-    //        rockScript.bossPhaseManager = this; // È¤Àº this.bossPhaseManager;
+    //        rockScript.bossPhaseManager = this; // í˜¹ì€ this.bossPhaseManager;
 
     //        List<GameObject> warnings = new List<GameObject>();
 
-    //        //  ·£´ıÀ¸·Î ¸î °³ »ı¼ºÇÒÁö Á¤ÇÏ±â
-    //        //int spawnCount = 4; // ¿øÇÏ´Â ¼öÄ¡·Î Á¶Á¤
-    //        int spawnCount = Random.Range(5, 7); // 3~5°³ »çÀÌ ·£´ı
+    //        //  ëœë¤ìœ¼ë¡œ ëª‡ ê°œ ìƒì„±í• ì§€ ì •í•˜ê¸°
+    //        //int spawnCount = 4; // ì›í•˜ëŠ” ìˆ˜ì¹˜ë¡œ ì¡°ì •
+    //        int spawnCount = Random.Range(5, 7); // 3~5ê°œ ì‚¬ì´ ëœë¤
 
 
     //        List<Transform> randomPoints = new List<Transform>(rockSpawnPoints);
 
-    //        // ¸®½ºÆ® ¼¯±â (Fisher-Yates ¹æ½Ä)
+    //        // ë¦¬ìŠ¤íŠ¸ ì„ê¸° (Fisher-Yates ë°©ì‹)
     //        for (int i = 0; i < randomPoints.Count; i++)
     //        {
     //            Transform temp = randomPoints[i];
@@ -260,7 +260,7 @@ public class BossPhaseManager : MonoBehaviour
     //            randomPoints[randomIndex] = temp;
     //        }
 
-    //        // ·£´ıÀ¸·Î ¼±ÅÃµÈ ÁöÁ¡¿¡ ¿ö´× »ı¼º
+    //        // ëœë¤ìœ¼ë¡œ ì„ íƒëœ ì§€ì ì— ì›Œë‹ ìƒì„±
     //        for (int i = 0; i < spawnCount && i < randomPoints.Count; i++)
     //        {
     //            //warnings.Add(Instantiate(warningCirclePrefab, randomPoints[i].position, Quaternion.identity));
@@ -277,7 +277,7 @@ public class BossPhaseManager : MonoBehaviour
     //            Destroy(warning);
     //        }
 
-    //        // °°Àº ÁöÁ¡¿¡ µ¹ »ı¼º
+    //        // ê°™ì€ ì§€ì ì— ëŒ ìƒì„±
     //        for (int i = 0; i < spawnCount && i < randomPoints.Count; i++)
     //        {
     //            Instantiate(rockPrefab, randomPoints[i].position, Quaternion.identity);
@@ -301,7 +301,7 @@ public class BossPhaseManager : MonoBehaviour
 
     //        int spawnCount = Random.Range(5, 7);
 
-    //        // BoxCollider·ÎºÎÅÍ ·£´ı À§Ä¡ ÃßÃâ
+    //        // BoxColliderë¡œë¶€í„° ëœë¤ ìœ„ì¹˜ ì¶”ì¶œ
     //        BoxCollider area = randomArea.GetComponent<BoxCollider>();
     //        Vector3 center = area.center + area.transform.position;
     //        Vector3 size = area.size;
@@ -310,7 +310,7 @@ public class BossPhaseManager : MonoBehaviour
     //        {
     //            float randomX = Random.Range(center.x - size.x / 2, center.x + size.x / 2);
     //            float randomZ = Random.Range(center.z - size.z / 2, center.z + size.z / 2);
-    //            Vector3 spawnPosition = new Vector3(randomX, area.transform.position.y, randomZ); // ÇÊ¿ä ½Ã Y º¸Á¤
+    //            Vector3 spawnPosition = new Vector3(randomX, area.transform.position.y, randomZ); // í•„ìš” ì‹œ Y ë³´ì •
 
     //            Vector3 warningPosition = spawnPosition + Vector3.down * 4f;
     //            warnings.Add(Instantiate(warningCirclePrefab, warningPosition, Quaternion.Euler(90, 0, 0)));
@@ -347,7 +347,7 @@ public class BossPhaseManager : MonoBehaviour
 
             //int spawnCount = Random.Range(5,7);
             int spawnCount = 0;
-            float minDistance = 4.0f;         // µ¹ °£ ÃÖ¼Ò °Å¸®
+            float minDistance = 4.0f;         // ëŒ ê°„ ìµœì†Œ ê±°ë¦¬
 
             if (currentPhase == 2)
             {
@@ -357,12 +357,12 @@ public class BossPhaseManager : MonoBehaviour
             else if (currentPhase == 3)
             {
                 spawnCount = Random.Range(5, 7);
-                minDistance = 3.5f; // 3ÆäÀÌÁî¿¡¼­ Á» ´õ Á¼°Ô ¶³¾îÁöµµ·Ï ¼³Á¤
+                minDistance = 3.5f; // 3í˜ì´ì¦ˆì—ì„œ ì¢€ ë” ì¢ê²Œ ë–¨ì–´ì§€ë„ë¡ ì„¤ì •
             }
 
-            int maxAttempts = 50;             // ¹«ÇÑ·çÇÁ ¹æÁö ½Ãµµ Á¦ÇÑ
+            int maxAttempts = 50;             // ë¬´í•œë£¨í”„ ë°©ì§€ ì‹œë„ ì œí•œ
 
-            // BoxCollider·ÎºÎÅÍ ¹üÀ§ °è»ê
+            // BoxColliderë¡œë¶€í„° ë²”ìœ„ ê³„ì‚°
             BoxCollider area = randomArea.GetComponent<BoxCollider>();
             Vector3 center = area.center + area.transform.position;
             Vector3 size = area.size;
@@ -397,10 +397,10 @@ public class BossPhaseManager : MonoBehaviour
                 i++;
             }
 
-            // ·Î±× Ãß°¡ (µğ¹ö±ë¿ë)
+            // ë¡œê·¸ ì¶”ê°€ (ë””ë²„ê¹…ìš©)
             //if (i < spawnCount)
             //{
-            //    Debug.LogWarning($"½ºÆù Á¦ÇÑ¿¡ µµ´ŞÇÏ¿© {i}/{spawnCount}°³¸¸ »ı¼ºµÊ");
+            //    Debug.LogWarning($"ìŠ¤í° ì œí•œì— ë„ë‹¬í•˜ì—¬ {i}/{spawnCount}ê°œë§Œ ìƒì„±ë¨");
             //}
 
             yield return new WaitForSeconds(1f);
@@ -427,7 +427,7 @@ public class BossPhaseManager : MonoBehaviour
         phase2Land.SetActive(false);
         mentalImage.SetActive(true);
 
-        // Phase2 ÄÚ·çÆ¾ ÁßÁö
+        // Phase2 ì½”ë£¨í‹´ ì¤‘ì§€
         //if (phase2Coroutine != null)
         //{
         //    StopCoroutine(phase2Coroutine);
@@ -444,30 +444,30 @@ public class BossPhaseManager : MonoBehaviour
 
 
 
-            //1.°æ°íÀ½ Àç»ı
-            Debug.Log("Ãæ°İÆÄ µîÀå À§ÀÌÀ×");
-            //2.Ä«¸Ş¶ó Èçµé¸²
-            Debug.Log("Ä«¸Ş¶ó ÈçµéÈçµé");
+            //1.ê²½ê³ ìŒ ì¬ìƒ
+            //Debug.Log("ì¶©ê²©íŒŒ ë“±ì¥ ìœ„ì´ì‰");
+            //2.ì¹´ë©”ë¼ í”ë“¤ë¦¼
+            //Debug.Log("ì¹´ë©”ë¼ í”ë“¤í”ë“¤");
 
             yield return new WaitForSeconds(1f);
 
 
-            //3.Ãæ°İÆÄ ÀÌÆåÆ® ¹ß»ı
+            //3.ì¶©ê²©íŒŒ ì´í™íŠ¸ ë°œìƒ
             Instantiate(shockwaveEffectPrefab, player.transform.position, Quaternion.identity);
 
-            // ÇÃ·¹ÀÌ¾î°¡ Á¦´Ü ¹İ°æ ¾È¿¡ ÀÖ´ÂÁö È®ÀÎ
+            // í”Œë ˆì´ì–´ê°€ ì œë‹¨ ë°˜ê²½ ì•ˆì— ìˆëŠ”ì§€ í™•ì¸
             //float distanceToAltar = Vector3.Distance(player.position, altar.position);
 
-            // ¾ÈÀü ¹İ°æ ¹ÛÀÌ¸é Á¤½Å·Â µ¥¹ÌÁö
+            // ì•ˆì „ ë°˜ê²½ ë°–ì´ë©´ ì •ì‹ ë ¥ ë°ë¯¸ì§€
             //if (distanceToAltar > altarSafeRadius)
             //{
                 PlayerMental mental = player.GetComponent<PlayerMental>();
                 if (mental != null && !mental.isHealing)
                 {
-                    Debug.Log("¾ÈÀü ¹İ°æ ¹ÛÀÓ");
-                    //4.Á¤½Å·Â µ¥¹ÌÁö
+                    //Debug.Log("ì•ˆì „ ë°˜ê²½ ë°–ì„");
+                    //4.ì •ì‹ ë ¥ ë°ë¯¸ì§€
                     mental.TakeMentalDamage(shockwaveMentalDamage);
-                    //5.Ä«¸Ş¶ó »ö»ó ¿Ö°î È¿°ú(Æ÷½ºÆ® ÇÁ·Î¼¼½Ì)
+                    //5.ì¹´ë©”ë¼ ìƒ‰ìƒ ì™œê³¡ íš¨ê³¼(í¬ìŠ¤íŠ¸ í”„ë¡œì„¸ì‹±)
                 }
            // }
             yield return new WaitForSeconds(2f);
@@ -483,19 +483,19 @@ public class BossPhaseManager : MonoBehaviour
     {
         isPaused = true;
 
-        // ¿¬Ãâ Àü ÁØºñ ½Ã°£
+        // ì—°ì¶œ ì „ ì¤€ë¹„ ì‹œê°„
         yield return new WaitForSeconds(0.5f);
 
-        // ÆäÀÌÁî ³Ñ¾î°¡´Â ¿¬Ãâ ½ÃÀÛ
-        //Debug.Log("º¸½º : À¸À¹");
-        // º¸½º ±×¸£¸ª ¼Ò¸® Ãß°¡
+        // í˜ì´ì¦ˆ ë„˜ì–´ê°€ëŠ” ì—°ì¶œ ì‹œì‘
+        //Debug.Log("ë³´ìŠ¤ : ìœ¼ìœ½");
+        // ë³´ìŠ¤ ê·¸ë¥´ë¦‰ ì†Œë¦¬ ì¶”ê°€
         bossHowlAudio.Play();
 
         if (dialogueData.phaseDialogues.ContainsKey(nextPhase))
         {
             foreach (string line in dialogueData.phaseDialogues[nextPhase])
             {
-                yield return StartCoroutine(dialogueManager.ShowDialogue("º¸½º", line));
+                yield return StartCoroutine(dialogueManager.ShowDialogue("ë³´ìŠ¤", line));
             }
         }
 
@@ -508,10 +508,10 @@ public class BossPhaseManager : MonoBehaviour
 
         //foreach (string line in lines)
         //{
-        //    yield return StartCoroutine(dialogueManager.ShowDialogue("º¸½º", line));
+        //    yield return StartCoroutine(dialogueManager.ShowDialogue("ë³´ìŠ¤", line));
         //}
 
-        // ¿¬Ãâ ½Ã°£
+        // ì—°ì¶œ ì‹œê°„
         //yield return new WaitForSeconds(2f);
 
         isPaused = false;
@@ -520,7 +520,7 @@ public class BossPhaseManager : MonoBehaviour
     
     void bossClear()
     {
-        Debug.Log("º¸½ºÀü Å¬¸®¾î");
+        //Debug.Log("ë³´ìŠ¤ì „ í´ë¦¬ì–´");
         //SceneManager.LoadScene("button");
         //SceneLoad.LoadSceneWithLoading("button");
         mentalImage.SetActive(false);

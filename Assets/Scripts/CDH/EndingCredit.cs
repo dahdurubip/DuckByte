@@ -6,26 +6,26 @@ public class EndingCredit : MonoBehaviour
 {
     // public enum EndingType { Good, Bad, True }
 
-    // ¿£µùºĞ±â µ¥ÀÌÅÍSO
-    // ¿£µù ºĞ±â½ÃÀÛÇÏ´Â °÷¿¡¼­ µ¥ÀÌÅÍ ¼³Á¤ÇØÁÖ±â
-    // ¼³Á¤¹æ¹ı : EndingDataSO.currentEnding = EndingType.Bad;
+    // ì—”ë”©ë¶„ê¸° ë°ì´í„°SO
+    // ì—”ë”© ë¶„ê¸°ì‹œì‘í•˜ëŠ” ê³³ì—ì„œ ë°ì´í„° ì„¤ì •í•´ì£¼ê¸°
+    // ì„¤ì •ë°©ë²• : EndingDataSO.currentEnding = EndingType.Bad;
     public EndingDataSO dataSO;
 
-    [Header("UI ÇÁ¸®ÆÕ°ú ºÎ¸ğ")]
-    public GameObject textPrefab; // TextMeshProUGUI ÇÁ¸®ÆÕ
-    public Transform textParent; // TextµéÀÌ µé¾î°¥ ºÎ¸ğ (Vertical Layout Group Æ÷ÇÔ)
+    [Header("UI í”„ë¦¬íŒ¹ê³¼ ë¶€ëª¨")]
+    public GameObject textPrefab; // TextMeshProUGUI í”„ë¦¬íŒ¹
+    public Transform textParent; // Textë“¤ì´ ë“¤ì–´ê°ˆ ë¶€ëª¨ (Vertical Layout Group í¬í•¨)
     public GameObject canbas;
     public GameObject TM;
 
-    [Header("Å¸ÀÌÇÎ ¼³Á¤")]
-    public float typingSpeed = 0.05f; // ±ÛÀÚ´ç µô·¹ÀÌ
+    [Header("íƒ€ì´í•‘ ì„¤ì •")]
+    public float typingSpeed = 0.05f; // ê¸€ìë‹¹ ë”œë ˆì´
 
-    [Header("ÇöÀç ¿£µù Å¸ÀÔ")]
+    [Header("í˜„ì¬ ì—”ë”© íƒ€ì…")]
     //public EndingType currentEnding;
     //private EndingType currentEnding => dataSO.currentEnding;
 
 
-    [Header("¿£µùº° ´ë»çµé")]
+    [Header("ì—”ë”©ë³„ ëŒ€ì‚¬ë“¤")]
     [TextArea(2, 4)] public string[] goodEndingLines;
     [TextArea(2, 4)] public string[] badEndingLines;
     [TextArea(2, 4)] public string[] trueEndingLines;
@@ -43,7 +43,7 @@ public class EndingCredit : MonoBehaviour
             case EndingType.Good: return goodEndingLines;
             case EndingType.Bad: return badEndingLines;
             case EndingType.True: return trueEndingLines;
-            default: return new string[] { "¿£µù Å¸ÀÔ ¿À·ù" };
+            default: return new string[] { "ì—”ë”© íƒ€ì… ì˜¤ë¥˜" };
         }
     }
 
@@ -61,12 +61,12 @@ public class EndingCredit : MonoBehaviour
                 yield return new WaitForSeconds(typingSpeed);
             }
 
-            yield return new WaitForSeconds(1f); // ´ÙÀ½ ÁÙ·Î ³Ñ¾î°¡±â Àü ´ë±â
+            yield return new WaitForSeconds(1f); // ë‹¤ìŒ ì¤„ë¡œ ë„˜ì–´ê°€ê¸° ì „ ëŒ€ê¸°
         }
 
         if (dataSO.currentEnding == EndingType.True)
         {
-            Debug.Log("True ¿£µùÀÌ ³¡³µ½À´Ï´Ù!");
+           // Debug.Log("True ì—”ë”©ì´ ëë‚¬ìŠµë‹ˆë‹¤!");
             canbas.SetActive(false);
             TM.SetActive(true);
         }

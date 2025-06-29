@@ -1,18 +1,18 @@
 using System.Collections;
 using UnityEngine;
-using TMPro; // Å¸ÀÌ¸Ó UI¿¡ ÇÊ¿ä
+using TMPro; // íƒ€ì´ë¨¸ UIì— í•„ìš”
 
 public class FirePuzzleManager : MonoBehaviour
 {
-    public Statue[] statues;                  // ÆÛÁñ¿¡ Æ÷ÇÔµÈ ¼®»óµé
-    // public Door doorToOpen;                   // ÆÛÁñ Å¬¸®¾î ½Ã ¿­¸± ¹®
-    public TextMeshProUGUI timerText;         // ³²Àº ½Ã°£ UI Ç¥½Ã¿ë
+    public Statue[] statues;                  // í¼ì¦ì— í¬í•¨ëœ ì„ìƒë“¤
+    // public Door doorToOpen;                   // í¼ì¦ í´ë¦¬ì–´ ì‹œ ì—´ë¦´ ë¬¸
+    public TextMeshProUGUI timerText;         // ë‚¨ì€ ì‹œê°„ UI í‘œì‹œìš©
 
-    private int litCount = 0;                 // ÇöÀç ºÒ ºÙÀº ¼®»ó ¼ö
-    private Coroutine timerCoroutine;         // Å¸ÀÌ¸Ó ÄÚ·çÆ¾ ÃßÀû º¯¼ö
-    public float timeLimit = 30f;            // Á¦ÇÑ ½Ã°£
+    private int litCount = 0;                 // í˜„ì¬ ë¶ˆ ë¶™ì€ ì„ìƒ ìˆ˜
+    private Coroutine timerCoroutine;         // íƒ€ì´ë¨¸ ì½”ë£¨í‹´ ì¶”ì  ë³€ìˆ˜
+    public float timeLimit = 30f;            // ì œí•œ ì‹œê°„
 
-    public GameObject bonginEffect;           // º¸½º ¹® ºÀÀÎ ÀÌÆåÆ®
+    public GameObject bonginEffect;           // ë³´ìŠ¤ ë¬¸ ë´‰ì¸ ì´í™íŠ¸
     public GameObject bossDoor1;
     public GameObject bossDoor2;
 
@@ -21,56 +21,56 @@ public class FirePuzzleManager : MonoBehaviour
 
     private void Start()
     {
-        foreach (var statue in statues)       // °¢ ¼®»ó¿¡ ÀÌº¥Æ® µî·Ï
+        foreach (var statue in statues)       // ê° ì„ìƒì— ì´ë²¤íŠ¸ ë“±ë¡
         {
             statue.OnFireLit += OnStatueLit;
         }
-        timerText.gameObject.SetActive(false); // UI ÃÊ±â¿¡´Â ²¨³õ±â
+        timerText.gameObject.SetActive(false); // UI ì´ˆê¸°ì—ëŠ” êº¼ë†“ê¸°
     }
 
     private void OnStatueLit(Statue statue)
     {
-        litCount++;                            // ºÒ ºÙÀº ¼®»ó ¼ö Áõ°¡
+        litCount++;                            // ë¶ˆ ë¶™ì€ ì„ìƒ ìˆ˜ ì¦ê°€
 
         if (litCount == 1 && timerCoroutine == null)
         {
-            timerCoroutine = StartCoroutine(FireTimer()); // Ã¹ ºÒÀÌ¸é Å¸ÀÌ¸Ó ½ÃÀÛ
+            timerCoroutine = StartCoroutine(FireTimer()); // ì²« ë¶ˆì´ë©´ íƒ€ì´ë¨¸ ì‹œì‘
         }
 
         if (litCount >= statues.Length)
         {
-            PuzzleComplete();                  // ÀüºÎ ºÙÀ¸¸é ÆÛÁñ Å¬¸®¾î
+            PuzzleComplete();                  // ì „ë¶€ ë¶™ìœ¼ë©´ í¼ì¦ í´ë¦¬ì–´
         }
     }
 
     private IEnumerator FireTimer()
     {
         float timer = timeLimit;
-        timerText.gameObject.SetActive(true); // Å¸ÀÌ¸Ó UI Ç¥½Ã
+        timerText.gameObject.SetActive(true); // íƒ€ì´ë¨¸ UI í‘œì‹œ
 
         while (timer > 0f)
         {
             timer -= Time.deltaTime;
-            timerText.text = $"³²Àº ½Ã°£: {timer:F1}ÃÊ"; // UI ¾÷µ¥ÀÌÆ®
+            timerText.text = $"ë‚¨ì€ ì‹œê°„: {timer:F1}ì´ˆ"; // UI ì—…ë°ì´íŠ¸
             yield return null;
         }
 
-        Debug.Log("½Ã°£ ÃÊ°ú!");
-        ResetPuzzle();                        // Á¦ÇÑ ½Ã°£ ³» ½ÇÆĞ ¡æ ÃÊ±âÈ­
+        //Debug.Log("ì‹œê°„ ì´ˆê³¼!");
+        ResetPuzzle();                        // ì œí•œ ì‹œê°„ ë‚´ ì‹¤íŒ¨ â†’ ì´ˆê¸°í™”
     }
 
     private void PuzzleComplete()
     {
-        StopCoroutine(timerCoroutine);         // Å¸ÀÌ¸Ó ÁßÁö
+        StopCoroutine(timerCoroutine);         // íƒ€ì´ë¨¸ ì¤‘ì§€
         timerCoroutine = null;
-        timerText.gameObject.SetActive(false); // UI ¼û±â±â
+        timerText.gameObject.SetActive(false); // UI ìˆ¨ê¸°ê¸°
 
-        Debug.Log("ÆÛÁñ ¿Ï·á!");
-        // ¹®ÀÌ ¿­¸®´Â ¼Ò¸®°¡ µé¸°´Ù ÅØ½ºÆ® ¶ç¿ì±â
+       // Debug.Log("í¼ì¦ ì™„ë£Œ!");
+        // ë¬¸ì´ ì—´ë¦¬ëŠ” ì†Œë¦¬ê°€ ë“¤ë¦°ë‹¤ í…ìŠ¤íŠ¸ ë„ìš°ê¸°
         dialogueManager.PlayDialogue("clearToBossDoor");
-        // º¸½º¹® ºÀÀÎ µÇ¾î ÀÖ´ø ÀÌÆåÆ® ¾ø¾Ö±â
+        // ë³´ìŠ¤ë¬¸ ë´‰ì¸ ë˜ì–´ ìˆë˜ ì´í™íŠ¸ ì—†ì• ê¸°
         bonginEffect.SetActive(false);
-        // ¹®ÀÌ¶û »óÈ£ÀÛ¿ë °¡´ÉÇØÁö´Â ±â´É Ãß°¡
+        // ë¬¸ì´ë‘ ìƒí˜¸ì‘ìš© ê°€ëŠ¥í•´ì§€ëŠ” ê¸°ëŠ¥ ì¶”ê°€
         bossDoor1.layer = LayerMask.NameToLayer("Interactable");
         bossDoor2.layer = LayerMask.NameToLayer("Interactable");
     }
@@ -79,11 +79,11 @@ public class FirePuzzleManager : MonoBehaviour
     {
         foreach (var statue in statues)
         {
-            statue.Extinguish();              // ¸ğµç ¼®»ó ºÒ ²ô±â
+            statue.Extinguish();              // ëª¨ë“  ì„ìƒ ë¶ˆ ë„ê¸°
         }
 
         litCount = 0;
         timerCoroutine = null;
-        timerText.gameObject.SetActive(false); // UI ¼û±â±â
+        timerText.gameObject.SetActive(false); // UI ìˆ¨ê¸°ê¸°
     }
 }
