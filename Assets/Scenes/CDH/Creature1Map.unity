@@ -38826,6 +38826,10 @@ PrefabInstance:
     m_TransformParent: {fileID: 0}
     m_Modifications:
     - target: {fileID: 1233254671802239474, guid: d4b2ada4637a0984287e190d7d5e015a, type: 3}
+      propertyPath: clampAngle
+      value: 70
+      objectReference: {fileID: 0}
+    - target: {fileID: 1233254671802239474, guid: d4b2ada4637a0984287e190d7d5e015a, type: 3}
       propertyPath: smoothness
       value: 40
       objectReference: {fileID: 0}
@@ -38839,7 +38843,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 1233254671802239474, guid: d4b2ada4637a0984287e190d7d5e015a, type: 3}
       propertyPath: sensitivity
-      value: 70
+      value: 10
       objectReference: {fileID: 0}
     - target: {fileID: 1233254671802239474, guid: d4b2ada4637a0984287e190d7d5e015a, type: 3}
       propertyPath: cameraRadius
@@ -46052,12 +46056,16 @@ PrefabInstance:
       objectReference: {fileID: 220939627}
     - target: {fileID: 7170638558045817283, guid: 1c1b96555739802468e69a1ebcb9c6bb, type: 3}
       propertyPath: detectRange
-      value: 2.5
+      value: 2
       objectReference: {fileID: 0}
     - target: {fileID: 7170638558045817283, guid: 1c1b96555739802468e69a1ebcb9c6bb, type: 3}
       propertyPath: flashManager
       value: 
       objectReference: {fileID: 4082654894924243248}
+    - target: {fileID: 7170638558045817283, guid: 1c1b96555739802468e69a1ebcb9c6bb, type: 3}
+      propertyPath: detectionRadius
+      value: 0.2
+      objectReference: {fileID: 0}
     - target: {fileID: 7170638558045817283, guid: 1c1b96555739802468e69a1ebcb9c6bb, type: 3}
       propertyPath: dialogueManager
       value: 
@@ -177012,8 +177020,8 @@ Rigidbody:
     m_Bits: 0
   m_ImplicitCom: 1
   m_ImplicitTensor: 1
-  m_UseGravity: 0
-  m_IsKinematic: 0
+  m_UseGravity: 1
+  m_IsKinematic: 1
   m_Interpolate: 0
   m_Constraints: 0
   m_CollisionDetection: 0
@@ -192857,8 +192865,8 @@ Rigidbody:
     m_Bits: 0
   m_ImplicitCom: 1
   m_ImplicitTensor: 1
-  m_UseGravity: 0
-  m_IsKinematic: 0
+  m_UseGravity: 1
+  m_IsKinematic: 1
   m_Interpolate: 0
   m_Constraints: 0
   m_CollisionDetection: 0
@@ -214458,6 +214466,9 @@ PrefabInstance:
     - targetCorrespondingSourceObject: {fileID: 2408173796995232607, guid: 6aee56be9750d404fb0529b617a08c19, type: 3}
       insertIndex: -1
       addedObject: {fileID: 6529724340340998161}
+    - targetCorrespondingSourceObject: {fileID: 2408173796995232607, guid: 6aee56be9750d404fb0529b617a08c19, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 6529724340340998163}
   m_SourcePrefab: {fileID: 100100000, guid: 6aee56be9750d404fb0529b617a08c19, type: 3}
 --- !u!4 &6529724340340998159 stripped
 Transform:
@@ -214505,6 +214516,33 @@ MonoBehaviour:
   isLit: 0
   fireEffect: {fileID: 922112442}
   fireAudio: {fileID: 922112443}
+--- !u!54 &6529724340340998163
+Rigidbody:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6529724340340998160}
+  serializedVersion: 4
+  m_Mass: 1
+  m_Drag: 0
+  m_AngularDrag: 0.05
+  m_CenterOfMass: {x: 0, y: 0, z: 0}
+  m_InertiaTensor: {x: 1, y: 1, z: 1}
+  m_InertiaRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ImplicitCom: 1
+  m_ImplicitTensor: 1
+  m_UseGravity: 1
+  m_IsKinematic: 1
+  m_Interpolate: 0
+  m_Constraints: 0
+  m_CollisionDetection: 0
 --- !u!1001 &6531457887043891845
 PrefabInstance:
   m_ObjectHideFlags: 0

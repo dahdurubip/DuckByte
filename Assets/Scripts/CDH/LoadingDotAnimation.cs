@@ -4,8 +4,8 @@ using System.Collections;
 
 public class LoadingDotAnimation : MonoBehaviour
 {
-    public TextMeshProUGUI loadingText; // ·ÎµùÁß... ÅØ½ºÆ® UI ¿¬°á
-    public float dotAnimationSpeed = 0.5f; // Á¡ÀÌ ¹Ù²î´Â ¼Óµµ
+    public TextMeshProUGUI loadingText; // ë¡œë”©ì¤‘... í…ìŠ¤íŠ¸ UI ì—°ê²°
+    public float dotAnimationSpeed = 0.5f; // ì ì´ ë°”ë€ŒëŠ” ì†ë„
 
     private void Start()
     {
@@ -18,10 +18,10 @@ public class LoadingDotAnimation : MonoBehaviour
 
         while (true)
         {
-            dotCount = (dotCount + 1) % 4; // 0,1,2,3 ¹İº¹
+            dotCount = (dotCount + 1) % 4; // 0,1,2,3 ë°˜ë³µ
             string dots = new string('.', dotCount);
 
-            loadingText.text = $"·ÎµùÁß{dots}";
+            loadingText.text = $"ë¡œë”©ì¤‘{dots}";
 
             yield return new WaitForSeconds(dotAnimationSpeed);
         }

@@ -6714,9 +6714,17 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 1437195307}
     - target: {fileID: 8991524472919144028, guid: aa019e8f511846e46b09d36139908157, type: 3}
+      propertyPath: detectRange
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 8991524472919144028, guid: aa019e8f511846e46b09d36139908157, type: 3}
       propertyPath: flashManager
       value: 
       objectReference: {fileID: 1572002660}
+    - target: {fileID: 8991524472919144028, guid: aa019e8f511846e46b09d36139908157, type: 3}
+      propertyPath: detectionRadius
+      value: 0.2
+      objectReference: {fileID: 0}
     - target: {fileID: 8991524472919144028, guid: aa019e8f511846e46b09d36139908157, type: 3}
       propertyPath: dialogueManager
       value: 
@@ -19812,7 +19820,7 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 1233254671802239474, guid: d4b2ada4637a0984287e190d7d5e015a, type: 3}
       propertyPath: clampAngle
-      value: 10
+      value: 70
       objectReference: {fileID: 0}
     - target: {fileID: 1233254671802239474, guid: d4b2ada4637a0984287e190d7d5e015a, type: 3}
       propertyPath: smoothness
