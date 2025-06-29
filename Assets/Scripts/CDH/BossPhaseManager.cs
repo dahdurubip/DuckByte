@@ -26,6 +26,7 @@ public class BossPhaseManager : MonoBehaviour
     [Header("3 페이즈")]
     public GameObject phase3Land;
     public GameObject phase2Land;
+    public GameObject mentalImage;
     private Coroutine phase2Coroutine;
 
     [Header("스크립트")]
@@ -424,6 +425,7 @@ public class BossPhaseManager : MonoBehaviour
 
         phase3Land.SetActive(true);
         phase2Land.SetActive(false);
+        mentalImage.SetActive(true);
 
         // Phase2 코루틴 중지
         //if (phase2Coroutine != null)
@@ -521,6 +523,7 @@ public class BossPhaseManager : MonoBehaviour
         Debug.Log("보스전 클리어");
         //SceneManager.LoadScene("button");
         //SceneLoad.LoadSceneWithLoading("button");
+        mentalImage.SetActive(false);
         bossTMCamera.SetActive(true);
         bossTM.SetActive(true);
 

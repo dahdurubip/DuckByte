@@ -7,9 +7,6 @@ public class NoteClick : MonoBehaviour
 
     void OnMouseDown()
     {
-        if (manager != null)
-        {
-            manager.ShowNotePopup(noteIndex);
-        }
+        manager?.ShowNotePopup(noteIndex);
     }
 }
