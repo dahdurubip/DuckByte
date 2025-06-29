@@ -3,17 +3,17 @@ using UnityEngine.UIElements;
 
 public class RockOff : MonoBehaviour
 {
-    public GameObject dustEffectPrefab; // ¸ÕÁö ÇÁ¸®ÆÕ
-    //public GameObject BurnParticlePrefab; // ºÒ¹Ù´Ú ¿¬±â ÆÄÆ¼Å¬
-    public float destroyDelay = 2f;     // ¸ÕÁö ÀÌÆåÆ® Á¦°Å ½Ã°£
-    public GameObject burningGroundPrefab; // ºÒ¹Ù´Ú ÇÁ¸®ÆÕ
-    public float burnDuration = 3f;        // ºÒ¹Ù´Ú Á¦°Å ½Ã°£
+    public GameObject dustEffectPrefab; // ë¨¼ì§€ í”„ë¦¬íŒ¹
+    //public GameObject BurnParticlePrefab; // ë¶ˆë°”ë‹¥ ì—°ê¸° íŒŒí‹°í´
+    public float destroyDelay = 2f;     // ë¨¼ì§€ ì´í™íŠ¸ ì œê±° ì‹œê°„
+    public GameObject burningGroundPrefab; // ë¶ˆë°”ë‹¥ í”„ë¦¬íŒ¹
+    public float burnDuration = 3f;        // ë¶ˆë°”ë‹¥ ì œê±° ì‹œê°„
     public Vector3 contactPoint;
 
     public BossPhaseManager bossPhaseManager;
     //[SerializeField] AudioSource rockAudio;
-    public AudioClip breakingClip;               // µ¹ ±úÁö´Â ¼Ò¸®
-    public GameObject soundPlayerPrefab;         // »ç¿îµå Àç»ı¿ë ÇÁ¸®ÆÕ
+    public AudioClip breakingClip;               // ëŒ ê¹¨ì§€ëŠ” ì†Œë¦¬
+    public GameObject soundPlayerPrefab;         // ì‚¬ìš´ë“œ ì¬ìƒìš© í”„ë¦¬íŒ¹
 
 
     //public bool IsRockOff { get; private set; }
@@ -22,13 +22,13 @@ public class RockOff : MonoBehaviour
     {
         if (collision.gameObject.CompareTag("Ground") || collision.gameObject.CompareTag("Player"))
         {
-            // Ãæµ¹ ÁöÁ¡
+            // ì¶©ëŒ ì§€ì 
             contactPoint = collision.contacts[0].point;
 
-            // µ¹ Á¦°Å
+            // ëŒ ì œê±°
             Destroy(gameObject);
 
-            // µ¹ ±úÁö´Â ¼Ò¸®
+            // ëŒ ê¹¨ì§€ëŠ” ì†Œë¦¬
             //rockAudio.Play();
 
 
@@ -47,14 +47,14 @@ public class RockOff : MonoBehaviour
 
             Quaternion rotation = Quaternion.LookRotation(Vector3.up);
 
-            // ¸ÕÁö ÀÌÆåÆ® »ı¼º
+            // ë¨¼ì§€ ì´í™íŠ¸ ìƒì„±
             //GameObject dust = Instantiate(dustEffectPrefab, contactPoint, Quaternion.identity);
             GameObject dust = Instantiate(dustEffectPrefab, contactPoint, Quaternion.LookRotation(Vector3.up));
 
             //IsRockOff = true;
-            //Debug.Log("¶ô¿ÀÇÁ ½ºÅ©¸³Æ®" + IsRockOff);
+            //Debug.Log("ë½ì˜¤í”„ ìŠ¤í¬ë¦½íŠ¸" + IsRockOff);
 
-            //Debug.Log("¶ô¿ÀÇÁ ½ºÅ©¸³Æ®" + bossPhaseManager.currentPhase);
+            //Debug.Log("ë½ì˜¤í”„ ìŠ¤í¬ë¦½íŠ¸" + bossPhaseManager.currentPhase);
 
             //if(bossPhaseManager.currentPhase == 2)
             //{
@@ -66,7 +66,7 @@ public class RockOff : MonoBehaviour
                 BurningGround(contactPoint);
             }
 
-            // ¸ÕÁö ÀÌÆåÆ® ÀÏÁ¤ ½Ã°£ ÈÄ Á¦°Å
+            // ë¨¼ì§€ ì´í™íŠ¸ ì¼ì • ì‹œê°„ í›„ ì œê±°
             Destroy(dust, destroyDelay);
 
 
@@ -77,7 +77,7 @@ public class RockOff : MonoBehaviour
 
     public void BurningGround(Vector3 position)
     {
-        Debug.Log("¶¥ ºÒÅ½");
+        //Debug.Log("ë•… ë¶ˆíƒ");
         GameObject fire = Instantiate(burningGroundPrefab, position, Quaternion.identity);
         Destroy(fire, burnDuration);
 

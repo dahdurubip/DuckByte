@@ -4,7 +4,7 @@ using UnityEngine;
 public class Jiockdo : MonoBehaviour, IInteractable
 {
     [Header("requiredKeyTag Settings")]
-    //ÇÊ¿ä ¿­¼è ÅÂ±×
+    //í•„ìš” ì—´ì‡  íƒœê·¸
     public string requiredKeyTag = "Bulsang";
     [SerializeField] private ItemManager itemmanager;
     [SerializeField] private DialogueManager dialogueManager;
@@ -27,36 +27,36 @@ public class Jiockdo : MonoBehaviour, IInteractable
 
     //[SerializeField] private GameObject SCDoorLock;
 
-    //IInteractable ±¸Çö
+    //IInteractable êµ¬í˜„
     public void OnInteract(GameObject heldItem)
     {
-        //1) ¾ÆÀÌÅÛÀÌ ³Î(null)ÀÌ¸é ¹«½Ã
+        //1) ì•„ì´í…œì´ ë„(null)ì´ë©´ ë¬´ì‹œ
         if (heldItem == null) return;
 
-        //2) ÅÂ±×°¡ ¸Â´Â ¿­¼èÀÎÁö È®ÀÎ
+        //2) íƒœê·¸ê°€ ë§ëŠ” ì—´ì‡ ì¸ì§€ í™•ì¸
         if (heldItem.CompareTag(requiredKeyTag))
         {
             ClearJiockdo();
         }
         else
         {
-            Debug.Log("ÀÌ°Ç ºÒ»óÀÌ ¾Æ´Õ´Ï´Ù.");
+           // Debug.Log("ì´ê±´ ë¶ˆìƒì´ ì•„ë‹™ë‹ˆë‹¤.");
         }
     }
 
     private void ClearJiockdo()
     {
-        Debug.Log("ºÒ»óÀ» ¹ÙÃÆ½À´Ï´Ù");
+        //Debug.Log("ë¶ˆìƒì„ ë°”ì³¤ìŠµë‹ˆë‹¤");
         //Destroy(itemmanager.currentItem);
-        itemmanager.DestroyCurrentItem(); //¿ÀºêÁ§Æ® ÆÄ±«ÇÏ´Â ÄÚµå
-        // Áö¿Áµµ ±×¸² ³ªÅ¸³²
+        itemmanager.DestroyCurrentItem(); //ì˜¤ë¸Œì íŠ¸ íŒŒê´´í•˜ëŠ” ì½”ë“œ
+        // ì§€ì˜¥ë„ ê·¸ë¦¼ ë‚˜íƒ€ë‚¨
         JiockdoArt.SetActive(true);
         circle.SetActive(false);
-        // Ç®¸° ÀÚ¹°¼è°¡ »ç¶óÁü
+        // í’€ë¦° ìë¬¼ì‡ ê°€ ì‚¬ë¼ì§
         //SCDoorLock.SetActive(false);
-        // ¹®µé ³ªÅ¸³ª´Â ´ë»ç
+        // ë¬¸ë“¤ ë‚˜íƒ€ë‚˜ëŠ” ëŒ€ì‚¬
         dialogueManager.PlayDialogue("clearToJiockdo");
-        // ¼û°ÜÁø ¹®°ú »óÈ£ÀÛ¿ë ÇÒ ¼ö ÀÖ°ÔµÊ
+        // ìˆ¨ê²¨ì§„ ë¬¸ê³¼ ìƒí˜¸ì‘ìš© í•  ìˆ˜ ìˆê²Œë¨
         D1.enabled = true;
         D2.enabled = true;
         D3.enabled = true;

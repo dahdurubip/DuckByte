@@ -2,7 +2,7 @@ using UnityEngine;
 
 public class AltarManager : MonoBehaviour, IInteractable
 {
-    [Header("Á¦´Ü »óÈ£ÀÛ¿ë ¾ÆÀÌÅÛ")]
+    [Header("ì œë‹¨ ìƒí˜¸ì‘ìš© ì•„ì´í…œ")]
     public string requiredItemTag = "Piece";
     public BossPhaseManager bossPhaseManager;
     public ParticleSystem altarEffect;
@@ -19,38 +19,38 @@ public class AltarManager : MonoBehaviour, IInteractable
 
     public void OnInteract(GameObject heldItem)
     {
-        // 1) ¾ÆÀÌÅÛÀÌ ³Î(null)ÀÌ¸é ¹«½Ã
+        // 1) ì•„ì´í…œì´ ë„(null)ì´ë©´ ë¬´ì‹œ
         if (heldItem == null) return;
 
-        // 2) ÅÂ±×°¡ ¸Â´Â ¿­¼èÀÎÁö È®ÀÎ
+        // 2) íƒœê·¸ê°€ ë§ëŠ” ì—´ì‡ ì¸ì§€ í™•ì¸
         if (heldItem.CompareTag(requiredItemTag))
         {
             PhaseClear();
-            altarEffect.Play(true); // ÆÄÆ¼Å¬ Àç»ı
+            altarEffect.Play(true); // íŒŒí‹°í´ ì¬ìƒ
             itemAudio.Play();
         }
         else
         {
-            Debug.Log("ÀÌ°Ç ¿­¼è°¡ ¾Æ´Õ´Ï´Ù.");
+            Debug.Log("ì´ê±´ ì—´ì‡ ê°€ ì•„ë‹™ë‹ˆë‹¤.");
         }
     }
 
     void PhaseClear()
     {
-        //Debug.Log("»óÀÚ°¡ ¿­¸³´Ï´Ù!");
+        //Debug.Log("ìƒìê°€ ì—´ë¦½ë‹ˆë‹¤!");
         //if (animator != null)
         //animator.SetTrigger("Open");
-        // TODO: ¾ÆÀÌÅÛ ½ºÆù, ¼Ò¸® Àç»ı µî Ãß°¡
+        // TODO: ì•„ì´í…œ ìŠ¤í°, ì†Œë¦¬ ì¬ìƒ ë“± ì¶”ê°€
 
-        // Á¶°¢ ¾ÆÀÌÅÛ ¾ø¾Ö±â
-        //itemmanager.DestroyCurrentItem(); //¿ÀºêÁ§Æ® ÆÄ±«ÇÏ´Â ÄÚµå
+        // ì¡°ê° ì•„ì´í…œ ì—†ì• ê¸°
+        //itemmanager.DestroyCurrentItem(); //ì˜¤ë¸Œì íŠ¸ íŒŒê´´í•˜ëŠ” ì½”ë“œ
 
 
         int nextPhase = bossPhaseManager.currentPhase + 1;
         //bossPhaseManager.SetPhase(nextPhase);
         if (nextPhase == 4)
         {
-            // ¸¶Áö¸· ÆäÀÌÁî µµ´Ş ½Ã µû·Î Ã³¸®
+            // ë§ˆì§€ë§‰ í˜ì´ì¦ˆ ë„ë‹¬ ì‹œ ë”°ë¡œ ì²˜ë¦¬
             bossPhaseManager.SetPhase(nextPhase);
         }
         else

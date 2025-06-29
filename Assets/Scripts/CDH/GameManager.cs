@@ -4,32 +4,32 @@ using System;
 public class GameManager : MonoBehaviour
 {
 
-    // µ¨¸®°ÔÀÌÆ® ÀÌº¥Æ® (ÇÃ·¹ÀÌ¾î°¡ ¼Ò¸®¸¦ ¹ß»ı½ÃÅ³ ¶§ À§Ä¡¸¦ Àü´Ş)
+    // ë¸ë¦¬ê²Œì´íŠ¸ ì´ë²¤íŠ¸ (í”Œë ˆì´ì–´ê°€ ì†Œë¦¬ë¥¼ ë°œìƒì‹œí‚¬ ë•Œ ìœ„ì¹˜ë¥¼ ì „ë‹¬)
     public event Action<Vector3> OnSoundEmitted;
-    // C# ±âº» Á¦°ø µ¨¸®°ÔÀÌÆ® ÇÔ¼ö - Action<T>
+    // C# ê¸°ë³¸ ì œê³µ ë¸ë¦¬ê²Œì´íŠ¸ í•¨ìˆ˜ - Action<T>
 
     // public delegate void SoundEvent(Vector3 position);
     // public event SoundEvent OnSoundEmitted;
-    // ÀÌ°É ÇÑ ¹®ÀåÀ¸·Î ÁÙÀÎ °ÍÀÓ
+    // ì´ê±¸ í•œ ë¬¸ì¥ìœ¼ë¡œ ì¤„ì¸ ê²ƒì„
 
 
 
-    // °ÔÀÓ ³»¿¡¼­ ¼Ò¸®°¡ ¹ß»ıÇÏ¸é È£Ãâ (ex: ÇÃ·¹ÀÌ¾î Á¡ÇÁ, ¹® ºÎ¼ö±â)
+    // ê²Œì„ ë‚´ì—ì„œ ì†Œë¦¬ê°€ ë°œìƒí•˜ë©´ í˜¸ì¶œ (ex: í”Œë ˆì´ì–´ ì í”„, ë¬¸ ë¶€ìˆ˜ê¸°)
     public void EmitSound(Vector3 soundPosition)
     {
-        OnSoundEmitted?.Invoke(soundPosition);// OnSoundEmitted°¡ nullÀÌ ¾Æ´Ï¶ó¸é ¼ÓÇØÀÖ´Â ÇÔ¼öµéÀ» ½ÇÇàÇÑ´Ù.
+        OnSoundEmitted?.Invoke(soundPosition);// OnSoundEmittedê°€ nullì´ ì•„ë‹ˆë¼ë©´ ì†í•´ìˆëŠ” í•¨ìˆ˜ë“¤ì„ ì‹¤í–‰í•œë‹¤.
     }
 
 
-    // ÆĞ´Ğ½Ã ³ª¿Ã ÀÌÆÑÆ® È¤Àº È¿°úÀ½
+    // íŒ¨ë‹‰ì‹œ ë‚˜ì˜¬ ì´íŒ©íŠ¸ í˜¹ì€ íš¨ê³¼ìŒ
     public void TriggerPanicEffect()
     {
-        Debug.Log("ÆĞ´Ğ!");
+        //Debug.Log("íŒ¨ë‹‰!");
     }
 
     public void KillPlayer()
     {
-        Debug.Log("ÇÃ·¹ÀÌ¾î Á×À½");
+        //Debug.Log("í”Œë ˆì´ì–´ ì£½ìŒ");
         SceneLoad.LoadSceneWithLoading("Creature1Map");
 
     }

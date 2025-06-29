@@ -3,7 +3,7 @@ using UnityEngine;
 public class SCDoor : MonoBehaviour, IInteractable
 {
     [Header("requiredKeyTag Settings")]
-    //ÇÊ¿ä ¿­¼è ÅÂ±×
+    //í•„ìš” ì—´ì‡  íƒœê·¸
     public string requiredKeyTag = "SCDoorKey";
     [SerializeField] private ItemManager itemmanager;
 
@@ -13,41 +13,41 @@ public class SCDoor : MonoBehaviour, IInteractable
         
 
 
-    //IInteractable ±¸Çö
+    //IInteractable êµ¬í˜„
     public void OnInteract(GameObject heldItem)
     {
-        //1) ¾ÆÀÌÅÛÀÌ ³Î(null)ÀÌ¸é ¹«½Ã
+        //1) ì•„ì´í…œì´ ë„(null)ì´ë©´ ë¬´ì‹œ
         if (heldItem == null)
         {
             dialogueManager.PlayDialogue("interactSCDoor");
             return;
         }
 
-        //2) ÅÂ±×°¡ ¸Â´Â ¿­¼èÀÎÁö È®ÀÎ
+        //2) íƒœê·¸ê°€ ë§ëŠ” ì—´ì‡ ì¸ì§€ í™•ì¸
         if (heldItem.CompareTag(requiredKeyTag))
         {
             OpenSCD();
         }
         else
         {
-            Debug.Log("ÀÌ°Ç ¿­¼è°¡ ¾Æ´Õ´Ï´Ù.");
+            //Debug.Log("ì´ê±´ ì—´ì‡ ê°€ ì•„ë‹™ë‹ˆë‹¤.");
         }
     }
 
     private void OpenSCD()
     {
-        Debug.Log("ÀÚ¹°¼è°¡ Ç®·È½À´Ï´Ù");
+        //Debug.Log("ìë¬¼ì‡ ê°€ í’€ë ¸ìŠµë‹ˆë‹¤");
         //Debug.Log("item : ");
         //Destroy(itemmanager.currentItem);
-        itemmanager.DestroyCurrentItem(); //¿ÀºêÁ§Æ® ÆÄ±«ÇÏ´Â ÄÚµå
-        //Ç®¸®´Â ¼Ò¸®
+        itemmanager.DestroyCurrentItem(); //ì˜¤ë¸Œì íŠ¸ íŒŒê´´í•˜ëŠ” ì½”ë“œ
+        //í’€ë¦¬ëŠ” ì†Œë¦¬
         m1_AudioManager.instance.PlaySfx(m1_AudioManager.m1sfx.doorLock);
         //Destroy(itemmanager.nearbyInteractable);
 
 
-        // Ç®¸° ÀÚ¹°¼è°¡ »ç¶óÁü
+        // í’€ë¦° ìë¬¼ì‡ ê°€ ì‚¬ë¼ì§
         SCDoorLock.SetActive(false);
-        // ¹®°ú »óÈ£ÀÛ¿ë ÇÒ ¼ö ÀÖ°ÔµÊ
+        // ë¬¸ê³¼ ìƒí˜¸ì‘ìš© í•  ìˆ˜ ìˆê²Œë¨
         SCD.enabled = true;
     }
 }

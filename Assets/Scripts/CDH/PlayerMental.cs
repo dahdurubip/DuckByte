@@ -1,25 +1,25 @@
 using UnityEngine;
-using UnityEngine.SceneManagement; // Á×¾úÀ» ¶§ ¾À ¸®·Îµå¿ë
+using UnityEngine.SceneManagement; // ì£½ì—ˆì„ ë•Œ ì”¬ ë¦¬ë¡œë“œìš©
 using System.Collections;
 using UnityEngine.Audio;
 
 public class PlayerMental : MonoBehaviour
 {
-    [Header("Á¤½Å·Â ¼³Á¤")]
+    [Header("ì •ì‹ ë ¥ ì„¤ì •")]
     public float maxMental = 100;
     public float currentMental;
 
-    [Header("È¸º¹ ¼³Á¤")]
-    public float recoveryRate = 5f; // ÃÊ´ç È¸º¹·®
-    public float recoveryRange = 3f; // Á¦´Ü°úÀÇ °Å¸®
+    [Header("íšŒë³µ ì„¤ì •")]
+    public float recoveryRate = 5f; // ì´ˆë‹¹ íšŒë³µëŸ‰
+    public float recoveryRange = 3f; // ì œë‹¨ê³¼ì˜ ê±°ë¦¬
 
-    // ÇöÀç Á¶ÀÛ ¹İÀü»óÅÂÀÎÁö¸¦ ³ªÅ¸³»ÁÜ
-    [Header("»óÅÂ")]
+    // í˜„ì¬ ì¡°ì‘ ë°˜ì „ìƒíƒœì¸ì§€ë¥¼ ë‚˜íƒ€ë‚´ì¤Œ
+    [Header("ìƒíƒœ")]
     public bool isReversingControl = false;
 
-    // Á¦´Ü ¿ÀºêÁ§Æ®ÀÇ À§Ä¡¸¦ ÀúÀå
+    // ì œë‹¨ ì˜¤ë¸Œì íŠ¸ì˜ ìœ„ì¹˜ë¥¼ ì €ì¥
     //public Transform altar;
-    //private PlayerMovement playerMovement; // Á¶ÀÛ ¹İÀü Àû¿ë¿ë
+    //private PlayerMovement playerMovement; // ì¡°ì‘ ë°˜ì „ ì ìš©ìš©
 
     private Coroutine recoverCoroutine;
     public bool isHealing { get; private set; }
@@ -30,8 +30,8 @@ public class PlayerMental : MonoBehaviour
     public ParticleSystem debuffEffect;
     //[SerializeField] AudioSource debuffAudio;
 
-    public AudioClip heal; // 1¹ø ±¸¿ª À½¾Ç
-    public AudioClip debuff; // 2¹ø ±¸¿ª À½¾Ç
+    public AudioClip heal; // 1ë²ˆ êµ¬ì—­ ìŒì•…
+    public AudioClip debuff; // 2ë²ˆ êµ¬ì—­ ìŒì•…
 
     [SerializeField] AudioSource playAudio;
 
@@ -47,7 +47,7 @@ public class PlayerMental : MonoBehaviour
         //playerMovement = GetComponent<PlayerMovement>();
         //if (playerMovement == null)
         //{
-        //    Debug.LogWarning("PlayerMovement ÄÄÆ÷³ÍÆ®¸¦ Ã£À» ¼ö ¾ø½À´Ï´Ù.");
+        //    Debug.LogWarning("PlayerMovement ì»´í¬ë„ŒíŠ¸ë¥¼ ì°¾ì„ ìˆ˜ ì—†ìŠµë‹ˆë‹¤.");
         //}
     }
 
@@ -58,13 +58,13 @@ public class PlayerMental : MonoBehaviour
         if (other.CompareTag("SlowZone"))
         {
             isInSlowZone = true;
-            // ÀÌµ¿ ¼Óµµ ÁÙÀÌ´Â ÄÚµå³Ö±â
+            // ì´ë™ ì†ë„ ì¤„ì´ëŠ” ì½”ë“œë„£ê¸°
             pm.speed = 2f;
         }
 
         if (other.CompareTag("HealZone"))
         {
-            Debug.Log("ÈúÁ¸ µé¾î¿È");
+           // Debug.Log("íì¡´ ë“¤ì–´ì˜´");
 
             //healAudio.Play();
             playAudio.loop = true;
@@ -82,13 +82,13 @@ public class PlayerMental : MonoBehaviour
         if (other.CompareTag("SlowZone"))
         {
             isInSlowZone = false;
-            // ÀÌµ¿ ¼Óµµ ¿ø»óº¹±¸ÇÏ´Â ÄÚµå³Ö±â
+            // ì´ë™ ì†ë„ ì›ìƒë³µêµ¬í•˜ëŠ” ì½”ë“œë„£ê¸°
             pm.speed = 5f;
         }
 
         if (other.CompareTag("HealZone") && recoverCoroutine != null)
         {
-            Debug.Log("ÈúÁ¸ ³ª°¨");
+            //Debug.Log("íì¡´ ë‚˜ê°");
             //healAudio.Stop();
             playAudio.Stop();
             isHealing = false;
@@ -99,7 +99,7 @@ public class PlayerMental : MonoBehaviour
 
     IEnumerator RecoverMental()
     {
-        Debug.Log("È¸º¹ ½ÃÀÛ");
+        //Debug.Log("íšŒë³µ ì‹œì‘");
         while (true)
         {
             currentMental += recoveryRate * Time.deltaTime;
@@ -108,20 +108,20 @@ public class PlayerMental : MonoBehaviour
             if (currentMental > 30 && isReversingControl)
             {
                 isReversingControl = false;
-                Debug.Log("Á¤½Å·Â È¸º¹ ¡æ Á¶ÀÛ Á¤»óÈ­");
+                //Debug.Log("ì •ì‹ ë ¥ íšŒë³µ â†’ ì¡°ì‘ ì •ìƒí™”");
             }
 
-            yield return null; // ´ÙÀ½ ÇÁ·¹ÀÓ±îÁö ´ë±â
+            yield return null; // ë‹¤ìŒ í”„ë ˆì„ê¹Œì§€ ëŒ€ê¸°
         }
     }
 
 
     void Update()
     {
-        // Á¤½Å·Â È¸º¹ Á¶°Ç
+        // ì •ì‹ ë ¥ íšŒë³µ ì¡°ê±´
         //if (altar != null)
         //{
-        //    // ÇÃ·¹ÀÌ¾îÀÇ À§Ä¡¿Í Á¦´ÜÀÇ À§Ä¡»çÀÌÀÇ °Å¸®¸¦ ±¸ÇØ È¸º¹ ±¸¿ª ÀÌ³»¶ó¸é È¸º¹ÇÔ¼ö¸¦ È£Ãâ
+        //    // í”Œë ˆì´ì–´ì˜ ìœ„ì¹˜ì™€ ì œë‹¨ì˜ ìœ„ì¹˜ì‚¬ì´ì˜ ê±°ë¦¬ë¥¼ êµ¬í•´ íšŒë³µ êµ¬ì—­ ì´ë‚´ë¼ë©´ íšŒë³µí•¨ìˆ˜ë¥¼ í˜¸ì¶œ
         //    float distanceToAltar = Vector3.Distance(transform.position, altar.position);
         //    if (distanceToAltar <= recoveryRange)
         //    {
@@ -137,80 +137,80 @@ public class PlayerMental : MonoBehaviour
         //Debug.Log(currentMental);
         //Debug.Log(pm.finalSpeed);
 
-        // Á¤½Å·Â »óÅÂ¿¡ µû¸¥ È¿°ú
-        // ÇöÀç Á¤½Å·ÂÀÌ 30ÀÌÇÏÀÌ¸é¼­ Á¶ÀÛ¹İÀüÀÌ µÇÁö¾Ê¾Ò´Ù¸é È¿°úÇÔ¼ö È£Ãâ
+        // ì •ì‹ ë ¥ ìƒíƒœì— ë”°ë¥¸ íš¨ê³¼
+        // í˜„ì¬ ì •ì‹ ë ¥ì´ 30ì´í•˜ì´ë©´ì„œ ì¡°ì‘ë°˜ì „ì´ ë˜ì§€ì•Šì•˜ë‹¤ë©´ íš¨ê³¼í•¨ìˆ˜ í˜¸ì¶œ
         if (currentMental <= 30 && !isReversingControl)
         {
             TriggerLowMentalEffects();
         }
 
-        // Á¤½Å·ÂÀÌ 0ÀÌÇÏ°¡µÇ¸é »ç¸ÁÇÔ¼ö È£Ãâ
+        // ì •ì‹ ë ¥ì´ 0ì´í•˜ê°€ë˜ë©´ ì‚¬ë§í•¨ìˆ˜ í˜¸ì¶œ
         if (currentMental <= 0)
         {
             //Die();
         }
     }
 
-    // ¿ÜºÎ¿¡¼­ Á¤½Å·ÂÀ» ±ğÀ»¶§ »ç¿ë ÇÒ ÇÔ¼ö
+    // ì™¸ë¶€ì—ì„œ ì •ì‹ ë ¥ì„ ê¹ì„ë•Œ ì‚¬ìš© í•  í•¨ìˆ˜
     public void TakeMentalDamage(int amount)
     {
         currentMental -= amount;
-        //Clamp¸¦ ÅëÇØ¼­ °ªÀ» 0~100»çÀÌ·Î À¯Áö
+        //Clampë¥¼ í†µí•´ì„œ ê°’ì„ 0~100ì‚¬ì´ë¡œ ìœ ì§€
         currentMental = Mathf.Clamp(currentMental, 0, maxMental);
-        // Á¤½Å·Â °¨¼Ò ÆÄÆ¼Å¬ Àç»ı ¹× ¿Àµğ¿À Àç»ı
+        // ì •ì‹ ë ¥ ê°ì†Œ íŒŒí‹°í´ ì¬ìƒ ë° ì˜¤ë””ì˜¤ ì¬ìƒ
         debuffEffect.Play();
         //debuffAudio.Play();
         playAudio.loop = false;
         PlaySound(debuff);
 
-        Debug.Log("Á¤½Å·Â °¨¼Ò: " + currentMental);
+       // Debug.Log("ì •ì‹ ë ¥ ê°ì†Œ: " + currentMental);
     }
 
-    // È¸º¹ ÇÔ¼ö
+    // íšŒë³µ í•¨ìˆ˜
     //void RecoverMental()
     //{
-    //    Debug.Log("È¸º¹Áß");
-    //    // Á¤½Å·ÂÀ» ÃÊ´ç È¸º¹
+    //    Debug.Log("íšŒë³µì¤‘");
+    //    // ì •ì‹ ë ¥ì„ ì´ˆë‹¹ íšŒë³µ
     //    currentMental += recoveryRate * Time.deltaTime;
     //    currentMental = Mathf.Clamp(currentMental, 0f, maxMental);
 
-    //    // Á¶ÀÛ ¹İÀü º¹±¸
-    //    // Á¤½Å·ÂÀÌ 30ÀÌ»óÀÌ¸é¼­ Á¶ÀÛ¹İÀü»óÅÂÀÏ½Ã¿¡´Â Á¶ÀÛ¹İÀü »óÅÂ¸¦ ÇØÁ¦
+    //    // ì¡°ì‘ ë°˜ì „ ë³µêµ¬
+    //    // ì •ì‹ ë ¥ì´ 30ì´ìƒì´ë©´ì„œ ì¡°ì‘ë°˜ì „ìƒíƒœì¼ì‹œì—ëŠ” ì¡°ì‘ë°˜ì „ ìƒíƒœë¥¼ í•´ì œ
     //    if (currentMental > 30 && isReversingControl)
     //    {
     //        isReversingControl = false;
     //        //if (playerMovement != null)
     //        //    playerMovement.SetReverseControl(false);
 
-    //        Debug.Log("Á¤½Å·Â È¸º¹ ¡æ Á¶ÀÛ Á¤»óÈ­");
+    //        Debug.Log("ì •ì‹ ë ¥ íšŒë³µ â†’ ì¡°ì‘ ì •ìƒí™”");
     //    }
     //}
 
-    // ³·Àº Á¤½Å·Â È¿°ú
+    // ë‚®ì€ ì •ì‹ ë ¥ íš¨ê³¼
     void TriggerLowMentalEffects()
     {
-        // Á¶ÀÛ¹İÀü ½ÃÀÛ
+        // ì¡°ì‘ë°˜ì „ ì‹œì‘
         isReversingControl = true;
 
         //if (playerMovement != null)
         //    playerMovement.SetReverseControl(true);
 
-        // È­¸é ¿Ö°î È¿°úµµ ¿©±â¼­ ½ÃÀÛ
-        Debug.Log("Á¤½Å·Â ³·À½! È­¸é ¿Ö°î + Á¶ÀÛ ¹İÀü ½ÃÀÛ");
+        // í™”ë©´ ì™œê³¡ íš¨ê³¼ë„ ì—¬ê¸°ì„œ ì‹œì‘
+        //Debug.Log("ì •ì‹ ë ¥ ë‚®ìŒ! í™”ë©´ ì™œê³¡ + ì¡°ì‘ ë°˜ì „ ì‹œì‘");
     }
 
-    // Á×À½ ÇÔ¼ö
+    // ì£½ìŒ í•¨ìˆ˜
     void Die()
     {
-        Debug.Log("Á¤½Å·Â 0 ¡æ »ç¸Á!");
-        // ¿©±â¼­ °ÔÀÓ ¿À¹ö Ã³¸® (ÃßÈÄ Ã¼Å©Æ÷ÀÎÆ® ¸¸µé¾î¼­ ÄÆ¾À ³¡³­ ÈÄ·Î µÇµ¹¸± ¿¹Á¤)
+        Debug.Log("ì •ì‹ ë ¥ 0 â†’ ì‚¬ë§!");
+        // ì—¬ê¸°ì„œ ê²Œì„ ì˜¤ë²„ ì²˜ë¦¬ (ì¶”í›„ ì²´í¬í¬ì¸íŠ¸ ë§Œë“¤ì–´ì„œ ì»·ì”¬ ëë‚œ í›„ë¡œ ë˜ëŒë¦´ ì˜ˆì •)
         SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
     }
 
     void PlaySound(AudioClip newClip)
     {
         //if (audioSource.clip == newClip && audioSource.isPlaying)
-        //    return; // ÀÌ¹Ì Àç»ı ÁßÀÌ¸é ¹«½Ã
+        //    return; // ì´ë¯¸ ì¬ìƒ ì¤‘ì´ë©´ ë¬´ì‹œ
 
         playAudio.clip = newClip;
         playAudio.Play();

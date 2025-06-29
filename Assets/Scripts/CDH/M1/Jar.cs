@@ -2,13 +2,13 @@ using UnityEngine;
 
 public class Jar : MonoBehaviour
 {
-    public GameObject intactJar;   // ±úÁöÁö ¾ÊÀº Àåµ¶´ë
-    public GameObject brokenJar;   // ±úÁø Àåµ¶´ë (Á¶°¢ »óÅÂ)
-    //public ParticleSystem breakEffect; // ÆÄÆí È¿°ú (¼±ÅÃ)
+    public GameObject intactJar;   // ê¹¨ì§€ì§€ ì•Šì€ ì¥ë…ëŒ€
+    public GameObject brokenJar;   // ê¹¨ì§„ ì¥ë…ëŒ€ (ì¡°ê° ìƒíƒœ)
+    //public ParticleSystem breakEffect; // íŒŒí¸ íš¨ê³¼ (ì„ íƒ)
 
     private bool isBroken = false;
 
-    // ÀÌº¥Æ® ±¸µ¶¶§ ÇÊ¿ä
+    // ì´ë²¤íŠ¸ êµ¬ë…ë•Œ í•„ìš”
     public GameManager GM;
 
     public void BreakJar()
@@ -16,21 +16,21 @@ public class Jar : MonoBehaviour
         if (isBroken) return;
         isBroken = true;
 
-        intactJar.SetActive(false);         // ¿øº» ²¨Áü
-        brokenJar.SetActive(true);          // Á¶°¢ ÄÑÁü
+        intactJar.SetActive(false);         // ì›ë³¸ êº¼ì§
+        brokenJar.SetActive(true);          // ì¡°ê° ì¼œì§
 
         //if (breakEffect != null)
-        //    breakEffect.Play();             // ÆÄÆ¼Å¬ Àç»ı
+        //    breakEffect.Play();             // íŒŒí‹°í´ ì¬ìƒ
 
-        // Á¶°¢¿¡ Rigidbody ºÙ¾î ÀÖÀ¸¸é Áß·Â Àû¿ëµÊ
-        Debug.Log("Àåµ¶´ë ±úÁü!");
+        // ì¡°ê°ì— Rigidbody ë¶™ì–´ ìˆìœ¼ë©´ ì¤‘ë ¥ ì ìš©ë¨
+       // Debug.Log("ì¥ë…ëŒ€ ê¹¨ì§!");
 
-        // ±úÁö´Â ¼Ò¸® Àç»ı
+        // ê¹¨ì§€ëŠ” ì†Œë¦¬ ì¬ìƒ
         m1_AudioManager.instance.PlaySfx(m1_AudioManager.m1sfx.brokenJar);
 
-        // ÇØ´ç À§Ä¡·Î ¸ó½ºÅÍ ÂÑ¾Æ¿È
+        // í•´ë‹¹ ìœ„ì¹˜ë¡œ ëª¬ìŠ¤í„° ì«“ì•„ì˜´
         //Vector3 soundPosition = transform.position + transform.forward * 2f;
-        //GM.EmitSound(soundPosition);  // GameManager¿¡ ÀÌº¥Æ® Àü´Ş
-        GM.EmitSound(transform.position);  // GameManager¿¡ ÀÌº¥Æ® Àü´Ş
+        //GM.EmitSound(soundPosition);  // GameManagerì— ì´ë²¤íŠ¸ ì „ë‹¬
+        GM.EmitSound(transform.position);  // GameManagerì— ì´ë²¤íŠ¸ ì „ë‹¬
     }
 }

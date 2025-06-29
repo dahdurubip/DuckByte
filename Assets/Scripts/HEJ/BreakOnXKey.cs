@@ -5,59 +5,59 @@ using UnityEngine.UI;
 
 public class BreakOnXKey : MonoBehaviour
 {
-    [Header("ÇÃ·¹ÀÌ¾î")]
+    [Header("í”Œë ˆì´ì–´")]
     [SerializeField] private Transform player;
 
-    [Header("ºÎ¼ú ¼ö ÀÖ´Â ÃÖ´ë °Å¸®")]
+    [Header("ë¶€ìˆ  ìˆ˜ ìˆëŠ” ìµœëŒ€ ê±°ë¦¬")]
     [SerializeField] private float breakDistance = 2f;
 
-    [Header("ÅëÂ¥ ¸Ş½Ã")]
+    [Header("í†µì§œ ë©”ì‹œ")]
     [SerializeField] private GameObject wholeEggs;
 
-    [Header("ÆÄÆí ±×·ì")]
+    [Header("íŒŒí¸ ê·¸ë£¹")]
     [SerializeField] private GameObject fragmentsParent;
 
-    [Header("Æø¹ß·Â / ¹İ°æ")]
+    [Header("í­ë°œë ¥ / ë°˜ê²½")]
     [SerializeField] private float explosionForce = 200f;
     [SerializeField] private float explosionRadius = 1.5f;
 
-    [Header("5ÃÊ ³» ½ÇÆĞ ½Ã È°¼ºÈ­ÇÒ °Å¹Ì ¿ÀºêÁ§Æ®")]
-    [SerializeField] private GameObject spiderObject;
+    //[Header("5ì´ˆ ë‚´ ì‹¤íŒ¨ ì‹œ í™œì„±í™”í•  ê±°ë¯¸ ì˜¤ë¸Œì íŠ¸")]
+    //[SerializeField] private GameObject spiderObject;
 
-    [Header("±ú±â Á¦ÇÑ ½Ã°£")]
+    [Header("ê¹¨ê¸° ì œí•œ ì‹œê°„")]
     [SerializeField] private float breakTimeout = 5f;
 
     //**
     private const int totalStages = 10;
     private int pressCount = 0;
 
-    [Header("µå¶ø ¾ÆÀÌÅÛ ¼³Á¤")]
+    [Header("ë“œë ì•„ì´í…œ ì„¤ì •")]
     [SerializeField] private GameObject dropItemPrefab;
-    [SerializeField] private Slider breakProgressSlider;    // ¾Ë ±ú´Â ¼öÄ¡ ½½¶óÀÌ´õ
-    [Header("½½¶óÀÌ´õ ÄÁÆ®·Ñ")]
-    [SerializeField] private GameObject breakSliderObject;  // ½½¶óÀÌ´õ ²°´Ù Ä×´Ù
+    [SerializeField] private Slider breakProgressSlider;    // ì•Œ ê¹¨ëŠ” ìˆ˜ì¹˜ ìŠ¬ë¼ì´ë”
+    [Header("ìŠ¬ë¼ì´ë” ì»¨íŠ¸ë¡¤")]
+    [SerializeField] private GameObject breakSliderObject;  // ìŠ¬ë¼ì´ë” ê»ë‹¤ ì¼°ë‹¤
 
-    [Header("¾Ë ÆäÀÌÁî Á¤º¸")]
-    [SerializeField] private int phase = 1; // ÀÌ ¾ËÀÌ ¸î ÆäÀÌÁî¿¡ ¼ÓÇÏ´ÂÁö (ÀÎ½ºÆåÅÍ¿¡¼­ ¼³Á¤)
+    [Header("ì•Œ í˜ì´ì¦ˆ ì •ë³´")]
+    [SerializeField] private int phase = 1; // ì´ ì•Œì´ ëª‡ í˜ì´ì¦ˆì— ì†í•˜ëŠ”ì§€ (ì¸ìŠ¤í™í„°ì—ì„œ ì„¤ì •)
 
-    [Header("¾Ë ±×·ì ¸Å´ÏÀú")]
-    [SerializeField] private EggGroupManager eggGroupManager; // ¸Å´ÏÀú Á÷Á¢ ¿¬°á
+    [Header("ì•Œ ê·¸ë£¹ ë§¤ë‹ˆì €")]
+    [SerializeField] private EggGroupManager eggGroupManager; // ë§¤ë‹ˆì € ì§ì ‘ ì—°ê²°
 
     //**
 
     private List<Transform> fragments = new List<Transform>();
     private int piecesPerStage;
 
-    // Å¸ÀÌ¸Ó ÇÑ ¹ø¸¸ ½ÃÀÛÇÏµµ·Ï
+    // íƒ€ì´ë¨¸ í•œ ë²ˆë§Œ ì‹œì‘í•˜ë„ë¡
     private bool timerStarted = false;
 
-    // ·¹ÀÌ¾î ¹Ù²Ü ¿ÀºêÁ§Æ®
+    // ë ˆì´ì–´ ë°”ê¿€ ì˜¤ë¸Œì íŠ¸
     [SerializeField] private GameObject brokenEgg;
 
     void Start()
     {
         fragmentsParent.SetActive(false);
-        if (spiderObject != null) spiderObject.SetActive(false);
+        //if (spiderObject != null) spiderObject.SetActive(false);
 
         foreach (Transform frag in fragmentsParent.transform)
         {
@@ -68,7 +68,7 @@ public class BreakOnXKey : MonoBehaviour
 
         piecesPerStage = Mathf.CeilToInt(fragments.Count / (float)totalStages);
 
-        // ¾Ë ±ú´Â ½½¶óÀÌ´õ ÃÊ±âÈ­
+        // ì•Œ ê¹¨ëŠ” ìŠ¬ë¼ì´ë” ì´ˆê¸°í™”
         if (breakProgressSlider != null)
         {
             breakProgressSlider.minValue = 0;
@@ -80,23 +80,23 @@ public class BreakOnXKey : MonoBehaviour
             eggGroupManager.RegisterEgg(this, phase);
         if (breakSliderObject != null)
         {
-            breakSliderObject.SetActive(false); // ½ÃÀÛ ½Ã ¼û±è
+            breakSliderObject.SetActive(false); // ì‹œì‘ ì‹œ ìˆ¨ê¹€
         }
     }
 
     //private void Update()
     //{
-    //    // ÇÃ·¹ÀÌ¾î°¡ °¡±îÀÌ ¿À¸é
+    //    // í”Œë ˆì´ì–´ê°€ ê°€ê¹Œì´ ì˜¤ë©´
     //    if (Vector3.Distance(player.position, transform.position) <= breakDistance)
     //    {
-    //        // Å¸ÀÌ¸Ó°¡ ¾ÆÁ÷ ¾È µ¹°í, ¾ËÀÌ ¿ÏÀüÈ÷ ±úÁö±â ÀüÀÌ¸é Å¸ÀÌ¸Ó ½ÃÀÛ
+    //        // íƒ€ì´ë¨¸ê°€ ì•„ì§ ì•ˆ ëŒê³ , ì•Œì´ ì™„ì „íˆ ê¹¨ì§€ê¸° ì „ì´ë©´ íƒ€ì´ë¨¸ ì‹œì‘
     //        if (!timerStarted && pressCount < totalStages)
     //        {
     //            timerStarted = true;
     //            StartCoroutine(BreakTimeoutCoroutine());
     //        }
 
-    //        // X ´©¸£¸é ºĞÇØ ´Ü°è ÁøÇà
+    //        // X ëˆ„ë¥´ë©´ ë¶„í•´ ë‹¨ê³„ ì§„í–‰
     //        if (Input.GetKeyDown(KeyCode.X) && pressCount < totalStages)
     //        {
     //            pressCount++;
@@ -107,17 +107,17 @@ public class BreakOnXKey : MonoBehaviour
 
     public void ProcessEggBreak()
     {
-        // ÇÃ·¹ÀÌ¾î°¡ ºÎ¼ú ¼ö ÀÖ´Â °Å¸® ³»¿¡ ÀÖ´ÂÁö È®ÀÎ
+        // í”Œë ˆì´ì–´ê°€ ë¶€ìˆ  ìˆ˜ ìˆëŠ” ê±°ë¦¬ ë‚´ì— ìˆëŠ”ì§€ í™•ì¸
         if (Vector3.Distance(player.position, transform.position) <= breakDistance)
         {
-            // Å¸ÀÌ¸Ó°¡ ¾ÆÁ÷ ½ÃÀÛµÇÁö ¾Ê¾Ò°í, ¾ËÀÌ ¿ÏÀüÈ÷ ±úÁöÁö ¾Ê¾Ò´Ù¸é Å¸ÀÌ¸Ó ½ÃÀÛ
+            // íƒ€ì´ë¨¸ê°€ ì•„ì§ ì‹œì‘ë˜ì§€ ì•Šì•˜ê³ , ì•Œì´ ì™„ì „íˆ ê¹¨ì§€ì§€ ì•Šì•˜ë‹¤ë©´ íƒ€ì´ë¨¸ ì‹œì‘
             if (!timerStarted && pressCount < totalStages)
             {
                 timerStarted = true;
                 StartCoroutine(BreakTimeoutCoroutine());
             }
 
-            // ¾ËÀÌ ¾ÆÁ÷ ¿ÏÀüÈ÷ ±úÁöÁö ¾Ê¾Ò´Ù¸é ºĞÇØ ´Ü°è ÁøÇà
+            // ì•Œì´ ì•„ì§ ì™„ì „íˆ ê¹¨ì§€ì§€ ì•Šì•˜ë‹¤ë©´ ë¶„í•´ ë‹¨ê³„ ì§„í–‰
             if (pressCount < totalStages)
             {
                 pressCount++;
@@ -131,24 +131,24 @@ public class BreakOnXKey : MonoBehaviour
     //    if (player == null)
     //        return;
 
-    //    // ±¸ÀÇ »ö»ó ¼³Á¤
+    //    // êµ¬ì˜ ìƒ‰ìƒ ì„¤ì •
     //    Gizmos.color = Color.red;
 
-    //    // ºÎ¼ú ¼ö ÀÖ´Â ÃÖ´ë °Å¸®¸¸Å­ ±¸¸¦ ±×¸² (¾Ë Áß½É ±âÁØ)
+    //    // ë¶€ìˆ  ìˆ˜ ìˆëŠ” ìµœëŒ€ ê±°ë¦¬ë§Œí¼ êµ¬ë¥¼ ê·¸ë¦¼ (ì•Œ ì¤‘ì‹¬ ê¸°ì¤€)
     //    Gizmos.DrawWireSphere(transform.position, breakDistance);
 
-    //    // ÇÃ·¹ÀÌ¾î¿Í ¾ËÀ» ÀÕ´Â ¼±µµ ÇÔ²² ±×¸²
+    //    // í”Œë ˆì´ì–´ì™€ ì•Œì„ ì‡ëŠ” ì„ ë„ í•¨ê»˜ ê·¸ë¦¼
     //    Gizmos.color = Color.yellow;
     //    Gizmos.DrawLine(transform.position, player.position);
     //}
 
-    // ¸¸¾à ¸îÃÊ¾È¿¡ ¾Ë±ú´Â°É ½ÇÆĞÇßÀ» °æ¿ì ÆĞ³ÎÆ¼¸¦ ÁÖ°í ½Í´Ù¸é °Å¹Ì ³ªÅ¸³ª´Â ºÎºĞ¿¡ ´ë½Å ´Ù¸¥°Å ³Ö±â (¿¹¸¦µé¾î ½½·Î¿ì¸ğ¼Ç È¤Àº ÇÇ°¨¼Ò È¤Àº ½ÇÆĞÀÌÆåÆ®?)
+    // ë§Œì•½ ëª‡ì´ˆì•ˆì— ì•Œê¹¨ëŠ”ê±¸ ì‹¤íŒ¨í–ˆì„ ê²½ìš° íŒ¨ë„í‹°ë¥¼ ì£¼ê³  ì‹¶ë‹¤ë©´ ê±°ë¯¸ ë‚˜íƒ€ë‚˜ëŠ” ë¶€ë¶„ì— ëŒ€ì‹  ë‹¤ë¥¸ê±° ë„£ê¸° (ì˜ˆë¥¼ë“¤ì–´ ìŠ¬ë¡œìš°ëª¨ì…˜ í˜¹ì€ í”¼ê°ì†Œ í˜¹ì€ ì‹¤íŒ¨ì´í™íŠ¸?)
     private IEnumerator BreakTimeoutCoroutine()
     {
         float elapsed = 0f;
         while (elapsed < breakTimeout)
         {
-            // ¿ÏÀüÈ÷ ±úÁ³À¸¸é Å¸ÀÌ¸Ó ÁßÁö
+            // ì™„ì „íˆ ê¹¨ì¡Œìœ¼ë©´ íƒ€ì´ë¨¸ ì¤‘ì§€
             if (pressCount >= totalStages)
                 yield break;
 
@@ -156,7 +156,7 @@ public class BreakOnXKey : MonoBehaviour
             yield return null;
         }
 
-        // Å¸ÀÓ¾Æ¿ô: 5ÃÊ ³»¿¡ ¿ÏÀü ºĞÇØ ½ÇÆĞ ¢¡ °Å¹Ì È°¼ºÈ­
+        // íƒ€ì„ì•„ì›ƒ: 5ì´ˆ ë‚´ì— ì™„ì „ ë¶„í•´ ì‹¤íŒ¨ â‡’ ê±°ë¯¸ í™œì„±í™”
         //if (spiderObject != null)
         //    spiderObject.SetActive(true);
     }
@@ -169,7 +169,7 @@ public class BreakOnXKey : MonoBehaviour
             fragmentsParent.SetActive(true);
 
             if (breakSliderObject != null)
-                breakSliderObject.SetActive(true); // Ã³À½ ±ú¸é º¸ÀÌ°Ô
+                breakSliderObject.SetActive(true); // ì²˜ìŒ ê¹¨ë©´ ë³´ì´ê²Œ
         }
 
         int start = (stage - 1) * piecesPerStage;
@@ -207,10 +207,10 @@ public class BreakOnXKey : MonoBehaviour
             }
 
             if (breakSliderObject != null)
-                breakSliderObject.SetActive(false); // ´Ù ±ú¸é ¼û±è
+                breakSliderObject.SetActive(false); // ë‹¤ ê¹¨ë©´ ìˆ¨ê¹€
 
-            // ·¹ÀÌ¾î ¹Ù²Ş
-            brokenEgg.layer = LayerMask.NameToLayer("Default"); // ¿øÇÏ´Â ·¹ÀÌ¾î ÀÌ¸§À¸·Î º¯°æ
+            // ë ˆì´ì–´ ë°”ê¿ˆ
+            brokenEgg.layer = LayerMask.NameToLayer("Default"); // ì›í•˜ëŠ” ë ˆì´ì–´ ì´ë¦„ìœ¼ë¡œ ë³€ê²½
         }
     }
 }

@@ -9,18 +9,18 @@ public class MonsterAI : MonoBehaviour
     public Transform player;
     public PlayerMovement pM;
 
-    public float chaseSpeed = 3.0f;                 // ÃßÀû ¼Óµµ
-    public float patrolSpeed = 2.0f;                // ¹èÈ¸ ¼Óµµ
-    public float suspicionRange = 5f;               // ÀÇ½É ÀÎ½Ä ¹üÀ§
-    public float panicRange = 2f;                   // ÆĞ´Ğ °¡´É¼º ¹üÀ§
-    public float panicTime = 4f;                    // ÆĞ´Ğ±îÁö °É¸®´Â ½Ã°£
+    public float chaseSpeed = 3.0f;                 // ì¶”ì  ì†ë„
+    public float patrolSpeed = 2.0f;                // ë°°íšŒ ì†ë„
+    public float suspicionRange = 5f;               // ì˜ì‹¬ ì¸ì‹ ë²”ìœ„
+    public float panicRange = 2f;                   // íŒ¨ë‹‰ ê°€ëŠ¥ì„± ë²”ìœ„
+    public float panicTime = 4f;                    // íŒ¨ë‹‰ê¹Œì§€ ê±¸ë¦¬ëŠ” ì‹œê°„
 
-    private Vector3 targetPosition;                 // ¾ÆÀÌÅÛ »óÈ£ÀÛ¿ë °°ÀÌ ¼Ò¸®³­ °÷À» ¹Ş¾Æ¿Ã À§Ä¡ °ª
-    private bool isChasing = false;                 // ¸ó½ºÅÍÀÇ ÃßÀû »óÅÂ
-    private bool isPatrolling = false;              // ¸ó½ºÅÍÀÇ ¹èÈ¸ »óÅÂ
-    private bool isSuspicious = false;              // ¸ó½ºÅÍÀÇ ÀÇ½É »óÅÂ
-    private Coroutine suspicionCoroutine;           // ÀÇ½É ÄÚ·çÆ¾
-    private Coroutine panicCoroutine;               // ¹èÈ¸ ÄÚ·çÆ¾
+    private Vector3 targetPosition;                 // ì•„ì´í…œ ìƒí˜¸ì‘ìš© ê°™ì´ ì†Œë¦¬ë‚œ ê³³ì„ ë°›ì•„ì˜¬ ìœ„ì¹˜ ê°’
+    private bool isChasing = false;                 // ëª¬ìŠ¤í„°ì˜ ì¶”ì  ìƒíƒœ
+    private bool isPatrolling = false;              // ëª¬ìŠ¤í„°ì˜ ë°°íšŒ ìƒíƒœ
+    private bool isSuspicious = false;              // ëª¬ìŠ¤í„°ì˜ ì˜ì‹¬ ìƒíƒœ
+    private Coroutine suspicionCoroutine;           // ì˜ì‹¬ ì½”ë£¨í‹´
+    private Coroutine panicCoroutine;               // ë°°íšŒ ì½”ë£¨í‹´
 
     public Animator anim;
     [SerializeField] AudioSource idleSound;
@@ -35,11 +35,11 @@ public class MonsterAI : MonoBehaviour
         }
     }
 
-    // ¸ó½ºÅÍÀÇ ÃßÀû ¸ğµå
+    // ëª¬ìŠ¤í„°ì˜ ì¶”ì  ëª¨ë“œ
     private enum ChaseMode
     {
-        StaticTarget, // °íÁ¤µÈ À§Ä¡ ÃßÀû ex) ¼Ò¸® ¹ß»ı À§Ä¡
-        FollowPlayer  // ÇÃ·¹ÀÌ¾î ½Ç½Ã°£ ÃßÀû
+        StaticTarget, // ê³ ì •ëœ ìœ„ì¹˜ ì¶”ì  ex) ì†Œë¦¬ ë°œìƒ ìœ„ì¹˜
+        FollowPlayer  // í”Œë ˆì´ì–´ ì‹¤ì‹œê°„ ì¶”ì 
     }
 
     private ChaseMode currentChaseMode;
@@ -56,7 +56,7 @@ public class MonsterAI : MonoBehaviour
     }
 
 
-    // °íÁ¤µÈ ¼Ò¸® ¹ß»ı À§Ä¡¸¦ ÃßÀûÇÒ¶§ ¾µ ÇÔ¼ö // ÀÌº¥Æ® ÇÔ¼ö
+    // ê³ ì •ëœ ì†Œë¦¬ ë°œìƒ ìœ„ì¹˜ë¥¼ ì¶”ì í• ë•Œ ì“¸ í•¨ìˆ˜ // ì´ë²¤íŠ¸ í•¨ìˆ˜
     void RespondToSound(Vector3 soundPosition)
     {
         targetPosition = soundPosition;
@@ -70,16 +70,16 @@ public class MonsterAI : MonoBehaviour
         StartCoroutine(ChaseSound());
     }
 
-    // ½Ç½Ã°£À¸·Î ÇÃ·¹ÀÌ¾î¸¦ ÃßÀûÇÒ¶§ ¾µ ÇÔ¼ö
+    // ì‹¤ì‹œê°„ìœ¼ë¡œ í”Œë ˆì´ì–´ë¥¼ ì¶”ì í• ë•Œ ì“¸ í•¨ìˆ˜
     void StartChasingPlayer()
     {
-        if (isChasing) return; // ÀÌ¹Ì ÃßÀûÁßÀÌ¸é ¸®ÅÏÇÑ´Ù.
+        if (isChasing) return; // ì´ë¯¸ ì¶”ì ì¤‘ì´ë©´ ë¦¬í„´í•œë‹¤.
 
         currentChaseMode = ChaseMode.FollowPlayer;
         isChasing = true;
         NMA.isStopped = false;
 
-        // ÃßÀûÇÏ´Â ¾Ö´Ï¸ŞÀÌ¼Ç ³Ö±â - Run ¾Ö´Ï¸ŞÀÌ¼Ç
+        // ì¶”ì í•˜ëŠ” ì• ë‹ˆë©”ì´ì…˜ ë„£ê¸° - Run ì• ë‹ˆë©”ì´ì…˜
         setRun();
 
         StopAllCoroutines();
@@ -88,7 +88,7 @@ public class MonsterAI : MonoBehaviour
 
     private IEnumerator ChaseSound()
     {
-        Debug.Log("ÃßÀû ½ÃÀÛ");
+        //Debug.Log("ì¶”ì  ì‹œì‘");
         isPatrolling = false;
         NMA.speed = chaseSpeed;
         //NMA.SetDestination(targetPosition);
@@ -103,7 +103,7 @@ public class MonsterAI : MonoBehaviour
 
             //if (NMA.remainingDistance <= 0.5f)
             //{
-            //    Debug.Log("ÃßÀû Á¾·á! ¹èÈ¸ ½ÃÀÛ");
+            //    Debug.Log("ì¶”ì  ì¢…ë£Œ! ë°°íšŒ ì‹œì‘");
             //    isChasing = false;
             //    Patrol();
             //    yield break;
@@ -111,7 +111,7 @@ public class MonsterAI : MonoBehaviour
 
             //float distanceToPlayer = Vector3.Distance(transform.position, player.position);
 
-            //// ÆĞ´Ğ Á¶°Ç Ã¼Å©
+            //// íŒ¨ë‹‰ ì¡°ê±´ ì²´í¬
             //if (distanceToPlayer <= panicRange && !playerMovement.IsMoving && panicCoroutine == null)
             //{
             //    panicCoroutine = StartCoroutine(TriggerPanic());
@@ -122,35 +122,35 @@ public class MonsterAI : MonoBehaviour
 
             ///////////////////////////////////////////////////////////////////////
 
-            //if (!NMA.pathPending) // °æ·Î°è»ê ÁßÀÌ ¾Æ´Ò ½Ã ´ÙÀ½À» ½ÇÇà
+            //if (!NMA.pathPending) // ê²½ë¡œê³„ì‚° ì¤‘ì´ ì•„ë‹ ì‹œ ë‹¤ìŒì„ ì‹¤í–‰
             //{
-            //    // ÇöÀç ¸ğµå¿¡ µû¶ó ´Ù¸£°Ô ¼³Á¤ followplayer ¸ğµå¸é playerposition ¾Æ´Ò ½Ã´Â targetposition
+            //    // í˜„ì¬ ëª¨ë“œì— ë”°ë¼ ë‹¤ë¥´ê²Œ ì„¤ì • followplayer ëª¨ë“œë©´ playerposition ì•„ë‹ ì‹œëŠ” targetposition
             //    Vector3 destination = currentChaseMode == ChaseMode.FollowPlayer ? player.position : targetPosition;
             //    NMA.SetDestination(destination);
 
 
-            //    // ÇöÀç ¸ó½ºÅÍ¿Í ÇÃ·¹ÀÌ¾î »çÀÌÀÇ °Å¸®¸¦ ÃøÁ¤
+            //    // í˜„ì¬ ëª¬ìŠ¤í„°ì™€ í”Œë ˆì´ì–´ ì‚¬ì´ì˜ ê±°ë¦¬ë¥¼ ì¸¡ì •
             //    float distanceToPlayer = Vector3.Distance(transform.position, player.position);
 
-            //    // ÆĞ´Ğ Á¶°Ç À§ÀÇ °Å¸®°¡ ÆĞ´ĞÀÌ ¿À´Ã °Å¸®¾ÈÀÌ°í ÇÃ·¹ÀÌ¾î°¡ ¿òÁ÷ÀÌÁö¾Ê°í ÆĞ´Ğ ÄÚ·çÆ¾ÀÌ ³ÎÀÏ½Ã ´ÙÀ½ ½ÇÇà
+            //    // íŒ¨ë‹‰ ì¡°ê±´ ìœ„ì˜ ê±°ë¦¬ê°€ íŒ¨ë‹‰ì´ ì˜¤ëŠ˜ ê±°ë¦¬ì•ˆì´ê³  í”Œë ˆì´ì–´ê°€ ì›€ì§ì´ì§€ì•Šê³  íŒ¨ë‹‰ ì½”ë£¨í‹´ì´ ë„ì¼ì‹œ ë‹¤ìŒ ì‹¤í–‰
             //    if (distanceToPlayer <= panicRange && !playerMovement.IsMoving && panicCoroutine == null)
             //    {
             //        panicCoroutine = StartCoroutine(TriggerPanic());
             //    }
 
-            //    // ÃßÀû¸ğµå°¡ ÇÃ·¹ÀÌ¾î ¸ğµåÀÌ°í À§ÀÇ °Å¸®°¡ ÀÎ½Ä¹üÀ§º¸´Ù ¸Ö¾îÁö¸é ÃßÀûÀ» Æ÷±âÇÏ°í ¹èÈ¸ ½ÃÀÛ
+            //    // ì¶”ì ëª¨ë“œê°€ í”Œë ˆì´ì–´ ëª¨ë“œì´ê³  ìœ„ì˜ ê±°ë¦¬ê°€ ì¸ì‹ë²”ìœ„ë³´ë‹¤ ë©€ì–´ì§€ë©´ ì¶”ì ì„ í¬ê¸°í•˜ê³  ë°°íšŒ ì‹œì‘
             //    if (currentChaseMode == ChaseMode.FollowPlayer && distanceToPlayer > suspicionRange * 3f)
             //    {
-            //        Debug.Log("ÇÃ·¹ÀÌ¾î°¡ ¸Ö¾îÁü, ÃßÀû Á¾·á");
+            //        Debug.Log("í”Œë ˆì´ì–´ê°€ ë©€ì–´ì§, ì¶”ì  ì¢…ë£Œ");
             //        isChasing = false;
             //        Patrol();
             //        yield break;
             //    }
 
-            //    // ÃßÀû¸ğµå°¡ ¼Ò¸®¸ğµåÀÌ°í ¸ñÀûÁö¿¡ µµÂøÇÏ¸é ¹èÈ¸ ½ÃÀÛ
+            //    // ì¶”ì ëª¨ë“œê°€ ì†Œë¦¬ëª¨ë“œì´ê³  ëª©ì ì§€ì— ë„ì°©í•˜ë©´ ë°°íšŒ ì‹œì‘
             //    if (currentChaseMode == ChaseMode.StaticTarget && NMA.remainingDistance <= 0.5f)
             //    {
-            //        Debug.Log("µµÂø ¿Ï·á, ¹èÈ¸ Àç½ÃÀÛ");
+            //        Debug.Log("ë„ì°© ì™„ë£Œ, ë°°íšŒ ì¬ì‹œì‘");
             //        isChasing = false;
             //        Patrol();
             //        yield break;
@@ -160,29 +160,29 @@ public class MonsterAI : MonoBehaviour
 
             //////////////////////////////////////////////////////////////////////////////////////
 
-            // ÇöÀç ¸ğµå¿¡ µû¶ó ¸ñÀûÁö ¼³Á¤
+            // í˜„ì¬ ëª¨ë“œì— ë”°ë¼ ëª©ì ì§€ ì„¤ì •
             if (currentChaseMode == ChaseMode.FollowPlayer)
             {
-                NMA.SetDestination(player.position); // Ç×»ó ÃÖ½Å À§Ä¡·Î °»½Å
+                NMA.SetDestination(player.position); // í•­ìƒ ìµœì‹  ìœ„ì¹˜ë¡œ ê°±ì‹ 
             }
-            else if (!NMA.pathPending) // Á¤Àû ÃßÀûÀÏ ¶§¸¸ pathPending °í·Á
+            else if (!NMA.pathPending) // ì •ì  ì¶”ì ì¼ ë•Œë§Œ pathPending ê³ ë ¤
             {
                 NMA.SetDestination(targetPosition);
             }
 
-            // °Å¸® °è»ê
+            // ê±°ë¦¬ ê³„ì‚°
             float distanceToPlayer = Vector3.Distance(transform.position, player.position);
 
-            // ÆĞ´Ğ Á¶°Ç Ã¼Å©
+            // íŒ¨ë‹‰ ì¡°ê±´ ì²´í¬
             if (distanceToPlayer <= panicRange && !pM.IsMoving && panicCoroutine == null)
             {
                 panicCoroutine = StartCoroutine(TriggerPanic());
             }
 
-            // ÃßÀû Á¾·á Á¶°Ç
+            // ì¶”ì  ì¢…ë£Œ ì¡°ê±´
             if (currentChaseMode == ChaseMode.FollowPlayer && distanceToPlayer > suspicionRange * 2f)
             {
-                Debug.Log("ÇÃ·¹ÀÌ¾î°¡ ¸Ö¾îÁü, ÃßÀû Á¾·á");
+                //Debug.Log("í”Œë ˆì´ì–´ê°€ ë©€ì–´ì§, ì¶”ì  ì¢…ë£Œ");
                 isChasing = false;
                 StartCoroutine(LookAroundCoroutine());
                 //Patrol();
@@ -191,7 +191,7 @@ public class MonsterAI : MonoBehaviour
 
             if (currentChaseMode == ChaseMode.StaticTarget && !NMA.pathPending && NMA.remainingDistance <= 0.5f)
             {
-                Debug.Log("µµÂø ¿Ï·á, ¹èÈ¸ Àç½ÃÀÛ");
+               // Debug.Log("ë„ì°© ì™„ë£Œ, ë°°íšŒ ì¬ì‹œì‘");
                 isChasing = false;
                 StartCoroutine(LookAroundCoroutine());
                 //Patrol();
@@ -213,7 +213,7 @@ public class MonsterAI : MonoBehaviour
         setLook();
         //while (timer < duration)
         //{
-        //    //// ·£´ıÇÏ°Ô °í°³¸¦ ÁÂ¿ì·Î µ¹¸®´Â ¿¬Ãâ
+        //    //// ëœë¤í•˜ê²Œ ê³ ê°œë¥¼ ì¢Œìš°ë¡œ ëŒë¦¬ëŠ” ì—°ì¶œ
         //    //float angle = Mathf.Sin(Time.time * 2f) * 30f;
         //    //transform.rotation = Quaternion.Euler(0f, transform.eulerAngles.y + angle * Time.deltaTime, 0f);
 
@@ -223,18 +223,18 @@ public class MonsterAI : MonoBehaviour
         //}
         yield return new WaitForSeconds(2f);
         NMA.isStopped = false;
-        Patrol(); // ¶Ç´Â StartCoroutine(PatrolCoroutine());
+        Patrol(); // ë˜ëŠ” StartCoroutine(PatrolCoroutine());
     }
 
     private IEnumerator TriggerPanic()
     {
         float elapsed = 0f;
-        Debug.Log("ÆĞ´Ğ Ä«¿îÆ®´Ù¿î ½ÃÀÛ");
+        //Debug.Log("íŒ¨ë‹‰ ì¹´ìš´íŠ¸ë‹¤ìš´ ì‹œì‘");
         while (elapsed < panicTime)
         {
             if (pM.IsMoving || Vector3.Distance(transform.position, player.position) > panicRange)
             {
-                Debug.Log("ÆĞ´Ğ Á¶°Ç ÇØÁ¦");
+                Debug.Log("íŒ¨ë‹‰ ì¡°ê±´ í•´ì œ");
                 panicCoroutine = null;
                 yield break;
             }
@@ -243,7 +243,7 @@ public class MonsterAI : MonoBehaviour
             yield return null;
         }
 
-        Debug.Log("ÆĞ´Ğ ¹ßµ¿! ÃßÀû ½ÃÀÛ");
+        //Debug.Log("íŒ¨ë‹‰ ë°œë™! ì¶”ì  ì‹œì‘");
         GM.TriggerPanicEffect();
         isChasing = true;
         //StopAllCoroutines();
@@ -257,11 +257,11 @@ public class MonsterAI : MonoBehaviour
     {
         if (!isPatrolling)
         {
-            Debug.Log("¹èÈ¸ ½ÃÀÛ!");
+            //Debug.Log("ë°°íšŒ ì‹œì‘!");
             isPatrolling = true;
             NMA.speed = patrolSpeed;
 
-            // ¹èÈ¸ ¾Ö´Ï¸ŞÀÌ¼Ç ³Ö±â - walk ¸ğ¼Ç
+            // ë°°íšŒ ì• ë‹ˆë©”ì´ì…˜ ë„£ê¸° - walk ëª¨ì…˜
             //setWalk();
 
             StartCoroutine(PatrolCoroutine());
@@ -282,7 +282,7 @@ public class MonsterAI : MonoBehaviour
 
             NMA.SetDestination(patrolPosition);
             setWalk();
-            Debug.Log($"»õ·Î¿î ¹èÈ¸ ¸ñÀûÁö ¼³Á¤: {patrolPosition}");
+            //Debug.Log($"ìƒˆë¡œìš´ ë°°íšŒ ëª©ì ì§€ ì„¤ì •: {patrolPosition}");
 
             while (true)
             {
@@ -295,18 +295,18 @@ public class MonsterAI : MonoBehaviour
                 float distanceToPlayer = Vector3.Distance(transform.position, player.position);
 
 
-                // ÆĞ´Ğ
+                // íŒ¨ë‹‰
                 if (distanceToPlayer <= panicRange && !pM.IsMoving && panicCoroutine == null)
                 {
                     panicCoroutine = StartCoroutine(TriggerPanic());
                 }
 
 
-                // ÀÇ½É
+                // ì˜ì‹¬
                 if (distanceToPlayer <= suspicionRange && pM.IsMoving)
                 {
-                    Debug.Log("ÀÇ½É °Å¸® µé¾î¿ÔÀ½");
-                    if (!isSuspicious) // (!isSuspicious && suspicionCoroutine == null) ¼öÁ¤ÇÒÁö °í¹Î
+                   // Debug.Log("ì˜ì‹¬ ê±°ë¦¬ ë“¤ì–´ì™”ìŒ");
+                    if (!isSuspicious) // (!isSuspicious && suspicionCoroutine == null) ìˆ˜ì •í• ì§€ ê³ ë¯¼
                     {
                         NMA.isStopped = true;
                         idleSound.Play();
@@ -330,7 +330,7 @@ public class MonsterAI : MonoBehaviour
 
                 if (NMA.remainingDistance < 0.5f && NMA.velocity.magnitude < 0.1f)
                 {
-                    Debug.Log("¹èÈ¸ ¸ñÀûÁö µµÂø!");
+                    //Debug.Log("ë°°íšŒ ëª©ì ì§€ ë„ì°©!");
                     setLook();
                     break;
                 }
@@ -344,13 +344,13 @@ public class MonsterAI : MonoBehaviour
 
     private IEnumerator HandleSuspicion()
     {
-        //Debug.Log("ÇÃ·¹ÀÌ¾î ÀÇ½É Áß...");
+        //Debug.Log("í”Œë ˆì´ì–´ ì˜ì‹¬ ì¤‘...");
         //transform.LookAt(player);
         //yield return new WaitForSeconds(2f);
 
         //if (Vector3.Distance(transform.position, player.position) <= suspicionRange && playerMovement.IsMoving)
         //{
-        //    Debug.Log("ÇÃ·¹ÀÌ¾î ÃßÀû ½ÃÀÛ!");
+        //    Debug.Log("í”Œë ˆì´ì–´ ì¶”ì  ì‹œì‘!");
         //    //isChasing = true;
         //    //isPatrolling = false;
         //    //StopAllCoroutines();
@@ -359,30 +359,30 @@ public class MonsterAI : MonoBehaviour
         //}
         //else
         //{
-        //    Debug.Log("ÀÇ½ÉÇØÁ¦ ´Ù½Ã ¹èÈ¸½ÃÀÛ");
+        //    Debug.Log("ì˜ì‹¬í•´ì œ ë‹¤ì‹œ ë°°íšŒì‹œì‘");
         //    NMA.isStopped = false;
         //}
 
         //    isSuspicious = false;
 
-        Debug.Log("ÇÃ·¹ÀÌ¾î ÀÇ½É Áß...");
+        //Debug.Log("í”Œë ˆì´ì–´ ì˜ì‹¬ ì¤‘...");
 
         setLook();
 
-        // ÇÃ·¹ÀÌ¾î°¡ ¿òÁ÷ÀÌ´Â ½Ã°£À» °è»ê ÇÒ º¯¼ö
+        // í”Œë ˆì´ì–´ê°€ ì›€ì§ì´ëŠ” ì‹œê°„ì„ ê³„ì‚° í•  ë³€ìˆ˜
         float timer = 0f;
-        // ÇÃ·¹ÀÌ¾î°¡ ¸ØÃçµµ À¯¿¹½Ã°£À» ÁÙ º¯¼ö
+        // í”Œë ˆì´ì–´ê°€ ë©ˆì¶°ë„ ìœ ì˜ˆì‹œê°„ì„ ì¤„ ë³€ìˆ˜
         float lookIngTimer = 0f;
         float lookIngDuration = 1f;
-        // ÇÃ·¹ÀÌ¾î°¡ ¸Ö¾îÁö¸é ÀÇ½É ÇØÁ¦ µÉ °Å¸®
+        // í”Œë ˆì´ì–´ê°€ ë©€ì–´ì§€ë©´ ì˜ì‹¬ í•´ì œ ë  ê±°ë¦¬
         float maxDistance = suspicionRange * 2f;
 
         while (timer < 1f)
         {
-            // °è¼Ó ¹Ù¶óº¸°Ô ¸¸µê
+            // ê³„ì† ë°”ë¼ë³´ê²Œ ë§Œë“¦
             transform.LookAt(new Vector3(player.position.x, transform.position.y, player.position.z));
 
-            // Á¶°Ç À¯Áö ÁßÀÌ¸é Å¸ÀÌ¸Ó Áõ°¡
+            // ì¡°ê±´ ìœ ì§€ ì¤‘ì´ë©´ íƒ€ì´ë¨¸ ì¦ê°€
             if (Vector3.Distance(transform.position, player.position) <= suspicionRange && pM.IsMoving)
             {
                 timer += Time.deltaTime;
@@ -390,7 +390,7 @@ public class MonsterAI : MonoBehaviour
             }
             else if (Vector3.Distance(transform.position, player.position) > maxDistance)
             {
-                Debug.Log("ÇÃ·¹ÀÌ¾î°¡ ³Ê¹« ¸Ö¾îÁ®¼­ ÀÇ½É ÇØÁ¦");
+               // Debug.Log("í”Œë ˆì´ì–´ê°€ ë„ˆë¬´ ë©€ì–´ì ¸ì„œ ì˜ì‹¬ í•´ì œ");
                 isSuspicious = false;
                 NMA.isStopped = false;
                 setWalk();
@@ -401,7 +401,7 @@ public class MonsterAI : MonoBehaviour
                 lookIngTimer += Time.deltaTime;
                 if (lookIngTimer >= lookIngDuration)
                 {
-                    Debug.Log("ÀÇ½É Á¶°Ç ÇØÁ¦µÊ");
+                   // Debug.Log("ì˜ì‹¬ ì¡°ê±´ í•´ì œë¨");
                     isSuspicious = false;
                     NMA.isStopped = false;
                     setWalk();
@@ -412,7 +412,7 @@ public class MonsterAI : MonoBehaviour
             yield return null;
         }
 
-        Debug.Log("ÇÃ·¹ÀÌ¾î ÃßÀû ½ÃÀÛ!");
+        //Debug.Log("í”Œë ˆì´ì–´ ì¶”ì  ì‹œì‘!");
         //RespondToSound(player.position);
         StartChasingPlayer();
         isSuspicious = false;
@@ -420,7 +420,7 @@ public class MonsterAI : MonoBehaviour
 
     private Vector3 GetRandomNavMeshPosition(Vector3 center, float range)
     {
-        //for (int i = 0; i < 10; i++) // ÃÖ´ë 10¹ø ½Ãµµ // ÇØ´ç ºÎºĞÀº Àå¾Ö¹°ÀÌ ¸¹Àº °÷¿¡¼­ ÀûÀıÇÑ À§Ä¡¸¦ ¸ø »ËÀ» ½Ã¸¦ ¹æÁöÇÏ±â À§ÇØ »ç¿ëÇÏ´Â °ÍÀÌ ÀûÀı ÇÏÁö¸¸ ¼Óµµ°¡ Á¶±İ ´À¸²
+        //for (int i = 0; i < 10; i++) // ìµœëŒ€ 10ë²ˆ ì‹œë„ // í•´ë‹¹ ë¶€ë¶„ì€ ì¥ì• ë¬¼ì´ ë§ì€ ê³³ì—ì„œ ì ì ˆí•œ ìœ„ì¹˜ë¥¼ ëª» ë½ì„ ì‹œë¥¼ ë°©ì§€í•˜ê¸° ìœ„í•´ ì‚¬ìš©í•˜ëŠ” ê²ƒì´ ì ì ˆ í•˜ì§€ë§Œ ì†ë„ê°€ ì¡°ê¸ˆ ëŠë¦¼
         //{
         Vector3 randomDirection = Random.insideUnitSphere * range;
         randomDirection += center;
@@ -433,7 +433,7 @@ public class MonsterAI : MonoBehaviour
         }
         //}
 
-        // ½ÇÆĞ ½Ã ÇöÀç À§Ä¡ ¹İÈ¯
+        // ì‹¤íŒ¨ ì‹œ í˜„ì¬ ìœ„ì¹˜ ë°˜í™˜
         return center;
     }
 
@@ -441,11 +441,11 @@ public class MonsterAI : MonoBehaviour
     {
         if (other.CompareTag("Player"))
         {
-            Debug.Log("¸ó½ºÅÍ¿Í Ãæµ¹! ÇÃ·¹ÀÌ¾î Áï»ç");
+            //Debug.Log("ëª¬ìŠ¤í„°ì™€ ì¶©ëŒ! í”Œë ˆì´ì–´ ì¦‰ì‚¬");
 
-            // °ø°İ ¾Ö´Ï¸ŞÀÌ¼Ç ³Ö±â - attack Æ®¸®°Å
+            // ê³µê²© ì• ë‹ˆë©”ì´ì…˜ ë„£ê¸° - attack íŠ¸ë¦¬ê±°
             anim.SetTrigger("attackTrigger");
-            // °ø°İ ¼Ò¸®
+            // ê³µê²© ì†Œë¦¬
             m1_AudioManager.instance.PlaySfx(m1_AudioManager.m1sfx.m1Attack);
 
             GM.KillPlayer();
@@ -463,7 +463,7 @@ public class MonsterAI : MonoBehaviour
     {
         setBool();
         anim.SetBool("isRun", true);
-        Debug.Log("´Ş¸®±â½ÃÀÛÇßÀ½");
+        //Debug.Log("ë‹¬ë¦¬ê¸°ì‹œì‘í–ˆìŒ");
 
     }
 
@@ -471,7 +471,7 @@ public class MonsterAI : MonoBehaviour
     {
         setBool();
         anim.SetBool("isWalk", true);
-        Debug.Log("°È±â½ÃÀÛÇß´ß");
+       // Debug.Log("ê±·ê¸°ì‹œì‘í–ˆë‹­");
     }
 
     void setLook()
