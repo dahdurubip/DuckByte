@@ -26,7 +26,7 @@ public class Creature2 : MonoBehaviour
     [SerializeField] private float idleTime = 1f;
     [SerializeField] private float attackRange = 5f;
     [SerializeField] private float detectionRange = 10f;
-    [SerializeField] private float damage = 20f;
+    public float damage = 15f;
 
     [Header("Raycast Settings")]
     [SerializeField] private float raycastDistance = 2.0f; // 레이캐스트 감지 거리

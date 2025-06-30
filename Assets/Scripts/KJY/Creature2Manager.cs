@@ -1,10 +1,10 @@
-﻿using System.Collections;
+using System.Collections;
 using UnityEngine;
 
 public class Creature2Manager : MonoBehaviour
 {
-    [Header("Wall Settings")]
-    [SerializeField] private WallPosController wallpos;
+    //[Header("Wall Settings")]
+    //[SerializeField] private WallPosController wallpos;
 
     [Header("Creature2 Settings")]
     [SerializeField] private Creature2 creature2;
@@ -43,14 +43,13 @@ public class Creature2Manager : MonoBehaviour
         flashlightCloneObject.SetActive(false);
     }
 
-    //Update에서는 wallmove 관련만 처리 (그 외 타이밍은 OnPlayerDetected나 WhenTheLightOn에서 별도로 처리)
     private void Update()
     {
-        if (wallmove)
-        {
-            wallpos.MoveThewall(detectionCount);
-            wallmove = false;
-        }
+        //if (wallmove)
+        //{
+        //    wallpos.MoveThewall(detectionCount);
+        //    wallmove = false;
+        //}
 
         if(creature2.flashOn)
         {
@@ -75,14 +74,20 @@ public class Creature2Manager : MonoBehaviour
     public void OnEyeDetected(Vector3 eyePos)
     {
         //이미 순간이동 중이면 무시
-        if (isTeleporting) return;    
+        if (isTeleporting) return;
         ++detectionCount;
-        if(detectionCount >= 9)
-        {
-            detectionCount = 9;
-        }
         lastEyePos = eyePos;
         ActivateEyeClone();
+        detectionCnt();
+    }
+
+    private void detectionCnt()
+    {
+        if (detectionCount >= 3)
+        {
+            detectionCount = 3;
+            creature2.damage = 50;
+        }
     }
 
     private void ActivateEyeClone()
