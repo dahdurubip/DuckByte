@@ -9,7 +9,7 @@ public class DialogueManager : MonoBehaviour
 {
     [SerializeField] private TMP_Text dialogueText;
     [SerializeField] private GameObject dialoguePanel;
-    [SerializeField] private DialogueData dialogueData;       // ´ë»ç µ¥ÀÌÅÍ º¸°ü¼Ò
+    [SerializeField] private DialogueData dialogueData;       // ëŒ€ì‚¬ ë°ì´í„° ë³´ê´€ì†Œ
 
     public bool isTyping = false;
     public bool isPlayingDialogue = false;
@@ -19,7 +19,7 @@ public class DialogueManager : MonoBehaviour
     void Update()
     {
 
-        // ¹®ÀåÀÌ ¿Ï¼ºµÇ±âÀü ½ºÆäÀÌ½º¹Ù¸¦ ´©¸£´Â°É ¾Ë°Ô ÇÒ º¯¼ö
+        // ë¬¸ì¥ì´ ì™„ì„±ë˜ê¸°ì „ ìŠ¤í˜ì´ìŠ¤ë°”ë¥¼ ëˆ„ë¥´ëŠ”ê±¸ ì•Œê²Œ í•  ë³€ìˆ˜
         if (Input.GetKeyDown(KeyCode.Space))
         {
             skipRequested = true;
@@ -42,14 +42,14 @@ public class DialogueManager : MonoBehaviour
     {
         isPlayingDialogue = true;
 
-        Debug.Log("ÄÚ·çÆ¾ µé¾î¿È");
+        //Debug.Log("ì½”ë£¨í‹´ ë“¤ì–´ì˜´");
 
         if (dialogueData.interactables.ContainsKey(Name))
         {
             foreach (string line in dialogueData.interactables[Name])
             {
 
-                yield return StartCoroutine(ShowDialogue("ÇÃ·¹ÀÌ¾î", line));
+                yield return StartCoroutine(ShowDialogue("í”Œë ˆì´ì–´", line));
             }
         }
 
@@ -65,19 +65,19 @@ public class DialogueManager : MonoBehaviour
         dialogueText.text = "";
 
         //bool skip = false;
-        //float typingSpeed = 0.05f; // ±ÛÀÚ´ç Ãâ·Â ½Ã°£
-        //float extraWait = 0.7f;    // ´ë»ç Ãâ·Â ÈÄ Ãß°¡ ´ë±â ½Ã°£
+        //float typingSpeed = 0.05f; // ê¸€ìë‹¹ ì¶œë ¥ ì‹œê°„
+        //float extraWait = 0.7f;    // ëŒ€ì‚¬ ì¶œë ¥ í›„ ì¶”ê°€ ëŒ€ê¸° ì‹œê°„
         skipRequested = false;
 
 
-        // Å¸ÀÌÇÎ È¿°ú
+        // íƒ€ì´í•‘ íš¨ê³¼
         foreach (char c in line)
         {
 
             if (skipRequested)
             {
-                // ¹®Àå ¿Ï¼ºÀü ½ºÆäÀÌ½º ¹Ù ´­·¶À» ½Ã ÀüÃ¼¹®Àå ¶ç¿ì±â
-                // °°Àº ³ª·¹ÀÌ¼ÇÀ» º¼ ½Ã ºü¸£°Ô ³Ñ¾î°¡±â À§ÇÑ ±â´É
+                // ë¬¸ì¥ ì™„ì„±ì „ ìŠ¤í˜ì´ìŠ¤ ë°” ëˆŒë €ì„ ì‹œ ì „ì²´ë¬¸ì¥ ë„ìš°ê¸°
+                // ê°™ì€ ë‚˜ë ˆì´ì…˜ì„ ë³¼ ì‹œ ë¹ ë¥´ê²Œ ë„˜ì–´ê°€ê¸° ìœ„í•œ ê¸°ëŠ¥
                 dialogueText.text = line;
                 break;
             }
@@ -88,21 +88,21 @@ public class DialogueManager : MonoBehaviour
         }
 
 
-        // ´ë»ç°¡ ´Ù Å¸ÀÌÇÎµÇ¸é »ç¿ëÀÚ ÀÔ·Â ´ë±â (½ºÆäÀÌ½º¹Ù µî)
+        // ëŒ€ì‚¬ê°€ ë‹¤ íƒ€ì´í•‘ë˜ë©´ ì‚¬ìš©ì ì…ë ¥ ëŒ€ê¸° (ìŠ¤í˜ì´ìŠ¤ë°” ë“±)
         yield return new WaitUntil(() => Input.GetKeyDown(KeyCode.Space));
-        // ÀÚµ¿ ÁøÇà
+        // ìë™ ì§„í–‰
         // yield return new WaitForSeconds(1.5f);
-        // ÀüÃ¼ ´ë»ç ±æÀÌ¿¡ µû¶ó ´ë±â ½Ã°£ °è»ê
+        // ì „ì²´ ëŒ€ì‚¬ ê¸¸ì´ì— ë”°ë¼ ëŒ€ê¸° ì‹œê°„ ê³„ì‚°
         //float totalWait = (line.Length * typingSpeed) + extraWait;
         //yield return new WaitForSeconds(totalWait);
 
 
 
-        // ´ÙÀ½ ÁÙ ÁØºñ
+        // ë‹¤ìŒ ì¤„ ì¤€ë¹„
         dialogueText.text = "";
-        yield return new WaitForSeconds(0.2f); // ÁÙ °£ Àá±ñ ÅÒ
+        yield return new WaitForSeconds(0.2f); // ì¤„ ê°„ ì ê¹ í…€
 
-        dialoguePanel.SetActive(false); // »ç¶óÁö´Â È¿°ú ÁÖ°í ½ÍÀ¸¸é ¿©±â¿¡ ÀÌÆåÆ® Ãß°¡
+        dialoguePanel.SetActive(false); // ì‚¬ë¼ì§€ëŠ” íš¨ê³¼ ì£¼ê³  ì‹¶ìœ¼ë©´ ì—¬ê¸°ì— ì´í™íŠ¸ ì¶”ê°€
         isTyping = false;
     }
 
