@@ -1,12 +1,14 @@
 using UnityEngine;
 
+[RequireComponent(typeof(Collider))]
 public class NoteClick : MonoBehaviour
 {
-    public int noteIndex;
-    public SouthRoomPuzzleManager manager;
+    [SerializeField] private int noteIndex = 3;
+    [SerializeField] private SouthRoomPuzzleManager manager;
 
-    void OnMouseDown()
+    private void OnMouseDown()
     {
-        manager?.ShowNotePopup(noteIndex);
+        Debug.Log($"index={noteIndex} clicked");
+        manager?.ShowNote(noteIndex);
     }
 }
