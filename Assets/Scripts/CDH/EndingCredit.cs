@@ -1,6 +1,7 @@
 using System.Collections;
 using UnityEngine;
 using TMPro;
+using UnityEngine.SceneManagement;
 
 public class EndingCredit : MonoBehaviour
 {
@@ -29,6 +30,14 @@ public class EndingCredit : MonoBehaviour
     [TextArea(2, 4)] public string[] goodEndingLines;
     [TextArea(2, 4)] public string[] badEndingLines;
     [TextArea(2, 4)] public string[] trueEndingLines;
+
+    [Header("엔딩 페이드 관련")]
+    // 검은 화면
+    public CanvasGroup fadeGroup; 
+    public float fadeDuration = 3f;
+    // 전환할 씬 이름
+    public string lobbySceneName = "UI_OP";
+
 
     void Start()
     {
@@ -69,6 +78,27 @@ public class EndingCredit : MonoBehaviour
            // Debug.Log("True 엔딩이 끝났습니다!");
             canbas.SetActive(false);
             TM.SetActive(true);
+            yield break;
         }
+
+        yield return StartCoroutine(FadeToBlack());
+        yield return new WaitForSeconds(2f);
+        SceneManager.LoadScene(lobbySceneName);
     }
+
+    IEnumerator FadeToBlack()
+    {
+        float alphaValue = 0f;
+        while (alphaValue < fadeDuration)
+        {
+            float t = alphaValue / fadeDuration;
+            //fadeGroup.alpha = Mathf.Lerp(0f, 1f, t);
+            fadeGroup.alpha = Mathf.SmoothStep(0f, 1f, t);
+
+            alphaValue += Time.deltaTime;
+            yield return null;
+        }
+        fadeGroup.alpha = 1f;
+    }
+
 }
