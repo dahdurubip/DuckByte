@@ -221,6 +221,7 @@ public class ItemManager : MonoBehaviour
                     if (UnityEngine.SceneManagement.SceneManager.GetActiveScene().name == "Creature2Map")
                     {
                         Creature2AudioManager.instance.PlaySfx(Creature2AudioManager.sfx.PhorrorEffect);
+                        dialogueManager.PlayDialogue("inPrison2");
                     }
                     MainItem += 1;
                     Destroy(nearbyInteractable);
