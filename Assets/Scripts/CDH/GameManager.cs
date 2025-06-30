@@ -27,10 +27,10 @@ public class GameManager : MonoBehaviour
         //Debug.Log("패닉!");
     }
 
-    public void KillPlayer()
-    {
-        //Debug.Log("플레이어 죽음");
-        SceneLoad.LoadSceneWithLoading("Creature1Map");
+    //public void KillPlayer()
+    //{
+    //    //Debug.Log("플레이어 죽음");
+    //    SceneLoad.LoadSceneWithLoading("Creature1Map");
 
-    }
+    //}
 }

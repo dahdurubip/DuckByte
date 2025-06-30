@@ -28,8 +28,16 @@ public class Player : MonoBehaviour
     [SerializeField] private CameraMovement cam;
 
     [SerializeField] private Creature2SceneManager creature2scenemanager;
+    [SerializeField] private CharacterController playerController;
+    [SerializeField] private PlayerMovement pm;
+    [SerializeField] private GameObject DieUI;
     private float currentHp;
     private Animator animator;
+
+
+    [SerializeField] private DialogueManager dialogueManager; // 대사 출력 담당
+                                                              //[SerializeField] private DialogueData dialogueData;       // 대사 데이터 보관소
+    public bool isInside = false;
 
 
     private void Start()
@@ -66,21 +74,48 @@ public class Player : MonoBehaviour
 
     private void Die()
     {
-        Debug.Log("플레이어 사망!");
+        //Debug.Log("플레이어 사망!");
+        playerController.enabled = false;
+        pm.isMovable = false;
+
         StopAllCoroutines();
         //여기서 사망 애니메이션, 게임 오버 처리 등 넣기
         animator.SetBool("die", true);
+
+        DieUI.SetActive(true);
+
+        // 2초 후 씬 전환 실행
+        Invoke("DelayToDie", 3f);
+
         //게임오버 화면 전환
-        if (UnityEngine.SceneManagement.SceneManager.GetActiveScene().name == "Creature2Map")
+        //if (UnityEngine.SceneManagement.SceneManager.GetActiveScene().name == "Creature2Map")
+        //{
+        //    creature2scenemanager.RestartScene();
+        //}
+        //if (UnityEngine.SceneManagement.SceneManager.GetActiveScene().name == "Boss 1")
+        //{
+        //    //보스씬 로드 
+        //    SceneLoad.LoadSceneWithLoading("Boss 1");
+        //}
+
+    }
+
+    private void DelayToDie()
+    {
+        string currentScene = UnityEngine.SceneManagement.SceneManager.GetActiveScene().name;
+
+        if (currentScene == "Creature2Map")
         {
             creature2scenemanager.RestartScene();
         }
-        if (UnityEngine.SceneManagement.SceneManager.GetActiveScene().name == "Boss 1")
+        else if (currentScene == "Boss 1")
         {
-            //보스씬 로드 
             SceneLoad.LoadSceneWithLoading("Boss 1");
         }
-
+        else if (currentScene == "Creature1Map")
+        {
+            SceneLoad.LoadSceneWithLoading("Creature1Map");
+        }
     }
 
     public void Heal(float amount)
@@ -88,13 +123,38 @@ public class Player : MonoBehaviour
         CurrentHp += amount;
     }
 
-    //private void OnCollisionEnter(Collision collision)
-    //{
-    //    if (collision.gameObject.CompareTag("Rock"))
-    //    {
-    //        TakeDamage(5);
-    //        StartCoroutine(PlayerHitEffect());
-    //    }
-    //}
+
+    private void OnTriggerEnter(Collider other)
+    {
+        if (other.CompareTag("bossDoor"))
+        {
+            Debug.Log("보스문 충돌");
+            //m1_AudioManager.instance.PlaySfx(m1_AudioManager.m1sfx.);
+
+            //StartCoroutine(PlayDialogue("goToBossDoor"));
+            dialogueManager.PlayDialogue("goToBossDoor");
+        }
+
+        if (other.CompareTag("DontMonster"))
+            isInside = true;
+
+    }
+
+    private void OnTriggerExit(Collider other)
+    {
+        if (other.CompareTag("DontMonster"))
+            isInside = false;
+    }
+
+
+    // 돌멩이 타격
+    private void OnCollisionEnter(Collision collision)
+    {
+        if (collision.gameObject.CompareTag("Rock"))
+        {
+            TakeDamage(5);
+            StartCoroutine(PlayerHitEffect());
+        }
+    }
 
 }

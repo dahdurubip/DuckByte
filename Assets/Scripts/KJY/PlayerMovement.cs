@@ -79,7 +79,7 @@ public class PlayerMovement : MonoBehaviour
     [SerializeField] private AudioSource sfxAudioSource;      // 효과음용 AudioSource (숨소리 등)
 
     //플레이어 이동 가능 여부
-    private bool isMovable = true;
+    public bool isMovable = true;
     //회전 시 사용되는 속도
     private float rotationVelocity;
     //회전 부드러움 정도

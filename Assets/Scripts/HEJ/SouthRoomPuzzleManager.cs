@@ -1,111 +1,106 @@
-﻿using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 using TMPro;
 
 public class SouthRoomPuzzleManager : MonoBehaviour
 {
-    [Header("Click Popup UI")]
-    public GameObject noteCanvas;               // 클릭 시 뜨는 팝업
-    public List<RawImage> noteRawImageUIs;      // 클릭용 RawImage 3개
+    [SerializeField] private GameObject noteCanvas;
+    [SerializeField] private RawImage[] hintNotes;      // 인덱스 0~2: 힌트 노트 그림
+    [SerializeField] private TMP_Text fakeNoteText;     // 인덱스 3: 공통 페이크 텍스트
+    [SerializeField] private Button closeButton;
 
-    [Header("Close Button")]
-    public Button closeNoteButton;              // 클릭 팝업 닫기
+    [SerializeField] private GameObject inputCanvas;
+    [SerializeField] private TMP_InputField nameInput;
+    [SerializeField] private Button submitButton, cancelButton;
 
-    [Header("Name Input UI")]
-    public GameObject inputCanvas;
-    public TMP_InputField nameInputField;
-    public Button submitButton;
-    public Button cancelButton;
+    [SerializeField] private MonoBehaviour playerMovement;
+    [SerializeField] private GameObject itemPrefab;
+    [SerializeField] private Transform itemSpawnPoint;
 
-    [Header("Player Movement")]
-    public MonoBehaviour playerMovement;
-
-    [Header("Success Item")]
-    public GameObject itemPrefab;
-    public Transform itemSpawnPoint;
-
-    [Header("Correct Answer")]
-    public string correctName;
+    [SerializeField] private string correctName;
 
     private bool isSolved = false;
 
-    void Start()
+    private void Awake()
     {
-        // --- 클릭 팝업 초기화 ---
-        if (noteCanvas != null) noteCanvas.SetActive(false);
-        if (noteRawImageUIs != null)
-            foreach (var raw in noteRawImageUIs)
-                if (raw != null) raw.gameObject.SetActive(false);
-        if (closeNoteButton != null)
-            closeNoteButton.onClick.AddListener(CloseNoteUI);
+        // 버튼 리스너
+        closeButton?.onClick.AddListener(CloseNote);
+        submitButton?.onClick.AddListener(OnSubmitName);
+        cancelButton?.onClick.AddListener(CloseInput);
 
-        // --- 이름 입력창 초기화 ---
-        if (inputCanvas != null) inputCanvas.SetActive(false);
-        if (submitButton != null) submitButton.onClick.AddListener(SubmitName);
-        if (cancelButton != null) cancelButton.onClick.AddListener(CancelInputUI);
+        // 초기 상태
+        noteCanvas.SetActive(false);
+        inputCanvas.SetActive(false);
+        foreach (var note in hintNotes)
+            note.gameObject.SetActive(false);
+        fakeNoteText.gameObject.SetActive(false);
     }
 
-    // 클릭 팝업 열기
-    public void ShowNotePopup(int index)
+    // index 0~2: hintNotes, 3: fakeNoteText
+    public void ShowNote(int index)
     {
-        if (noteCanvas == null || noteRawImageUIs == null) return;
-        if (index < 0 || index >= noteRawImageUIs.Count) return;
+        ClearNotes();
 
-        for (int i = 0; i < noteRawImageUIs.Count; i++)
+        switch (index)
         {
-            var raw = noteRawImageUIs[i];
-            if (raw != null) raw.gameObject.SetActive(i == index);
+            case 0:
+            case 1:
+            case 2:
+                hintNotes[index].gameObject.SetActive(true);
+                break;
+            case 3:
+                fakeNoteText.gameObject.SetActive(true);
+                break;
+            default:
+                Debug.LogWarning($"Invalid note index: {index}");
+                return;
         }
+
         noteCanvas.SetActive(true);
     }
 
-    // 클릭 팝업 닫기
-    public void CloseNoteUI()
+    private void ClearNotes()
     {
-        if (noteCanvas != null) noteCanvas.SetActive(false);
-        if (noteRawImageUIs != null)
-            foreach (var raw in noteRawImageUIs)
-                if (raw != null) raw.gameObject.SetActive(false);
+        foreach (var note in hintNotes)
+            note.gameObject.SetActive(false);
+        fakeNoteText.gameObject.SetActive(false);
     }
 
-    // 이름 입력창 열기
-    public void OpenNameInputUI()
+    public void CloseNote()
+    {
+        noteCanvas.SetActive(false);
+    }
+
+    public void OpenInput()
     {
         if (isSolved) return;
-        if (inputCanvas != null) inputCanvas.SetActive(true);
+
+        inputCanvas.SetActive(true);
         if (playerMovement != null) playerMovement.enabled = false;
-        if (nameInputField != null)
-        {
-            nameInputField.text = "";
-            nameInputField.Select();
-        }
+
+        nameInput.text = "";
+        nameInput.ActivateInputField();
     }
 
-    // 이름 입력 취소
-    private void CancelInputUI()
+    private void CloseInput()
     {
-        if (inputCanvas != null) inputCanvas.SetActive(false);
+        inputCanvas.SetActive(false);
         if (playerMovement != null) playerMovement.enabled = true;
     }
 
-    // 이름 제출
-    private void SubmitName()
+    private void OnSubmitName()
     {
-        if (nameInputField == null) return;
-        string attempt = nameInputField.text.Trim();
-        if (!string.IsNullOrEmpty(attempt) &&
-            System.String.Equals(attempt, correctName.Trim(), System.StringComparison.OrdinalIgnoreCase))
+        var attempt = nameInput.text.Trim();
+        if (string.Equals(attempt, correctName.Trim(), System.StringComparison.OrdinalIgnoreCase))
         {
             isSolved = true;
             m1_AudioManager.instance.PlaySfx(m1_AudioManager.m1sfx.clearSound);
-            if (itemPrefab != null && itemSpawnPoint != null)
-                Instantiate(itemPrefab, itemSpawnPoint.position, itemSpawnPoint.rotation);
-            CancelInputUI();
+            Instantiate(itemPrefab, itemSpawnPoint.position, itemSpawnPoint.rotation);
+            CloseInput();
         }
         else
         {
-            Debug.Log("Incorrect answer: " + attempt);
+            Debug.Log($"Wrong answer: {attempt}");
         }
     }
 }
