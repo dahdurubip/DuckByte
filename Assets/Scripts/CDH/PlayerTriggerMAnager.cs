@@ -3,8 +3,9 @@ using System.Collections;
 
 public class PlayerTriggerMAnager : MonoBehaviour
 {
-    [SerializeField] private DialogueManager dialogueManager; // ´ë»ç Ãâ·Â ´ã´ç
-                                                              //[SerializeField] private DialogueData dialogueData;       // ´ë»ç µ¥ÀÌÅÍ º¸°ü¼Ò
+    [SerializeField] private DialogueManager dialogueManager; // ëŒ€ì‚¬ ì¶œë ¥ ë‹´ë‹¹
+                                                              //[SerializeField] private DialogueData dialogueData;       // ëŒ€ì‚¬ ë°ì´í„° ë³´ê´€ì†Œ
+    public bool isInside = false;
 
    
 
@@ -14,20 +15,28 @@ public class PlayerTriggerMAnager : MonoBehaviour
     {
         if (other.CompareTag("bossDoor"))
         {
-            Debug.Log("º¸½º¹® Ãæµ¹");
+            Debug.Log("ë³´ìŠ¤ë¬¸ ì¶©ëŒ");
             //m1_AudioManager.instance.PlaySfx(m1_AudioManager.m1sfx.);
 
             //StartCoroutine(PlayDialogue("goToBossDoor"));
             dialogueManager.PlayDialogue("goToBossDoor");
         }
-        
 
+        if (other.CompareTag("DontMonster"))
+            isInside = true;
+
+    }
+
+    private void OnTriggerExit(Collider other)
+    {
+        if (other.CompareTag("DontMonster"))
+            isInside = false;
     }
 
     //public void unBrokenJar()
     //{
 
-    //        Debug.Log("¾È±úÁö´Â Àåµ¶ Ãæµ¹");
+    //        Debug.Log("ì•ˆê¹¨ì§€ëŠ” ì¥ë… ì¶©ëŒ");
     //        //StartCoroutine(PlayDialogue("interactUnBrokenJar"));
     //        dialogueManager.PlayDialogue("interactUnBrokenJar");
 
@@ -37,13 +46,13 @@ public class PlayerTriggerMAnager : MonoBehaviour
     //{
     //    isPlayingDialogue = true;
 
-    //    Debug.Log("ÄÚ·çÆ¾ µé¾î¿È");
+    //    Debug.Log("ì½”ë£¨í‹´ ë“¤ì–´ì˜´");
 
     //    if (dialogueData.interactables.ContainsKey(Name))
     //    {
     //        foreach (string line in dialogueData.interactables[Name])
     //        {
-    //            yield return StartCoroutine(dialogueManager.ShowDialogue("ÇÃ·¹ÀÌ¾î", line));
+    //            yield return StartCoroutine(dialogueManager.ShowDialogue("í”Œë ˆì´ì–´", line));
     //        }
     //    }
 

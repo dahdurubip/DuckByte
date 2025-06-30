@@ -8,6 +8,7 @@ public class MonsterAI : MonoBehaviour
     public NavMeshAgent NMA;
     public Transform player;
     public PlayerMovement pM;
+    public Player playerScripts;
 
     public float chaseSpeed = 3.0f;                 // 추적 속도
     public float patrolSpeed = 2.0f;                // 배회 속도
@@ -29,7 +30,7 @@ public class MonsterAI : MonoBehaviour
 
     private void Update()
     {
-        if (pM.run)
+        if (pM.run && !playerScripts.isInside)
         {
             StartChasingPlayer();
         }
@@ -234,7 +235,7 @@ public class MonsterAI : MonoBehaviour
         {
             if (pM.IsMoving || Vector3.Distance(transform.position, player.position) > panicRange)
             {
-                Debug.Log("패닉 조건 해제");
+                //Debug.Log("패닉 조건 해제");
                 panicCoroutine = null;
                 yield break;
             }
@@ -296,14 +297,14 @@ public class MonsterAI : MonoBehaviour
 
 
                 // 패닉
-                if (distanceToPlayer <= panicRange && !pM.IsMoving && panicCoroutine == null)
+                if (distanceToPlayer <= panicRange && !pM.IsMoving && panicCoroutine == null && !playerScripts.isInside)
                 {
                     panicCoroutine = StartCoroutine(TriggerPanic());
                 }
 
 
                 // 의심
-                if (distanceToPlayer <= suspicionRange && pM.IsMoving)
+                if (distanceToPlayer <= suspicionRange && pM.IsMoving && !playerScripts.isInside)
                 {
                    // Debug.Log("의심 거리 들어왔음");
                     if (!isSuspicious) // (!isSuspicious && suspicionCoroutine == null) 수정할지 고민
@@ -448,9 +449,28 @@ public class MonsterAI : MonoBehaviour
             // 공격 소리
             m1_AudioManager.instance.PlaySfx(m1_AudioManager.m1sfx.m1Attack);
 
-            GM.KillPlayer();
+
+            //GM.KillPlayer();
+            playerScripts.TakeDamage(100);
         }
     }
+
+    //private void OnCollisionEnter(Collision collision)
+    //{
+    //    if (collision.gameObject.CompareTag("Player"))
+    //    {
+    //        //Debug.Log("몬스터와 충돌! 플레이어 즉사");
+
+    //        // 공격 애니메이션 넣기 - attack 트리거
+    //        anim.SetTrigger("attackTrigger");
+    //        // 공격 소리
+    //        m1_AudioManager.instance.PlaySfx(m1_AudioManager.m1sfx.m1Attack);
+
+
+    //        //GM.KillPlayer();
+    //        playerScripts.TakeDamage(100);
+    //    }
+    //}
 
     void setBool()
     {

@@ -5176,7 +5176,7 @@ MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 1131722648560557247, guid: aa019e8f511846e46b09d36139908157, type: 3}
   m_PrefabInstance: {fileID: 471999599}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
+  m_GameObject: {fileID: 1803933793}
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 9ec8629d79d4bdf49a9835a3c39f42da, type: 3}
@@ -6586,9 +6586,17 @@ PrefabInstance:
     m_TransformParent: {fileID: 0}
     m_Modifications:
     - target: {fileID: 821055021873458628, guid: aa019e8f511846e46b09d36139908157, type: 3}
+      propertyPath: pm
+      value: 
+      objectReference: {fileID: 340438702}
+    - target: {fileID: 821055021873458628, guid: aa019e8f511846e46b09d36139908157, type: 3}
       propertyPath: cam
       value: 
       objectReference: {fileID: 1961397946}
+    - target: {fileID: 821055021873458628, guid: aa019e8f511846e46b09d36139908157, type: 3}
+      propertyPath: DieUI
+      value: 
+      objectReference: {fileID: 1803933793}
     - target: {fileID: 821055021873458628, guid: aa019e8f511846e46b09d36139908157, type: 3}
       propertyPath: hitEffect1
       value: 
@@ -6597,6 +6605,10 @@ PrefabInstance:
       propertyPath: hitEffect2
       value: 
       objectReference: {fileID: 911017353}
+    - target: {fileID: 821055021873458628, guid: aa019e8f511846e46b09d36139908157, type: 3}
+      propertyPath: playerController
+      value: 
+      objectReference: {fileID: 1803933794}
     - target: {fileID: 1131722648560557247, guid: aa019e8f511846e46b09d36139908157, type: 3}
       propertyPath: GM
       value: 
@@ -54986,7 +54998,7 @@ MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 8991524472919144028, guid: aa019e8f511846e46b09d36139908157, type: 3}
   m_PrefabInstance: {fileID: 471999599}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
+  m_GameObject: {fileID: 1803933793}
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 5ff48fe90f03dd245b8eee98d341d1fe, type: 3}
@@ -54997,7 +55009,7 @@ MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 6175829726167144918, guid: aa019e8f511846e46b09d36139908157, type: 3}
   m_PrefabInstance: {fileID: 471999599}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
+  m_GameObject: {fileID: 1803933793}
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 6ced8d96fa5d50242b10cef025bb055f, type: 3}
@@ -60721,6 +60733,16 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1798098189}
   m_CullTransparentMesh: 1
+--- !u!1 &1803933793 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 2856388831691665886, guid: aa019e8f511846e46b09d36139908157, type: 3}
+  m_PrefabInstance: {fileID: 471999599}
+  m_PrefabAsset: {fileID: 0}
+--- !u!143 &1803933794 stripped
+CharacterController:
+  m_CorrespondingSourceObject: {fileID: 5392185983061293030, guid: aa019e8f511846e46b09d36139908157, type: 3}
+  m_PrefabInstance: {fileID: 471999599}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1001 &1808620328
 PrefabInstance:
   m_ObjectHideFlags: 0
