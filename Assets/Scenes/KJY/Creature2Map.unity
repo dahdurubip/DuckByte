@@ -33541,6 +33541,11 @@ PrefabInstance:
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: f5d1ff8197a9f5c4d9c48619c7621d97, type: 3}
+--- !u!1 &171768526922599330 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 6225066236889507759, guid: f5d1ff8197a9f5c4d9c48619c7621d97, type: 3}
+  m_PrefabInstance: {fileID: 171768526922599329}
+  m_PrefabAsset: {fileID: 0}
 --- !u!114 &171768526922599333 stripped
 MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 2034480609035555260, guid: f5d1ff8197a9f5c4d9c48619c7621d97, type: 3}
@@ -37271,6 +37276,7 @@ MonoBehaviour:
   crouchingWalkClip: {fileID: 8300000, guid: 7aefe04232b39254cad7899083ec0dbf, type: 3}
   footstepAudioSource: {fileID: 7170638557801259635}
   sfxAudioSource: {fileID: 7170638557801259636}
+  isMovable: 1
   rotationSmoothTime: 0.1
   GM: {fileID: 0}
 --- !u!1 &3859830382908256719
@@ -38136,6 +38142,11 @@ MonoBehaviour:
   hitEffect2: {fileID: 2977848828467034124}
   cam: {fileID: 1805503452}
   creature2scenemanager: {fileID: 762852052}
+  playerController: {fileID: 4945318174986519706}
+  pm: {fileID: 3850340033689301170}
+  DieUI: {fileID: 171768526922599330}
+  dialogueManager: {fileID: 301298124}
+  isInside: 0
 --- !u!1 &4629397516722586828
 GameObject:
   m_ObjectHideFlags: 0
