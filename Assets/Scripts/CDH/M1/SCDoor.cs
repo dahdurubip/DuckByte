@@ -10,6 +10,7 @@ public class SCDoor : MonoBehaviour, IInteractable
     [SerializeField] private GameObject SCDoorLock;
     [SerializeField] private DialogueManager dialogueManager;
     [SerializeField] private Collider SCD;
+    [SerializeField] private Collider BulsangDoor;
         
 
 
@@ -49,5 +50,6 @@ public class SCDoor : MonoBehaviour, IInteractable
         SCDoorLock.SetActive(false);
         // 문과 상호작용 할 수 있게됨
         SCD.enabled = true;
+        BulsangDoor.enabled = true;
     }
 }
