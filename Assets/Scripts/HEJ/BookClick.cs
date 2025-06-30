@@ -2,13 +2,11 @@ using UnityEngine;
 
 public class BookTrigger : MonoBehaviour
 {
-    public SouthRoomPuzzleManager manager;
+    [SerializeField] private SouthRoomPuzzleManager puzzleManager;
 
-    void OnMouseDown()
+    private void OnMouseDown()
     {
-        if (manager != null)
-        {
-            manager.OpenNameInputUI();
-        }
+        // puzzleManager가 할당되어 있으면 이름 입력 UI 열기
+        puzzleManager?.OpenInput();
     }
 }
