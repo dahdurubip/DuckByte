@@ -5361,6 +5361,10 @@ PrefabInstance:
       propertyPath: m_ConstrainProportionsScale
       value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: 1644771228721649424, guid: f5d1ff8197a9f5c4d9c48619c7621d97, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 2164466061207435081, guid: f5d1ff8197a9f5c4d9c48619c7621d97, type: 3}
       propertyPath: m_Pivot.x
       value: 0
@@ -5453,6 +5457,26 @@ PrefabInstance:
       propertyPath: m_IsActive
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 4452475507143490788, guid: f5d1ff8197a9f5c4d9c48619c7621d97, type: 3}
+      propertyPath: m_fontAsset
+      value: 
+      objectReference: {fileID: 11400000, guid: 43111dec0c3395d4a882c155f86f65ba, type: 2}
+    - target: {fileID: 4452475507143490788, guid: f5d1ff8197a9f5c4d9c48619c7621d97, type: 3}
+      propertyPath: m_fontColor.b
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4452475507143490788, guid: f5d1ff8197a9f5c4d9c48619c7621d97, type: 3}
+      propertyPath: m_fontColor.g
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4452475507143490788, guid: f5d1ff8197a9f5c4d9c48619c7621d97, type: 3}
+      propertyPath: m_fontColor.r
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4452475507143490788, guid: f5d1ff8197a9f5c4d9c48619c7621d97, type: 3}
+      propertyPath: m_hasFontAssetChanged
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 5651139560344544058, guid: f5d1ff8197a9f5c4d9c48619c7621d97, type: 3}
       propertyPath: m_IsActive
       value: 0
@@ -5504,6 +5528,18 @@ PrefabInstance:
     - target: {fileID: 8078640894234511989, guid: f5d1ff8197a9f5c4d9c48619c7621d97, type: 3}
       propertyPath: m_IsActive
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8218376070959970802, guid: f5d1ff8197a9f5c4d9c48619c7621d97, type: 3}
+      propertyPath: m_Color.b
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 8218376070959970802, guid: f5d1ff8197a9f5c4d9c48619c7621d97, type: 3}
+      propertyPath: m_Color.g
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 8218376070959970802, guid: f5d1ff8197a9f5c4d9c48619c7621d97, type: 3}
+      propertyPath: m_Color.r
+      value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -5712,6 +5748,11 @@ MeshCollider:
   m_Convex: 1
   m_CookingOptions: 30
   m_Mesh: {fileID: 5230610418620719717, guid: 0ef01c149448977428ae5664d595fc28, type: 3}
+--- !u!1 &231629685 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 1644771228721649424, guid: f5d1ff8197a9f5c4d9c48619c7621d97, type: 3}
+  m_PrefabInstance: {fileID: 220939626}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1001 &231982598
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -10911,6 +10952,17 @@ MeshCollider:
   m_Convex: 1
   m_CookingOptions: 30
   m_Mesh: {fileID: -6674590742333150855, guid: 50f8ce79331e9e748a2d688977bb22ee, type: 3}
+--- !u!114 &440099903 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 4452475507143490788, guid: f5d1ff8197a9f5c4d9c48619c7621d97, type: 3}
+  m_PrefabInstance: {fileID: 220939626}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f4688fdb7df04437aeb418b961361dc5, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1001 &441435760
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -56036,6 +56088,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   dialogueText: {fileID: 729649250}
   dialoguePanel: {fileID: 1064971796}
+  bossDialogueText: {fileID: 440099903}
+  bossDialoguePanel: {fileID: 231629685}
   dialogueData: {fileID: 1777336348}
   isTyping: 0
   isPlayingDialogue: 0

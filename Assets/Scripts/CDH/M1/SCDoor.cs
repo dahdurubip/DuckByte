@@ -20,7 +20,7 @@ public class SCDoor : MonoBehaviour, IInteractable
         //1) 아이템이 널(null)이면 무시
         if (heldItem == null)
         {
-            dialogueManager.PlayDialogue("interactSCDoor");
+            dialogueManager.PlayDialogue("interactSCDoor", "player");
             return;
         }
 

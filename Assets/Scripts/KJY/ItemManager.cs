@@ -199,12 +199,12 @@ public class ItemManager : MonoBehaviour
                     //}
 
                     m1_AudioManager.instance.PlaySfx(m1_AudioManager.m1sfx.unBrokenJar);
-                    dialogueManager.PlayDialogue("interactUnBrokenJar");
+                    dialogueManager.PlayDialogue("interactUnBrokenJar", "player");
                     return;
                 }
                 if (nearbyInteractable.CompareTag("Well"))
                 {
-                    dialogueManager.PlayDialogue("interactWell");
+                    dialogueManager.PlayDialogue("interactWell", "player");
                     return;
                 }
                 if (nearbyInteractable.CompareTag("BossDoor"))
@@ -223,7 +223,7 @@ public class ItemManager : MonoBehaviour
                     if (UnityEngine.SceneManagement.SceneManager.GetActiveScene().name == "Creature2Map")
                     {
                         Creature2AudioManager.instance.PlaySfx(Creature2AudioManager.sfx.PhorrorEffect);
-                        dialogueManager.PlayDialogue("inPrison2");
+                        dialogueManager.PlayDialogue("inPrison2", "player");
                     }
                     MainItem += 1;
                     Destroy(nearbyInteractable);

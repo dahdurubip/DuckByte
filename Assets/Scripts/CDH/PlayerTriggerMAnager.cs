@@ -19,7 +19,7 @@ public class PlayerTriggerMAnager : MonoBehaviour
             //m1_AudioManager.instance.PlaySfx(m1_AudioManager.m1sfx.);
 
             //StartCoroutine(PlayDialogue("goToBossDoor"));
-            dialogueManager.PlayDialogue("goToBossDoor");
+            dialogueManager.PlayDialogue("goToBossDoor", "player");
         }
 
         if (other.CompareTag("DontMonster"))

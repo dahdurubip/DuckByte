@@ -9,7 +9,7 @@ public class DetectEye : MonoBehaviour
     {
         if (other.gameObject.tag == "Player")
         {
-            dialogueManager.PlayDialogue("inPrison1");
+            dialogueManager.PlayDialogue("inPrison1", "player");
             eyeDetect.enabled = false; 
         }
     }

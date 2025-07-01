@@ -495,7 +495,7 @@ public class BossPhaseManager : MonoBehaviour
         {
             foreach (string line in dialogueData.phaseDialogues[nextPhase])
             {
-                yield return StartCoroutine(dialogueManager.ShowDialogue("보스", line));
+                yield return StartCoroutine(dialogueManager.ShowDialogue("boss", line));
             }
         }
 

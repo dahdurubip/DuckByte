@@ -55,7 +55,7 @@ public class Jiockdo : MonoBehaviour, IInteractable
         // 풀린 자물쇠가 사라짐
         //SCDoorLock.SetActive(false);
         // 문들 나타나는 대사
-        dialogueManager.PlayDialogue("clearToJiockdo");
+        dialogueManager.PlayDialogue("clearToJiockdo", "player");
         // 숨겨진 문과 상호작용 할 수 있게됨
         D1.enabled = true;
         D2.enabled = true;

@@ -12,7 +12,7 @@ public class DoorController : MonoBehaviour
         if (doorMesh != null)
         {
             initialRotation = doorMesh.localEulerAngles;
-            //Debug.Log($"[ÃÊ±â È¸Àü°ª ÀúÀå] doorMesh: {doorMesh.name} ¡æ {initialRotation}");
+            //Debug.Log($"[ì´ˆê¸° íšŒì „ê°’ ì €ì¥] doorMesh: {doorMesh.name} â†’ {initialRotation}");
         }
     }
 
@@ -27,7 +27,7 @@ public class DoorController : MonoBehaviour
                 initialRotation.y + 100f,
                 initialRotation.z
             );
-           // Debug.Log("[¹® ¿­¸² Ã³¸®] È¸Àü Àû¿ëµÊ: " + doorMesh.name);
+           // Debug.Log("[ë¬¸ ì—´ë¦¼ ì²˜ë¦¬] íšŒì „ ì ìš©ë¨: " + doorMesh.name);
         }
     }
 
@@ -37,11 +37,11 @@ public class DoorController : MonoBehaviour
         if (doorMesh != null)
         {
             doorMesh.localEulerAngles = initialRotation;
-            //Debug.Log("[¹® ´İÈû Ã³¸®] doorMesh È¸Àü ÃÊ±âÈ­µÊ: " + doorMesh.name);
+            //Debug.Log("[ë¬¸ ë‹«í˜ ì²˜ë¦¬] doorMesh íšŒì „ ì´ˆê¸°í™”ë¨: " + doorMesh.name);
         }
         else
         {
-           // Debug.LogWarning("[¹® ´İ±â ½ÇÆĞ] doorMesh°¡ ºñ¾î ÀÖÀ½");
+           // Debug.LogWarning("[ë¬¸ ë‹«ê¸° ì‹¤íŒ¨] doorMeshê°€ ë¹„ì–´ ìˆìŒ");
         }
     }
 }

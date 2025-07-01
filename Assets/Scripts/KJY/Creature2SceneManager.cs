@@ -11,7 +11,7 @@ public class Creature2SceneManager : MonoBehaviour
     private void Start()
     {
         //Creature2AudioManager.instance.PlaySfx(Creature2AudioManager.sfx.Phorror);
-        dialogueManager.PlayDialogue("inPrison");
+        dialogueManager.PlayDialogue("inPrison", "boss");
 
     }
 
