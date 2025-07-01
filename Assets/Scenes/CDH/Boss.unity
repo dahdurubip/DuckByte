@@ -191190,6 +191190,10 @@ PrefabInstance:
       value: SM_Unhyun_Norak_N_Haenggak_Wall_L001
       objectReference: {fileID: 0}
     - target: {fileID: 5541333225143849831, guid: e642aba117a0a2f40b89e86042fdf1a6, type: 3}
+      propertyPath: m_Layer
+      value: 10
+      objectReference: {fileID: 0}
+    - target: {fileID: 5541333225143849831, guid: e642aba117a0a2f40b89e86042fdf1a6, type: 3}
       propertyPath: m_IsActive
       value: 1
       objectReference: {fileID: 0}
@@ -261700,8 +261704,12 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 7170638556431290795}
     - target: {fileID: 1131722648560557247, guid: aa019e8f511846e46b09d36139908157, type: 3}
+      propertyPath: staminaRegenRate
+      value: 10
+      objectReference: {fileID: 0}
+    - target: {fileID: 1131722648560557247, guid: aa019e8f511846e46b09d36139908157, type: 3}
       propertyPath: staminaConsumeRate
-      value: 2
+      value: 15
       objectReference: {fileID: 0}
     - target: {fileID: 1131722648560557247, guid: aa019e8f511846e46b09d36139908157, type: 3}
       propertyPath: footstepAudioSource

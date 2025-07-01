@@ -44056,9 +44056,17 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 1568374702}
     - target: {fileID: 3850340034015714051, guid: 1c1b96555739802468e69a1ebcb9c6bb, type: 3}
+      propertyPath: staminaRegenRate
+      value: 10
+      objectReference: {fileID: 0}
+    - target: {fileID: 3850340034015714051, guid: 1c1b96555739802468e69a1ebcb9c6bb, type: 3}
       propertyPath: crouchingWalkClip
       value: 
       objectReference: {fileID: 8300000, guid: 7aefe04232b39254cad7899083ec0dbf, type: 3}
+    - target: {fileID: 3850340034015714051, guid: 1c1b96555739802468e69a1ebcb9c6bb, type: 3}
+      propertyPath: staminaConsumeRate
+      value: 15
+      objectReference: {fileID: 0}
     - target: {fileID: 3850340034015714051, guid: 1c1b96555739802468e69a1ebcb9c6bb, type: 3}
       propertyPath: footstepAudioSource
       value: 
