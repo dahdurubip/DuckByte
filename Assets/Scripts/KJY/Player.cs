@@ -74,9 +74,10 @@ public class Player : MonoBehaviour
 
     private void Die()
     {
+        pm.isMovable = false;
         //Debug.Log("플레이어 사망!");
         playerController.enabled = false;
-        pm.isMovable = false;
+
 
         StopAllCoroutines();
         //여기서 사망 애니메이션, 게임 오버 처리 등 넣기
