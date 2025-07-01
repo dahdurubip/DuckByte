@@ -273,7 +273,7 @@ public class ItemManager : MonoBehaviour
             //픽업
             if (pickableTarget != null)
             {
-                itemPickUp.Play();
+                //itemPickUp.Play();
                 Vector3 directionToTarget = pickableTarget.transform.position - transform.position;
                 float verticalOffset = directionToTarget.y;
 
@@ -387,6 +387,8 @@ public class ItemManager : MonoBehaviour
     {
         if (currentItem != null)
             DropCurrentItem();
+
+        itemPickUp.Play();
 
         currentItem = item;
         if (item.TryGetComponent<Rigidbody>(out var rb))

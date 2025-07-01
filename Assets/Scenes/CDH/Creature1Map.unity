@@ -44884,6 +44884,10 @@ PrefabInstance:
       value: 10
       objectReference: {fileID: 0}
     - target: {fileID: 7170638558045817283, guid: 1c1b96555739802468e69a1ebcb9c6bb, type: 3}
+      propertyPath: itemPickUp
+      value: 
+      objectReference: {fileID: 1568374702}
+    - target: {fileID: 7170638558045817283, guid: 1c1b96555739802468e69a1ebcb9c6bb, type: 3}
       propertyPath: noteUIText
       value: 
       objectReference: {fileID: 220939627}
@@ -49894,9 +49898,9 @@ AudioSource:
   m_Enabled: 1
   serializedVersion: 4
   OutputAudioMixerGroup: {fileID: 0}
-  m_audioClip: {fileID: 0}
-  m_Resource: {fileID: 0}
-  m_PlayOnAwake: 1
+  m_audioClip: {fileID: 8300000, guid: f1e0718e445f9974d9f135931916e656, type: 3}
+  m_Resource: {fileID: 8300000, guid: f1e0718e445f9974d9f135931916e656, type: 3}
+  m_PlayOnAwake: 0
   m_Volume: 1
   m_Pitch: 1
   Loop: 0
