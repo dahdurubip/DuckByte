@@ -41811,11 +41811,6 @@ BoxCollider:
   serializedVersion: 3
   m_Size: {x: 2.447781, y: 2.5987256, z: 0.11790143}
   m_Center: {x: 1.2238874, y: 1.2993628, z: 0.05894523}
---- !u!1 &1107000402 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 2386373885305285677, guid: f5d1ff8197a9f5c4d9c48619c7621d97, type: 3}
-  m_PrefabInstance: {fileID: 88621113}
-  m_PrefabAsset: {fileID: 0}
 --- !u!1001 &1108502479
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -93050,17 +93045,6 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 8354171145624440737, guid: 1148481abd8c8c640bc072e6998b0efd, type: 3}
   m_PrefabInstance: {fileID: 1520987464}
   m_PrefabAsset: {fileID: 0}
---- !u!114 &1521937274 stripped
-MonoBehaviour:
-  m_CorrespondingSourceObject: {fileID: 722583864437196761, guid: f5d1ff8197a9f5c4d9c48619c7621d97, type: 3}
-  m_PrefabInstance: {fileID: 88621113}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: f4688fdb7df04437aeb418b961361dc5, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!1 &1522776781
 GameObject:
   m_ObjectHideFlags: 0
@@ -95722,68 +95706,6 @@ Transform:
   m_CorrespondingSourceObject: {fileID: -8679921383154817045, guid: 2149b1e755921794bac72aa2eb70524f, type: 3}
   m_PrefabInstance: {fileID: 1589316029}
   m_PrefabAsset: {fileID: 0}
---- !u!1 &1591372658
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 1591372660}
-  - component: {fileID: 1591372659}
-  - component: {fileID: 1591372661}
-  m_Layer: 0
-  m_Name: TextManager
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!114 &1591372659
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1591372658}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 61d1b7e1b87b120419422449ff3decee, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  dialogueText: {fileID: 1521937274}
-  dialoguePanel: {fileID: 1107000402}
-  dialogueData: {fileID: 0}
-  isTyping: 0
-  isPlayingDialogue: 0
---- !u!4 &1591372660
-Transform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1591372658}
-  serializedVersion: 2
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 47.190414, y: -15.839266, z: 7.3797436}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_ConstrainProportionsScale: 0
-  m_Children: []
-  m_Father: {fileID: 0}
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &1591372661
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1591372658}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 19d236a273b947548ba95a3641f9b2a3, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!1 &1592670218
 GameObject:
   m_ObjectHideFlags: 0
@@ -187579,7 +187501,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f5259517ceef947479d4e43d7bd28f62, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  dialogueManager: {fileID: 1591372659}
+  dialogueManager: {fileID: 758972170}
 --- !u!1 &1911005747
 GameObject:
   m_ObjectHideFlags: 0
@@ -267130,7 +267052,7 @@ PrefabInstance:
     - target: {fileID: 8991524472919144028, guid: aa019e8f511846e46b09d36139908157, type: 3}
       propertyPath: dialogueManager
       value: 
-      objectReference: {fileID: 1591372659}
+      objectReference: {fileID: 0}
     - target: {fileID: 8991524472919144028, guid: aa019e8f511846e46b09d36139908157, type: 3}
       propertyPath: obanggiUIManager
       value: 
@@ -284954,11 +284876,11 @@ PrefabInstance:
     - target: {fileID: 8845663296742057360, guid: 8ce166a015b60934899e0c1a79c09522, type: 3}
       propertyPath: dialogueData
       value: 
-      objectReference: {fileID: 1591372661}
+      objectReference: {fileID: 0}
     - target: {fileID: 8845663296742057360, guid: 8ce166a015b60934899e0c1a79c09522, type: 3}
       propertyPath: dialogueManager
       value: 
-      objectReference: {fileID: 1591372659}
+      objectReference: {fileID: 0}
     - target: {fileID: 8845663296742057360, guid: 8ce166a015b60934899e0c1a79c09522, type: 3}
       propertyPath: burningGroundPrefab
       value: 
@@ -297054,7 +296976,6 @@ SceneRoots:
   - {fileID: 1514578076}
   - {fileID: 19412580}
   - {fileID: 1732550455}
-  - {fileID: 1591372660}
   - {fileID: 1109037676}
   - {fileID: 658357811}
   - {fileID: 1136901858}
