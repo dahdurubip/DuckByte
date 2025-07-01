@@ -3,15 +3,17 @@ using UnityEngine.UI;
 
 public class PreplacedButtonController : MonoBehaviour
 {
-    [Header("¾À¿¡ ¹Ì¸® ¸¸µé¾î µĞ ¹öÆ°µé (¼ø¼­´ë·Î)")]
+    [Header("ì”¬ì— ë¯¸ë¦¬ ë§Œë“¤ì–´ ë‘” ë²„íŠ¼ë“¤ (ìˆœì„œëŒ€ë¡œ)")]
     [SerializeField] private GameObject[] buttonObjects;
 
-    [Header("ÇÑ ¹öÆ°¿¡ ¹­À» ¾ÆÀÌÅÛ °³¼ö")]
+    [SerializeField] private ItemManager itemManager;
+
+    [Header("í•œ ë²„íŠ¼ì— ë¬¶ì„ ì•„ì´í…œ ê°œìˆ˜")]
     [SerializeField] private int itemsPerButton = 2;
 
     void Start()
     {
-        int totalItems = PlayerPrefs.GetInt("MainItemCount", 0);
+        int totalItems = itemManager.MainItem;
         int buttonCount = Mathf.CeilToInt(totalItems / (float)itemsPerButton);
         int maxButtons = buttonObjects.Length;
 
@@ -21,12 +23,12 @@ public class PreplacedButtonController : MonoBehaviour
 
             if (totalItems <= 2)
             {
-                // 2 ÀÌÇÏÀÏ ¶§´Â °¡¿îµ¥(ÀÎµ¦½º 1)¸¸ ²¨ÁÖ°í ³ª¸ÓÁö ¹öÆ°Àº ¸ğµÎ ÄÑ±â
+                // 2 ì´í•˜ì¼ ë•ŒëŠ” ê°€ìš´ë°(ì¸ë±ìŠ¤ 1)ë§Œ êº¼ì£¼ê³  ë‚˜ë¨¸ì§€ ë²„íŠ¼ì€ ëª¨ë‘ ì¼œê¸°
                 shouldActivate = (i != 1);
             }
             else
             {
-                // 3°³ ÀÌ»óÀÏ ¶§´Â itemsPerButton ±âÁØÀ¸·Î °è»êµÈ buttonCount ¸¸Å­ ¼ø¼­´ë·Î ÄÑ±â
+                // 3ê°œ ì´ìƒì¼ ë•ŒëŠ” itemsPerButton ê¸°ì¤€ìœ¼ë¡œ ê³„ì‚°ëœ buttonCount ë§Œí¼ ìˆœì„œëŒ€ë¡œ ì¼œê¸°
                 shouldActivate = (i < buttonCount);
             }
 
@@ -36,7 +38,7 @@ public class PreplacedButtonController : MonoBehaviour
             {
                 var btn = buttonObjects[i].GetComponent<Button>();
                 btn.onClick.RemoveAllListeners();
-                int idx = i; 
+                int idx = i;
                 btn.onClick.AddListener(() => OnButtonClicked(idx));
             }
         }
@@ -44,6 +46,6 @@ public class PreplacedButtonController : MonoBehaviour
 
     private void OnButtonClicked(int idx)
     {
-        Debug.Log($"[{idx + 1}¹ø ¹öÆ°] Å¬¸¯µÊ");
+        Debug.Log($"[{idx + 1}ë²ˆ ë²„íŠ¼] í´ë¦­ë¨");
     }
 }

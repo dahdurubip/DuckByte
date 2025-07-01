@@ -93,7 +93,7 @@ public class ItemManager : MonoBehaviour
                 MainItem = PlayerPrefs.GetInt("MainItemValue3", 0);
             }
 
-            //Debug.Log("mainItem" + MainItem);
+            Debug.Log("mainItem" + MainItem);
             //E키를 누르면 무조건 끄는 것
             if (noteUI.activeSelf)
             {
