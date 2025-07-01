@@ -16075,7 +16075,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 73804866e5c196442aa4a911e3257bfd, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  wallpos: {fileID: 2024447585}
   creature2: {fileID: 2048632044}
   eyeDetectionCloneObject: {fileID: 1033317762299373077}
   flashlightCloneObject: {fileID: 1168252503}
@@ -33602,6 +33601,46 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 2164466061207435081, guid: f5d1ff8197a9f5c4d9c48619c7621d97, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4552567312010259823, guid: f5d1ff8197a9f5c4d9c48619c7621d97, type: 3}
+      propertyPath: m_AnchoredPosition.x
+      value: 378
+      objectReference: {fileID: 0}
+    - target: {fileID: 4552567312010259823, guid: f5d1ff8197a9f5c4d9c48619c7621d97, type: 3}
+      propertyPath: m_AnchoredPosition.y
+      value: -89
+      objectReference: {fileID: 0}
+    - target: {fileID: 6263414116498232339, guid: f5d1ff8197a9f5c4d9c48619c7621d97, type: 3}
+      propertyPath: m_fontSize
+      value: 55
+      objectReference: {fileID: 0}
+    - target: {fileID: 6263414116498232339, guid: f5d1ff8197a9f5c4d9c48619c7621d97, type: 3}
+      propertyPath: m_margin.w
+      value: -81.10663
+      objectReference: {fileID: 0}
+    - target: {fileID: 6263414116498232339, guid: f5d1ff8197a9f5c4d9c48619c7621d97, type: 3}
+      propertyPath: m_margin.y
+      value: -153.99591
+      objectReference: {fileID: 0}
+    - target: {fileID: 6263414116498232339, guid: f5d1ff8197a9f5c4d9c48619c7621d97, type: 3}
+      propertyPath: m_fontAsset
+      value: 
+      objectReference: {fileID: 11400000, guid: 43111dec0c3395d4a882c155f86f65ba, type: 2}
+    - target: {fileID: 6263414116498232339, guid: f5d1ff8197a9f5c4d9c48619c7621d97, type: 3}
+      propertyPath: m_lineSpacing
+      value: 50
+      objectReference: {fileID: 0}
+    - target: {fileID: 6263414116498232339, guid: f5d1ff8197a9f5c4d9c48619c7621d97, type: 3}
+      propertyPath: m_fontSizeBase
+      value: 55
+      objectReference: {fileID: 0}
+    - target: {fileID: 6263414116498232339, guid: f5d1ff8197a9f5c4d9c48619c7621d97, type: 3}
+      propertyPath: m_sharedMaterial
+      value: 
+      objectReference: {fileID: -3277701624690761781, guid: 43111dec0c3395d4a882c155f86f65ba, type: 2}
+    - target: {fileID: 6263414116498232339, guid: f5d1ff8197a9f5c4d9c48619c7621d97, type: 3}
+      propertyPath: m_hasFontAssetChanged
       value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
