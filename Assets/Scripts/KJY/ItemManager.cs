@@ -21,6 +21,8 @@ public class ItemManager : MonoBehaviour
     [SerializeField] private ObanggiUIManager obanggiUIManager;
     [SerializeField] private DialogueManager dialogueManager;
 
+    [SerializeField] private AudioSource itemPickUp;
+
     [SerializeField] private GameObject howToUse;
 
     [Header("Key UI Settings")]
@@ -271,7 +273,7 @@ public class ItemManager : MonoBehaviour
             //픽업
             if (pickableTarget != null)
             {
-
+                itemPickUp.Play();
                 Vector3 directionToTarget = pickableTarget.transform.position - transform.position;
                 float verticalOffset = directionToTarget.y;
 

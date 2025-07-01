@@ -27,6 +27,8 @@ public class BreakOnXKey : MonoBehaviour
     [Header("깨기 제한 시간")]
     [SerializeField] private float breakTimeout = 5f;
 
+    [SerializeField] private AudioSource brokeEgg;
+
     //**
     private const int totalStages = 10;
     private int pressCount = 0;
@@ -163,6 +165,7 @@ public class BreakOnXKey : MonoBehaviour
 
     private void ApplyBreakStage(int stage)
     {
+        brokeEgg.Play();
         if (stage == 1)
         {
             wholeEggs.SetActive(false);
