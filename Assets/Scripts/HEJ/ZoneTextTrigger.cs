@@ -6,13 +6,12 @@ using TMPro;
 public class ZoneTextTrigger : MonoBehaviour
 {
     public GameObject promptCanvas;
-
     public TMP_Text promptText;
 
-
-    public string message = "¸¶¿ì½º¸¦ »ç¿ëÇØ º¸¼¼¿ä";
+    public string message = "ë§ˆìš°ìŠ¤ë¥¼ ì‚¬ìš©í•´ ë³´ì„¸ìš”";
     public float displayDuration = 5f;
 
+    private bool hasTriggered = false;
     private Coroutine hideCoroutine;
 
     void Awake()
@@ -26,20 +25,22 @@ public class ZoneTextTrigger : MonoBehaviour
 
     void OnTriggerEnter(Collider other)
     {
-        if (other.CompareTag("Player"))
+        if (!hasTriggered && other.CompareTag("Player"))
+        {
             ShowMessage();
+            hasTriggered = true;
+        }
     }
 
     private void ShowMessage()
     {
         if (promptCanvas == null || promptText == null)
-        {
             return;
-        }
 
         promptText.text = message;
         promptCanvas.SetActive(true);
 
+        // HideAfterDelay ì½”ë£¨í‹´ ìž¬ì‹œìž‘
         if (hideCoroutine != null)
             StopCoroutine(hideCoroutine);
         hideCoroutine = StartCoroutine(HideAfterDelay());

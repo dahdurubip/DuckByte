@@ -8,30 +8,16 @@ public class PreplacedButtonController : MonoBehaviour
 
     [SerializeField] private ItemManager itemManager;
 
-    [Header("한 버튼에 묶을 아이템 개수")]
-    [SerializeField] private int itemsPerButton = 2;
-
     void Start()
     {
         int totalItems = itemManager.MainItem;
-        int buttonCount = Mathf.CeilToInt(totalItems / (float)itemsPerButton);
         int maxButtons = buttonObjects.Length;
+        // 총 켤 버튼 수: totalItems <= 2 ? 2 : 3
+        int activateCount = totalItems <= 2 ? 2 : 3;
 
         for (int i = 0; i < maxButtons; i++)
         {
-            bool shouldActivate;
-
-            if (totalItems <= 2)
-            {
-                // 2 이하일 때는 가운데(인덱스 1)만 꺼주고 나머지 버튼은 모두 켜기
-                shouldActivate = (i != 1);
-            }
-            else
-            {
-                // 3개 이상일 때는 itemsPerButton 기준으로 계산된 buttonCount 만큼 순서대로 켜기
-                shouldActivate = (i < buttonCount);
-            }
-
+            bool shouldActivate = (i < activateCount);
             buttonObjects[i].SetActive(shouldActivate);
 
             if (shouldActivate)
@@ -46,6 +32,6 @@ public class PreplacedButtonController : MonoBehaviour
 
     private void OnButtonClicked(int idx)
     {
-        Debug.Log($"[{idx + 1}번 버튼] 클릭됨");
+        //Debug.Log($"[{idx + 1}번 버튼] 클릭됨");
     }
 }
