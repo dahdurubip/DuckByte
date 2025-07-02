@@ -44386,11 +44386,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 1233254671802239474, guid: d4b2ada4637a0984287e190d7d5e015a, type: 3}
       propertyPath: maxDistance
-      value: 5
+      value: 3.5
       objectReference: {fileID: 0}
     - target: {fileID: 1233254671802239474, guid: d4b2ada4637a0984287e190d7d5e015a, type: 3}
       propertyPath: minDistance
-      value: 0.3
+      value: 0.1
       objectReference: {fileID: 0}
     - target: {fileID: 1233254671802239474, guid: d4b2ada4637a0984287e190d7d5e015a, type: 3}
       propertyPath: sensitivity
@@ -45862,7 +45862,7 @@ MonoBehaviour:
     serializedVersion: 2
     m_Bits: 1024
   detectRange: 10
-  detectionRadius: 0.5
+  detectionRadius: 0.7
   flashManager: {fileID: 143854699}
   obanggiUIManager: {fileID: 1369876337}
   dialogueManager: {fileID: 301298124}
