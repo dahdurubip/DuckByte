@@ -25,7 +25,10 @@ public class PlayerMovement : MonoBehaviour
     //카메라 회전 토글 여부
     [SerializeField] private bool toggleCameraRotation;
     //앉기 상태 여부
-    [SerializeField] private bool isCrouching;
+    [SerializeField] public bool isCrouching;
+    private float crouchCooldownTimer = 0f;
+    [SerializeField] private bool canCrouch = true;
+
 
     [Header("Crouch Settings")]
     //앉았을 때 CharacterController 높이
@@ -144,6 +147,18 @@ public class PlayerMovement : MonoBehaviour
 
         HandleCrouch();
         HandleAudio();
+
+        // 쿨타임 타이머 감소
+        if (!canCrouch)
+        {
+            //Debug.Log("앉기 타이머 감소중");
+            crouchCooldownTimer -= Time.deltaTime;
+            if (crouchCooldownTimer <= 0f)
+            {
+                //Debug.Log(crouchCooldownTimer);
+                canCrouch = true;
+            }
+        }
     }
 
     //중력 처리
@@ -324,6 +339,9 @@ public class PlayerMovement : MonoBehaviour
     //앉기 처리
     private void HandleCrouch()
     {
+        // 쿨타임 중이면 무시
+        if (!canCrouch) return;
+
         if (Input.GetKeyDown(KeyCode.C))
         {
             isCrouching = !isCrouching;
@@ -340,8 +358,19 @@ public class PlayerMovement : MonoBehaviour
                 isCrouching = false;
                 playerCrouch = false;
                 crouchTimer = 0f;
+
+                // 강제 기상 후 쿨타임 시작
+                canCrouch = false;
+                crouchCooldownTimer = 5f; // 재앉기 불가
+
+                if (!isExhausted)
+                {
+                    StartCoroutine(ExhaustionCoroutine());
+                }
             }
         }
+
+        
     }
 
     private void HandleAudio()

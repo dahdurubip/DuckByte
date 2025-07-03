@@ -37890,7 +37890,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 1233254671802239474, guid: d4b2ada4637a0984287e190d7d5e015a, type: 3}
       propertyPath: sensitivity
-      value: 10
+      value: 3
       objectReference: {fileID: 0}
     - target: {fileID: 1233254671802239474, guid: d4b2ada4637a0984287e190d7d5e015a, type: 3}
       propertyPath: cameraRadius
@@ -44157,6 +44157,10 @@ PrefabInstance:
       value: 1.5
       objectReference: {fileID: 0}
     - target: {fileID: 3850340034015714051, guid: 1c1b96555739802468e69a1ebcb9c6bb, type: 3}
+      propertyPath: initialStamina
+      value: 100
+      objectReference: {fileID: 0}
+    - target: {fileID: 3850340034015714051, guid: 1c1b96555739802468e69a1ebcb9c6bb, type: 3}
       propertyPath: sfxAudioSource
       value: 
       objectReference: {fileID: 1568374702}
@@ -49855,6 +49859,7 @@ MonoBehaviour:
   heal: {fileID: 0}
   debuff: {fileID: 0}
   playAudio: {fileID: 0}
+  mentalVolume: {fileID: 0}
 --- !u!114 &1568374682 stripped
 MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 3850340034015714051, guid: 1c1b96555739802468e69a1ebcb9c6bb, type: 3}

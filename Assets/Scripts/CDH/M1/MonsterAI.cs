@@ -304,7 +304,7 @@ public class MonsterAI : MonoBehaviour
 
 
                 // 의심
-                if (distanceToPlayer <= suspicionRange && pM.IsMoving && !playerScripts.isInside)
+                if (distanceToPlayer <= suspicionRange && pM.IsMoving && !playerScripts.isInside && !pM.isCrouching)
                 {
                    // Debug.Log("의심 거리 들어왔음");
                     if (!isSuspicious) // (!isSuspicious && suspicionCoroutine == null) 수정할지 고민

@@ -34,6 +34,8 @@ public class PlayerMental : MonoBehaviour
     public AudioClip debuff; // 2번 구역 음악
 
     [SerializeField] AudioSource playAudio;
+    // 멘탈 무너졌을때 효과
+    [SerializeField] GameObject mentalVolume;
 
 
     void Start()
@@ -105,10 +107,11 @@ public class PlayerMental : MonoBehaviour
             currentMental += recoveryRate * Time.deltaTime;
             currentMental = Mathf.Clamp(currentMental, 0f, maxMental);
 
-            if (currentMental > 30 && isReversingControl)
+            if (currentMental > 50 && isReversingControl)
             {
                 isReversingControl = false;
                 //Debug.Log("정신력 회복 → 조작 정상화");
+                mentalVolume.SetActive(false);
             }
 
             yield return null; // 다음 프레임까지 대기
@@ -139,7 +142,7 @@ public class PlayerMental : MonoBehaviour
 
         // 정신력 상태에 따른 효과
         // 현재 정신력이 30이하이면서 조작반전이 되지않았다면 효과함수 호출
-        if (currentMental <= 30 && !isReversingControl)
+        if (currentMental <= 50 && !isReversingControl)
         {
             TriggerLowMentalEffects();
         }
@@ -196,6 +199,7 @@ public class PlayerMental : MonoBehaviour
         //    playerMovement.SetReverseControl(true);
 
         // 화면 왜곡 효과도 여기서 시작
+        mentalVolume.SetActive(true);
         //Debug.Log("정신력 낮음! 화면 왜곡 + 조작 반전 시작");
     }
 
