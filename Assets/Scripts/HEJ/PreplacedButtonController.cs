@@ -6,13 +6,20 @@ public class PreplacedButtonController : MonoBehaviour
     [Header("씬에 미리 만들어 둔 버튼들 (순서대로)")]
     [SerializeField] private GameObject[] buttonObjects;
 
-    [SerializeField] private ItemManager itemManager;
+    private ItemManager itemManager;
 
     void Start()
     {
+        // Unity 2023 이상: 권장 방식
+        itemManager = FindFirstObjectByType<ItemManager>();
+        if (itemManager == null)
+        {
+            Debug.LogError("ItemManager를 씬에서 찾을 수 없습니다.");
+            return;
+        }
+
         int totalItems = itemManager.MainItem;
         int maxButtons = buttonObjects.Length;
-        // 총 켤 버튼 수: totalItems <= 2 ? 2 : 3
         int activateCount = totalItems <= 2 ? 2 : 3;
 
         for (int i = 0; i < maxButtons; i++)
