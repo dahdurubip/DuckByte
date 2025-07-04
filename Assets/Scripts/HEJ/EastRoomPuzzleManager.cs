@@ -10,8 +10,8 @@ public class EastRoomPuzzleManager : MonoBehaviour
     public LightProp[] lamps;
 
     [Header("Reward")]
-    public GameObject rewardPrefab;       // ½ºÆùÇÒ ¾ÆÀÌÅÛ ÇÁ¸®ÆÕ
-    public Transform rewardSpawnPoint;   // ½ºÆùµÉ À§Ä¡(Transform)
+    public GameObject rewardPrefab;       // ìŠ¤í°í•  ì•„ì´í…œ í”„ë¦¬íŒ¹
+    public Transform rewardSpawnPoint;   // ìŠ¤í°ë  ìœ„ì¹˜(Transform)
 
     private List<int> sequence;
     private int currentIndex = 0;
@@ -31,7 +31,7 @@ public class EastRoomPuzzleManager : MonoBehaviour
         if (player == null || lamps == null || lamps.Length == 0)
             return;
 
-        // 1) ÇÃ·¹ÀÌ¾î¿Í °¡±î¿î ·¥ÇÁ ÇÏ³ª Ã£±â
+        // 1) í”Œë ˆì´ì–´ì™€ ê°€ê¹Œìš´ ë¨í”„ í•˜ë‚˜ ì°¾ê¸°
         LightProp closest = null;
         float minDist = float.MaxValue;
         foreach (var lamp in lamps)
@@ -47,18 +47,15 @@ public class EastRoomPuzzleManager : MonoBehaviour
             }
         }
 
-        // 2) ¸ğµç ·¥ÇÁ ¾ÆÀÌÄÜ ²ô°í, closest¸¸ ÄÔ
+        // 2) ëª¨ë“  ë¨í”„ ì•„ì´ì½˜ ë„ê³ , closestë§Œ ì¼¬
         foreach (var lamp in lamps)
             lamp.ShowIcon(lamp == closest);
 
-        // 3) EÅ° ÀÔ·Â ½Ã closest ÇÏ³ª¸¸ Ã³¸®
+        // 3) Eí‚¤ ì…ë ¥ ì‹œ closest í•˜ë‚˜ë§Œ ì²˜ë¦¬
         if (closest != null && Input.GetKeyDown(KeyCode.E))
             OnLampPressed(closest);
     }
 
-    /// <summary>
-    /// ¹æ ÀÔÀå Æ®¸®°Å¿¡¼­ StartPuzzle() ÇÑ ¹ø¸¸ È£ÃâÇÏ¼¼¿ä.
-    /// </summary>
     public void StartPuzzle()
     {
         StopAllCoroutines();
@@ -68,14 +65,14 @@ public class EastRoomPuzzleManager : MonoBehaviour
 
     IEnumerator InitialFlash()
     {
-        // ¸ğµÎ ÄÑÁ³´Ù
+        // ëª¨ë‘ ì¼œì¡Œë‹¤
         foreach (var lamp in lamps) lamp.SetState(true);
         yield return new WaitForSeconds(1.0f);
-        // ¸ğµÎ ²¨Á³´Ù
+        // ëª¨ë‘ êº¼ì¡Œë‹¤
         foreach (var lamp in lamps) lamp.SetState(false);
         yield return new WaitForSeconds(0.5f);
 
-        // ½ÃÄö½º »ı¼º ¹× Àç»ı
+        // ì‹œí€€ìŠ¤ ìƒì„± ë° ì¬ìƒ
         GenerateSequence();
         yield return StartCoroutine(ShowSequence());
     }
@@ -135,7 +132,7 @@ public class EastRoomPuzzleManager : MonoBehaviour
 
     private void PuzzleComplete()
     {
-        Debug.Log("Puzzle Complete!");
+       // Debug.Log("Puzzle Complete!");
 
         // 1) Reward Spawn
         if (rewardPrefab != null && rewardSpawnPoint != null)
@@ -147,7 +144,7 @@ public class EastRoomPuzzleManager : MonoBehaviour
         }
         else
         {
-            Debug.LogWarning("Reward Prefab or SpawnPoint not set!");
+           // Debug.LogWarning("Reward Prefab or SpawnPoint not set!");
         }
 
     }

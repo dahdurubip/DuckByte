@@ -10,11 +10,11 @@ public class PreplacedButtonController : MonoBehaviour
 
     void Start()
     {
-        // Unity 2023 이상: 권장 방식
+
         itemManager = FindFirstObjectByType<ItemManager>();
         if (itemManager == null)
         {
-            Debug.LogError("ItemManager를 씬에서 찾을 수 없습니다.");
+            //Debug.LogError("없습니다.");
             return;
         }
 

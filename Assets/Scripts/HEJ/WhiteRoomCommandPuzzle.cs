@@ -1,5 +1,6 @@
+// WhiteRoomCommandPuzzle.cs
 using UnityEngine;
-using TMPro;              
+using TMPro;
 using UnityEngine.VFX;
 using System.Collections;
 using System.Collections.Generic;
@@ -7,32 +8,32 @@ using System.Collections.Generic;
 public class WhiteRoomCommandPuzzle : MonoBehaviour
 {
     [Header("Audio Clips")]
-    public AudioClip rightClip;      // ‘오른쪽’ 안내 음성
-    public AudioClip leftClip;       // ‘왼쪽’ 안내 음성
-    public AudioClip stayClip;       // ‘전진’ 안내 음성
-    public AudioClip clearClip;     
-    public AudioSource audioSource;  
+    public AudioClip rightClip;
+    public AudioClip leftClip;
+    public AudioClip stayClip;
+    public AudioClip clearClip;
+    public AudioSource audioSource;
 
     [Header("Player Reset")]
-    public Transform player;              
-    public Transform playerStartPosition;  
+    public Transform player;
+    public Transform playerStartPosition;
 
     [Header("VFX")]
-    public GameObject failFog;        
+    public GameObject failFog;
 
     [Header("Doors")]
-    public List<DoorController> doors;  
+    public List<DoorController> doors;
 
     [Header("Reward")]
-    public GameObject rewardPrefab;      
-    public Transform rewardSpawnPoint;  
+    public GameObject rewardPrefab;
+    public Transform rewardSpawnPoint;
 
     [Header("Timing")]
-    public float inputDelay = 1.5f;   
-    public float gracePeriod = 0.2f;   
+    public float inputDelay = 1.5f;
+    public float gracePeriod = 0.2f;
 
     [Header("UI")]
-    public TextMeshProUGUI lastInputDisplay;  
+    public TextMeshProUGUI lastInputDisplay;
 
     public bool PuzzleStarted { get; private set; } = false;
 
@@ -48,11 +49,11 @@ public class WhiteRoomCommandPuzzle : MonoBehaviour
         if (failFog != null)
             failFog.SetActive(false);
 
-        else
+        if (lastInputDisplay != null)
             lastInputDisplay.gameObject.SetActive(false);
     }
 
-    // ZoneTrigger에서 호출: 퍼즐 시작 혹은 존 도달 알림
+    // ZoneTrigger에서 호출
     public void NotifyZoneReached(int zoneIndex)
     {
         if (!PuzzleStarted)
@@ -85,7 +86,6 @@ public class WhiteRoomCommandPuzzle : MonoBehaviour
 
             if (cmd == "Right") curr++;
             else if (cmd == "Left") curr--;
-            // Forward는 위치 변동 없음
         }
     }
 
@@ -93,19 +93,16 @@ public class WhiteRoomCommandPuzzle : MonoBehaviour
     {
         yield return new WaitForSeconds(1f);
 
-        int count = sequence.Count;
-        for (int i = 0; i < count; i++)
+        for (int i = 0; i < sequence.Count; i++)
         {
             var (cmd, zone) = sequence[i];
 
-            // 음성 재생
             AudioClip clip = cmd == "Right" ? rightClip
                             : cmd == "Left" ? leftClip
                                              : stayClip;
             if (clip != null)
                 audioSource.PlayOneShot(clip);
 
-            // 입력 대기 (clip.length + delay)
             float waitUntil = Time.time + (clip?.length ?? 0f) + inputDelay;
             KeyCode pressedKey = KeyCode.None;
             string displayText = string.Empty;
@@ -136,7 +133,6 @@ public class WhiteRoomCommandPuzzle : MonoBehaviour
             if (pressedKey == KeyCode.None)
                 displayText = "입력 없음";
 
-            // UI 표시: 굵게(성공) 또는 밑줄(실패)
             bool success = (pressedKey == KeyCode.None)
                         ? (cmd == "Forward")
                         : ((cmd == "Right" && pressedKey == KeyCode.D)
@@ -147,7 +143,6 @@ public class WhiteRoomCommandPuzzle : MonoBehaviour
             lastInputDisplay.text = styled;
             lastInputDisplay.gameObject.SetActive(true);
 
-            // 판정 전 짧은 여유
             yield return new WaitForSeconds(gracePeriod);
 
             if (!success)
@@ -156,32 +151,24 @@ public class WhiteRoomCommandPuzzle : MonoBehaviour
                 yield break;
             }
 
-            // 문 열기
             doors[zone].Open();
 
-            // 다음 스텝 전: 트리거 대기 (마지막 단계는 건너뜀)
-            if (i < count - 1)
+            if (i < sequence.Count - 1)
             {
                 zoneReached = false;
                 yield return new WaitUntil(() => zoneReached);
                 yield return new WaitForSeconds(0.3f);
             }
 
-            // UI 숨김
             lastInputDisplay.gameObject.SetActive(false);
         }
 
-        // 클리어 처리: 보상 스폰 → 텍스트 숨김
+        // 퍼즐 클리어
         if (rewardPrefab != null && rewardSpawnPoint != null)
         {
             audioSource.PlayOneShot(clearClip);
             Instantiate(rewardPrefab, rewardSpawnPoint.position, rewardSpawnPoint.rotation);
         }
-        else
-        {
-           // Debug.LogWarning("Reward prefab or spawn point is not assigned.");
-        }
-
         lastInputDisplay.gameObject.SetActive(false);
     }
 
@@ -189,17 +176,22 @@ public class WhiteRoomCommandPuzzle : MonoBehaviour
     {
         lastInputDisplay?.gameObject.SetActive(false);
         doors.ForEach(d => d.ResetDoor());
+
         var cc = player.GetComponent<CharacterController>();
         cc.enabled = false;
-        player.SetPositionAndRotation(
-            playerStartPosition.position,
-            playerStartPosition.rotation
-        );
+        player.SetPositionAndRotation(playerStartPosition.position, playerStartPosition.rotation);
         cc.enabled = true;
+
         failFog?.SetActive(true);
         failFog?.GetComponent<VisualEffect>()?.Play();
         yield return new WaitForSeconds(2f);
         failFog?.SetActive(false);
+
         PuzzleStarted = false;
+
+        // 모든 ZoneTrigger를 찾아 ResetTrigger 호출
+        var zoneTriggers = FindObjectsOfType<ZoneTrigger>();
+        foreach (var z in zoneTriggers)
+            z.ResetTrigger();
     }
 }
