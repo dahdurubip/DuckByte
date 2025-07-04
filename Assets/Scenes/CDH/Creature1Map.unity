@@ -9299,8 +9299,7 @@ MonoBehaviour:
   timerText: {fileID: 1866301284}
   timeLimit: 30
   bonginEffect: {fileID: 1468650694}
-  bossDoor1: {fileID: 1157797636}
-  bossDoor2: {fileID: 1952234132}
+  bossDoor: {fileID: 860421676}
   dialogueManager: {fileID: 1777336346}
 --- !u!4 &379437565
 Transform:
@@ -28235,7 +28234,7 @@ BoxCollider:
   m_LayerOverridePriority: 0
   m_IsTrigger: 0
   m_ProvidesContacts: 0
-  m_Enabled: 1
+  m_Enabled: 0
   serializedVersion: 3
   m_Size: {x: 1, y: 1, z: 1}
   m_Center: {x: 0, y: 0, z: 0}
@@ -37576,11 +37575,6 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!1 &1157797636 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 4778145331393723787, guid: c203c3cdb55b7ca4ab6c83b61fc8f4bd, type: 3}
-  m_PrefabInstance: {fileID: 3428216839044413806}
-  m_PrefabAsset: {fileID: 0}
 --- !u!1001 &1162660256
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -119504,11 +119498,6 @@ MeshCollider:
   m_Convex: 1
   m_CookingOptions: 30
   m_Mesh: {fileID: 184894869646255334, guid: 0ef01c149448977428ae5664d595fc28, type: 3}
---- !u!1 &1952234132 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 6377405259572713142, guid: 94a8dac73a5ff1f4ab6e8ff3f4a02797, type: 3}
-  m_PrefabInstance: {fileID: 8275878640631214657}
-  m_PrefabAsset: {fileID: 0}
 --- !u!1 &1957654859
 GameObject:
   m_ObjectHideFlags: 0
