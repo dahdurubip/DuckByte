@@ -361,7 +361,7 @@ public class PlayerMovement : MonoBehaviour
 
                 // 강제 기상 후 쿨타임 시작
                 canCrouch = false;
-                crouchCooldownTimer = 5f; // 재앉기 불가
+                crouchCooldownTimer = 10f; // 재앉기 불가
 
                 if (!isExhausted)
                 {
