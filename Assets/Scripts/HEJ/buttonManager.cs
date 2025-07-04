@@ -20,21 +20,21 @@ public class buttonManager : MonoBehaviour
 
     public void firstButton()
     {
-        Debug.Log("1");
+        //Debug.Log("1");
         endingDataSO.currentEnding = EndingType.Bad;
         SceneManager.LoadScene("Ending");
 
     }
     public void secondButton()
     {
-        Debug.Log("2");
+        //Debug.Log("2");
         endingDataSO.currentEnding = EndingType.True;
         SceneManager.LoadScene("Ending");
 
     }
     public void thirdButton()
     {
-        Debug.Log("3");
+        //Debug.Log("3");
         endingDataSO.currentEnding = EndingType.Good;
         SceneManager.LoadScene("Ending");
 

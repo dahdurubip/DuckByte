@@ -8,6 +8,12 @@ public class OpeningToCreature1 : MonoBehaviour
 
     void Start()
     {
+        
+        
+            //Debug.Log("시작: SavedScene = " + PlayerPrefs.GetString("SavedScene", "없음"));
+        
+
+
         if (timeline != null)
         {
             timeline.stopped += OnTimelineEnd; // 타임라인 종료 시 이벤트 실행

@@ -12,7 +12,29 @@ public class GameManager : MonoBehaviour
     // public event SoundEvent OnSoundEmitted;
     // 이걸 한 문장으로 줄인 것임
 
+    //private void Start()
+    //{
+    //    if (UnityEngine.SceneManagement.SceneManager.GetActiveScene().name == "Boss 1")
+    //    {
+    //    int savedItemCount = PlayerPrefs.GetInt("MainItemCount", -1);
+    //    string savedScene = PlayerPrefs.GetString("SavedScene", "없음");
 
+    //    Debug.Log("boss 저장된 아이템 수: " + savedItemCount);
+    //    Debug.Log("boss 저장된 씬 이름: " + savedScene);
+          
+    //    }
+        
+    //    if (UnityEngine.SceneManagement.SceneManager.GetActiveScene().name == "Creature1Map")
+    //    {
+    //    int savedItemCount = PlayerPrefs.GetInt("MainItemCount", -1);
+    //    string savedScene = PlayerPrefs.GetString("SavedScene", "없음");
+
+    //    Debug.Log("C1 저장된 아이템 수: " + savedItemCount);
+    //    Debug.Log("C1 저장된 씬 이름: " + savedScene);
+          
+    //    }
+
+    //}
 
     // 게임 내에서 소리가 발생하면 호출 (ex: 플레이어 점프, 문 부수기)
     public void EmitSound(Vector3 soundPosition)

@@ -26,12 +26,12 @@ public class MainItemManager : MonoBehaviour
         Debug.Log(mainItem);
     }
 
-    private void Start()
-    {
-        int savedItemCount = PlayerPrefs.GetInt("MainItemCount", -1);
-        string savedScene = PlayerPrefs.GetString("SavedScene", "없음");
+    //private void Start()
+    //{
+    //    int savedItemCount = PlayerPrefs.GetInt("MainItemCount", -1);
+    //    string savedScene = PlayerPrefs.GetString("SavedScene", "없음");
 
-        Debug.Log("저장된 아이템 수: " + savedItemCount);
-        Debug.Log("저장된 씬 이름: " + savedScene);
-    }
+    //    Debug.Log("저장된 아이템 수: " + savedItemCount);
+    //    Debug.Log("저장된 씬 이름: " + savedScene);
+    //}
 }

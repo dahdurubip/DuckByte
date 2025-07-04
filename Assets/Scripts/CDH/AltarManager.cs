@@ -31,7 +31,7 @@ public class AltarManager : MonoBehaviour, IInteractable
         }
         else
         {
-            Debug.Log("이건 열쇠가 아닙니다.");
+            //Debug.Log("이건 열쇠가 아닙니다.");
         }
     }
 

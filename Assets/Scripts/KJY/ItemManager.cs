@@ -81,7 +81,7 @@ public class ItemManager : MonoBehaviour
         if (Input.GetKeyDown(interactKey))
         {
 
-            Debug.Log("mainItem : " + MainItemManager.Instance.mainItem);
+            //Debug.Log("mainItem : " + MainItemManager.Instance.mainItem);
 
             if (UnityEngine.SceneManagement.SceneManager.GetActiveScene().name == "Creature2Map")
             {
