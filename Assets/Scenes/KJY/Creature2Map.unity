@@ -24554,7 +24554,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1503656391}
   - component: {fileID: 1503656390}
-  - component: {fileID: 1503656389}
+  - component: {fileID: 1503656392}
   m_Layer: 0
   m_Name: GameObject
   m_TagString: Untagged
@@ -24562,19 +24562,6 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
---- !u!114 &1503656389
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1503656388}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 195a615f5009aef459f6fa13ee7d9c73, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  itemmanager: {fileID: 7170638557801259634}
 --- !u!65 &1503656390
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -24611,6 +24598,20 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1503656392
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1503656388}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8c193f9a86c717d4389590eaa72c9a48, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  itemmanager: {fileID: 7170638557801259634}
+  dialogueManager: {fileID: 301298124}
 --- !u!1001 &1507628143
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -42579,6 +42580,7 @@ MonoBehaviour:
   crouchSpeed: 2.5
   toggleCameraRotation: 0
   isCrouching: 0
+  canCrouch: 1
   crouchHeight: 1
   crouchCenterY: 0.7
   crouchCapHeight: 1
@@ -42592,7 +42594,7 @@ MonoBehaviour:
   exhaustionDuration: 3
   walkClip: {fileID: 8300000, guid: bb809a75f1ca9fb48a67dbde5a8cf8a6, type: 3}
   runClip: {fileID: 8300000, guid: 2f60b4c94556d814a930b55a79125377, type: 3}
-  breatheClip: {fileID: 8300000, guid: 46ee065e93af0ba4bb8c9b24c0056bc3, type: 3}
+  breatheClip: {fileID: 8300000, guid: 7ef31bb0cc0779a48a8b56278532a56a, type: 3}
   crouchingWalkClip: {fileID: 8300000, guid: 7aefe04232b39254cad7899083ec0dbf, type: 3}
   footstepAudioSource: {fileID: 7170638557801259635}
   sfxAudioSource: {fileID: 7170638557801259636}

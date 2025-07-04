@@ -241,6 +241,10 @@ public class PlayerMovement : MonoBehaviour
             sfxAudioSource.PlayOneShot(breatheClip);
         }
 
+        if (footstepAudioSource != null)
+        {
+            footstepAudioSource.Stop();
+        }
         // 3. 3초 동안 대기
         yield return new WaitForSeconds(exhaustionDuration);
 
