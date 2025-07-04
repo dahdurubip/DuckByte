@@ -24275,51 +24275,6 @@ Transform:
   m_Children: []
   m_Father: {fileID: 1281455732}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!1 &658357809
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 658357811}
-  - component: {fileID: 658357810}
-  m_Layer: 0
-  m_Name: BossSceneManager
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!114 &658357810
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 658357809}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 195a615f5009aef459f6fa13ee7d9c73, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  itemmanager: {fileID: 7170638556431290794}
---- !u!4 &658357811
-Transform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 658357809}
-  serializedVersion: 2
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_ConstrainProportionsScale: 0
-  m_Children: []
-  m_Father: {fileID: 0}
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1001 &662010130
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -85404,7 +85359,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: aadcd86a07dadc044a6426883b0d50f9, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  itemmanager: {fileID: 0}
   bossTM: {fileID: 1186725641}
   camera3: {fileID: 0}
 --- !u!1 &1323856793
@@ -88733,7 +88687,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: aadcd86a07dadc044a6426883b0d50f9, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  itemmanager: {fileID: 7170638556431290794}
   bossTM: {fileID: 1186725641}
   camera3: {fileID: 1313383780}
 --- !u!65 &1418612922
@@ -296820,7 +296773,6 @@ SceneRoots:
   - {fileID: 19412580}
   - {fileID: 1732550455}
   - {fileID: 1109037676}
-  - {fileID: 658357811}
   - {fileID: 1136901858}
   - {fileID: 4658026384752871536}
   - {fileID: 979253766}

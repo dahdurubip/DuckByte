@@ -34,8 +34,6 @@ public class ItemManager : MonoBehaviour
     [Header("Note UI Settings")]
     public TextMeshProUGUI noteUIText;
 
-    //메인 아이템
-    public int MainItem = 0;
 
     //상호작용 키
     private KeyCode interactKey = KeyCode.E;
@@ -83,17 +81,13 @@ public class ItemManager : MonoBehaviour
         if (Input.GetKeyDown(interactKey))
         {
 
+            Debug.Log("mainItem : " + MainItemManager.Instance.mainItem);
+
             if (UnityEngine.SceneManagement.SceneManager.GetActiveScene().name == "Creature2Map")
             {
                 howToUse.SetActive(false);
             }
 
-            if (UnityEngine.SceneManagement.SceneManager.GetActiveScene().name == "Boss 1")
-            {
-                MainItem = PlayerPrefs.GetInt("MainItemValue3", 0);
-            }
-
-            Debug.Log("mainItem" + MainItem);
             //E키를 누르면 무조건 끄는 것
             if (noteUI.activeSelf)
             {
@@ -209,8 +203,6 @@ public class ItemManager : MonoBehaviour
                 }
                 if (nearbyInteractable.CompareTag("BossDoor"))
                 {
-                    PlayerPrefs.SetInt("MainItemValue2", MainItem);
-                    PlayerPrefs.Save();
                     SceneLoad.LoadSceneWithLoading("Boss");
                     //SceneManager.LoadScene("Boss");
                     return;
@@ -225,7 +217,7 @@ public class ItemManager : MonoBehaviour
                         Creature2AudioManager.instance.PlaySfx(Creature2AudioManager.sfx.PhorrorEffect);
                         dialogueManager.PlayDialogue("inPrison2", "player");
                     }
-                    MainItem += 1;
+                    MainItemManager.Instance.mainItem += 1;
                     Destroy(nearbyInteractable);
                     return;
                 }

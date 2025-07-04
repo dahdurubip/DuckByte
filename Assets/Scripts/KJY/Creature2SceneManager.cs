@@ -4,7 +4,6 @@ using UnityEngine.SceneManagement;
 public class Creature2SceneManager : MonoBehaviour
 {
 
-    [SerializeField] private ItemManager itemmanager;
     [SerializeField] private DialogueManager dialogueManager;
 
 
@@ -19,8 +18,6 @@ public class Creature2SceneManager : MonoBehaviour
     {
         if (other.gameObject.tag == "Player")
         {
-            PlayerPrefs.SetInt("MainItemValue1", itemmanager.MainItem);
-            PlayerPrefs.Save();
             //SceneManager.LoadScene("Creature1Map");
             SceneLoad.LoadSceneWithLoading("Creature1Map");
         }

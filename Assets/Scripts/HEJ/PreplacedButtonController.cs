@@ -6,19 +6,10 @@ public class PreplacedButtonController : MonoBehaviour
     [Header("씬에 미리 만들어 둔 버튼들 (순서대로)")]
     [SerializeField] private GameObject[] buttonObjects;
 
-    private ItemManager itemManager;
-
     void Start()
     {
 
-        itemManager = FindFirstObjectByType<ItemManager>();
-        if (itemManager == null)
-        {
-            //Debug.LogError("없습니다.");
-            return;
-        }
-
-        int totalItems = itemManager.MainItem;
+        int totalItems = MainItemManager.Instance.mainItem;
         int maxButtons = buttonObjects.Length;
         int activateCount = totalItems <= 2 ? 2 : 3;
 
