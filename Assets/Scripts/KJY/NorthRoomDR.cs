@@ -9,7 +9,7 @@ public class NorthRoomDR : MonoBehaviour
     {
         if (other.gameObject.tag == "Player")
         {
-            dialogueManager.PlayDialogue("northRoom", "player");
+            dialogueManager.PlayDialogue("northRoom", "boss");
         }
     }
 
