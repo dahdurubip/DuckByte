@@ -13,8 +13,9 @@ public class FirePuzzleManager : MonoBehaviour
     public float timeLimit = 30f;            // 제한 시간
 
     public GameObject bonginEffect;           // 보스 문 봉인 이펙트
-    public GameObject bossDoor1;
-    public GameObject bossDoor2;
+    [SerializeField] private Collider bossDoor; 
+    //public GameObject bossDoor1;
+    //public GameObject bossDoor2;
 
     [SerializeField] private DialogueManager dialogueManager;
 
@@ -71,8 +72,9 @@ public class FirePuzzleManager : MonoBehaviour
         // 보스문 봉인 되어 있던 이펙트 없애기
         bonginEffect.SetActive(false);
         // 문이랑 상호작용 가능해지는 기능 추가
-        bossDoor1.layer = LayerMask.NameToLayer("Interactable");
-        bossDoor2.layer = LayerMask.NameToLayer("Interactable");
+        bossDoor.enabled = true;
+        //bossDoor1.layer = LayerMask.NameToLayer("Interactable");
+        //bossDoor2.layer = LayerMask.NameToLayer("Interactable");
     }
 
     private void ResetPuzzle()

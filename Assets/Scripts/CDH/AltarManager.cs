@@ -43,7 +43,7 @@ public class AltarManager : MonoBehaviour, IInteractable
         // TODO: 아이템 스폰, 소리 재생 등 추가
 
         // 조각 아이템 없애기
-        itemmanager.DestroyCurrentItem(); //오브젝트 파괴하는 코드
+        //itemmanager.DestroyCurrentItem(); //오브젝트 파괴하는 코드
 
 
         int nextPhase = bossPhaseManager.currentPhase + 1;
