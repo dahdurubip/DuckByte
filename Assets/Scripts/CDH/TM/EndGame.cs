@@ -19,6 +19,10 @@ public class EndGame : MonoBehaviour
         if (director == timeline)
         {
             //SceneManager.LoadScene("Creature2Map"); // 전환할 씬 이름 입력
+            // 저장값 완전히 초기화
+            PlayerPrefs.DeleteAll();
+            PlayerPrefs.Save();
+
             SceneLoad.LoadSceneWithLoading("UI_OP");
 
         }

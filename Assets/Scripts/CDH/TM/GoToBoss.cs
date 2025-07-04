@@ -4,13 +4,13 @@ using UnityEngine.SceneManagement;
 
 public class GoToBoss : MonoBehaviour
 {
-    public PlayableDirector timeline; // ÀÎ½ºÆåÅÍ¿¡¼­ Å¸ÀÓ¶óÀÎ Ãß°¡
+    public PlayableDirector timeline; // ì¸ìŠ¤í™í„°ì—ì„œ íƒ€ì„ë¼ì¸ ì¶”ê°€
 
     void Start()
     {
         if (timeline != null)
         {
-            timeline.stopped += OnTimelineEnd; // Å¸ÀÓ¶óÀÎ Á¾·á ½Ã ÀÌº¥Æ® ½ÇÇà
+            timeline.stopped += OnTimelineEnd; // íƒ€ì„ë¼ì¸ ì¢…ë£Œ ì‹œ ì´ë²¤íŠ¸ ì‹¤í–‰
         }
     }
 
@@ -18,6 +18,7 @@ public class GoToBoss : MonoBehaviour
     {
         if (director == timeline)
         {
+            GameSaveManager.SaveProgress("Boss 1");
             SceneLoad.LoadSceneWithLoading("Boss 1");
         }
     }

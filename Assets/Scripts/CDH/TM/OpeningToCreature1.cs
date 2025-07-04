@@ -4,13 +4,13 @@ using UnityEngine.SceneManagement;
 
 public class OpeningToCreature1 : MonoBehaviour
 {
-    public PlayableDirector timeline; // ÀÎ½ºÆåÅÍ¿¡¼­ Å¸ÀÓ¶óÀÎ Ãß°¡
+    public PlayableDirector timeline; // ì¸ìŠ¤í™í„°ì—ì„œ íƒ€ì„ë¼ì¸ ì¶”ê°€
 
     void Start()
     {
         if (timeline != null)
         {
-            timeline.stopped += OnTimelineEnd; // Å¸ÀÓ¶óÀÎ Á¾·á ½Ã ÀÌº¥Æ® ½ÇÇà
+            timeline.stopped += OnTimelineEnd; // íƒ€ì„ë¼ì¸ ì¢…ë£Œ ì‹œ ì´ë²¤íŠ¸ ì‹¤í–‰
         }
     }
 
@@ -18,7 +18,8 @@ public class OpeningToCreature1 : MonoBehaviour
     {
         if (director == timeline)
         {
-            //SceneManager.LoadScene("Creature2Map"); // ÀüÈ¯ÇÒ ¾À ÀÌ¸§ ÀÔ·Â
+            //SceneManager.LoadScene("Creature2Map"); // ì „í™˜í•  ì”¬ ì´ë¦„ ì…ë ¥
+            GameSaveManager.SaveProgress("Creature2Map");
             SceneLoad.LoadSceneWithLoading("Creature2Map");
 
         }

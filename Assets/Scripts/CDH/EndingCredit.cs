@@ -83,6 +83,11 @@ public class EndingCredit : MonoBehaviour
 
         yield return StartCoroutine(FadeToBlack());
         yield return new WaitForSeconds(2f);
+
+        // 저장값 완전히 초기화
+        PlayerPrefs.DeleteAll();
+        PlayerPrefs.Save();
+
         SceneManager.LoadScene(lobbySceneName);
     }
 

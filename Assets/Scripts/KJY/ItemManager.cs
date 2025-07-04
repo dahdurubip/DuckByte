@@ -203,6 +203,7 @@ public class ItemManager : MonoBehaviour
                 }
                 if (nearbyInteractable.CompareTag("BossDoor"))
                 {
+                    GameSaveManager.SaveProgress("Boss");
                     SceneLoad.LoadSceneWithLoading("Boss");
                     //SceneManager.LoadScene("Boss");
                     return;
