@@ -241,10 +241,6 @@ public class PlayerMovement : MonoBehaviour
             sfxAudioSource.PlayOneShot(breatheClip);
         }
 
-        if (footstepAudioSource != null)
-        {
-            footstepAudioSource.Stop();
-        }
         // 3. 3초 동안 대기
         yield return new WaitForSeconds(exhaustionDuration);
 
@@ -381,40 +377,40 @@ public class PlayerMovement : MonoBehaviour
     {
         if (footstepAudioSource == null) return;
 
-        if (IsMoving)
-        {
-            AudioClip targetClip = null;
-
-            if (isCrouching)
-            {
-                targetClip = crouchingWalkClip;
-            }
-            else if (run)
-            {
-                targetClip = runClip;
-            }
-            else
-            {
-                targetClip = walkClip;
-            }
-
-            if (footstepAudioSource.clip != targetClip)
-            {
-                footstepAudioSource.clip = targetClip;
-                footstepAudioSource.Play();
-            }
-            else if (!footstepAudioSource.isPlaying)
-            {
-                footstepAudioSource.Play();
-            }
-        }
-        else
+        if (!isMovable || !IsMoving)
         {
             if (footstepAudioSource.isPlaying)
             {
                 footstepAudioSource.Stop();
             }
+            return; 
         }
+
+        AudioClip targetClip = null;
+
+        if (isCrouching)
+        {
+            targetClip = crouchingWalkClip;
+        }
+        else if (run)
+        {
+            targetClip = runClip;
+        }
+        else
+        {
+            targetClip = walkClip;
+        }
+
+        if (footstepAudioSource.clip != targetClip)
+        {
+            footstepAudioSource.clip = targetClip;
+        }
+
+        if (footstepAudioSource.clip != null && !footstepAudioSource.isPlaying)
+        {
+            footstepAudioSource.Play();
+        }
+
     }
 
     //스태미나 UI 업데이트
