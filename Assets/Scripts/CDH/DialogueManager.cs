@@ -1,9 +1,7 @@
 using UnityEngine;
 using TMPro;
 using System.Collections;
-using UnityEditor.Rendering.PostProcessing;
-using UnityEngine.InputSystem;
-using GLTFast.Schema;
+
 
 public class DialogueManager : MonoBehaviour
 {
