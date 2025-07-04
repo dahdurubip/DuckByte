@@ -16699,6 +16699,11 @@ GameObject:
   m_CorrespondingSourceObject: {fileID: 8778139068119761599, guid: 0ffd378c26133c741b4dc0c230cf9027, type: 3}
   m_PrefabInstance: {fileID: 961732519}
   m_PrefabAsset: {fileID: 0}
+--- !u!136 &961732521 stripped
+CapsuleCollider:
+  m_CorrespondingSourceObject: {fileID: 774150335372717801, guid: 0ffd378c26133c741b4dc0c230cf9027, type: 3}
+  m_PrefabInstance: {fileID: 961732519}
+  m_PrefabAsset: {fileID: 0}
 --- !u!114 &961732522
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -82558,6 +82563,10 @@ PrefabInstance:
       propertyPath: dialogueData
       value: 
       objectReference: {fileID: 1591372661}
+    - target: {fileID: 8845663296742057360, guid: 8ce166a015b60934899e0c1a79c09522, type: 3}
+      propertyPath: FinalCollider
+      value: 
+      objectReference: {fileID: 961732521}
     - target: {fileID: 8845663296742057360, guid: 8ce166a015b60934899e0c1a79c09522, type: 3}
       propertyPath: bossHowlAudio
       value: 

@@ -44,7 +44,7 @@ public class BossPhaseManager : MonoBehaviour
     [SerializeField] AudioSource bossHowlAudio;
     [SerializeField] GameObject bossTMCamera;
     [SerializeField] GameObject bossTM;
-
+    [SerializeField] Collider FinalCollider;
 
 
 
@@ -526,7 +526,7 @@ public class BossPhaseManager : MonoBehaviour
         mentalImage.SetActive(false);
         bossTMCamera.SetActive(true);
         bossTM.SetActive(true);
-
+        FinalCollider.enabled = false;
     }
 
 }
