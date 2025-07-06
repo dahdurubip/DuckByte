@@ -6,7 +6,7 @@ using UnityEngine.SceneManagement;
 public class OpeningTyper : MonoBehaviour
 {
 
-
+    [SerializeField] private AudioSource Typing;
     [Header("UI 프리팹과 부모")]
     public GameObject textPrefab; // TextMeshProUGUI 프리팹
     public Transform textParent; // Text들이 들어갈 부모 (Vertical Layout Group 포함)
@@ -50,10 +50,13 @@ public class OpeningTyper : MonoBehaviour
             GameObject lineObj = Instantiate(textPrefab, textParent);
             TMP_Text tmpText = lineObj.GetComponent<TMP_Text>();
             tmpText.text = "";
+            //Typing.Play();
+
 
             foreach (char c in line)
             {
                 tmpText.text += c;
+                Typing.Play();
                 yield return new WaitForSeconds(typingSpeed);
             }
 
