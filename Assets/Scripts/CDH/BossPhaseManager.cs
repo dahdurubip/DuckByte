@@ -46,7 +46,8 @@ public class BossPhaseManager : MonoBehaviour
     [SerializeField] GameObject bossTM;
     [SerializeField] Collider FinalCollider;
 
-
+    private int expectedEggCount = 5; // 알 개수 정확히 입력
+    private int registeredEggCount = 0;
 
 
     //public Transform[] rockSpawnPoints;
@@ -65,10 +66,22 @@ public class BossPhaseManager : MonoBehaviour
     //[SerializeField] float burnDuration = 3f;        // 몇 초 동안 유지할지
 
 
-    void Start()
+    //void Start()
+    //{
+    //    //Debug.Log(currentPhase);
+    //    SetPhase(currentPhase);
+    //}
+
+    public void OnEggRegistered()
     {
-        //Debug.Log(currentPhase);
-        SetPhase(currentPhase);
+        registeredEggCount++;
+        //Debug.Log($"[Boss] 알 등록됨 ({registeredEggCount}/{expectedEggCount})");
+
+        if (registeredEggCount == expectedEggCount)
+        {
+            //Debug.Log("[Boss] 모든 알 등록 완료 → 1페이즈 시작!");
+            SetPhase(1);
+        }
     }
 
     //void Update()
@@ -102,7 +115,7 @@ public class BossPhaseManager : MonoBehaviour
     //    timer = 0;
     //}
 
-   
+
 
     public void SetPhase(int phase)
     {
