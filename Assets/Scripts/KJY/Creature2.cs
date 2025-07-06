@@ -184,10 +184,13 @@ public class Creature2 : MonoBehaviour
         navMeshAgent.destination = wayPoint[currentPatrolIndex].position;
 
         //순찰 지점에 도착했을 때 Idle상태로 전한
-        if (!navMeshAgent.pathPending && navMeshAgent.remainingDistance < 0.5f)
+        if (!navMeshAgent.pathPending && navMeshAgent.remainingDistance <= navMeshAgent.stoppingDistance)
         {
-            currentState = CreatureState.Idle;
-            idleTimer = 0f;
+            if (!navMeshAgent.hasPath || navMeshAgent.velocity.sqrMagnitude == 0f)
+            {
+                currentState = CreatureState.Idle;
+                idleTimer = 0f;
+            }
         }
     }
 
