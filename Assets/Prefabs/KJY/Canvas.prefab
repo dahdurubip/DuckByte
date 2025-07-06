@@ -405,10 +405,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0cd44c1031e13a943bb63640046fad76, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  m_UiScaleMode: 0
+  m_UiScaleMode: 1
   m_ReferencePixelsPerUnit: 100
   m_ScaleFactor: 1
-  m_ReferenceResolution: {x: 800, y: 600}
+  m_ReferenceResolution: {x: 1920, y: 1080}
   m_ScreenMatchMode: 0
   m_MatchWidthOrHeight: 0
   m_PhysicalUnit: 3
@@ -5788,7 +5788,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &4552567312010259823
 RectTransform:
   m_ObjectHideFlags: 0
@@ -7509,6 +7509,11 @@ PrefabInstance:
     - target: {fileID: 5494442301347326932, guid: cde0a81abd0138449b0667732f8316a3, type: 3}
       propertyPath: m_IsActive
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7447008182753902624, guid: cde0a81abd0138449b0667732f8316a3, type: 3}
+      propertyPath: m_text
+      value: "\uB048\uC9C8\uAE34 \uB140\uC11D... \uB098\uC640 \uB05D\uC7A5\uC744
+        \uBCF4\uC790!!"
       objectReference: {fileID: 0}
     - target: {fileID: 7447008182753902624, guid: cde0a81abd0138449b0667732f8316a3, type: 3}
       propertyPath: m_fontSize
