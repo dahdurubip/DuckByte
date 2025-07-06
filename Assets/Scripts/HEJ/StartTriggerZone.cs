@@ -33,7 +33,7 @@ public class StartTriggerZone : MonoBehaviour
     private IEnumerator PlayDialogueThenStart()
     {
         // 1) 대사 재생
-        dialogManager.PlayDialogue("eastRoom", "player");
+        dialogManager.PlayDialogue("eastRoom", "boss");
 
         // 2) DialogueManager.isPlayingDialogue가 false가 될 때까지 대기
         yield return new WaitUntil(() => !dialogManager.isPlayingDialogue);

@@ -48,8 +48,7 @@ public class ZoneTextTrigger : MonoBehaviour
 
     private IEnumerator PlayDialogueThenShowPrompt()
     {
-        // 대사 키는 DialogueData에 정의된 이름과 일치시켜야 합니다.
-        dialogManager.PlayDialogue("souththRoom", "player");
+        dialogManager.PlayDialogue("souththRoom", "boss");
 
         // 대사가 시작될 때까지 대기
         yield return new WaitUntil(() => dialogManager.isPlayingDialogue);

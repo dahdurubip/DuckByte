@@ -45,7 +45,7 @@ public class ZoneTrigger : MonoBehaviour
     private IEnumerator PlayDialogueThenNotify()
     {
         // 대사 재생
-        dialogManager.PlayDialogue("westRoom", "player");
+        dialogManager.PlayDialogue("westRoom", "boss");
 
         // 재생이 실제로 시작될 때까지 대기
         yield return new WaitUntil(() => dialogManager.isPlayingDialogue);
