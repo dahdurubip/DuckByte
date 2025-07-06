@@ -44,8 +44,11 @@ public class BreakOnXKey : MonoBehaviour
 
     [Header("알 그룹 매니저")]
     [SerializeField] private EggGroupManager eggGroupManager; // 매니저 직접 연결
+    [SerializeField] private GameObject brokenEgg;
+    [Header("보스 페이즈 매니저")]
+    [SerializeField] private BossPhaseManager bossPhaseManager;
 
-    //**
+    //**/
 
     private List<Transform> fragments = new List<Transform>();
     private int piecesPerStage;
@@ -54,7 +57,6 @@ public class BreakOnXKey : MonoBehaviour
     private bool timerStarted = false;
 
     // 레이어 바꿀 오브젝트
-    [SerializeField] private GameObject brokenEgg;
 
     void Start()
     {
@@ -78,8 +80,19 @@ public class BreakOnXKey : MonoBehaviour
             breakProgressSlider.value = 0;
         }
 
+        //if (eggGroupManager != null)
+        //    eggGroupManager.RegisterEgg(this, phase);
+
         if (eggGroupManager != null)
+        {
             eggGroupManager.RegisterEgg(this, phase);
+
+            if (phase == 1 && bossPhaseManager != null)
+            {
+                bossPhaseManager.OnEggRegistered();
+            }
+        }
+
         if (breakSliderObject != null)
         {
             breakSliderObject.SetActive(false); // 시작 시 숨김
