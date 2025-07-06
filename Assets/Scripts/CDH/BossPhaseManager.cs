@@ -75,11 +75,11 @@ public class BossPhaseManager : MonoBehaviour
     public void OnEggRegistered()
     {
         registeredEggCount++;
-        Debug.Log($"[Boss] 알 등록됨 ({registeredEggCount}/{expectedEggCount})");
+        //Debug.Log($"[Boss] 알 등록됨 ({registeredEggCount}/{expectedEggCount})");
 
         if (registeredEggCount == expectedEggCount)
         {
-            Debug.Log("[Boss] 모든 알 등록 완료 → 1페이즈 시작!");
+            //Debug.Log("[Boss] 모든 알 등록 완료 → 1페이즈 시작!");
             SetPhase(1);
         }
     }
