@@ -11,6 +11,7 @@ public class EndingCredit : MonoBehaviour
     // 엔딩 분기시작하는 곳에서 데이터 설정해주기
     // 설정방법 : EndingDataSO.currentEnding = EndingType.Bad;
     public EndingDataSO dataSO;
+    [SerializeField] private AudioSource TypingSound;
 
     [Header("UI 프리팹과 부모")]
     public GameObject textPrefab; // TextMeshProUGUI 프리팹
@@ -67,6 +68,7 @@ public class EndingCredit : MonoBehaviour
             foreach (char c in line)
             {
                 tmpText.text += c;
+                TypingSound.Play();
                 yield return new WaitForSeconds(typingSpeed);
             }
 
