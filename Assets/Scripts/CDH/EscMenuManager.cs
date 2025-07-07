@@ -35,12 +35,15 @@ public class EscMenuManager : MonoBehaviour
 
     public void OnClickConfirmYes()
     {
-        //Time.timeScale = 1f;
-#if UNITY_EDITOR
-        UnityEditor.EditorApplication.isPlaying = false;
-#else
-        Application.Quit();
-#endif
+        //        //Time.timeScale = 1f;
+        //#if UNITY_EDITOR
+        //        UnityEditor.EditorApplication.isPlaying = false;
+        //#else
+        //        Application.Quit();
+        //#endif
+        SceneLoad.LoadSceneWithLoading("UI_OP");
+        confirmPanel.SetActive(false);
+        escPanel.SetActive(false);
     }
 
     public void OnClickConfirmNo()
