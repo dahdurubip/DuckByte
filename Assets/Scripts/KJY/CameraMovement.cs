@@ -37,6 +37,7 @@ public class CameraMovement : MonoBehaviour
     [SerializeField] private float cameraRadius = 0.2f;
 
     [Header("Auto-Alignment Settings")]
+    [SerializeField] private bool useAutoAlign = false;
     [SerializeField] private float noMouseInputThreshold = 0.01f;
     //마우스 입력 없을 시 자동 정렬 시작 시간
     [SerializeField] private float timeBeforeAutoAlign = 1.0f;
@@ -120,28 +121,33 @@ public class CameraMovement : MonoBehaviour
             else
             {
                 //마우스 비활성시 타이머
-                timeSinceLastMouseInput += Time.deltaTime;
+                if (useAutoAlign)
+                {
+                    timeSinceLastMouseInput += Time.deltaTime;
+                }
             }
 
-            if (currentSceneName == autoAlignSceneName) // <--- 추가된 조건
+            if (useAutoAlign)
             {
-                if (playerMovement != null && !playerMovement.IsMoving)
+                if (currentSceneName == autoAlignSceneName)
                 {
-                    if (timeSinceLastMouseInput >= timeBeforeAutoAlign && !isAutoAligning)
+                    if (playerMovement != null && !playerMovement.IsMoving)
                     {
-                        isAutoAligning = true;
+                        if (timeSinceLastMouseInput >= timeBeforeAutoAlign && !isAutoAligning)
+                        {
+                            isAutoAligning = true;
+                        }
                     }
-                }
-                else
-                {
-                    isAutoAligning = false;
-                    timeSinceLastMouseInput = 0f;
+                    else
+                    {
+                        isAutoAligning = false;
+                        timeSinceLastMouseInput = 0f;
+                    }
                 }
             }
             else // 자동 정렬을 사용하지 않는 씬일 경우
             {
                 isAutoAligning = false; // 자동 정렬 강제 비활성화
-                // timeSinceLastMouseInput = 0f; // 이 씬에서는 타이머도 리셋할 수 있음 (선택 사항)
             }
 
             if (isAutoAligning)

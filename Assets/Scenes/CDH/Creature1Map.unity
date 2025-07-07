@@ -2914,6 +2914,11 @@ MeshCollider:
   m_Convex: 0
   m_CookingOptions: 30
   m_Mesh: {fileID: -2178802069804899766, guid: 31692f2afc87a0f49879663505e88b9b, type: 3}
+--- !u!1 &133134588 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 8691830841307529300, guid: 95f7bb54ff27a7840af0d3c2675b3ffd, type: 3}
+  m_PrefabInstance: {fileID: 7363210300800007475}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1001 &136036066
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -11234,6 +11239,11 @@ MeshCollider:
   m_Convex: 1
   m_CookingOptions: 30
   m_Mesh: {fileID: -6674590742333150855, guid: 50f8ce79331e9e748a2d688977bb22ee, type: 3}
+--- !u!1 &430231423 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 3525087328074658465, guid: 1502d79bd523f8c44aec6306a2f448fc, type: 3}
+  m_PrefabInstance: {fileID: 2929892734931377487}
+  m_PrefabAsset: {fileID: 0}
 --- !u!114 &440099903 stripped
 MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 4452475507143490788, guid: f5d1ff8197a9f5c4d9c48619c7621d97, type: 3}
@@ -38196,7 +38206,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 1233254671802239474, guid: d4b2ada4637a0984287e190d7d5e015a, type: 3}
       propertyPath: minDistance
-      value: 0.3
+      value: 0.01
       objectReference: {fileID: 0}
     - target: {fileID: 1233254671802239474, guid: d4b2ada4637a0984287e190d7d5e015a, type: 3}
       propertyPath: sensitivity
@@ -44635,7 +44645,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 4945318175805157163, guid: 1c1b96555739802468e69a1ebcb9c6bb, type: 3}
       propertyPath: m_Radius
-      value: 0.18
+      value: 0.4
       objectReference: {fileID: 0}
     - target: {fileID: 4988899844810396821, guid: 1c1b96555739802468e69a1ebcb9c6bb, type: 3}
       propertyPath: m_Name
@@ -44999,7 +45009,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6551614942396899850, guid: 1c1b96555739802468e69a1ebcb9c6bb, type: 3}
       propertyPath: m_Radius
-      value: 0.2
+      value: 0.4
       objectReference: {fileID: 0}
     - target: {fileID: 6551614942396899850, guid: 1c1b96555739802468e69a1ebcb9c6bb, type: 3}
       propertyPath: m_Enabled
@@ -54600,6 +54610,11 @@ MeshFilter:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1557955712}
   m_Mesh: {fileID: 3672602250773455586, guid: 50f8ce79331e9e748a2d688977bb22ee, type: 3}
+--- !u!1 &1559348520 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 6900794675056219175, guid: b69206ebf5be43d4fa1cf7f6bbdd2c9e, type: 3}
+  m_PrefabInstance: {fileID: 2308966663242835528}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &1561054131
 GameObject:
   m_ObjectHideFlags: 0
@@ -132917,6 +132932,10 @@ PrefabInstance:
       value: SM_Unhyun_Noan_W_Haenggak_Wall_A001
       objectReference: {fileID: 0}
     - target: {fileID: 2414765868168020690, guid: 66ff5ff5b44ddc24ea2be53f660a73ef, type: 3}
+      propertyPath: m_Layer
+      value: 10
+      objectReference: {fileID: 0}
+    - target: {fileID: 2414765868168020690, guid: 66ff5ff5b44ddc24ea2be53f660a73ef, type: 3}
       propertyPath: m_IsActive
       value: 1
       objectReference: {fileID: 0}
@@ -159779,19 +159798,47 @@ PrefabInstance:
       value: SM_Unhyun_Norak_S_Haenggak_Wall_D001 (10)
       objectReference: {fileID: 0}
     - target: {fileID: 6900794675056219175, guid: b69206ebf5be43d4fa1cf7f6bbdd2c9e, type: 3}
+      propertyPath: m_Layer
+      value: 10
+      objectReference: {fileID: 0}
+    - target: {fileID: 6900794675056219175, guid: b69206ebf5be43d4fa1cf7f6bbdd2c9e, type: 3}
       propertyPath: m_IsActive
       value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
-    m_AddedComponents: []
+    m_AddedComponents:
+    - targetCorrespondingSourceObject: {fileID: 6900794675056219175, guid: b69206ebf5be43d4fa1cf7f6bbdd2c9e, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 2308966663242835532}
   m_SourcePrefab: {fileID: 100100000, guid: b69206ebf5be43d4fa1cf7f6bbdd2c9e, type: 3}
 --- !u!4 &2308966663242835529 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 6093190652115439261, guid: b69206ebf5be43d4fa1cf7f6bbdd2c9e, type: 3}
   m_PrefabInstance: {fileID: 2308966663242835528}
   m_PrefabAsset: {fileID: 0}
+--- !u!65 &2308966663242835532
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1559348520}
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_IsTrigger: 0
+  m_ProvidesContacts: 0
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Size: {x: 2.4477959, y: 2.3854108, z: 0.117847875}
+  m_Center: {x: 1.2238972, y: 1.1927032, z: 0.058921255}
 --- !u!1 &2312816243374519083
 GameObject:
   m_ObjectHideFlags: 0
@@ -168796,6 +168843,10 @@ PrefabInstance:
       value: SM_Unhyun_Norak_S_Haenggak_Wall_E001
       objectReference: {fileID: 0}
     - target: {fileID: 3525087328074658465, guid: 1502d79bd523f8c44aec6306a2f448fc, type: 3}
+      propertyPath: m_Layer
+      value: 10
+      objectReference: {fileID: 0}
+    - target: {fileID: 3525087328074658465, guid: 1502d79bd523f8c44aec6306a2f448fc, type: 3}
       propertyPath: m_IsActive
       value: 1
       objectReference: {fileID: 0}
@@ -168846,13 +168897,37 @@ PrefabInstance:
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
-    m_AddedComponents: []
+    m_AddedComponents:
+    - targetCorrespondingSourceObject: {fileID: 3525087328074658465, guid: 1502d79bd523f8c44aec6306a2f448fc, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 2929892734931377491}
   m_SourcePrefab: {fileID: 100100000, guid: 1502d79bd523f8c44aec6306a2f448fc, type: 3}
 --- !u!4 &2929892734931377488 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 4296557821487392795, guid: 1502d79bd523f8c44aec6306a2f448fc, type: 3}
   m_PrefabInstance: {fileID: 2929892734931377487}
   m_PrefabAsset: {fileID: 0}
+--- !u!65 &2929892734931377491
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 430231423}
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_IsTrigger: 0
+  m_ProvidesContacts: 0
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Size: {x: 0.11784774, y: 2.385411, z: 2.4477997}
+  m_Center: {x: 0.05892189, y: 1.1927031, z: -1.2238991}
 --- !u!1001 &2934539562983549240
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -176494,6 +176569,10 @@ PrefabInstance:
     - target: {fileID: 1385638075443844362, guid: 1c0455761690c6742ad6fca4674a4f78, type: 3}
       propertyPath: m_Name
       value: SM_Unhyun_Norak_S_Haenggak_Wall_G001
+      objectReference: {fileID: 0}
+    - target: {fileID: 1385638075443844362, guid: 1c0455761690c6742ad6fca4674a4f78, type: 3}
+      propertyPath: m_Layer
+      value: 10
       objectReference: {fileID: 0}
     - target: {fileID: 1385638075443844362, guid: 1c0455761690c6742ad6fca4674a4f78, type: 3}
       propertyPath: m_IsActive
@@ -222723,6 +222802,10 @@ PrefabInstance:
       value: SM_Unhyun_Norak_S_Haenggak_Wall_G001
       objectReference: {fileID: 0}
     - target: {fileID: 1385638075443844362, guid: 1c0455761690c6742ad6fca4674a4f78, type: 3}
+      propertyPath: m_Layer
+      value: 10
+      objectReference: {fileID: 0}
+    - target: {fileID: 1385638075443844362, guid: 1c0455761690c6742ad6fca4674a4f78, type: 3}
       propertyPath: m_IsActive
       value: 1
       objectReference: {fileID: 0}
@@ -228075,6 +228158,10 @@ PrefabInstance:
       value: SM_Unhyun_Noan_W_Haenggak_Wall_A001
       objectReference: {fileID: 0}
     - target: {fileID: 2414765868168020690, guid: 66ff5ff5b44ddc24ea2be53f660a73ef, type: 3}
+      propertyPath: m_Layer
+      value: 10
+      objectReference: {fileID: 0}
+    - target: {fileID: 2414765868168020690, guid: 66ff5ff5b44ddc24ea2be53f660a73ef, type: 3}
       propertyPath: m_IsActive
       value: 1
       objectReference: {fileID: 0}
@@ -230572,7 +230659,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 8346373756206963438, guid: 95f7bb54ff27a7840af0d3c2675b3ffd, type: 3}
       propertyPath: m_LocalPosition.y
-      value: 0.234
+      value: 0.54
       objectReference: {fileID: 0}
     - target: {fileID: 8346373756206963438, guid: 95f7bb54ff27a7840af0d3c2675b3ffd, type: 3}
       propertyPath: m_LocalPosition.z
@@ -230621,13 +230708,37 @@ PrefabInstance:
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
-    m_AddedComponents: []
+    m_AddedComponents:
+    - targetCorrespondingSourceObject: {fileID: 8691830841307529300, guid: 95f7bb54ff27a7840af0d3c2675b3ffd, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 7363210300800007479}
   m_SourcePrefab: {fileID: 100100000, guid: 95f7bb54ff27a7840af0d3c2675b3ffd, type: 3}
 --- !u!4 &7363210300800007476 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 8346373756206963438, guid: 95f7bb54ff27a7840af0d3c2675b3ffd, type: 3}
   m_PrefabInstance: {fileID: 7363210300800007475}
   m_PrefabAsset: {fileID: 0}
+--- !u!65 &7363210300800007479
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 133134588}
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_IsTrigger: 0
+  m_ProvidesContacts: 0
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Size: {x: 7.7711196, y: 0.11893349, z: 3.1711113}
+  m_Center: {x: -3.8855598, y: 0.05946676, z: -1.5855488}
 --- !u!1001 &7363833781393146345
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -231909,6 +232020,10 @@ PrefabInstance:
     - target: {fileID: 6900794675056219175, guid: b69206ebf5be43d4fa1cf7f6bbdd2c9e, type: 3}
       propertyPath: m_Name
       value: SM_Unhyun_Norak_S_Haenggak_Wall_D001 (9)
+      objectReference: {fileID: 0}
+    - target: {fileID: 6900794675056219175, guid: b69206ebf5be43d4fa1cf7f6bbdd2c9e, type: 3}
+      propertyPath: m_Layer
+      value: 10
       objectReference: {fileID: 0}
     - target: {fileID: 6900794675056219175, guid: b69206ebf5be43d4fa1cf7f6bbdd2c9e, type: 3}
       propertyPath: m_IsActive
@@ -233214,6 +233329,10 @@ PrefabInstance:
     - target: {fileID: 8445548150931884044, guid: 077db7cb155cc144292f2871f6cb427b, type: 3}
       propertyPath: m_Name
       value: SM_Unhyun_Norak_S_Haenggak_Pillar_B001 (8)
+      objectReference: {fileID: 0}
+    - target: {fileID: 8445548150931884044, guid: 077db7cb155cc144292f2871f6cb427b, type: 3}
+      propertyPath: m_Layer
+      value: 10
       objectReference: {fileID: 0}
     - target: {fileID: 8445548150931884044, guid: 077db7cb155cc144292f2871f6cb427b, type: 3}
       propertyPath: m_IsActive
@@ -254557,6 +254676,10 @@ PrefabInstance:
     - target: {fileID: 4224131682947243026, guid: c4bfb9a21b77b164fa3d13586c0e6d84, type: 3}
       propertyPath: m_Name
       value: SM_Unhyun_Norak_S_Haenggak_Wall_K001
+      objectReference: {fileID: 0}
+    - target: {fileID: 4224131682947243026, guid: c4bfb9a21b77b164fa3d13586c0e6d84, type: 3}
+      propertyPath: m_Layer
+      value: 10
       objectReference: {fileID: 0}
     - target: {fileID: 4224131682947243026, guid: c4bfb9a21b77b164fa3d13586c0e6d84, type: 3}
       propertyPath: m_IsActive

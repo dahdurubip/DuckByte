@@ -7797,6 +7797,11 @@ MeshRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
+--- !u!1 &177378404 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 8637670815539940957, guid: 70cfde8bd7c2adb4ba865ef6ed623b2c, type: 3}
+  m_PrefabInstance: {fileID: 506935533}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &181956159
 GameObject:
   m_ObjectHideFlags: 0
@@ -8655,7 +8660,7 @@ Transform:
   m_GameObject: {fileID: 219346039}
   serializedVersion: 2
   m_LocalRotation: {x: -0.5, y: 0.5, z: -0.5, w: 0.5}
-  m_LocalPosition: {x: 4.922, y: 1.974, z: -15.83}
+  m_LocalPosition: {x: 4.922, y: 1.974, z: -15.764}
   m_LocalScale: {x: 0.22500001, y: 1.5000001, z: 0.5}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -17406,6 +17411,10 @@ PrefabInstance:
       value: SM_Unhyun_Norak_Door_M001 (11)
       objectReference: {fileID: 0}
     - target: {fileID: 8637670815539940957, guid: 70cfde8bd7c2adb4ba865ef6ed623b2c, type: 3}
+      propertyPath: m_Layer
+      value: 10
+      objectReference: {fileID: 0}
+    - target: {fileID: 8637670815539940957, guid: 70cfde8bd7c2adb4ba865ef6ed623b2c, type: 3}
       propertyPath: m_IsActive
       value: 1
       objectReference: {fileID: 0}
@@ -17456,13 +17465,37 @@ PrefabInstance:
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
-    m_AddedComponents: []
+    m_AddedComponents:
+    - targetCorrespondingSourceObject: {fileID: 8637670815539940957, guid: 70cfde8bd7c2adb4ba865ef6ed623b2c, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 506935537}
   m_SourcePrefab: {fileID: 100100000, guid: 70cfde8bd7c2adb4ba865ef6ed623b2c, type: 3}
 --- !u!4 &506935534 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 8977076463991002343, guid: 70cfde8bd7c2adb4ba865ef6ed623b2c, type: 3}
   m_PrefabInstance: {fileID: 506935533}
   m_PrefabAsset: {fileID: 0}
+--- !u!65 &506935537
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 177378404}
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_IsTrigger: 0
+  m_ProvidesContacts: 0
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Size: {x: 0.110450566, y: 1.9450824, z: 0.5662773}
+  m_Center: {x: -0.035358362, y: 0.9676583, z: 0.27642915}
 --- !u!1001 &512892789
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -21665,6 +21698,10 @@ PrefabInstance:
     - target: {fileID: 2950925047642088122, guid: 070d3a14ddad8b54d87e56664828228b, type: 3}
       propertyPath: m_Name
       value: SM_Unhyun_Norak_Wall_A001 (8)
+      objectReference: {fileID: 0}
+    - target: {fileID: 2950925047642088122, guid: 070d3a14ddad8b54d87e56664828228b, type: 3}
+      propertyPath: m_Layer
+      value: 10
       objectReference: {fileID: 0}
     - target: {fileID: 2950925047642088122, guid: 070d3a14ddad8b54d87e56664828228b, type: 3}
       propertyPath: m_IsActive
@@ -28485,6 +28522,10 @@ PrefabInstance:
       value: SM_Unhyun_Norak_Door_N001 (13)
       objectReference: {fileID: 0}
     - target: {fileID: 2056889044182232576, guid: c2771ce5188c51349b5ae46a7a698488, type: 3}
+      propertyPath: m_Layer
+      value: 10
+      objectReference: {fileID: 0}
+    - target: {fileID: 2056889044182232576, guid: c2771ce5188c51349b5ae46a7a698488, type: 3}
       propertyPath: m_IsActive
       value: 1
       objectReference: {fileID: 0}
@@ -34457,6 +34498,11 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 9011259487841719523, guid: 76b6781d7880ecf43bc57072154ad176, type: 3}
   m_PrefabInstance: {fileID: 912472224}
   m_PrefabAsset: {fileID: 0}
+--- !u!1 &912876395 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 2056889044182232576, guid: c2771ce5188c51349b5ae46a7a698488, type: 3}
+  m_PrefabInstance: {fileID: 1234846802}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1001 &913850741
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -34724,6 +34770,10 @@ PrefabInstance:
     - target: {fileID: 2950925047642088122, guid: 070d3a14ddad8b54d87e56664828228b, type: 3}
       propertyPath: m_Name
       value: SM_Unhyun_Norak_Wall_A001 (10)
+      objectReference: {fileID: 0}
+    - target: {fileID: 2950925047642088122, guid: 070d3a14ddad8b54d87e56664828228b, type: 3}
+      propertyPath: m_Layer
+      value: 10
       objectReference: {fileID: 0}
     - target: {fileID: 2950925047642088122, guid: 070d3a14ddad8b54d87e56664828228b, type: 3}
       propertyPath: m_IsActive
@@ -43780,6 +43830,10 @@ PrefabInstance:
       value: SM_Unhyun_Norak_Wall_G001
       objectReference: {fileID: 0}
     - target: {fileID: 1999159352853496933, guid: 0656f2d9fb18b884686d2cc92f436cf6, type: 3}
+      propertyPath: m_Layer
+      value: 10
+      objectReference: {fileID: 0}
+    - target: {fileID: 1999159352853496933, guid: 0656f2d9fb18b884686d2cc92f436cf6, type: 3}
       propertyPath: m_IsActive
       value: 1
       objectReference: {fileID: 0}
@@ -44490,11 +44544,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 1233254671802239474, guid: d4b2ada4637a0984287e190d7d5e015a, type: 3}
       propertyPath: minDistance
-      value: 0.1
+      value: 0.01
       objectReference: {fileID: 0}
     - target: {fileID: 1233254671802239474, guid: d4b2ada4637a0984287e190d7d5e015a, type: 3}
       propertyPath: sensitivity
-      value: 10
+      value: 3
       objectReference: {fileID: 0}
     - target: {fileID: 1233254671802239474, guid: d4b2ada4637a0984287e190d7d5e015a, type: 3}
       propertyPath: cameraRadius
@@ -51692,19 +51746,47 @@ PrefabInstance:
       value: SM_Unhyun_Norak_Door_N001 (4)
       objectReference: {fileID: 0}
     - target: {fileID: 2056889044182232576, guid: c2771ce5188c51349b5ae46a7a698488, type: 3}
+      propertyPath: m_Layer
+      value: 10
+      objectReference: {fileID: 0}
+    - target: {fileID: 2056889044182232576, guid: c2771ce5188c51349b5ae46a7a698488, type: 3}
       propertyPath: m_IsActive
       value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
-    m_AddedComponents: []
+    m_AddedComponents:
+    - targetCorrespondingSourceObject: {fileID: 2056889044182232576, guid: c2771ce5188c51349b5ae46a7a698488, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 1234846806}
   m_SourcePrefab: {fileID: 100100000, guid: c2771ce5188c51349b5ae46a7a698488, type: 3}
 --- !u!4 &1234846803 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 1711465837584430266, guid: c2771ce5188c51349b5ae46a7a698488, type: 3}
   m_PrefabInstance: {fileID: 1234846802}
   m_PrefabAsset: {fileID: 0}
+--- !u!65 &1234846806
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 912876395}
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_IsTrigger: 0
+  m_ProvidesContacts: 0
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Size: {x: 0.1105879, y: 1.9450827, z: 0.56732124}
+  m_Center: {x: -0.035016652, y: 0.9676595, z: -0.2769557}
 --- !u!1001 &1237612020
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -91814,6 +91896,10 @@ PrefabInstance:
     - target: {fileID: 8637670815539940957, guid: 70cfde8bd7c2adb4ba865ef6ed623b2c, type: 3}
       propertyPath: m_Name
       value: SM_Unhyun_Norak_Door_M001 (13)
+      objectReference: {fileID: 0}
+    - target: {fileID: 8637670815539940957, guid: 70cfde8bd7c2adb4ba865ef6ed623b2c, type: 3}
+      propertyPath: m_Layer
+      value: 10
       objectReference: {fileID: 0}
     - target: {fileID: 8637670815539940957, guid: 70cfde8bd7c2adb4ba865ef6ed623b2c, type: 3}
       propertyPath: m_IsActive
@@ -182589,6 +182675,10 @@ PrefabInstance:
       value: SM_Unhyun_Norak_Door_N001 (15)
       objectReference: {fileID: 0}
     - target: {fileID: 2056889044182232576, guid: c2771ce5188c51349b5ae46a7a698488, type: 3}
+      propertyPath: m_Layer
+      value: 10
+      objectReference: {fileID: 0}
+    - target: {fileID: 2056889044182232576, guid: c2771ce5188c51349b5ae46a7a698488, type: 3}
       propertyPath: m_IsActive
       value: 1
       objectReference: {fileID: 0}
@@ -184383,6 +184473,10 @@ PrefabInstance:
     - target: {fileID: 7259832653382135684, guid: b67b323cafcc915418b74490eba32673, type: 3}
       propertyPath: m_Name
       value: Door (8)
+      objectReference: {fileID: 0}
+    - target: {fileID: 7259832653382135684, guid: b67b323cafcc915418b74490eba32673, type: 3}
+      propertyPath: m_IsActive
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 7259832653382135684, guid: b67b323cafcc915418b74490eba32673, type: 3}
       propertyPath: m_TagString
@@ -194842,6 +194936,10 @@ PrefabInstance:
     - target: {fileID: 8637670815539940957, guid: 70cfde8bd7c2adb4ba865ef6ed623b2c, type: 3}
       propertyPath: m_Name
       value: SM_Unhyun_Norak_Door_M001 (14)
+      objectReference: {fileID: 0}
+    - target: {fileID: 8637670815539940957, guid: 70cfde8bd7c2adb4ba865ef6ed623b2c, type: 3}
+      propertyPath: m_Layer
+      value: 10
       objectReference: {fileID: 0}
     - target: {fileID: 8637670815539940957, guid: 70cfde8bd7c2adb4ba865ef6ed623b2c, type: 3}
       propertyPath: m_IsActive
