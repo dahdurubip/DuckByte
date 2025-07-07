@@ -39,6 +39,7 @@ public class Creature2 : MonoBehaviour
     private bool patrollingForward = true;
     private float idleTimer = 0f;
     private bool isReversingCooldown = false;
+    private bool justExitedIdle = false;
 
     //크리처 애니메이션
     private Animator animator;
@@ -192,6 +193,21 @@ public class Creature2 : MonoBehaviour
                 idleTimer = 0f;
             }
         }
+
+        if (!justExitedIdle)
+        {
+            if (!navMeshAgent.pathPending && navMeshAgent.remainingDistance <= navMeshAgent.stoppingDistance)
+            {
+                if (!navMeshAgent.hasPath || navMeshAgent.velocity.sqrMagnitude == 0f)
+                {
+                    currentState = CreatureState.Idle;
+                    idleTimer = 0f;
+                }
+            }
+        }
+
+        //다음 프레임부터는 정상적으로 도착 검사를 하도록 플래그를 리셋
+        justExitedIdle = false;
     }
 
     private void ReversePatrolDirection()
@@ -236,6 +252,7 @@ public class Creature2 : MonoBehaviour
         }
 
         currentState = CreatureState.Patrol;
+        justExitedIdle = true;
     }
 
     private void Creature2Attack()
